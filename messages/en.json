@@ -1,0 +1,140 @@
+{
+  "language": {
+    "en": "English",
+    "ru": "Русский"
+  },
+  "common": {
+    "brand": "American Study",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "backHome": "Back home"
+  },
+  "landing": {
+    "eyebrow": "A calmer path to boarding school",
+    "title": "Your US school journey, made clear.",
+    "subtitle": "American Study helps Kazakh students and their families turn a big goal into a step-by-step plan, from the first diagnostic to the final application.",
+    "primaryCta": "Open your portal",
+    "secondaryCta": "Preview the student app",
+    "roadmapLabel": "Your path",
+    "roadmapTitle": "Big goals. Clear next steps.",
+    "step1": "Discover your best-fit schools",
+    "step1Body": "See thoughtful matches with a clear percentage and a consultant's reasoning.",
+    "step2": "Build a strong application",
+    "step2Body": "Follow guided tasks for essays, interviews, documents, and deadlines.",
+    "step3": "Stay supported together",
+    "step3Body": "Students work independently while parents see progress without chasing updates.",
+    "parentPromise": "Designed for students, reassuring for parents."
+  },
+  "auth": {
+    "google": "Continue with Google",
+    "or": "or",
+    "email": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "needAccount": "Create an account",
+    "haveAccount": "Back to sign in",
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to continue your school journey.",
+      "submit": "Sign in"
+    },
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "Use the email address invited by your American Study consultant.",
+      "submit": "Create account"
+    },
+    "reset": {
+      "title": "Reset your password",
+      "subtitle": "We will send a secure reset link to your email.",
+      "submit": "Send reset link"
+    },
+    "update": {
+      "title": "Choose a new password",
+      "subtitle": "Use at least 8 characters, then sign in with your new password.",
+      "label": "New password",
+      "submit": "Update password",
+      "pending": "Updating...",
+      "success": "Your password was updated. You can return to sign in.",
+      "error": "The password could not be updated. Open a fresh reset link and try again."
+    },
+    "error": {
+      "title": "We could not complete that",
+      "configuration": "The portal is ready, but Supabase credentials have not been connected yet. Add them to your local environment and try again.",
+      "login": "Check your email and password, then try again.",
+      "signup": "We could not create the account. Your consultant may need to confirm the invited email.",
+      "reset": "The reset email could not be sent. Please try again shortly.",
+      "google": "Google sign-in could not start. Check the provider configuration.",
+      "callback": "The secure sign-in callback was missing or invalid.",
+      "validation": "Enter a valid email address and a password of at least 8 characters.",
+      "unknown": "An unexpected authentication error occurred.",
+      "back": "Back to sign in"
+    }
+  },
+  "locked": {
+    "cta": "Unlock full support"
+  },
+  "setup": {
+    "title": "Your portal is almost ready",
+    "body": "Your account is authenticated, but a consultant still needs to assign your portal role. No private data has been opened.",
+    "cta": "Return home"
+  },
+  "app": {
+    "navigation": "Portal navigation",
+    "previewBadge": "Preview only · no private data",
+    "progress": "Application progress",
+    "nextMilestone": "Next milestone",
+    "viewDetails": "View details",
+    "lockedTitle": "Full application roadmap",
+    "lockedDescription": "Unlock guided essays, interview practice, document checklists, and consultant calls in one place.",
+    "section": {
+      "eyebrow": "Selected workspace",
+      "title": "{section} preview",
+      "description": "This Milestone 1 view confirms responsive navigation and the role-aware app shell. Live student data arrives in the next milestones."
+    },
+    "nav": {
+      "home": "Home",
+      "roadmap": "Roadmap",
+      "schools": "Schools",
+      "essays": "Essays",
+      "bookings": "Bookings",
+      "people": "Students"
+    },
+    "student": {
+      "eyebrow": "Student portal",
+      "title": "Good morning, Alex",
+      "subtitle": "One clear place for your schools, tasks, deadlines, and consultant support.",
+      "status": "On track",
+      "progressBody": "Three tasks completed this week. Your school-list review is the next checkpoint.",
+      "next": "School list review",
+      "timing": "Thursday · 16:00",
+      "cardLabel": "Diagnostic summary",
+      "cardTitle": "Your strongest application themes",
+      "cardBody": "Curiosity, community leadership, and a strong interest in engineering give your profile a clear story."
+    },
+    "parent": {
+      "eyebrow": "Parent overview",
+      "title": "A clear view of Alex's progress",
+      "subtitle": "See what is finished, what is overdue, and where a gentle reminder can help.",
+      "status": "0 overdue",
+      "progressBody": "Alex is moving steadily. The next two tasks are planned before the school-list call.",
+      "next": "Review school matches",
+      "timing": "Due in 2 days",
+      "cardLabel": "This week",
+      "cardTitle": "Two meaningful wins",
+      "cardBody": "Alex completed the interests profile and reviewed the first eight matched schools."
+    },
+    "admin": {
+      "eyebrow": "Consultant workspace",
+      "title": "Students moving forward",
+      "subtitle": "A focused view of the pipeline, consultant priorities, and application activity.",
+      "status": "12 active students",
+      "progressBody": "Most active students are in list building. Two profiles need consultant review today.",
+      "next": "Review new diagnostics",
+      "timing": "2 waiting on admin",
+      "cardLabel": "Pipeline focus",
+      "cardTitle": "Trial students ready for matching",
+      "cardBody": "Three completed diagnostics are ready for preferences, match reasons, and school selection."
+    }
+  }
+}
