@@ -30,11 +30,14 @@ Supabase variables are supplied.
 | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase publishable key |
-| `NEXT_PUBLIC_APP_URL` | Canonical app origin used for auth callbacks |
+| `NEXT_PUBLIC_APP_URL` | Canonical app origin used for auth callbacks and password reset redirects |
 
 Never add a Supabase secret or service-role key to a `NEXT_PUBLIC_*` variable.
 Google client credentials belong in Google Cloud and Supabase dashboards, not
 in this application's environment file.
+
+`apphosting.yaml` provides the canonical app origin, browser-safe Supabase URL,
+and publishable key at both build time and runtime.
 
 ## Verification
 
@@ -56,13 +59,34 @@ npm audit --audit-level=moderate
    `http://127.0.0.1:54321/auth/v1/callback`; hosted projects show their callback
    URL in the provider settings.
 5. Add the Google client ID and secret to the Supabase Google provider.
-6. Add `http://localhost:3000/auth/callback` and the Vercel callback origin to
-   Supabase's allowed redirect URLs.
+6. Add these local URLs to Supabase Auth's allowed redirect URLs:
+   `http://localhost:3000/auth/callback`,
+   `http://localhost:3000/en/update-password`, and
+   `http://localhost:3000/ru/update-password`.
 7. Set `app_metadata.role` to exactly `student`, `parent`, or `admin` for M1.
    M2 replaces this temporary role source with the authoritative `users` table.
 
 To roll back provider changes, disable Google in Supabase Auth, remove the added
 redirect origins, and revoke the Google OAuth client secret.
+
+## Firebase App Hosting
+
+1. Create an App Hosting backend for this repository and wait for Firebase to
+   assign its HTTPS backend URL.
+2. Set `NEXT_PUBLIC_APP_URL` in `apphosting.yaml` to the exact backend origin,
+   without a trailing slash.
+3. Trigger a new rollout so Next.js embeds the production origin during the
+   build.
+4. In Supabase Auth URL configuration, set the Site URL to the same origin and
+   allow these exact production redirects:
+   `<APP_URL>/auth/callback`, `<APP_URL>/en/update-password`, and
+   `<APP_URL>/ru/update-password`.
+5. If a custom domain becomes canonical, update `NEXT_PUBLIC_APP_URL`, the
+   Supabase Site URL, and all three allowed redirects, then trigger another
+   rollout.
+
+The committed App Hosting configuration contains public values only. Do not add
+a Supabase secret key or service-role key to `apphosting.yaml`.
 
 ## Milestone 1 Manual Tests
 
@@ -114,6 +138,7 @@ redirect origins, and revoke the Google OAuth client secret.
 
 - Switch between linked students and verify progress and overdue totals.
 - Compare admin applied-school data with the exported CSV.
-- Deploy preview and production to Vercel; verify separate env and auth redirects.
+- Deploy preview and production to Firebase App Hosting; verify each backend's
+  environment and Supabase auth redirects.
 
 The detailed execution plan is in `.omo/plans/american-study.md`.

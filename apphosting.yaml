@@ -1,0 +1,23 @@
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 80
+
+env:
+  - variable: NEXT_PUBLIC_APP_URL
+    value: https://american-study--american-study-kz-yeldarca.europe-west4.hosted.app
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_SUPABASE_URL
+    value: https://jekazsybbcdfwfyvcxnn.supabase.co
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    value: sb_publishable_GHNrNrZOmMtcSXtpRJfdXQ_69tbuySI
+    availability:
+      - BUILD
+      - RUNTIME
