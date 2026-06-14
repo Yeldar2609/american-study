@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
+import { restoreAuthUser } from "@/lib/admin/auth-compensation"
 import type { AdminStudentActionState } from "@/lib/admin/student-action-state"
 import { parseStudentProfileForm } from "@/lib/admin/student-profile-form"
 import { requireRole } from "@/lib/auth/session"
@@ -91,8 +92,16 @@ export async function updateStudentProfileAction(
     target_student_id: value.studentId,
   })
   if (profileError !== null) {
-    await restoreAuthUser(admin, existingStudent.user_id, existingUser)
-    return { fieldErrors: {}, message: "unexpected", status: "error" }
+    const restored = await restoreAuthUser(admin.auth.admin, existingStudent.user_id, {
+      email: existingUser.email,
+      fullName: existingUser.full_name,
+      language: existingUser.language,
+    })
+    return {
+      fieldErrors: {},
+      message: restored ? "unexpected" : "cleanupRequired",
+      status: "error",
+    }
   }
 
   revalidatePath(`/${locale}/app/admin`)
@@ -127,18 +136,4 @@ export async function setStudentPackageAction(
 
   revalidatePath(`/${locale}/app/admin`)
   return { fieldErrors: {}, message: "packageUpdated", status: "success" }
-}
-
-type AdminClient = NonNullable<ReturnType<typeof createAdminClient>>
-
-async function restoreAuthUser(
-  admin: AdminClient,
-  userId: string,
-  user: { readonly email: string; readonly full_name: string; readonly language: string },
-): Promise<void> {
-  await admin.auth.admin.updateUserById(userId, {
-    email: user.email,
-    email_confirm: true,
-    user_metadata: { full_name: user.full_name, language: user.language },
-  })
 }

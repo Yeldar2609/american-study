@@ -47,16 +47,18 @@ export function roleHomePath(locale: string, role: UserRole): string {
   return `/${locale}/app/${role}`
 }
 
-export function authorizedRoleDestination(
-  locale: string,
-  actual: UserRole | null,
+export function authenticatedRoleDestination(
+  requestedLocale: string,
+  profile: UserProfile | null,
   expected: UserRole,
 ): string | null {
-  if (actual === null) {
-    return `/${locale}/setup-required`
+  if (profile === null) {
+    return `/${requestedLocale}/setup-required`
   }
 
-  return actual === expected ? null : roleHomePath(locale, actual)
+  return profile.role === expected && profile.language === requestedLocale
+    ? null
+    : roleHomePath(profile.language, profile.role)
 }
 
 export function callbackDestination(

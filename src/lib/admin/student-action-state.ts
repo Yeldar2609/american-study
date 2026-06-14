@@ -5,6 +5,7 @@ export type AdminStudentActionState = {
     | "created"
     | "updated"
     | "packageUpdated"
+    | "cleanupRequired"
     | "configuration"
     | "validation"
     | "duplicate"

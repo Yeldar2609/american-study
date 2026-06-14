@@ -1,6 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
+import { deleteAuthUsers } from "@/lib/admin/auth-compensation"
 import type { AdminStudentActionState } from "@/lib/admin/student-action-state"
 import { parseStudentForm } from "@/lib/admin/student-form"
 import { requireRole } from "@/lib/auth/session"
@@ -78,8 +79,12 @@ export async function createStudentAction(
       : { data: null, error: userError }
 
   if (studentError !== null || student === null) {
-    await admin.auth.admin.deleteUser(studentUserId)
-    return { fieldErrors: {}, message: "unexpected", status: "error" }
+    const cleaned = await deleteAuthUsers(admin.auth.admin, [studentUserId])
+    return {
+      fieldErrors: {},
+      message: cleaned ? "unexpected" : "cleanupRequired",
+      status: "error",
+    }
   }
 
   if (
@@ -96,10 +101,10 @@ export async function createStudentAction(
       user_metadata: { full_name: value.parentFullName, language: value.parentLanguage },
     })
     if (parentAuthError !== null) {
-      await admin.auth.admin.deleteUser(studentUserId)
+      const cleaned = await deleteAuthUsers(admin.auth.admin, [studentUserId])
       return {
         fieldErrors: { parentEmail: ["duplicate"] },
-        message: "duplicate",
+        message: cleaned ? "duplicate" : "cleanupRequired",
         status: "error",
       }
     }
@@ -120,9 +125,12 @@ export async function createStudentAction(
             .insert({ parent_user_id: parentUserId, student_id: student.id })
         : { error: parentUserError }
     if (linkError !== null) {
-      await admin.auth.admin.deleteUser(parentUserId)
-      await admin.auth.admin.deleteUser(studentUserId)
-      return { fieldErrors: {}, message: "unexpected", status: "error" }
+      const cleaned = await deleteAuthUsers(admin.auth.admin, [parentUserId, studentUserId])
+      return {
+        fieldErrors: {},
+        message: cleaned ? "unexpected" : "cleanupRequired",
+        status: "error",
+      }
     }
   }
 

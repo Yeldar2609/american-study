@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import {
-  authorizedRoleDestination,
+  authenticatedRoleDestination,
   callbackDestination,
   parseUserProfile,
   parseUserRole,
@@ -63,9 +63,16 @@ describe("authorization contracts", () => {
   })
 
   it("routes missing and mismatched roles without opening the requested role", () => {
-    expect(authorizedRoleDestination("en", null, "student")).toBe("/en/setup-required")
-    expect(authorizedRoleDestination("ru", "parent", "student")).toBe("/ru/app/parent")
-    expect(authorizedRoleDestination("en", "admin", "admin")).toBeNull()
+    expect(authenticatedRoleDestination("en", null, "student")).toBe("/en/setup-required")
+    expect(authenticatedRoleDestination("en", { language: "ru", role: "parent" }, "student")).toBe(
+      "/ru/app/parent",
+    )
+    expect(authenticatedRoleDestination("en", { language: "ru", role: "admin" }, "admin")).toBe(
+      "/ru/app/admin",
+    )
+    expect(
+      authenticatedRoleDestination("en", { language: "en", role: "admin" }, "admin"),
+    ).toBeNull()
   })
 
   it("selects callback destinations without leaking unsafe next values", () => {

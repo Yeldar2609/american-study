@@ -11,6 +11,8 @@ export default async function AppPage({ params }: AppPageProps) {
   const authenticated = await requireAuthenticatedUser(locale)
 
   redirect(
-    authenticated === null ? `/${locale}/setup-required` : roleHomePath(locale, authenticated.role),
+    authenticated === null
+      ? `/${locale}/setup-required`
+      : roleHomePath(authenticated.language, authenticated.role),
   )
 }

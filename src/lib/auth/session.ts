@@ -1,7 +1,7 @@
 import type { User } from "@supabase/supabase-js"
 import { redirect } from "next/navigation"
 import {
-  authorizedRoleDestination,
+  authenticatedRoleDestination,
   parseUserProfile,
   type UserLanguage,
   type UserRole,
@@ -54,7 +54,7 @@ export async function requireAuthenticatedUser(locale: string): Promise<Authenti
 
 export async function requireRole(locale: string, expected: UserRole): Promise<AuthenticatedUser> {
   const authenticated = await requireAuthenticatedUser(locale)
-  const destination = authorizedRoleDestination(locale, authenticated?.role ?? null, expected)
+  const destination = authenticatedRoleDestination(locale, authenticated, expected)
 
   if (destination !== null) {
     redirect(destination)

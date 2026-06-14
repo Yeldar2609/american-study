@@ -166,6 +166,7 @@
       "created": "Student account and family links were created.",
       "updated": "The student profile was updated.",
       "packageUpdated": "The student's package access was updated.",
+      "cleanupRequired": "The operation could not be fully rolled back. Check Supabase Auth before retrying.",
       "configuration": "The server is missing its Supabase service-role secret.",
       "validation": "Check the highlighted fields and try again.",
       "duplicate": "An account with this email may already exist.",
