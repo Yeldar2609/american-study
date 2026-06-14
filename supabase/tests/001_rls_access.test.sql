@@ -2,7 +2,7 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 
-select plan(19);
+select plan(23);
 
 insert into public.schools (
   id, name, state, city, setting, student_body, strengths
@@ -172,6 +172,31 @@ select throws_ok(
 
 select set_config(
   'request.jwt.claims',
+  '{"sub":"00000000-0000-0000-0000-000000000006","role":"authenticated"}',
+  true
+);
+select results_eq(
+  'select count(*) from public.students',
+  array[0::bigint],
+  'unrelated users cannot read student profiles'
+);
+select results_eq(
+  'select count(*) from public.schools',
+  array[0::bigint],
+  'unrelated users cannot read the paid school catalog'
+);
+select throws_ok(
+  $$select public.admin_update_student_profile(
+      '00000000-0000-0000-0000-000000000102',
+      '{}'::jsonb
+    )$$,
+  '42501',
+  'Admin access required',
+  'non-admin users cannot invoke the profile update RPC'
+);
+
+select set_config(
+  'request.jwt.claims',
   '{"sub":"00000000-0000-0000-0000-000000000001","role":"authenticated"}',
   true
 );
@@ -190,6 +215,35 @@ select lives_ok(
     set diagnostic_summary = diagnostic_summary
     where id = '00000000-0000-0000-0000-000000000102'$$,
   'admin can update students'
+);
+select lives_ok(
+  $$select public.admin_update_student_profile(
+      '00000000-0000-0000-0000-000000000102',
+      jsonb_build_object(
+        'address', 'Almaty',
+        'aid_need_level', 'medium',
+        'current_grade', '8',
+        'current_school', 'Local School',
+        'diagnostic_summary', 'Updated by pgTAP',
+        'dob', '2012-01-01',
+        'drive_folder_url', null,
+        'email', 'trial.student@american-study.local',
+        'english_level', 'B2',
+        'full_name', 'Trial Student',
+        'interests', jsonb_build_array('STEM'),
+        'language', 'en',
+        'parent_email', 'trial.parent@american-study.local',
+        'parent_phone', null,
+        'passport_id_drive_url', null,
+        'phone', null,
+        'pref_setting', 'suburban',
+        'pref_size', 'medium',
+        'pref_state_or_region', 'New England',
+        'stage', 'trial',
+        'test_scores', '{}'::jsonb
+      )
+    )$$,
+  'admin can update student and user profile rows transactionally'
 );
 
 select * from finish();
