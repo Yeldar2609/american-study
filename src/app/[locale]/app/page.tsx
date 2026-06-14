@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
-import { parseUserRoleFromMetadata, roleHomePath } from "@/lib/auth/access"
-import { requireUser } from "@/lib/auth/session"
+import { roleHomePath } from "@/lib/auth/access"
+import { requireAuthenticatedUser } from "@/lib/auth/session"
 
 type AppPageProps = {
   readonly params: Promise<{ locale: string }>
@@ -8,8 +8,9 @@ type AppPageProps = {
 
 export default async function AppPage({ params }: AppPageProps) {
   const { locale } = await params
-  const user = await requireUser(locale)
-  const role = parseUserRoleFromMetadata(user.app_metadata)
+  const authenticated = await requireAuthenticatedUser(locale)
 
-  redirect(role === null ? `/${locale}/setup-required` : roleHomePath(locale, role))
+  redirect(
+    authenticated === null ? `/${locale}/setup-required` : roleHomePath(locale, authenticated.role),
+  )
 }

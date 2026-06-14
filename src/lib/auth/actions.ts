@@ -63,19 +63,6 @@ export async function emailAuthAction(action: AuthAction, locale: string, formDa
   redirect(result.error ? authErrorPath(locale, action) : next)
 }
 
-export async function googleAuthAction(locale: string) {
-  const env = readPublicEnv()
-  const supabase = await requireSupabase(locale)
-  const result = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: `${env.NEXT_PUBLIC_APP_URL}/auth/callback?locale=${locale}`,
-    },
-  })
-
-  redirect(result.error || !result.data.url ? authErrorPath(locale, "google") : result.data.url)
-}
-
 export async function logoutAction(locale: string) {
   const supabase = await createClient()
 

@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest"
 import {
   authorizedRoleDestination,
   callbackDestination,
+  parseUserProfile,
   parseUserRole,
-  parseUserRoleFromMetadata,
   roleHomePath,
   safeRedirectPath,
 } from "@/lib/auth/access"
@@ -21,10 +21,14 @@ describe("authorization contracts", () => {
     expect(parseUserRole("owner")).toBeNull()
   })
 
-  it("reads roles only from metadata objects", () => {
-    expect(parseUserRoleFromMetadata({ role: "student" })).toBe("student")
-    expect(parseUserRoleFromMetadata({ role: "owner" })).toBeNull()
-    expect(parseUserRoleFromMetadata(null)).toBeNull()
+  it("parses authoritative database profiles and rejects malformed rows", () => {
+    expect(parseUserProfile({ language: "ru", role: "parent" })).toEqual({
+      language: "ru",
+      role: "parent",
+    })
+    expect(parseUserProfile({ language: "de", role: "parent" })).toBeNull()
+    expect(parseUserProfile({ language: "en", role: "owner" })).toBeNull()
+    expect(parseUserProfile(null)).toBeNull()
   })
 
   it("rejects absolute and protocol-relative redirect targets", () => {

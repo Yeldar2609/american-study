@@ -4,10 +4,18 @@ import { expect, test } from "@playwright/test"
 
 test("switches the login page from English to Russian", async ({ page }, testInfo) => {
   await page.goto("/en/login?next=%2Fen%2Fapp%2Fstudent")
+  await expect(
+    page.getByRole("button", { name: "Google sign-in is temporarily unavailable" }),
+  ).toBeDisabled()
+  await expect(page.getByLabel("Email address")).toBeEditable()
+  await expect(page.getByLabel("Password")).toBeEditable()
   await page.getByRole("button", { name: "Русский" }).click()
 
   await expect(page).toHaveURL(/\/ru\/login\?next=%2Fen%2Fapp%2Fstudent$/)
   await expect(page.getByRole("heading", { name: "С возвращением" })).toBeVisible()
+  await expect(
+    page.getByRole("button", { name: "Вход через Google временно недоступен" }),
+  ).toBeDisabled()
   await mkdir(".omo/evidence/final", { recursive: true })
   await page.screenshot({
     fullPage: true,
@@ -36,10 +44,27 @@ test("shows fixture-only role previews with a locked feature", async ({ page }, 
   })
 })
 
-test("redirects an unauthenticated protected request to login", async ({ page }) => {
+test("shows the safe admin student manager preview", async ({ page }, testInfo) => {
+  await page.goto("/en/preview/admin?section=people")
+
+  await expect(page.getByRole("heading", { name: "Students and families" })).toBeVisible()
+  await expect(page.getByRole("heading", { name: "Create a student" })).toBeVisible()
+  await expect(page.getByText("Preview mode: account creation is disabled")).toBeVisible()
+  await expect(page.getByRole("button", { name: "Create student account" })).toBeDisabled()
+  await expect(page.getByText("student@example.com")).toHaveCount(0)
+  await mkdir(".omo/evidence/final", { recursive: true })
+  await page.screenshot({
+    fullPage: true,
+    path: `.omo/evidence/final/${testInfo.project.name}-admin-students-preview.png`,
+  })
+})
+
+test("redirects an unauthenticated protected request to login with its return path", async ({
+  page,
+}) => {
   await page.goto("/en/app")
 
-  await expect(page).toHaveURL(/\/en\/login\?error=configuration$/)
+  await expect(page).toHaveURL(/\/en\/login\?next=\/en\/app$/)
   await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible()
 })
 
@@ -83,7 +108,12 @@ test("provides functional navigation and keyboard focus", async ({ page }) => {
 })
 
 test("has no serious or critical accessibility violations", async ({ page }) => {
-  for (const path of ["/en", "/ru/login", "/en/preview/student"]) {
+  for (const path of [
+    "/en",
+    "/ru/login",
+    "/en/preview/student",
+    "/en/preview/admin?section=people",
+  ]) {
     await page.goto(path)
     const results = await new AxeBuilder({ page }).setLegacyMode().analyze()
     const blocking = results.violations.filter(

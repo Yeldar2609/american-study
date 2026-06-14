@@ -1,5 +1,6 @@
 import { ArrowUpRight, CalendarClock, CircleCheck, Clock3, Sparkles } from "lucide-react"
 import { getTranslations } from "next-intl/server"
+import { StudentManager } from "@/components/admin/student-manager"
 import { AppSidebar } from "@/components/app/app-sidebar"
 import { LockedCard } from "@/components/locked-card"
 import { Badge } from "@/components/ui/badge"
@@ -12,6 +13,7 @@ type RoleDashboardProps = {
   readonly locale: string
   readonly role: UserRole
   readonly section?: string | undefined
+  readonly selectedStudentId?: string | undefined
   readonly preview?: boolean
 }
 
@@ -19,6 +21,7 @@ export async function RoleDashboard({
   locale,
   role,
   section = "home",
+  selectedStudentId,
   preview = false,
 }: RoleDashboardProps) {
   const t = await getTranslations("app")
@@ -66,57 +69,71 @@ export async function RoleDashboard({
             </Card>
           )}
 
-          <section className="mt-8 grid gap-4 md:grid-cols-3">
-            <Card className="p-5 md:col-span-2">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm font-bold text-slate-500">{t("progress")}</p>
-                  <p className="mt-1 text-3xl font-black text-slate-950">{progress}%</p>
-                </div>
-                <span className="grid size-12 place-items-center rounded-2xl bg-blue-100 text-blue-700">
-                  <Sparkles aria-hidden="true" className="size-6" />
-                </span>
-              </div>
-              <div className="mt-5">
-                <Progress label={t("progress")} value={progress} />
-              </div>
-              <p className="mt-4 text-sm text-slate-600">{t(`${role}.progressBody`)}</p>
-            </Card>
-            <Card className="bg-slate-950 p-5 text-white">
-              <CalendarClock aria-hidden="true" className="size-6 text-cyan-300" />
-              <p className="mt-5 text-sm font-bold text-slate-300">{t("nextMilestone")}</p>
-              <p className="mt-1 text-xl font-black">{t(`${role}.next`)}</p>
-              <p className="mt-3 inline-flex items-center gap-2 text-sm text-slate-300">
-                <Clock3 aria-hidden="true" className="size-4" />
-                {t(`${role}.timing`)}
-              </p>
-            </Card>
-          </section>
+          {role === "admin" && activeSection === "people" ? (
+            <section className="mt-8">
+              <StudentManager
+                locale={locale}
+                preview={preview}
+                selectedStudentId={selectedStudentId}
+              />
+            </section>
+          ) : (
+            <>
+              <section className="mt-8 grid gap-4 md:grid-cols-3">
+                <Card className="p-5 md:col-span-2">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-bold text-slate-500">{t("progress")}</p>
+                      <p className="mt-1 text-3xl font-black text-slate-950">{progress}%</p>
+                    </div>
+                    <span className="grid size-12 place-items-center rounded-2xl bg-blue-100 text-blue-700">
+                      <Sparkles aria-hidden="true" className="size-6" />
+                    </span>
+                  </div>
+                  <div className="mt-5">
+                    <Progress label={t("progress")} value={progress} />
+                  </div>
+                  <p className="mt-4 text-sm text-slate-600">{t(`${role}.progressBody`)}</p>
+                </Card>
+                <Card className="bg-slate-950 p-5 text-white">
+                  <CalendarClock aria-hidden="true" className="size-6 text-cyan-300" />
+                  <p className="mt-5 text-sm font-bold text-slate-300">{t("nextMilestone")}</p>
+                  <p className="mt-1 text-xl font-black">{t(`${role}.next`)}</p>
+                  <p className="mt-3 inline-flex items-center gap-2 text-sm text-slate-300">
+                    <Clock3 aria-hidden="true" className="size-4" />
+                    {t(`${role}.timing`)}
+                  </p>
+                </Card>
+              </section>
 
-          <section className="mt-4 grid gap-4 lg:grid-cols-2">
-            <Card className="p-6">
-              <p className="text-sm font-bold text-blue-700">{t(`${role}.cardLabel`)}</p>
-              <h2 className="mt-2 text-2xl font-black text-slate-950">{t(`${role}.cardTitle`)}</h2>
-              <p className="mt-3 leading-7 text-slate-600">{t(`${role}.cardBody`)}</p>
-              <Link
-                className="mt-5 inline-flex items-center gap-2 text-sm font-black text-blue-700 focus-visible:rounded focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
-                href={
-                  preview
-                    ? `/preview/${role}?section=diagnostic`
-                    : `/app/${role}?section=diagnostic`
-                }
-              >
-                {t("viewDetails")}
-                <ArrowUpRight aria-hidden="true" className="size-4" />
-              </Link>
-            </Card>
-            <LockedCard
-              description={t("lockedDescription")}
-              preview={preview}
-              role={role}
-              title={t("lockedTitle")}
-            />
-          </section>
+              <section className="mt-4 grid gap-4 lg:grid-cols-2">
+                <Card className="p-6">
+                  <p className="text-sm font-bold text-blue-700">{t(`${role}.cardLabel`)}</p>
+                  <h2 className="mt-2 text-2xl font-black text-slate-950">
+                    {t(`${role}.cardTitle`)}
+                  </h2>
+                  <p className="mt-3 leading-7 text-slate-600">{t(`${role}.cardBody`)}</p>
+                  <Link
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-blue-700 focus-visible:rounded focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
+                    href={
+                      preview
+                        ? `/preview/${role}?section=diagnostic`
+                        : `/app/${role}?section=diagnostic`
+                    }
+                  >
+                    {t("viewDetails")}
+                    <ArrowUpRight aria-hidden="true" className="size-4" />
+                  </Link>
+                </Card>
+                <LockedCard
+                  description={t("lockedDescription")}
+                  preview={preview}
+                  role={role}
+                  title={t("lockedTitle")}
+                />
+              </section>
+            </>
+          )}
         </div>
       </main>
     </div>

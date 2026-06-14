@@ -2,13 +2,15 @@ import type { User } from "@supabase/supabase-js"
 import { redirect } from "next/navigation"
 import {
   authorizedRoleDestination,
-  parseUserRoleFromMetadata,
+  parseUserProfile,
+  type UserLanguage,
   type UserRole,
 } from "@/lib/auth/access"
 import { createClient } from "@/lib/supabase/server"
 
 export type AuthenticatedUser = {
   readonly user: User
+  readonly language: UserLanguage
   readonly role: UserRole
 }
 
@@ -28,14 +30,39 @@ export async function requireUser(locale: string): Promise<User> {
   return data.user
 }
 
-export async function requireRole(locale: string, expected: UserRole): Promise<AuthenticatedUser> {
+export async function requireAuthenticatedUser(locale: string): Promise<AuthenticatedUser | null> {
   const user = await requireUser(locale)
-  const role = parseUserRoleFromMetadata(user.app_metadata)
-  const destination = authorizedRoleDestination(locale, role, expected)
+  const supabase = await createClient()
+
+  if (supabase === null) {
+    return null
+  }
+
+  const { data } = await supabase
+    .from("users")
+    .select("role, language")
+    .eq("id", user.id)
+    .maybeSingle()
+  const profile = parseUserProfile(data)
+
+  if (profile !== null) {
+    return { user, ...profile }
+  }
+
+  return null
+}
+
+export async function requireRole(locale: string, expected: UserRole): Promise<AuthenticatedUser> {
+  const authenticated = await requireAuthenticatedUser(locale)
+  const destination = authorizedRoleDestination(locale, authenticated?.role ?? null, expected)
 
   if (destination !== null) {
     redirect(destination)
   }
 
-  return { user, role: expected }
+  if (authenticated === null) {
+    redirect(`/${locale}/setup-required`)
+  }
+
+  return authenticated
 }

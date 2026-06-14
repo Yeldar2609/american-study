@@ -1,5 +1,20 @@
+import { z } from "zod"
+
 export const userRoles = ["student", "parent", "admin"] as const
 export type UserRole = (typeof userRoles)[number]
+export const userLanguages = ["en", "ru"] as const
+export type UserLanguage = (typeof userLanguages)[number]
+
+const userProfileSchema = z.object({
+  language: z.enum(userLanguages),
+  role: z.enum(userRoles),
+})
+export type UserProfile = Readonly<z.infer<typeof userProfileSchema>>
+
+export function parseUserProfile(value: unknown): UserProfile | null {
+  const result = userProfileSchema.safeParse(value)
+  return result.success ? result.data : null
+}
 
 export function parseUserRole(value: unknown): UserRole | null {
   switch (value) {
@@ -10,14 +25,6 @@ export function parseUserRole(value: unknown): UserRole | null {
     default:
       return null
   }
-}
-
-export function parseUserRoleFromMetadata(metadata: unknown): UserRole | null {
-  if (typeof metadata !== "object" || metadata === null || !("role" in metadata)) {
-    return null
-  }
-
-  return parseUserRole(metadata.role)
 }
 
 export function safeRedirectPath(value: string | null, fallback: string): string {

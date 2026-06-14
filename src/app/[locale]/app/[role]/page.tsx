@@ -5,12 +5,12 @@ import { requireRole } from "@/lib/auth/session"
 
 type RolePageProps = {
   readonly params: Promise<{ locale: string; role: string }>
-  readonly searchParams: Promise<{ section?: string }>
+  readonly searchParams: Promise<{ section?: string; student?: string }>
 }
 
 export default async function RolePage({ params, searchParams }: RolePageProps) {
   const { locale, role: rawRole } = await params
-  const { section } = await searchParams
+  const { section, student } = await searchParams
   const role = parseUserRole(rawRole)
 
   if (role === null) {
@@ -18,5 +18,5 @@ export default async function RolePage({ params, searchParams }: RolePageProps) 
   }
 
   await requireRole(locale, role)
-  return <RoleDashboard locale={locale} role={role} section={section} />
+  return <RoleDashboard locale={locale} role={role} section={section} selectedStudentId={student} />
 }

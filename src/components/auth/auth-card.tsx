@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Link } from "@/i18n/navigation"
-import { emailAuthAction, googleAuthAction } from "@/lib/auth/actions"
+import { emailAuthAction } from "@/lib/auth/actions"
 
 type AuthMode = "login" | "signup" | "reset"
 
@@ -20,7 +20,6 @@ export async function AuthCard({ locale, mode, next = "" }: AuthCardProps) {
   const t = await getTranslations("auth")
   const common = await getTranslations("common")
   const action = emailAuthAction.bind(null, mode, locale)
-  const googleAction = googleAuthAction.bind(null, locale)
 
   return (
     <main className="grid min-h-screen place-items-center px-4 py-8">
@@ -44,14 +43,14 @@ export async function AuthCard({ locale, mode, next = "" }: AuthCardProps) {
 
           {mode !== "reset" && (
             <>
-              <form action={googleAction} className="mt-6">
-                <Button className="w-full" type="submit" variant="outline">
+              <div className="mt-6">
+                <Button className="w-full" disabled type="button" variant="outline">
                   <span aria-hidden="true" className="text-base font-black text-blue-600">
                     G
                   </span>
-                  {t("google")}
+                  {t("googleDisabled")}
                 </Button>
-              </form>
+              </div>
               <div className="my-5 flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-slate-400">
                 <span className="h-px flex-1 bg-slate-200" />
                 {t("or")}

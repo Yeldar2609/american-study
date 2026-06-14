@@ -10,7 +10,6 @@ responsive role previews, and a polished locked feature state.
 - Node.js 22
 - npm 10+
 - A Supabase project for live authentication
-- Google OAuth configured in Google Cloud and Supabase for live Google sign-in
 
 ## Run Locally
 
@@ -31,10 +30,11 @@ Supabase variables are supplied.
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase publishable key |
 | `NEXT_PUBLIC_APP_URL` | Canonical app origin used for auth callbacks and password reset redirects |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only admin operations and CSV imports |
 
 Never add a Supabase secret or service-role key to a `NEXT_PUBLIC_*` variable.
-Google client credentials belong in Google Cloud and Supabase dashboards, not
-in this application's environment file.
+Do not add `SUPABASE_SERVICE_ROLE_KEY` to `apphosting.yaml`; configure it as a
+Firebase App Hosting backend secret.
 
 `apphosting.yaml` provides the canonical app origin, browser-safe Supabase URL,
 and publishable key at both build time and runtime.
@@ -50,24 +50,20 @@ npm run test:e2e
 npm audit --audit-level=moderate
 ```
 
-## Supabase And Google Setup
+## Supabase Setup
 
 1. Create a Supabase project and copy its project URL and publishable key.
 2. Enable email/password in Supabase Auth.
-3. Create a Google OAuth client for a web application.
-4. Add Supabase's Google callback URL to Google Cloud. For local Supabase this is
-   `http://127.0.0.1:54321/auth/v1/callback`; hosted projects show their callback
-   URL in the provider settings.
-5. Add the Google client ID and secret to the Supabase Google provider.
-6. Add these local URLs to Supabase Auth's allowed redirect URLs:
+3. Keep the Google provider disabled for this phase. The Google button is
+   intentionally inert while email/password remains available.
+4. Add these local URLs to Supabase Auth's allowed redirect URLs:
    `http://localhost:3000/auth/callback`,
    `http://localhost:3000/en/update-password`, and
    `http://localhost:3000/ru/update-password`.
-7. Set `app_metadata.role` to exactly `student`, `parent`, or `admin` for M1.
-   M2 replaces this temporary role source with the authoritative `users` table.
-
-To roll back provider changes, disable Google in Supabase Auth, remove the added
-redirect origins, and revoke the Google OAuth client secret.
+5. Apply the migrations under `supabase/migrations`, then configure
+   `SUPABASE_SERVICE_ROLE_KEY` only in the server runtime.
+6. The application reads role and language only from `public.users`. Accounts
+   without a provisioned profile remain on the setup-required screen.
 
 ## Firebase App Hosting
 
@@ -92,11 +88,11 @@ a Supabase secret key or service-role key to `apphosting.yaml`.
 
 - Open `/en` and `/ru`; verify every visible string uses the selected language.
 - Use the switcher on `/en/login`; verify `/ru/login` and Russian copy.
-- Submit email login, signup, reset, and Google login with no env; verify the
-  translated controlled error, not an exception page.
-- With configured Supabase, verify login, signup confirmation, reset, Google
-  callback, logout, and session persistence.
-- Set each valid role in trusted app metadata and verify `/[locale]/app`
+- Verify the Google button is disabled in EN and RU while email/password fields
+  remain usable.
+- With configured Supabase, verify email login, signup confirmation, reset,
+  logout, and session persistence.
+- Provision each valid role in `public.users` and verify `/[locale]/app`
   dispatches to the matching shell.
 - Open a different role URL directly; verify the server redirects to the user's
   assigned role.
@@ -108,6 +104,9 @@ a Supabase secret key or service-role key to `apphosting.yaml`.
 ### M2: Data, RLS, and Admin Profiles
 
 - Apply migrations from a clean Supabase project.
+- Run `supabase db test` and verify all pgTAP schema/RLS checks pass.
+- Log in with the local fixtures from `supabase/seed.sql`; every fixture uses
+  password `LocalTest123!`.
 - Import the supplied school CSV and reconcile accepted and rejected row counts.
 - Create linked student and parent users; edit every centralized student field.
 - Test anonymous, owner, linked-parent, unrelated-user, and admin database access.
