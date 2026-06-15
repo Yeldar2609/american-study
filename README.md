@@ -65,6 +65,19 @@ npm audit --audit-level=moderate
 6. The application reads role and language only from `public.users`. Accounts
    without a provisioned profile remain on the setup-required screen.
 
+The authoritative M2 catalog is committed as `data/schools.csv`, with source
+checksums, exact row counts, and normalization notes in
+`data/schools.provenance.json`. Validate it without credentials:
+
+```bash
+npm run import:schools -- data/schools.csv --dry-run
+```
+
+Live CLI imports require `NEXT_PUBLIC_SUPABASE_URL` and the server-only
+`SUPABASE_SERVICE_ROLE_KEY`; the validated batch is written in one database
+RPC. The append-only authoritative-school migration provides the database
+password path when a service-role key is unavailable.
+
 ## Firebase App Hosting
 
 1. Create an App Hosting backend for this repository and wait for Firebase to
@@ -104,10 +117,11 @@ a Supabase secret key or service-role key to `apphosting.yaml`.
 ### M2: Data, RLS, and Admin Profiles
 
 - Apply migrations from a clean Supabase project.
-- Run `supabase db test` and verify all pgTAP schema/RLS checks pass.
+- Run `npm exec supabase -- test db` and verify all pgTAP schema/RLS checks pass.
 - Log in with the local fixtures from `supabase/seed.sql`; every fixture uses
   password `LocalTest123!`.
-- Import the supplied school CSV and reconcile accepted and rejected row counts.
+- Dry-run `data/schools.csv`; verify 70 accepted rows, zero rejected rows, and
+  the checksum recorded in `data/schools.provenance.json`.
 - Create linked student and parent users; edit every centralized student field.
 - Test anonymous, owner, linked-parent, unrelated-user, and admin database access.
 

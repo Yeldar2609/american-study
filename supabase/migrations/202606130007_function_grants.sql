@@ -9,7 +9,6 @@ grant execute on function public.admin_set_student_package_state(
   uuid,
   public.package_state
 ) to authenticated;
-grant execute on function public.admin_import_schools(jsonb) to authenticated;
 
 alter default privileges in schema public
   revoke execute on functions from public, anon;

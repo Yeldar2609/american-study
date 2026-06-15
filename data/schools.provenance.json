@@ -1,0 +1,40 @@
+{
+  "source_name": "pasted-text.txt",
+  "source_locator": "codex-attachment:309e76a9-84fc-43aa-8acb-0f8ae9ea78a9/pasted-text.txt",
+  "permission_basis": "User-supplied attachment for the American Study M2 school import.",
+  "source_sha256": "bf8808cb78084a93563eb756a4c399c39026c4ba5e3845630009d888640fcf0f",
+  "canonical_sha256": "6888adf1d7d2e13caae0ecb221e5c66d2e7674ae08d0934840e50a9ac5d46666",
+  "source_row_count": 70,
+  "canonical_row_count": 70,
+  "canonical_header": [
+    "name",
+    "state",
+    "city",
+    "setting",
+    "student_body",
+    "affiliation",
+    "grades",
+    "enrollment",
+    "pct_boarding",
+    "pct_international",
+    "boarding_tuition_usd",
+    "acceptance_rate_pct",
+    "avg_ssat_pctile",
+    "offers_financial_aid",
+    "niche_grade",
+    "strengths",
+    "website_url",
+    "niche_profile_url",
+    "notes"
+  ],
+  "normalization_date": "2026-06-15",
+  "normalization_notes": [
+    "Mapped source header aliases website and niche_profile to website_url and niche_profile_url.",
+    "Mapped official US state names to uppercase postal codes.",
+    "Normalized setting and student_body enum values to lowercase and niche grades to uppercase.",
+    "Serialized strengths with semicolon-space delimiters while preserving source item text and order.",
+    "Normalized Unicode or mojibake grade dashes to ASCII hyphens.",
+    "Preserved blank numeric, URL, text, and notes fields as blank CSV cells so the importer stores nulls.",
+    "Did not invent, scrape, or infer any missing value."
+  ]
+}

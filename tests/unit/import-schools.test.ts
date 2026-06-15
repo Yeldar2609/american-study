@@ -16,6 +16,55 @@ function csvRow(values: Readonly<Record<string, string>>): string {
 }
 
 describe("parseSchoolCsv", () => {
+  it("characterizes the current canonical header and comma-delimited strengths", () => {
+    // Given
+    const csv = [
+      HEADER,
+      'Example Academy,MA,Andover,suburban,coed,,9-12,,,,,,,true,A,"STEM, Arts",https://example.edu,https://example.edu/profile,',
+    ].join("\n")
+
+    // When
+    const report = parseSchoolCsv(csv)
+
+    // Then
+    expect(report.rejected).toEqual([])
+    expect(report.accepted[0]).toMatchObject({
+      state: "MA",
+      setting: "suburban",
+      strengths: ["STEM", "Arts"],
+      student_body: "coed",
+      website_url: "https://example.edu",
+      niche_profile_url: "https://example.edu/profile",
+    })
+  })
+
+  it("accepts and normalizes the supplied CSV conventions", () => {
+    // Given
+    const sourceHeader = HEADER.replace("website_url", "website").replace(
+      "niche_profile_url",
+      "niche_profile",
+    )
+    const csv = [
+      sourceHeader,
+      'Cate School,California,Carpinteria,Rural,Coed,Nonsectarian,"9–12",,,,,,,true,A+,"Outdoor/Environmental; Arts; Leadership",,,',
+    ].join("\n")
+
+    // When
+    const report = parseSchoolCsv(csv)
+
+    // Then
+    expect(report.rejected).toEqual([])
+    expect(report.accepted[0]).toMatchObject({
+      grades: "9-12",
+      setting: "rural",
+      state: "CA",
+      strengths: ["Outdoor/Environmental", "Arts", "Leadership"],
+      student_body: "coed",
+      website_url: null,
+      niche_profile_url: null,
+    })
+  })
+
   it("parses valid blank optional values as database nulls", () => {
     // Given
     const csv = `${HEADER}\nExample Academy,MA,Andover,suburban,coed,,,,,,,,,,,,,,`
@@ -126,6 +175,50 @@ describe("parseSchoolCsv", () => {
     // Then
     expect(report.acceptedCount).toBe(1)
     expect(report.rejectedCount).toBe(1)
+  })
+
+  it("rejects an unknown or missing header before accepting rows", () => {
+    // Given
+    const csv = `${HEADER.replace("notes", "unexpected")}\nExample Academy,MA,Andover,suburban,coed,,,,,,,,,,,,,,`
+
+    // When
+    const report = parseSchoolCsv(csv)
+
+    // Then
+    expect(report.acceptedCount).toBe(0)
+    expect(report.rejected).toEqual([
+      {
+        line: 1,
+        reason: `header: expected ${HEADER}`,
+      },
+    ])
+  })
+
+  it("rejects non-HTTPS URLs", () => {
+    // Given
+    const csv = [
+      HEADER,
+      "Example Academy,MA,Andover,suburban,coed,,,,,,,,,,,,http://example.edu,,",
+    ].join("\n")
+
+    // When
+    const report = parseSchoolCsv(csv)
+
+    // Then
+    expect(report.acceptedCount).toBe(0)
+    expect(report.rejected[0]?.reason).toContain("must use HTTPS")
+  })
+
+  it("rejects unknown two-letter state codes", () => {
+    // Given
+    const csv = [HEADER, "Example Academy,ZZ,Andover,suburban,coed,,,,,,,,,,,,,,"].join("\n")
+
+    // When
+    const report = parseSchoolCsv(csv)
+
+    // Then
+    expect(report.acceptedCount).toBe(0)
+    expect(report.rejected[0]?.reason).toContain("official US state")
   })
 
   it("refuses a live import report containing any rejected row", () => {

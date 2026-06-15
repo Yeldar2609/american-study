@@ -15,6 +15,10 @@ const adminProfileRpc = readFileSync(
   "supabase/migrations/202606140002_admin_profile_rpc.sql",
   "utf8",
 )
+const schoolImportRpc = readFileSync(
+  "supabase/migrations/202606150001_service_school_import.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -64,6 +68,22 @@ describe("Supabase migration contract", () => {
   it("revokes anonymous execution of public functions", () => {
     expect(functionGrants).toContain(
       "revoke execute on all functions in schema public from public, anon",
+    )
+  })
+
+  it("does not grant a function before its creating migration", () => {
+    expect(functionGrants).not.toContain("admin_import_schools")
+  })
+
+  it("guards the school import RPC and grants only intended roles", () => {
+    expect(schoolImportRpc).toContain("security definer")
+    expect(schoolImportRpc).toContain("set search_path = ''")
+    expect(schoolImportRpc).toContain("auth.role()) is distinct from 'service_role'")
+    expect(schoolImportRpc).toContain(
+      "revoke execute on function public.admin_import_schools(jsonb) from public, anon",
+    )
+    expect(schoolImportRpc).toContain(
+      "grant execute on function public.admin_import_schools(jsonb) to authenticated, service_role",
     )
   })
 
