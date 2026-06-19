@@ -1,5 +1,6 @@
 import { ExternalLink, Heart, MapPin } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
+import { MatchBreakdownDisclosure } from "@/components/schools/match-breakdown-disclosure"
 import { SchoolAdminControls } from "@/components/schools/school-admin-controls"
 import { Card } from "@/components/ui/card"
 import { setSchoolStarAction } from "@/lib/workspace/school-actions"
@@ -10,10 +11,18 @@ type SchoolCardProps = {
   readonly readOnly: boolean
   readonly role: "student" | "parent" | "admin"
   readonly school: SchoolCatalogItem
+  readonly showBreakdown: boolean
   readonly studentId: string
 }
 
-export async function SchoolCard({ locale, readOnly, role, school, studentId }: SchoolCardProps) {
+export async function SchoolCard({
+  locale,
+  readOnly,
+  role,
+  school,
+  showBreakdown,
+  studentId,
+}: SchoolCardProps) {
   const t = await getTranslations("schools")
   const format = await getFormatter()
   const starAction = setSchoolStarAction.bind(null, locale)
@@ -62,6 +71,7 @@ export async function SchoolCard({ locale, readOnly, role, school, studentId }: 
             <p className="mt-1 text-sm leading-6 text-slate-700">{school.matchReason}</p>
           </div>
         )}
+        {showBreakdown && <MatchBreakdownDisclosure schoolId={school.id} studentId={studentId} />}
         <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
           <div>
             <dt className="font-bold text-slate-500">{t("enrollment")}</dt>

@@ -196,6 +196,25 @@
         "submitted": "Submitted"
       }
     },
+    "breakdown": {
+      "toggle": "See score breakdown",
+      "hide": "Hide score breakdown",
+      "loading": "Loading score breakdown…",
+      "error": "Score breakdown is unavailable right now.",
+      "factors": {
+        "english": "English readiness",
+        "academic": "Academic fit",
+        "interests": "Interests & strengths",
+        "aid": "Financial aid fit",
+        "preference": "Your preferences"
+      },
+      "bands": {
+        "strong": "Strong fit on {factor}.",
+        "good": "Good fit on {factor}.",
+        "fair": "Moderate fit on {factor}.",
+        "weak": "Limited fit on {factor}."
+      }
+    },
     "empty": {
       "title": "No schools found",
       "empty": "No student profile is available for this account yet.",

@@ -98,6 +98,7 @@ export async function SchoolsWorkspace({
               readOnly={role === "parent" || access.packageState === "trial"}
               role={role}
               school={school}
+              showBreakdown={access.packageState === "paid" || role === "admin"}
               studentId={access.studentId}
             />
           ))}
