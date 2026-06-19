@@ -1,5 +1,6 @@
 import { ExternalLink, Heart, MapPin } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
+import { CompareToggle } from "@/components/schools/compare/compare-toggle"
 import { MatchBreakdownDisclosure } from "@/components/schools/match-breakdown-disclosure"
 import { SchoolAdminControls } from "@/components/schools/school-admin-controls"
 import { Card } from "@/components/ui/card"
@@ -71,7 +72,12 @@ export async function SchoolCard({
             <p className="mt-1 text-sm leading-6 text-slate-700">{school.matchReason}</p>
           </div>
         )}
-        {showBreakdown && <MatchBreakdownDisclosure schoolId={school.id} studentId={studentId} />}
+        {showBreakdown && (
+          <>
+            <MatchBreakdownDisclosure schoolId={school.id} studentId={studentId} />
+            <CompareToggle schoolId={school.id} />
+          </>
+        )}
         <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
           <div>
             <dt className="font-bold text-slate-500">{t("enrollment")}</dt>

@@ -1,4 +1,9 @@
 import { getTranslations } from "next-intl/server"
+import {
+  type ComparableSchool,
+  CompareProvider,
+} from "@/components/schools/compare/compare-context"
+import { SchoolComparison } from "@/components/schools/compare/school-comparison"
 import { SchoolCard } from "@/components/schools/school-card"
 import { SchoolFilters } from "@/components/schools/school-filters"
 import { Card } from "@/components/ui/card"
@@ -52,6 +57,18 @@ export async function SchoolsWorkspace({
   const states = [
     ...new Set(result.items.flatMap((school) => (school.state ? [school.state] : []))),
   ].toSorted()
+  const unlocked = access.packageState === "paid" || role === "admin"
+  const comparableItems: readonly ComparableSchool[] = result.items.map((school) => ({
+    body: school.body,
+    financialAid: school.financialAid,
+    id: school.id,
+    matchPercent: school.matchPercent,
+    name: school.name,
+    saoDeadline: school.saoDeadline,
+    setting: school.setting,
+    strengths: school.strengths,
+    tuition: school.tuition,
+  }))
 
   return (
     <section className="mt-8">
@@ -87,23 +104,26 @@ export async function SchoolsWorkspace({
 
       {access.packageState === "paid" && <SchoolFilters filters={filters} states={states} />}
 
-      {schools.length === 0 ? (
-        <WorkspaceMessage body={t("empty.filtered")} title={t("empty.title")} />
-      ) : (
-        <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {schools.map((school) => (
-            <SchoolCard
-              key={school.id}
-              locale={locale}
-              readOnly={role === "parent" || access.packageState === "trial"}
-              role={role}
-              school={school}
-              showBreakdown={access.packageState === "paid" || role === "admin"}
-              studentId={access.studentId}
-            />
-          ))}
-        </div>
-      )}
+      <CompareProvider items={comparableItems}>
+        {unlocked && <SchoolComparison studentId={access.studentId} />}
+        {schools.length === 0 ? (
+          <WorkspaceMessage body={t("empty.filtered")} title={t("empty.title")} />
+        ) : (
+          <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {schools.map((school) => (
+              <SchoolCard
+                key={school.id}
+                locale={locale}
+                readOnly={role === "parent" || access.packageState === "trial"}
+                role={role}
+                school={school}
+                showBreakdown={unlocked}
+                studentId={access.studentId}
+              />
+            ))}
+          </div>
+        )}
+      </CompareProvider>
     </section>
   )
 }

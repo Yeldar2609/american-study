@@ -215,6 +215,29 @@
         "weak": "Limited fit on {factor}."
       }
     },
+    "compare": {
+      "add": "Add to compare",
+      "limit": "Compare limit reached",
+      "title": "Compare schools",
+      "hint": "Select up to 3 schools below to compare them side by side.",
+      "clear": "Clear",
+      "loading": "Loading…",
+      "attribute": "Attribute",
+      "rows": {
+        "match": "Overall match",
+        "tuition": "Boarding tuition",
+        "aid": "Financial aid",
+        "setting": "Setting",
+        "body": "Student body",
+        "deadline": "SAO deadline",
+        "strengths": "Strengths"
+      },
+      "aid": {
+        "yes": "Offered",
+        "no": "Not offered",
+        "unknown": "Not listed"
+      }
+    },
     "empty": {
       "title": "No schools found",
       "empty": "No student profile is available for this account yet.",
