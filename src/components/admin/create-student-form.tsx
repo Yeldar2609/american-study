@@ -9,13 +9,12 @@ import { createStudentAction } from "@/lib/admin/student-actions"
 
 type CreateStudentFormProps = {
   readonly locale: string
-  readonly preview?: boolean
 }
 
 const selectClassName =
   "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-slate-950 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
 
-export function CreateStudentForm({ locale, preview = false }: CreateStudentFormProps) {
+export function CreateStudentForm({ locale }: CreateStudentFormProps) {
   const t = useTranslations("adminStudents")
   const action = createStudentAction.bind(null, locale)
   const [actionState, formAction, pending] = useActionState(action, initialAdminStudentActionState)
@@ -39,12 +38,6 @@ export function CreateStudentForm({ locale, preview = false }: CreateStudentForm
           {t(`messages.${state.message}`)}
         </div>
       )}
-      {preview && (
-        <div className="rounded-2xl bg-blue-50 p-4 text-sm font-bold text-blue-800" role="status">
-          {t("previewNotice")}
-        </div>
-      )}
-
       <div className="grid gap-4 sm:grid-cols-2">
         <StudentFormField
           autoComplete="name"
@@ -102,7 +95,7 @@ export function CreateStudentForm({ locale, preview = false }: CreateStudentForm
           />
           <label className="grid gap-2 text-sm font-bold text-slate-700">
             {t("fields.parentLanguage")}
-            <select className={selectClassName} defaultValue="" name="parentLanguage">
+            <select className={selectClassName} defaultValue="ru" name="parentLanguage">
               <option value="">{t("options.notSet")}</option>
               <option value="en">{t("options.english")}</option>
               <option value="ru">{t("options.russian")}</option>
@@ -204,7 +197,7 @@ export function CreateStudentForm({ locale, preview = false }: CreateStudentForm
         </div>
       </details>
 
-      <Button className="w-full sm:w-fit" disabled={pending || preview} size="large" type="submit">
+      <Button className="w-full sm:w-fit" disabled={pending} size="large" type="submit">
         {pending ? t("creating") : t("create")}
       </Button>
     </form>

@@ -29,13 +29,13 @@ export async function Hero() {
           </Link>
           <Link
             className={buttonVariants({ variant: "outline", size: "large" })}
-            href="/preview/student"
+            href="/#how-it-works"
           >
             {t("secondaryCta")}
           </Link>
         </div>
       </section>
-      <Card className="relative overflow-hidden p-7 sm:p-9">
+      <Card className="relative scroll-mt-8 overflow-hidden p-7 sm:p-9" id="how-it-works">
         <div
           aria-hidden="true"
           className="absolute -right-16 -top-16 size-48 rounded-full bg-cyan-200/50 blur-2xl"

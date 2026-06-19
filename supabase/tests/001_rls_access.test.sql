@@ -2,7 +2,64 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 
-select plan(24);
+select plan(27);
+
+insert into auth.users (
+  instance_id,
+  id,
+  aud,
+  role,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  created_at,
+  updated_at,
+  confirmation_token,
+  recovery_token,
+  email_change_token_new,
+  email_change
+) values
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '00000000-0000-0000-0000-000000000005',
+    'authenticated',
+    'authenticated',
+    'rls.trial.parent@american-study.local',
+    crypt('LocalTest123!', gen_salt('bf')),
+    now(),
+    '{"provider":"email","providers":["email"],"role":"parent"}',
+    '{"full_name":"RLS Trial Parent","language":"ru"}',
+    now(),
+    now(),
+    '',
+    '',
+    '',
+    ''
+  ),
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '00000000-0000-0000-0000-000000000006',
+    'authenticated',
+    'authenticated',
+    'rls.unrelated@american-study.local',
+    crypt('LocalTest123!', gen_salt('bf')),
+    now(),
+    '{"provider":"email","providers":["email"],"role":"parent"}',
+    '{"full_name":"RLS Unrelated Parent","language":"ru"}',
+    now(),
+    now(),
+    '',
+    '',
+    '',
+    ''
+  );
+
+insert into public.parents_students (parent_user_id, student_id) values (
+  '00000000-0000-0000-0000-000000000005',
+  '00000000-0000-0000-0000-000000000102'
+);
 
 insert into public.schools (
   id, name, state, city, setting, student_body, strengths
@@ -86,10 +143,15 @@ select results_eq(
   array['Test Admin Pick'::text],
   'trial student receives only admin-matched schools'
 );
+select results_eq(
+  'select count(*) from public.get_dashboard_students()',
+  array[1::bigint],
+  'trial student receives only their dashboard student'
+);
 
 select set_config(
   'request.jwt.claims',
-  '{"sub":"00000000-0000-0000-0000-000000000004","role":"authenticated"}',
+  '{"sub":"00000000-0000-0000-0000-000000000005","role":"authenticated"}',
   true
 );
 select results_eq(
@@ -111,6 +173,11 @@ select results_eq(
   'select count(*) from public.get_my_matched_schools()',
   array[1::bigint],
   'parent of a trial student receives only the linked admin pick'
+);
+select results_eq(
+  'select count(*) from public.get_dashboard_students()',
+  array[1::bigint],
+  'parent receives only linked dashboard students'
 );
 select throws_ok(
   $$select public.set_school_pick_starred(
@@ -150,7 +217,7 @@ select lives_ok(
 
 select set_config(
   'request.jwt.claims',
-  '{"sub":"00000000-0000-0000-0000-000000000005","role":"authenticated"}',
+  '{"sub":"00000000-0000-0000-0000-000000000004","role":"authenticated"}',
   true
 );
 select results_eq(
@@ -209,6 +276,11 @@ select results_eq(
   'select count(*) from public.schools',
   array[2::bigint],
   'admin can read all schools'
+);
+select results_eq(
+  'select count(*) from public.get_dashboard_students()',
+  array[2::bigint],
+  'admin dashboard includes all students'
 );
 select lives_ok(
   $$update public.students

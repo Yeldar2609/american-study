@@ -1,9 +1,9 @@
 # American Study
 
 Bilingual EN/RU consulting portal for Kazakh students applying to US boarding
-schools. Milestone 1 provides the production application foundation: localized
-public and auth pages, Supabase SSR auth wiring, server-side role guards,
-responsive role previews, and a polished locked feature state.
+schools. The current application foundation includes localized public and auth
+pages, Supabase SSR auth wiring, server-side role guards, live role dashboards,
+and polished locked and empty states.
 
 ## Requirements
 
@@ -19,9 +19,8 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open `http://localhost:3000`. The public pages and fixture-only previews work
-without secrets. Auth actions show a controlled configuration error until the
-Supabase variables are supplied.
+Open `http://localhost:3000`. Public pages work without secrets. Auth actions
+show a controlled configuration error until the Supabase variables are supplied.
 
 ## Environment
 
@@ -36,8 +35,8 @@ Never add a Supabase secret or service-role key to a `NEXT_PUBLIC_*` variable.
 Do not add `SUPABASE_SERVICE_ROLE_KEY` to `apphosting.yaml`; configure it as a
 Firebase App Hosting backend secret.
 
-`apphosting.yaml` provides the canonical app origin, browser-safe Supabase URL,
-and publishable key at both build time and runtime.
+`apphosting.yaml` provides the current Firebase backend origin and browser-safe
+Supabase values at build and runtime.
 
 ## Verification
 
@@ -80,8 +79,8 @@ password path when a service-role key is unavailable.
 
 ## Firebase App Hosting
 
-1. Create an App Hosting backend for this repository and wait for Firebase to
-   assign its HTTPS backend URL.
+1. Create a new App Hosting backend for this repository and wait for Firebase
+   to assign its HTTPS backend URL.
 2. Set `NEXT_PUBLIC_APP_URL` in `apphosting.yaml` to the exact backend origin,
    without a trailing slash.
 3. Trigger a new rollout so Next.js embeds the production origin during the
@@ -109,7 +108,8 @@ a Supabase secret key or service-role key to `apphosting.yaml`.
   dispatches to the matching shell.
 - Open a different role URL directly; verify the server redirects to the user's
   assigned role.
-- Check student, parent, and admin previews at 320px, 390px, 768px, and 1440px.
+- Check authenticated student, parent, and admin dashboards at 320px, 390px,
+  768px, and 1440px.
 - Navigate by keyboard; verify visible focus, labeled fields, and one unlock CTA.
 
 ## Future Milestone Checks
@@ -118,8 +118,8 @@ a Supabase secret key or service-role key to `apphosting.yaml`.
 
 - Apply migrations from a clean Supabase project.
 - Run `npm exec supabase -- test db` and verify all pgTAP schema/RLS checks pass.
-- Log in with the local fixtures from `supabase/seed.sql`; every fixture uses
-  password `LocalTest123!`.
+- Log in with the four local test accounts from `supabase/seed.sql`; every
+  account uses password `LocalTest123!`.
 - Dry-run `data/schools.csv`; verify 70 accepted rows, zero rejected rows, and
   the checksum recorded in `data/schools.provenance.json`.
 - Create linked student and parent users; edit every centralized student field.
@@ -151,7 +151,7 @@ a Supabase secret key or service-role key to `apphosting.yaml`.
 
 - Switch between linked students and verify progress and overdue totals.
 - Compare admin applied-school data with the exported CSV.
-- Deploy preview and production to Firebase App Hosting; verify each backend's
+- Deploy staging and production to Firebase App Hosting; verify each backend's
   environment and Supabase auth redirects.
 
 The detailed execution plan is in `.omo/plans/american-study.md`.

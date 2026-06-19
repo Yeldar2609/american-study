@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import { PT_Serif, Rubik } from "next/font/google"
 import { headers } from "next/headers"
 import type { ReactNode } from "react"
@@ -15,14 +14,6 @@ const displayFont = PT_Serif({
   subsets: ["latin", "cyrillic"],
   variable: "--font-display",
 })
-
-export const metadata: Metadata = {
-  title: {
-    default: "American Study",
-    template: "%s | American Study",
-  },
-  description: "A clear path from Kazakhstan to a US boarding school.",
-}
 
 export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const requestHeaders = await headers()

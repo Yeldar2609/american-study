@@ -1,4 +1,14 @@
-import { BookOpen, CalendarDays, FileText, Home, LogOut, School, Users } from "lucide-react"
+import {
+  BookOpen,
+  CalendarDays,
+  FileText,
+  FolderKanban,
+  Home,
+  Library,
+  LogOut,
+  School,
+  Users,
+} from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { Logo } from "@/components/brand/logo"
 import { LocaleSwitcher } from "@/components/locale-switcher"
@@ -12,8 +22,10 @@ const iconByItem = {
   roadmap: BookOpen,
   schools: School,
   essays: FileText,
+  applications: FolderKanban,
   bookings: CalendarDays,
   people: Users,
+  resources: Library,
 } as const
 
 type NavigationItem = keyof typeof iconByItem
@@ -22,16 +34,15 @@ type SidebarProps = {
   readonly locale: string
   readonly role: UserRole
   readonly activeSection: string
-  readonly preview?: boolean
 }
 
-export async function AppSidebar({ locale, role, activeSection, preview = false }: SidebarProps) {
+export async function AppSidebar({ locale, role, activeSection }: SidebarProps) {
   const t = await getTranslations("app")
   const common = await getTranslations("common")
   const items: readonly NavigationItem[] =
     role === "admin"
-      ? ["home", "people", "schools", "essays"]
-      : ["home", "roadmap", "schools", "essays", "bookings"]
+      ? ["home", "people", "schools", "applications", "essays", "resources"]
+      : ["home", "roadmap", "schools", "essays", "bookings", "resources"]
   const logout = logoutAction.bind(null, locale)
 
   return (
@@ -54,7 +65,7 @@ export async function AppSidebar({ locale, role, activeSection, preview = false 
                   ? "bg-blue-600 text-white"
                   : "text-slate-600 hover:bg-blue-50 hover:text-blue-800"
               }`}
-              href={preview ? `/preview/${role}?section=${item}` : `/app/${role}?section=${item}`}
+              href={`/app/${role}?section=${item}`}
               key={item}
             >
               <Icon aria-hidden="true" className="size-5" />
@@ -62,23 +73,19 @@ export async function AppSidebar({ locale, role, activeSection, preview = false 
             </Link>
           )
         })}
-        {!preview && (
-          <form action={logout} className="shrink-0 lg:hidden">
-            <Button type="submit" variant="ghost">
-              <LogOut aria-hidden="true" className="size-5" />
-              {common("signOut")}
-            </Button>
-          </form>
-        )}
-      </nav>
-      {!preview && (
-        <form action={logout} className="mt-auto hidden pt-8 lg:block">
-          <Button className="w-full" type="submit" variant="ghost">
+        <form action={logout} className="shrink-0 lg:hidden">
+          <Button type="submit" variant="ghost">
             <LogOut aria-hidden="true" className="size-5" />
             {common("signOut")}
           </Button>
         </form>
-      )}
+      </nav>
+      <form action={logout} className="mt-auto hidden pt-8 lg:block">
+        <Button className="w-full" type="submit" variant="ghost">
+          <LogOut aria-hidden="true" className="size-5" />
+          {common("signOut")}
+        </Button>
+      </form>
     </aside>
   )
 }

@@ -2,7 +2,7 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 
-select plan(43);
+select plan(45);
 
 select has_table('public', 'users', 'users exists');
 select has_table('public', 'students', 'students exists');
@@ -43,6 +43,12 @@ select has_function(
   'get_my_matched_schools',
   array[]::text[],
   'matched schools RPC exists'
+);
+select has_function(
+  'public',
+  'get_dashboard_students',
+  array[]::text[],
+  'dashboard students RPC exists'
 );
 select has_function(
   'public',
@@ -142,6 +148,11 @@ select is(
   has_function_privilege('anon', 'public.get_my_matched_schools()', 'execute'),
   false,
   'anonymous users cannot execute matched schools RPC'
+);
+select is(
+  has_function_privilege('anon', 'public.get_dashboard_students()', 'execute'),
+  false,
+  'anonymous users cannot execute dashboard RPC'
 );
 select is(
   has_function_privilege(

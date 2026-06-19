@@ -31,7 +31,11 @@ export async function createStudentAction(
     email: value.studentEmail,
     email_confirm: true,
     password: value.studentPassword,
-    user_metadata: { full_name: value.studentFullName, language: value.studentLanguage },
+    user_metadata: {
+      full_name: value.studentFullName,
+      language: value.studentLanguage,
+      role: "student",
+    },
   })
   if (studentAuthError !== null) {
     return {
@@ -98,7 +102,11 @@ export async function createStudentAction(
       email: value.parentEmail,
       email_confirm: true,
       password: value.parentPassword,
-      user_metadata: { full_name: value.parentFullName, language: value.parentLanguage },
+      user_metadata: {
+        full_name: value.parentFullName,
+        language: value.parentLanguage,
+        role: "parent",
+      },
     })
     if (parentAuthError !== null) {
       const cleaned = await deleteAuthUsers(admin.auth.admin, [studentUserId])

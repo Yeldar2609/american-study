@@ -10,21 +10,14 @@ import { listAdminStudents } from "@/lib/admin/student-queries"
 
 type StudentManagerProps = {
   readonly locale: string
-  readonly preview?: boolean
   readonly selectedStudentId?: string | undefined
 }
 
-export async function StudentManager({
-  locale,
-  preview = false,
-  selectedStudentId,
-}: StudentManagerProps) {
+export async function StudentManager({ locale, selectedStudentId }: StudentManagerProps) {
   const t = await getTranslations("adminStudents")
-  const result = preview ? ({ kind: "ready", students: [] } as const) : await listAdminStudents()
+  const result = await listAdminStudents()
   const selected =
-    preview || selectedStudentId === undefined
-      ? null
-      : await getAdminStudentProfile(selectedStudentId)
+    selectedStudentId === undefined ? null : await getAdminStudentProfile(selectedStudentId)
 
   return (
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)]">
@@ -116,7 +109,7 @@ export async function StudentManager({
             {t(selected.kind === "configuration" ? "configurationBody" : "loadError")}
           </div>
         ) : (
-          <CreateStudentForm locale={locale} preview={preview} />
+          <CreateStudentForm locale={locale} />
         )}
       </Card>
     </div>

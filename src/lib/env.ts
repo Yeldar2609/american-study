@@ -10,6 +10,7 @@ const publicEnvSchema = z.object({
 })
 
 const privateEnvSchema = z.object({
+  CALENDAR_BOOKING_LINK: optionalEnvironmentValue(z.url()),
   NEXT_PUBLIC_SUPABASE_URL: optionalEnvironmentValue(z.url()),
   SUPABASE_SERVICE_ROLE_KEY: optionalEnvironmentValue(z.string().min(1)),
 })

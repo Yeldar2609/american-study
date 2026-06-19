@@ -11,8 +11,34 @@ const userProfileSchema = z.object({
 })
 export type UserProfile = Readonly<z.infer<typeof userProfileSchema>>
 
+const legacyTransitionProfileSchema = z
+  .object({
+    app_metadata: z.object({
+      role: z.enum(userRoles),
+    }),
+    email: z.string().email(),
+    id: z.string().uuid(),
+    user_metadata: z.object({
+      full_name: z.string().trim().min(1).max(200),
+      language: z.enum(userLanguages),
+    }),
+  })
+  .transform(({ app_metadata, email, id, user_metadata }) => ({
+    email,
+    full_name: user_metadata.full_name,
+    id,
+    language: user_metadata.language,
+    role: app_metadata.role,
+  }))
+export type LegacyTransitionProfile = Readonly<z.infer<typeof legacyTransitionProfileSchema>>
+
 export function parseUserProfile(value: unknown): UserProfile | null {
   const result = userProfileSchema.safeParse(value)
+  return result.success ? result.data : null
+}
+
+export function parseLegacyTransitionProfile(value: unknown): LegacyTransitionProfile | null {
+  const result = legacyTransitionProfileSchema.safeParse(value)
   return result.success ? result.data : null
 }
 

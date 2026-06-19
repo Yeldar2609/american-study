@@ -25,6 +25,19 @@ function leafValues(value: unknown): unknown[] {
   return Object.values(value).flatMap(leafValues)
 }
 
+function leafEntries(value: unknown, prefix = ""): readonly (readonly [string, string])[] {
+  if (typeof value === "string") {
+    return [[prefix, value]]
+  }
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    return []
+  }
+
+  return Object.entries(value).flatMap(([key, child]) =>
+    leafEntries(child, prefix === "" ? key : `${prefix}.${key}`),
+  )
+}
+
 describe("translation catalogs", () => {
   it("keeps English and Russian message keys in exact parity", () => {
     const english = readMessages("en")
@@ -37,5 +50,16 @@ describe("translation catalogs", () => {
     const values = leafValues(readMessages(locale))
 
     expect(values.every((value) => typeof value === "string" && value.trim() !== "")).toBe(true)
+  })
+
+  it("uses genuine Russian copy instead of copied English values", () => {
+    const english = new Map(leafEntries(readMessages("en")))
+    const russian = new Map(leafEntries(readMessages("ru")))
+    const allowedSharedValues = new Set(["common.brand", "auth.emailPlaceholder", "metadata.title"])
+    const copiedKeys = [...english.entries()].flatMap(([key, value]) =>
+      !allowedSharedValues.has(key) && russian.get(key) === value ? [key] : [],
+    )
+
+    expect(copiedKeys).toEqual([])
   })
 })

@@ -16,12 +16,12 @@ describe("locale routing", () => {
 
   it("replaces the locale prefix while preserving the route", () => {
     // Given
-    const pathname = "/en/preview/student"
+    const pathname = "/en/login"
 
     // When
     const result = replaceLocale(pathname, "ru")
 
     // Then
-    expect(result).toBe("/ru/preview/student")
+    expect(result).toBe("/ru/login")
   })
 })

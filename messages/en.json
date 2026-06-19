@@ -1,7 +1,13 @@
 {
   "language": {
     "en": "English",
-    "ru": "Русский"
+    "ru": "Russian",
+    "switchError": "Your language preference could not be saved. Please try again."
+  },
+  "metadata": {
+    "title": "American Study",
+    "titleTemplate": "%s | American Study",
+    "description": "A clear path from Kazakhstan to a US boarding school."
   },
   "common": {
     "brand": "American Study",
@@ -14,7 +20,7 @@
     "title": "Your US school journey, made clear.",
     "subtitle": "American Study helps Kazakh students and their families turn a big goal into a step-by-step plan, from the first diagnostic to the final application.",
     "primaryCta": "Open your portal",
-    "secondaryCta": "Preview the student app",
+    "secondaryCta": "See how it works",
     "roadmapLabel": "Your path",
     "roadmapTitle": "Big goals. Clear next steps.",
     "step1": "Discover your best-fit schools",
@@ -73,7 +79,7 @@
     }
   },
   "locked": {
-    "cta": "Unlock full support"
+    "contactConsultant": "Contact your consultant to unlock full support."
   },
   "setup": {
     "title": "Your portal is almost ready",
@@ -82,16 +88,38 @@
   },
   "app": {
     "navigation": "Portal navigation",
-    "previewBadge": "Preview only · no private data",
     "progress": "Application progress",
+    "progressSummary": "{completed} of {total} tasks approved",
     "nextMilestone": "Next milestone",
-    "viewDetails": "View details",
     "lockedTitle": "Full application roadmap",
     "lockedDescription": "Unlock guided essays, interview practice, document checklists, and consultant calls in one place.",
-    "section": {
-      "eyebrow": "Selected workspace",
-      "title": "{section} preview",
-      "description": "This Milestone 1 view confirms responsive navigation and the role-aware app shell. Live student data arrives in the next milestones."
+    "status": {
+      "students": "{count, plural, =0 {No students} one {# student} other {# students}}",
+      "overdue": "{count, plural, =0 {Nothing overdue} one {# overdue task} other {# overdue tasks}}"
+    },
+    "configuration": {
+      "title": "Portal connection required",
+      "body": "The portal cannot load account data until its Supabase environment is configured."
+    },
+    "loadError": {
+      "title": "Dashboard unavailable",
+      "body": "Your live dashboard data could not be loaded. Please try again shortly."
+    },
+    "empty": {
+      "studentsTitle": "No student records yet",
+      "studentStudentsBody": "Your consultant has not created your student profile yet.",
+      "parentStudentsBody": "No students are linked to this parent account yet.",
+      "adminStudentsBody": "Create the first student from the Students section.",
+      "notAvailable": "Not started",
+      "tasksBody": "No application tasks have been assigned yet.",
+      "nextTask": "No upcoming task",
+      "sectionTitle": "Nothing here yet",
+      "sectionBody": "This workspace has no saved records yet. New items will appear here after they are created."
+    },
+    "diagnostic": {
+      "label": "Diagnostic summary",
+      "emptyTitle": "Summary not added yet",
+      "emptyBody": "Your consultant has not published a diagnostic summary yet."
     },
     "nav": {
       "home": "Home",
@@ -99,43 +127,325 @@
       "schools": "Schools",
       "essays": "Essays",
       "bookings": "Bookings",
-      "people": "Students"
+      "people": "Students",
+      "applications": "Applications",
+      "resources": "Resources"
     },
     "student": {
       "eyebrow": "Student portal",
-      "title": "Good morning, Alex",
-      "subtitle": "One clear place for your schools, tasks, deadlines, and consultant support.",
-      "status": "On track",
-      "progressBody": "Three tasks completed this week. Your school-list review is the next checkpoint.",
-      "next": "School list review",
-      "timing": "Thursday · 16:00",
-      "cardLabel": "Diagnostic summary",
-      "cardTitle": "Your strongest application themes",
-      "cardBody": "Curiosity, community leadership, and a strong interest in engineering give your profile a clear story."
+      "title": "Welcome, {name}",
+      "subtitle": "Your schools, tasks, deadlines, and consultant support in one place."
     },
     "parent": {
       "eyebrow": "Parent overview",
-      "title": "A clear view of Alex's progress",
-      "subtitle": "See what is finished, what is overdue, and where a gentle reminder can help.",
-      "status": "0 overdue",
-      "progressBody": "Alex is moving steadily. The next two tasks are planned before the school-list call.",
-      "next": "Review school matches",
-      "timing": "Due in 2 days",
-      "cardLabel": "This week",
-      "cardTitle": "Two meaningful wins",
-      "cardBody": "Alex completed the interests profile and reviewed the first eight matched schools."
+      "title": "Welcome, {name}",
+      "subtitle": "See completed work, overdue tasks, and the next important deadline for your linked students."
     },
     "admin": {
       "eyebrow": "Consultant workspace",
-      "title": "Students moving forward",
-      "subtitle": "A focused view of the pipeline, consultant priorities, and application activity.",
-      "status": "12 active students",
-      "progressBody": "Most active students are in list building. Two profiles need consultant review today.",
-      "next": "Review new diagnostics",
-      "timing": "2 waiting on admin",
-      "cardLabel": "Pipeline focus",
-      "cardTitle": "Trial students ready for matching",
-      "cardBody": "Three completed diagnostics are ready for preferences, match reasons, and school selection."
+      "title": "Welcome, {name}",
+      "subtitle": "Live student workload, deadlines, and application progress across the agency."
+    }
+  },
+  "schools": {
+    "title": "School matches",
+    "trialEyebrow": "Your consultant's matches",
+    "paidEyebrow": "Full school database",
+    "trialBody": "Explore the schools selected for you and the reasons each one fits.",
+    "paidBody": "Search the full database, compare your match scores, and save favorites.",
+    "studentPicker": "Choose a student",
+    "loadError": "The live school catalog could not be loaded. Please try again shortly.",
+    "match": "{percent}% match",
+    "why": "Why it fits",
+    "locationUnknown": "Location not listed",
+    "enrollment": "Enrollment",
+    "tuition": "Boarding tuition",
+    "notAvailable": "Not listed",
+    "website": "Open school website",
+    "star": "Add to favorites",
+    "unstar": "Remove from favorites",
+    "filters": {
+      "search": "Search schools or strengths",
+      "state": "All states",
+      "setting": "All settings",
+      "body": "All student bodies",
+      "apply": "Apply filters"
+    },
+    "settings": {
+      "urban": "Urban",
+      "suburban": "Suburban",
+      "rural": "Rural"
+    },
+    "bodies": {
+      "coed": "Coeducational",
+      "boys": "Boys",
+      "girls": "Girls"
+    },
+    "admin": {
+      "edit": "Consultant controls",
+      "matched": "Include in matched list",
+      "finalSeven": "Include in final seven",
+      "override": "Match score override",
+      "reason": "Why this school fits",
+      "deadline": "SAO deadline",
+      "status": "Application status",
+      "save": "Save school decision",
+      "statuses": {
+        "researching": "Researching",
+        "applied": "Applied",
+        "submitted": "Submitted"
+      }
+    },
+    "empty": {
+      "title": "No schools found",
+      "empty": "No student profile is available for this account yet.",
+      "not_found": "That student is not linked to your account.",
+      "filtered": "No schools match these filters. Clear a filter and try again."
+    }
+  },
+  "roadmap": {
+    "eyebrow": "Application plan",
+    "title": "Roadmap and documents",
+    "body": "Follow each assigned step, use the guides, and keep your application files organized.",
+    "lockedBody": "Upgrade to access your guided roadmap, document checklist, videos, and status tracking.",
+    "loadError": "The live roadmap could not be loaded. Please try again shortly.",
+    "studentPicker": "Choose a student",
+    "tasks": "Application tasks",
+    "documents": "Document checklist",
+    "videos": "How-to videos",
+    "openDrive": "Open in Google Drive",
+    "videoTitle": "Walkthrough for {title}",
+    "changeStatus": "Task status",
+    "saveStatus": "Save status",
+    "statuses": {
+      "not_started": "Not started",
+      "in_progress": "In progress",
+      "submitted": "Submitted",
+      "needs_revision": "Needs revision",
+      "approved": "Approved"
+    },
+    "documentStatuses": {
+      "requested": "Requested",
+      "uploaded": "Uploaded",
+      "verified": "Verified"
+    },
+    "empty": {
+      "empty": "No student profile is available for this account yet.",
+      "not_found": "That student is not linked to your account.",
+      "tasksTitle": "No tasks assigned",
+      "tasks": "Your consultant has not assigned application tasks yet.",
+      "documents": "No document requests have been added yet.",
+      "videos": "No walkthrough videos have been published yet."
+    },
+    "admin": {
+      "newTask": "Add an application task",
+      "newDocument": "Add a document request",
+      "section": "Roadmap section",
+      "title": "Title",
+      "description": "Instructions",
+      "videoId": "YouTube video ID",
+      "dueDate": "Due date",
+      "driveLink": "Google Drive link",
+      "required": "Required document",
+      "notes": "Internal instructions",
+      "documentType": "Document type",
+      "saveTask": "Create task",
+      "saveDocument": "Create document request",
+      "documentTypes": {
+        "passport": "Passport",
+        "transcript": "Transcript",
+        "recommendation": "Recommendation",
+        "financial": "Financial document",
+        "test_score": "Test score",
+        "photo": "Photo",
+        "other": "Other"
+      }
+    }
+  },
+  "essays": {
+    "eyebrow": "Essay workspace",
+    "title": "Essays",
+    "body": "Keep every draft in Google Drive and follow consultant feedback through approval.",
+    "lockedBody": "Upgrade to access essay planning, reviews, revision requests, and consultant feedback.",
+    "loadError": "The live essay workspace could not be loaded. Please try again shortly.",
+    "studentPicker": "Choose a student",
+    "newEssay": "Add an essay",
+    "create": "Create essay",
+    "save": "Save essay",
+    "edit": "Edit essay",
+    "feedback": "Consultant feedback",
+    "openDrive": "Open essay in Google Drive",
+    "fields": {
+      "title": "Essay title",
+      "driveLink": "Google Drive link",
+      "status": "Essay status",
+      "feedback": "Feedback"
+    },
+    "statuses": {
+      "draft": "Draft",
+      "in_review": "In review",
+      "needs_revision": "Needs revision",
+      "approved": "Approved"
+    },
+    "empty": {
+      "empty": "No student profile is available for this account yet.",
+      "not_found": "That student is not linked to your account.",
+      "title": "No essays yet",
+      "items": "Create the first essay when the writing phase begins."
+    }
+  },
+  "bookings": {
+    "eyebrow": "Consultant calls",
+    "title": "Book a call",
+    "body": "Choose the support session you need and continue to the agency's Google Calendar booking page.",
+    "lockedBody": "Upgrade to book strategy, essay, interview, and final application calls.",
+    "loadError": "The live booking workspace could not be loaded. Please try again shortly.",
+    "studentPicker": "Choose a student",
+    "book": "Continue to booking",
+    "history": "Booking history",
+    "configurationTitle": "Calendar connection required",
+    "configurationBody": "The agency's Google Calendar appointment link has not been configured yet.",
+    "parentReadOnly": "Parents can review booked calls. The student or consultant creates new booking requests.",
+    "types": {
+      "school_list_review": {
+        "title": "School-list review",
+        "body": "Review matches, favorites, and the final school list."
+      },
+      "essay_review": {
+        "title": "Essay review",
+        "body": "Discuss drafts, feedback, and the next revision."
+      },
+      "mock_interview": {
+        "title": "Mock interview",
+        "body": "Practice answers in a Google Meet interview session."
+      },
+      "final_application_check": {
+        "title": "Final application check",
+        "body": "Verify every form, document, and deadline before submission."
+      },
+      "general_strategy": {
+        "title": "General strategy",
+        "body": "Discuss priorities, concerns, and the overall application plan."
+      }
+    },
+    "statuses": {
+      "requested": "Requested",
+      "booked": "Booked",
+      "completed": "Completed"
+    },
+    "empty": {
+      "empty": "No student profile is available for this account yet.",
+      "not_found": "That student is not linked to your account.",
+      "items": "No calls have been requested yet."
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No new notifications.",
+    "markRead": "Mark notification as read"
+  },
+  "comments": {
+    "title": "Family and consultant comments",
+    "message": "Comment",
+    "attachment": "Optional Google Drive link",
+    "send": "Post comment",
+    "empty": "No comments yet.",
+    "openAttachment": "Open attachment"
+  },
+  "applications": {
+    "eyebrow": "Partner-school outreach",
+    "title": "Applications",
+    "body": "See every active application, submission status, and SAO deadline in one place.",
+    "export": "Export CSV",
+    "student": "Student",
+    "school": "School",
+    "status": "Status",
+    "deadline": "SAO deadline",
+    "notSet": "Not set",
+    "loadError": "The applications list could not be loaded.",
+    "emptyTitle": "No active applications",
+    "empty": "Applied and submitted schools will appear here.",
+    "statuses": {
+      "researching": "Researching",
+      "applied": "Applied",
+      "submitted": "Submitted"
+    }
+  },
+  "resources": {
+    "eyebrow": "Guides and answers",
+    "title": "Resources",
+    "body": "Use the agency's video library and bilingual answers throughout the application process.",
+    "lockedBody": "Upgrade to access the complete video library and application FAQ.",
+    "loadError": "The resource library could not be loaded.",
+    "videos": "Video library",
+    "faq": "Frequently asked questions",
+    "empty": {
+      "empty": "No student profile is available for this account yet.",
+      "not_found": "That student is not linked to your account.",
+      "videos": "No videos have been published yet.",
+      "faq": "No FAQ entries have been published yet."
+    },
+    "admin": {
+      "newVideo": "Add a video",
+      "newFaq": "Add an FAQ",
+      "section": "Section key",
+      "youtubeId": "YouTube video ID",
+      "titleEn": "English title",
+      "titleRu": "Russian title",
+      "questionEn": "English question",
+      "questionRu": "Russian question",
+      "answerEn": "English answer",
+      "answerRu": "Russian answer",
+      "order": "Display order",
+      "saveVideo": "Save video",
+      "saveFaq": "Save FAQ"
+    }
+  },
+  "adminAnalytics": {
+    "eyebrow": "Admin overview",
+    "title": "Agency analytics",
+    "subtitle": "A focused view of access, activation, pipeline movement, deadline risk, and recent student activity.",
+    "metrics": {
+      "total": "Total students",
+      "trial": "Trial students",
+      "paid": "Paid students",
+      "conversion": "Trial to paid",
+      "activated": "Activated",
+      "atRisk": "At risk"
+    },
+    "pipeline": {
+      "title": "Pipeline by stage",
+      "subtitle": "Student distribution across the current admissions workflow."
+    },
+    "recent": {
+      "title": "Recent activity",
+      "subtitle": "The latest student records with tracked activity.",
+      "updated": "Student activity updated",
+      "empty": "No recent student activity has been recorded yet."
+    },
+    "stages": {
+      "diagnostic": "Diagnostic",
+      "trial": "Trial",
+      "listBuilding": "List building",
+      "finalized": "List finalized",
+      "application": "Application",
+      "submitted": "Submitted"
+    },
+    "packages": {
+      "trial": "Trial",
+      "paid": "Paid"
+    },
+    "empty": {
+      "title": "No student analytics yet",
+      "body": "Analytics will appear after the first student account is created."
+    },
+    "configuration": {
+      "title": "Analytics connection required",
+      "body": "Admin analytics cannot load until the Supabase environment is configured."
+    },
+    "error": {
+      "title": "Analytics are temporarily unavailable",
+      "body": "Live agency metrics could not be loaded. Please try again shortly."
     }
   },
   "adminStudents": {
@@ -154,7 +464,6 @@
     "parentSection": "Add a linked parent",
     "parentHint": "Optional. If you enter a parent email, name, language, and temporary password are required.",
     "profileSection": "Diagnostic profile and preferences",
-    "previewNotice": "Preview mode: account creation is disabled and no private student data is loaded.",
     "create": "Create student account",
     "creating": "Creating account...",
     "saveChanges": "Save profile changes",

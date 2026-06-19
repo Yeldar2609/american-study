@@ -19,6 +19,21 @@ const schoolImportRpc = readFileSync(
   "supabase/migrations/202606150001_service_school_import.sql",
   "utf8",
 )
+const workspaceAccess = readFileSync(
+  "supabase/migrations/202606180002_workspace_access.sql",
+  "utf8",
+)
+const schoolManagement = readFileSync(
+  "supabase/migrations/202606180003_school_management.sql",
+  "utf8",
+)
+const paidWorkflows = readFileSync("supabase/migrations/202606180004_paid_workflows.sql", "utf8")
+const collaboration = readFileSync(
+  "supabase/migrations/202606180005_collaboration_admin.sql",
+  "utf8",
+)
+const authTriggerFix = readFileSync("supabase/migrations/202606180006_auth_trigger_fix.sql", "utf8")
+const adminAnalytics = readFileSync("supabase/migrations/202606180007_admin_analytics.sql", "utf8")
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -102,10 +117,93 @@ describe("Supabase migration contract", () => {
     expect(adminProfileRpc).toContain("to authenticated")
   })
 
-  it("seeds role fixtures without inventing school records", () => {
+  it("enforces paid feature access through one stable database helper", () => {
+    expect(workspaceAccess).toContain("create or replace function private.is_unlocked")
+    expect(workspaceAccess).toContain("language sql")
+    expect(workspaceAccess).toContain("stable")
+    expect(workspaceAccess).toContain("create or replace function public.get_school_catalog")
+    expect(workspaceAccess).toContain("student.package_state = 'paid'")
+    expect(workspaceAccess).toContain("or pick.admin_pick")
+    expect(workspaceAccess).toContain("create or replace function public.set_school_star")
+    expect(workspaceAccess).toContain("if not private.is_unlocked(target_student_id)")
+  })
+
+  it("guards school matching changes and limits the final list to seven", () => {
+    expect(schoolManagement).toContain("create or replace function public.admin_update_school_pick")
+    expect(schoolManagement).toContain("if not private.is_admin()")
+    expect(schoolManagement).toContain("Final seven already contains seven schools")
+    expect(schoolManagement).toContain("on conflict (student_id, school_id)")
+    expect(schoolManagement).toContain("grant execute")
+  })
+
+  it("uses guarded workflow mutations that create notifications", () => {
+    expect(paidWorkflows).toContain("create or replace function public.update_task_status")
+    expect(paidWorkflows).toContain("create or replace function public.admin_save_task")
+    expect(paidWorkflows).toContain("create or replace function public.admin_save_document")
+    expect(paidWorkflows).toContain("create or replace function public.save_essay")
+    expect(paidWorkflows).toContain("create or replace function public.request_booking")
+    expect(paidWorkflows).toContain("create or replace function public.mark_notification_read")
+    expect(paidWorkflows).toContain("if not private.is_unlocked")
+    expect(paidWorkflows).toContain("insert into public.notifications")
+    expect(paidWorkflows).toContain("documents_paid_select")
+    expect(paidWorkflows).toContain("messages_paid_select")
+  })
+
+  it("supports paid comments and an admin-only applications export", () => {
+    expect(collaboration).toContain("create or replace function public.post_student_comment")
+    expect(collaboration).toContain("create or replace function public.get_admin_applications")
+    expect(collaboration).toContain("if not private.is_unlocked")
+    expect(collaboration).toContain("if not private.is_admin()")
+    expect(collaboration).toContain("grant execute")
+  })
+
+  it("lets Auth create users before optional role metadata is available", () => {
+    expect(authTriggerFix).toContain("new.raw_user_meta_data ->> 'role'")
+    expect(authTriggerFix).toContain("requested_role is null")
+    expect(authTriggerFix).toContain("return new")
+  })
+
+  it("defines the admin analytics aggregate and its security contract", () => {
+    expect(adminAnalytics).toContain("create or replace function public.get_admin_analytics()")
+    expect(adminAnalytics).toContain("returns jsonb")
+    expect(adminAnalytics).toContain("language plpgsql")
+    expect(adminAnalytics).toContain("stable")
+    expect(adminAnalytics).toContain("security definer")
+    expect(adminAnalytics).toContain("set search_path = ''")
+    expect(adminAnalytics).toContain("if not private.is_admin()")
+    expect(adminAnalytics).toContain(
+      "raise exception 'Admin access required' using errcode = '42501'",
+    )
+    expect(adminAnalytics).toMatch(/return\s*\(\s*with[\s\S]+jsonb_build_object/i)
+    expect(adminAnalytics).toContain("'conversion_percent'")
+    expect(adminAnalytics).toMatch(
+      /student_rollup\.paid_students\s*\*\s*100\.0\s*\/\s*student_rollup\.total_students/,
+    )
+    expect(adminAnalytics).toContain("pick.admin_pick")
+    expect(adminAnalytics).toContain(
+      "student.stage in ('list_building', 'finalized', 'application', 'submitted')",
+    )
+    expect(adminAnalytics).toContain("task.due_date between current_date and current_date + 14")
+    expect(adminAnalytics).toContain("task.status <> 'approved'")
+    expect(adminAnalytics).toContain("document.required")
+    expect(adminAnalytics).toContain("document.due_date between current_date and current_date + 14")
+    expect(adminAnalytics).toContain("document.status <> 'verified'")
+    expect(adminAnalytics).toContain("distinct on (activity.student_id)")
+    expect(adminAnalytics).toContain("limit 8")
+    expect(adminAnalytics).toContain(
+      "revoke execute on function public.get_admin_analytics() from public, anon",
+    )
+    expect(adminAnalytics).toContain(
+      "grant execute on function public.get_admin_analytics() to authenticated",
+    )
+  })
+
+  it("seeds exactly four role accounts without inventing school records", () => {
     expect(seed).toContain("admin@american-study.local")
     expect(seed).toContain("trial.student@american-study.local")
     expect(seed).toContain("paid.student@american-study.local")
+    expect(seed).toContain("paid.parent@american-study.local")
+    expect(new Set(seed.match(/'[a-z.]+@american-study\.local'/g) ?? []).size).toBe(4)
     expect(seed).not.toMatch(/insert\s+into\s+public\.schools/i)
   })
 })

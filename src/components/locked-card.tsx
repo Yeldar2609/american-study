@@ -1,18 +1,13 @@
 import { LockKeyhole } from "lucide-react"
 import { getTranslations } from "next-intl/server"
-import { buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Link } from "@/i18n/navigation"
-import type { UserRole } from "@/lib/auth/access"
 
 type LockedCardProps = {
   readonly title: string
   readonly description: string
-  readonly preview: boolean
-  readonly role: UserRole
 }
 
-export async function LockedCard({ title, description, preview, role }: LockedCardProps) {
+export async function LockedCard({ title, description }: LockedCardProps) {
   const t = await getTranslations("locked")
 
   return (
@@ -27,12 +22,7 @@ export async function LockedCard({ title, description, preview, role }: LockedCa
         </span>
         <h3 className="text-xl font-black text-slate-950">{title}</h3>
         <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">{description}</p>
-        <Link
-          className={`${buttonVariants({ variant: "primary" })} mt-5`}
-          href={preview ? "/login" : `/app/${role}?unlock=1`}
-        >
-          {t("cta")}
-        </Link>
+        <p className="mt-5 font-black text-blue-700">{t("contactConsultant")}</p>
       </div>
     </Card>
   )

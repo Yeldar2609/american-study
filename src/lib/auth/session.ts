@@ -2,16 +2,64 @@ import type { User } from "@supabase/supabase-js"
 import { redirect } from "next/navigation"
 import {
   authenticatedRoleDestination,
+  type LegacyTransitionProfile,
+  parseLegacyTransitionProfile,
   parseUserProfile,
   type UserLanguage,
+  type UserProfile,
   type UserRole,
 } from "@/lib/auth/access"
 import { createClient } from "@/lib/supabase/server"
+
+export type AuthIdentity = {
+  readonly app_metadata: unknown
+  readonly email?: unknown
+  readonly id: unknown
+  readonly user_metadata: unknown
+}
+
+export type ProfileQueryResult = {
+  readonly data: unknown
+  readonly error: unknown
+}
+
+export interface ProfileStore {
+  readProfile(userId: string): Promise<ProfileQueryResult>
+  writeTransitionProfile(profile: LegacyTransitionProfile): Promise<ProfileQueryResult>
+}
 
 export type AuthenticatedUser = {
   readonly user: User
   readonly language: UserLanguage
   readonly role: UserRole
+}
+
+export async function resolveUserProfile(
+  identity: AuthIdentity,
+  store: ProfileStore,
+): Promise<UserProfile | null> {
+  if (typeof identity.id !== "string") {
+    return null
+  }
+
+  const readResult = await store.readProfile(identity.id)
+
+  if (readResult.error !== null) {
+    return null
+  }
+
+  if (readResult.data !== null) {
+    return parseUserProfile(readResult.data)
+  }
+
+  const transitionProfile = parseLegacyTransitionProfile(identity)
+
+  if (transitionProfile === null) {
+    return null
+  }
+
+  const writeResult = await store.writeTransitionProfile(transitionProfile)
+  return writeResult.error === null ? parseUserProfile(writeResult.data) : null
 }
 
 export async function requireUser(locale: string): Promise<User> {
@@ -38,12 +86,15 @@ export async function requireAuthenticatedUser(locale: string): Promise<Authenti
     return null
   }
 
-  const { data } = await supabase
-    .from("users")
-    .select("role, language")
-    .eq("id", user.id)
-    .maybeSingle()
-  const profile = parseUserProfile(data)
+  const store: ProfileStore = {
+    async readProfile(userId) {
+      return supabase.from("users").select("role, language").eq("id", userId).maybeSingle()
+    },
+    async writeTransitionProfile(transitionProfile) {
+      return supabase.from("users").insert(transitionProfile).select("role, language").single()
+    },
+  }
+  const profile = await resolveUserProfile(user, store)
 
   if (profile !== null) {
     return { user, ...profile }

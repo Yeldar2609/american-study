@@ -18,7 +18,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "npm run build && playwright test",
-    "import:schools": "node --experimental-strip-types scripts/import-schools.ts"
+    "import:schools": "node --experimental-strip-types scripts/import-schools.ts",
+    "db:start": "supabase start",
+    "db:reset": "supabase db reset",
+    "db:test": "supabase test db",
+    "db:lint": "supabase db lint --local --fail-on error",
+    "db:status": "supabase status",
+    "db:stop": "supabase stop"
   },
   "dependencies": {
     "@radix-ui/react-slot": "latest",
@@ -46,6 +52,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "jsdom": "latest",
+    "supabase": "2.107.0",
     "tailwindcss": "latest",
     "typescript": "latest",
     "vitest": "latest"

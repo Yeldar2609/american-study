@@ -73,45 +73,11 @@ insert into auth.users (
     '00000000-0000-0000-0000-000000000004',
     'authenticated',
     'authenticated',
-    'trial.parent@american-study.local',
-    crypt('LocalTest123!', gen_salt('bf')),
-    now(),
-    '{"provider":"email","providers":["email"],"role":"parent"}',
-    '{"full_name":"Trial Parent","language":"ru"}',
-    now(),
-    now(),
-    '',
-    '',
-    '',
-    ''
-  ),
-  (
-    '00000000-0000-0000-0000-000000000000',
-    '00000000-0000-0000-0000-000000000005',
-    'authenticated',
-    'authenticated',
     'paid.parent@american-study.local',
     crypt('LocalTest123!', gen_salt('bf')),
     now(),
     '{"provider":"email","providers":["email"],"role":"parent"}',
     '{"full_name":"Paid Parent","language":"ru"}',
-    now(),
-    now(),
-    '',
-    '',
-    '',
-    ''
-  ),
-  (
-    '00000000-0000-0000-0000-000000000000',
-    '00000000-0000-0000-0000-000000000006',
-    'authenticated',
-    'authenticated',
-    'unrelated@american-study.local',
-    crypt('LocalTest123!', gen_salt('bf')),
-    now(),
-    '{"provider":"email","providers":["email"],"role":"parent"}',
-    '{"full_name":"Unrelated Parent","language":"ru"}',
     now(),
     now(),
     '',
@@ -133,7 +99,7 @@ insert into public.students (
     '00000000-0000-0000-0000-000000000102',
     '00000000-0000-0000-0000-000000000002',
     'trial',
-    'Local trial diagnostic summary.',
+    null,
     'medium',
     'trial'
   ),
@@ -141,7 +107,7 @@ insert into public.students (
     '00000000-0000-0000-0000-000000000103',
     '00000000-0000-0000-0000-000000000003',
     'paid',
-    'Local paid diagnostic summary.',
+    null,
     'low',
     'list_building'
   )
@@ -150,10 +116,6 @@ on conflict (id) do nothing;
 insert into public.parents_students (parent_user_id, student_id) values
   (
     '00000000-0000-0000-0000-000000000004',
-    '00000000-0000-0000-0000-000000000102'
-  ),
-  (
-    '00000000-0000-0000-0000-000000000005',
     '00000000-0000-0000-0000-000000000103'
   )
 on conflict do nothing;
