@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 import { safeRedirectPath } from "@/lib/auth/access"
 import { readPublicEnv } from "@/lib/env"
+import { createAdminClient } from "@/lib/supabase/admin"
 import { createClient } from "@/lib/supabase/server"
 
 type AuthAction = "login" | "signup" | "reset"
@@ -55,11 +56,34 @@ export async function emailAuthAction(action: AuthAction, locale: string, formDa
     redirect(authErrorPath(locale, "validation"))
   }
 
-  const result =
-    action === "signup"
-      ? await supabase.auth.signUp(credentials.data)
-      : await supabase.auth.signInWithPassword(credentials.data)
+  if (action === "signup") {
+    // Supabase's built-in mailer is rate-limited and unreliable, so the default
+    // confirm-email signup leaves users stuck unconfirmed. Create the account
+    // pre-confirmed via the service-role admin client, then sign in below.
+    const admin = createAdminClient()
 
+    if (admin === null) {
+      redirect(authErrorPath(locale, "configuration"))
+    }
+
+    // app_metadata.role drives the on_auth_user_created trigger, which only
+    // creates the public.users profile when a valid role is present. Without it
+    // the account exists but has no profile, stranding the user at
+    // /setup-required. Self-serve signups default to "student".
+    const created = await admin.auth.admin.createUser({
+      app_metadata: { role: "student" },
+      email: credentials.data.email,
+      email_confirm: true,
+      password: credentials.data.password,
+      user_metadata: { language: locale === "ru" ? "ru" : "en" },
+    })
+
+    if (created.error) {
+      redirect(authErrorPath(locale, "signup"))
+    }
+  }
+
+  const result = await supabase.auth.signInWithPassword(credentials.data)
   redirect(result.error ? authErrorPath(locale, action) : next)
 }
 
