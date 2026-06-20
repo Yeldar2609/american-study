@@ -1,12 +1,13 @@
 import { defineRouting } from "next-intl/routing"
 
-export const locales = ["en", "ru"] as const
+export const locales = ["en", "ru", "kk"] as const
 export type Locale = (typeof locales)[number]
 
 export function parseLocale(value: string): Locale | null {
   switch (value) {
     case "en":
     case "ru":
+    case "kk":
       return value
     default:
       return null

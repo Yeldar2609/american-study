@@ -10,13 +10,19 @@ import {
   updateStudentProfileAction,
 } from "@/lib/admin/student-profile-actions"
 import type { AdminStudentProfile } from "@/lib/admin/student-profile-query"
+import type { CurrentSchoolOption } from "@/lib/current-schools/options"
 
 type StudentProfileEditorProps = {
   readonly locale: string
   readonly profile: AdminStudentProfile
+  readonly currentSchools: readonly CurrentSchoolOption[]
 }
 
-export function StudentProfileEditor({ locale, profile }: StudentProfileEditorProps) {
+export function StudentProfileEditor({
+  currentSchools,
+  locale,
+  profile,
+}: StudentProfileEditorProps) {
   const t = useTranslations("adminStudents")
   const [state, updateAction, pending] = useActionState(
     updateStudentProfileAction.bind(null, locale),
@@ -69,7 +75,11 @@ export function StudentProfileEditor({ locale, profile }: StudentProfileEditorPr
             {t(`messages.${state.message}`)}
           </p>
         )}
-        <StudentProfileFields fieldErrors={state.fieldErrors} profile={profile} />
+        <StudentProfileFields
+          currentSchools={currentSchools}
+          fieldErrors={state.fieldErrors}
+          profile={profile}
+        />
         <Button className="w-full sm:w-fit" disabled={pending} size="large" type="submit">
           {pending ? t("updating") : t("saveChanges")}
         </Button>

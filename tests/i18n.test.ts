@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest"
 
 type Messages = Readonly<Record<string, unknown>>
 
-function readMessages(locale: "en" | "ru"): Messages {
+function readMessages(locale: "en" | "ru" | "kk"): Messages {
   return JSON.parse(readFileSync(`messages/${locale}.json`, "utf8")) as Messages
 }
 
@@ -39,14 +39,14 @@ function leafEntries(value: unknown, prefix = ""): readonly (readonly [string, s
 }
 
 describe("translation catalogs", () => {
-  it("keeps English and Russian message keys in exact parity", () => {
-    const english = readMessages("en")
-    const russian = readMessages("ru")
+  it("keeps English, Russian, and Kazakh message keys in exact parity", () => {
+    const english = leafKeys(readMessages("en")).sort()
 
-    expect(leafKeys(russian).sort()).toEqual(leafKeys(english).sort())
+    expect(leafKeys(readMessages("ru")).sort()).toEqual(english)
+    expect(leafKeys(readMessages("kk")).sort()).toEqual(english)
   })
 
-  it.each(["en", "ru"] as const)("contains no blank user-facing strings in %s", (locale) => {
+  it.each(["en", "ru", "kk"] as const)("contains no blank user-facing strings in %s", (locale) => {
     const values = leafValues(readMessages(locale))
 
     expect(values.every((value) => typeof value === "string" && value.trim() !== "")).toBe(true)

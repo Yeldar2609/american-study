@@ -16,6 +16,8 @@ const optionalScore = (minimum: number, maximum: number) =>
     .refine((value) => value === "" || /^\d+(\.\d+)?$/.test(value), "number")
     .transform((value) => (value === "" ? null : Number(value)))
     .refine((value) => value === null || (value >= minimum && value <= maximum), "range")
+const optionalUuid = z.union([z.literal(""), z.uuid("uuid")]).transform((value) => value || null)
+const independentFlag = z.string().transform((value) => value === "true")
 
 const studentFormSchema = z
   .object({
@@ -23,6 +25,8 @@ const studentFormSchema = z
     aidNeedLevel: z.enum(["", "low", "medium", "high"]).transform((value) => value || null),
     currentGrade: optionalText,
     currentSchool: optionalText,
+    currentSchoolId: optionalUuid,
+    isIndependentStudent: independentFlag,
     det: optionalScore(10, 160),
     diagnosticSummary: optionalText,
     dob: optionalText,
@@ -43,7 +47,7 @@ const studentFormSchema = z
     packageState: z.enum(["trial", "paid"]),
     parentEmail: z.union([z.literal(""), z.email("email")]).transform((value) => value || null),
     parentFullName: optionalText,
-    parentLanguage: z.enum(["", "en", "ru"]).transform((value) => value || null),
+    parentLanguage: z.enum(["", "en", "ru", "kk"]).transform((value) => value || null),
     parentPassword: optionalText,
     parentPhone: optionalText,
     passportIdDriveUrl: optionalUrl,
@@ -62,7 +66,8 @@ const studentFormSchema = z
     ]),
     studentEmail: z.email("email"),
     studentFullName: z.string().trim().min(1, "required").max(200, "tooLong"),
-    studentLanguage: z.enum(["en", "ru"]),
+    // Students are English-only (no language switcher). Always provisioned as "en".
+    studentLanguage: z.literal("en").default("en"),
     studentPassword: z.string().min(12, "password"),
     toefl: optionalScore(0, 120),
   })
@@ -99,12 +104,14 @@ export function parseStudentForm(formData: FormData): StudentFormResult {
     aidNeedLevel: formValue(formData, "aidNeedLevel"),
     currentGrade: formValue(formData, "currentGrade"),
     currentSchool: formValue(formData, "currentSchool"),
+    currentSchoolId: formValue(formData, "currentSchoolId"),
     det: formValue(formData, "det"),
     diagnosticSummary: formValue(formData, "diagnosticSummary"),
     dob: formValue(formData, "dob"),
     driveFolderUrl: formValue(formData, "driveFolderUrl"),
     englishLevel: formValue(formData, "englishLevel"),
     interests: formValue(formData, "interests"),
+    isIndependentStudent: formValue(formData, "isIndependentStudent"),
     packageState: formValue(formData, "packageState"),
     parentEmail: formValue(formData, "parentEmail"),
     parentFullName: formValue(formData, "parentFullName"),
@@ -120,7 +127,7 @@ export function parseStudentForm(formData: FormData): StudentFormResult {
     stage: formValue(formData, "stage"),
     studentEmail: formValue(formData, "studentEmail"),
     studentFullName: formValue(formData, "studentFullName"),
-    studentLanguage: formValue(formData, "studentLanguage"),
+    studentLanguage: "en",
     studentPassword: formValue(formData, "studentPassword"),
     toefl: formValue(formData, "toefl"),
   })
@@ -135,5 +142,8 @@ export function parseStudentForm(formData: FormData): StudentFormResult {
       (entry): entry is [string, number] => entry[1] !== null,
     ),
   )
-  return { kind: "success", value: { ...profile, testScores } }
+  const currentSchool = profile.isIndependentStudent
+    ? { currentSchool: null, currentSchoolId: null }
+    : { currentSchool: profile.currentSchool, currentSchoolId: profile.currentSchoolId }
+  return { kind: "success", value: { ...profile, ...currentSchool, testScores } }
 }

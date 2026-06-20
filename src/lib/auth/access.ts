@@ -2,7 +2,7 @@ import { z } from "zod"
 
 export const userRoles = ["student", "parent", "admin"] as const
 export type UserRole = (typeof userRoles)[number]
-export const userLanguages = ["en", "ru"] as const
+export const userLanguages = ["en", "ru", "kk"] as const
 export type UserLanguage = (typeof userLanguages)[number]
 
 const userProfileSchema = z.object({

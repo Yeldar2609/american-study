@@ -2,17 +2,24 @@
 
 import { useTranslations } from "next-intl"
 import { StudentFormField } from "@/components/admin/student-form-field"
+import { CurrentSchoolPicker } from "@/components/current-schools/current-school-picker"
 import type { AdminStudentProfile } from "@/lib/admin/student-profile-query"
+import type { CurrentSchoolOption } from "@/lib/current-schools/options"
 
 type StudentProfileFieldsProps = {
   readonly fieldErrors: Readonly<Record<string, readonly string[]>>
   readonly profile: AdminStudentProfile
+  readonly currentSchools: readonly CurrentSchoolOption[]
 }
 
 const selectClassName =
   "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-slate-950 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
 
-export function StudentProfileFields({ fieldErrors, profile }: StudentProfileFieldsProps) {
+export function StudentProfileFields({
+  currentSchools,
+  fieldErrors,
+  profile,
+}: StudentProfileFieldsProps) {
   const t = useTranslations("adminStudents")
   const fieldError = (name: string) => {
     const code = fieldErrors[name]?.[0]
@@ -37,13 +44,6 @@ export function StudentProfileFields({ fieldErrors, profile }: StudentProfileFie
         required
         type="email"
       />
-      <label className="grid gap-2 text-sm font-bold text-slate-700">
-        {t("fields.studentLanguage")}
-        <select className={selectClassName} defaultValue={profile.language} name="studentLanguage">
-          <option value="en">{t("options.english")}</option>
-          <option value="ru">{t("options.russian")}</option>
-        </select>
-      </label>
       <label className="grid gap-2 text-sm font-bold text-slate-700">
         {t("fields.stage")}
         <select className={selectClassName} defaultValue={profile.stage} name="stage">
@@ -73,10 +73,12 @@ export function StudentProfileFields({ fieldErrors, profile }: StudentProfileFie
         label={t("fields.address")}
         name="address"
       />
-      <StudentFormField
-        defaultValue={profile.currentSchool ?? ""}
+      <CurrentSchoolPicker
+        defaultIndependent={profile.isIndependentStudent}
+        defaultSchoolId={profile.currentSchoolId}
+        defaultSchoolText={profile.currentSchool}
         label={t("fields.currentSchool")}
-        name="currentSchool"
+        options={currentSchools}
       />
       <StudentFormField
         defaultValue={profile.currentGrade ?? ""}

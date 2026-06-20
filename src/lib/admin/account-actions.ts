@@ -9,7 +9,7 @@ import { createAdminClient } from "@/lib/supabase/admin"
 const createSchema = z.object({
   email: z.string().trim().email(),
   fullName: z.string().trim().min(1).max(120),
-  language: z.enum(["en", "ru"]),
+  language: z.enum(["en", "ru", "kk"]),
   password: z.string().min(12).max(128),
   // Students carry a full profile entity and are created via the student form;
   // this quick action handles parent and admin/staff logins only.

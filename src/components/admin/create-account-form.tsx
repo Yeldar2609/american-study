@@ -60,6 +60,7 @@ export function CreateAccountForm({ locale }: { readonly locale: string }) {
         <select className={selectClassName} defaultValue="ru" name="language">
           <option value="en">{t("english")}</option>
           <option value="ru">{t("russian")}</option>
+          <option value="kk">{t("kazakh")}</option>
         </select>
       </label>
       <Button className="w-full sm:w-fit" disabled={pending} size="large" type="submit">

@@ -6,7 +6,9 @@ const profileSchema = z.object({
   aid_need_level: z.enum(["low", "medium", "high"]).nullable(),
   current_grade: z.string().nullable(),
   current_school: z.string().nullable(),
+  current_school_id: z.string().nullable(),
   diagnostic_summary: z.string().nullable(),
+  is_independent_student: z.boolean(),
   dob: z.string().nullable(),
   drive_folder_url: z.string().nullable(),
   english_level: z.string().nullable(),
@@ -28,7 +30,7 @@ const profileSchema = z.object({
 const userSchema = z.object({
   email: z.string(),
   full_name: z.string(),
-  language: z.enum(["en", "ru"]),
+  language: z.enum(["en", "ru", "kk"]),
 })
 
 export type AdminStudentProfile = {
@@ -36,7 +38,7 @@ export type AdminStudentProfile = {
   readonly userId: string
   readonly email: string
   readonly fullName: string
-  readonly language: "en" | "ru"
+  readonly language: "en" | "ru" | "kk"
   readonly packageState: "trial" | "paid"
   readonly stage:
     | "diagnostic"
@@ -49,6 +51,8 @@ export type AdminStudentProfile = {
   readonly aidNeedLevel: "low" | "medium" | "high" | null
   readonly currentGrade: string | null
   readonly currentSchool: string | null
+  readonly currentSchoolId: string | null
+  readonly isIndependentStudent: boolean
   readonly diagnosticSummary: string | null
   readonly dob: string | null
   readonly driveFolderUrl: string | null
@@ -110,6 +114,8 @@ export async function getAdminStudentProfile(
       aidNeedLevel: value.aid_need_level,
       currentGrade: value.current_grade,
       currentSchool: value.current_school,
+      currentSchoolId: value.current_school_id,
+      isIndependentStudent: value.is_independent_student,
       diagnosticSummary: value.diagnostic_summary,
       dob: value.dob,
       driveFolderUrl: value.drive_folder_url,
