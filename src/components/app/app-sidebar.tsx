@@ -62,8 +62,8 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
               aria-current={activeSection === item ? "page" : undefined}
               className={`inline-flex min-h-11 shrink-0 items-center gap-3 rounded-xl px-4 text-sm font-bold transition-colors ${
                 activeSection === item
-                  ? "bg-blue-600 text-white"
-                  : "text-slate-600 hover:bg-blue-50 hover:text-blue-800"
+                  ? "bg-blue-700 text-white"
+                  : "text-slate-600 hover:bg-blue-50 hover:text-blue-700"
               }`}
               href={`/app/${role}?section=${item}`}
               key={item}

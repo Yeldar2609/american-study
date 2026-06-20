@@ -1,4 +1,4 @@
-import { PT_Serif, Rubik } from "next/font/google"
+import { Rubik } from "next/font/google"
 import { headers } from "next/headers"
 import type { ReactNode } from "react"
 import "./globals.css"
@@ -9,8 +9,11 @@ const bodyFont = Rubik({
   variable: "--font-body",
 })
 
-const displayFont = PT_Serif({
-  weight: ["400", "700"],
+// Modern Civic uses a geometric sans throughout. variant-C's Manrope lacks
+// Cyrillic glyphs, which would break RU headings, so the display face reuses
+// Rubik (geometric, Cyrillic-complete) at heavier weights.
+const displayFont = Rubik({
+  weight: ["500", "700", "800"],
   subsets: ["latin", "cyrillic"],
   variable: "--font-display",
 })

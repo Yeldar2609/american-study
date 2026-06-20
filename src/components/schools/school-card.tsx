@@ -29,7 +29,7 @@ export async function SchoolCard({
   const starAction = setSchoolStarAction.bind(null, locale)
   return (
     <Card className="flex h-full flex-col overflow-hidden">
-      <div className="bg-gradient-to-br from-blue-600 via-cyan-500 to-cyan-300 p-5 text-white">
+      <div className="bg-blue-700 p-5 text-white">
         <div className="flex items-start justify-between gap-3">
           <span className="rounded-2xl bg-white/20 px-3 py-2 text-2xl font-black backdrop-blur">
             {t("match", { percent: school.matchPercent })}
@@ -41,7 +41,7 @@ export async function SchoolCard({
               <input name="starred" type="hidden" value={String(!school.starred)} />
               <button
                 aria-label={t(school.starred ? "unstar" : "star")}
-                className="grid size-11 place-items-center rounded-full bg-white text-rose-500 shadow-lg"
+                className="grid size-11 place-items-center rounded-full bg-white text-red-500 shadow-lg"
                 type="submit"
               >
                 <Heart className="size-5" fill={school.starred ? "currentColor" : "none"} />
@@ -59,7 +59,7 @@ export async function SchoolCard({
         <div className="flex flex-wrap gap-2">
           {school.strengths.map((strength) => (
             <span
-              className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-bold text-cyan-900"
+              className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700"
               key={strength}
             >
               {strength}

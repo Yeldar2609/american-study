@@ -16,7 +16,7 @@ export async function NotificationsPanel({ locale }: { readonly locale: string }
   return (
     <section className="mt-6">
       <h2 className="flex items-center gap-2 text-2xl font-black text-slate-950">
-        <Bell className="size-6 text-rose-500" />
+        <Bell className="size-6 text-blue-700" />
         {t("title")}
       </h2>
       {result.value.length === 0 ? (

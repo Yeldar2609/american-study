@@ -20,8 +20,8 @@ export async function AdminContentForms({ locale }: { readonly locale: string })
           <Submit label={t("saveVideo")} />
         </form>
       </details>
-      <details className="rounded-3xl border border-cyan-100 bg-white p-5">
-        <summary className="cursor-pointer text-lg font-black text-cyan-900">{t("newFaq")}</summary>
+      <details className="rounded-3xl border border-blue-100 bg-white p-5">
+        <summary className="cursor-pointer text-lg font-black text-blue-800">{t("newFaq")}</summary>
         <form action={faqAction} className="mt-4 grid gap-3">
           <input name="id" type="hidden" value="" />
           <Field label={t("questionEn")} name="questionEn" />

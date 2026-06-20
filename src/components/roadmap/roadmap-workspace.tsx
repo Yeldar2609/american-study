@@ -95,7 +95,7 @@ async function DocumentsPanel({ documents }: { readonly documents: readonly Stud
   return (
     <Card className="p-5">
       <h2 className="flex items-center gap-2 text-xl font-black text-slate-950">
-        <FileCheck2 className="size-5 text-cyan-600" />
+        <FileCheck2 className="size-5 text-blue-700" />
         {t("documents")}
       </h2>
       {documents.length === 0 ? (

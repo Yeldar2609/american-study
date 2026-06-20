@@ -30,8 +30,8 @@ export async function AdminWorkflowForms({
           <Submit label={t("saveTask")} />
         </form>
       </details>
-      <details className="rounded-3xl border border-cyan-100 bg-white p-5">
-        <summary className="cursor-pointer text-lg font-black text-cyan-900">
+      <details className="rounded-3xl border border-blue-100 bg-white p-5">
+        <summary className="cursor-pointer text-lg font-black text-blue-800">
           {t("newDocument")}
         </summary>
         <form action={documentAction} className="mt-4 grid gap-3">

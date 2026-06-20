@@ -30,11 +30,11 @@ export function StudentProfileEditor({ locale, profile }: StudentProfileEditorPr
 
   return (
     <div className="grid gap-6">
-      <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
+      <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-bold text-cyan-800">{t("packageLabel")}</p>
-            <p className="mt-1 text-xl font-black text-cyan-950">
+            <p className="text-sm font-bold text-blue-700">{t("packageLabel")}</p>
+            <p className="mt-1 text-xl font-black text-blue-900">
               {t(`options.${profile.packageState}`)}
             </p>
           </div>
@@ -49,7 +49,7 @@ export function StudentProfileEditor({ locale, profile }: StudentProfileEditorPr
           </form>
         </div>
         {packageState.message !== "none" && (
-          <p className="mt-3 text-sm font-bold text-cyan-900" role="status">
+          <p className="mt-3 text-sm font-bold text-blue-800" role="status">
             {t(`messages.${packageState.message}`)}
           </p>
         )}
@@ -62,7 +62,7 @@ export function StudentProfileEditor({ locale, profile }: StudentProfileEditorPr
             className={
               state.status === "success"
                 ? "rounded-2xl bg-emerald-50 p-4 text-sm font-bold text-emerald-800"
-                : "rounded-2xl bg-rose-50 p-4 text-sm font-bold text-rose-800"
+                : "rounded-2xl bg-red-50 p-4 text-sm font-bold text-red-700"
             }
             role="status"
           >

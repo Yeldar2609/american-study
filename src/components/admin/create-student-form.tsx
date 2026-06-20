@@ -31,7 +31,7 @@ export function CreateStudentForm({ locale }: CreateStudentFormProps) {
           className={
             state.status === "success"
               ? "rounded-2xl bg-emerald-50 p-4 text-sm font-bold text-emerald-800"
-              : "rounded-2xl bg-rose-50 p-4 text-sm font-bold text-rose-800"
+              : "rounded-2xl bg-red-50 p-4 text-sm font-bold text-red-700"
           }
           role="status"
         >
@@ -71,9 +71,9 @@ export function CreateStudentForm({ locale }: CreateStudentFormProps) {
         </label>
       </div>
 
-      <details className="rounded-2xl border border-cyan-100 bg-cyan-50/60 p-4">
-        <summary className="cursor-pointer font-black text-cyan-950">{t("parentSection")}</summary>
-        <p className="mt-2 text-sm leading-6 text-cyan-900/70">{t("parentHint")}</p>
+      <details className="rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
+        <summary className="cursor-pointer font-black text-blue-900">{t("parentSection")}</summary>
+        <p className="mt-2 text-sm leading-6 text-blue-900/70">{t("parentHint")}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <StudentFormField
             error={fieldError("parentFullName")}

@@ -21,7 +21,7 @@ export async function CommentsPanel({
   return (
     <Card className="p-5">
       <h2 className="flex items-center gap-2 text-xl font-black text-slate-950">
-        <MessageCircle className="size-5 text-rose-500" />
+        <MessageCircle className="size-5 text-blue-700" />
         {t("title")}
       </h2>
       <form action={action} className="mt-4 grid gap-3">
@@ -42,7 +42,7 @@ export async function CommentsPanel({
             type="url"
           />
         </label>
-        <button className="min-h-11 rounded-xl bg-rose-500 px-4 font-bold text-white" type="submit">
+        <button className="min-h-11 rounded-xl bg-blue-700 px-4 font-bold text-white" type="submit">
           {t("send")}
         </button>
       </form>

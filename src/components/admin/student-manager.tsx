@@ -22,7 +22,7 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
   return (
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)]">
       <Card className="overflow-hidden">
-        <div className="border-b border-slate-100 bg-gradient-to-br from-blue-600 to-cyan-500 p-6 text-white">
+        <div className="border-b border-slate-100 bg-blue-700 p-6 text-white">
           <div className="flex items-center gap-3">
             <span className="grid size-11 place-items-center rounded-2xl bg-white/20">
               <Users aria-hidden="true" className="size-6" />
@@ -42,7 +42,7 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
             </div>
           )}
           {result.kind === "error" && (
-            <div className="rounded-2xl border border-rose-200 bg-rose-50 p-5 font-bold text-rose-800">
+            <div className="rounded-2xl border border-red-200 bg-red-50 p-5 font-bold text-red-700">
               {t("loadError")}
             </div>
           )}
@@ -68,7 +68,7 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
                     className={
                       student.packageState === "paid"
                         ? "bg-emerald-50 text-emerald-800"
-                        : "bg-cyan-50 text-cyan-800"
+                        : "bg-blue-50 text-blue-700"
                     }
                   >
                     {t(`options.${student.packageState}`)}
@@ -90,11 +90,11 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
 
       <Card className="h-fit p-6">
         <div className="mb-6 flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-2xl bg-rose-100 text-rose-700">
+          <span className="grid size-11 place-items-center rounded-2xl bg-red-100 text-red-700">
             <Plus aria-hidden="true" className="size-6" />
           </span>
           <div>
-            <p className="text-sm font-bold text-rose-700">
+            <p className="text-sm font-bold text-red-700">
               {selected?.kind === "ready" ? t("editEyebrow") : t("formEyebrow")}
             </p>
             <h2 className="text-2xl font-black text-slate-950">
@@ -105,7 +105,7 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
         {selected?.kind === "ready" ? (
           <StudentProfileEditor locale={locale} profile={selected.profile} />
         ) : selected !== null && selected.kind !== "notFound" ? (
-          <div className="rounded-2xl bg-rose-50 p-4 font-bold text-rose-800">
+          <div className="rounded-2xl bg-red-50 p-4 font-bold text-red-700">
             {t(selected.kind === "configuration" ? "configurationBody" : "loadError")}
           </div>
         ) : (
