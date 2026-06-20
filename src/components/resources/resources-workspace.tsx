@@ -78,7 +78,7 @@ export async function ResourcesWorkspace({
         </Card>
         <Card className="p-5">
           <h2 className="flex items-center gap-2 text-xl font-black text-slate-950">
-            <CircleHelp className="size-5 text-cyan-600" />
+            <CircleHelp className="size-5 text-blue-700" />
             {t("faq")}
           </h2>
           {result.value.faq.length === 0 ? (

@@ -10,12 +10,14 @@ type PipelineLabels = {
   readonly trial: string
 }
 
+// Six funnel stages, six deliberately distinct hues (Modern Civic family) so no
+// two adjacent bars collapse together. Not a blanket cyan->blue swap.
 const stages = [
-  { key: "diagnostic", tone: "bg-blue-600" },
-  { key: "trial", tone: "bg-cyan-500" },
-  { key: "listBuilding", tone: "bg-blue-400" },
+  { key: "diagnostic", tone: "bg-blue-700" },
+  { key: "trial", tone: "bg-sky-400" },
+  { key: "listBuilding", tone: "bg-indigo-500" },
   { key: "finalized", tone: "bg-emerald-500" },
-  { key: "application", tone: "bg-rose-400" },
+  { key: "application", tone: "bg-red-500" },
   { key: "submitted", tone: "bg-slate-700" },
 ] as const satisfies readonly {
   readonly key: keyof AdminAnalyticsStageCounts

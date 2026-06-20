@@ -14,7 +14,7 @@ export function Progress({ value, label }: ProgressProps) {
     >
       <div className="h-3 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-400"
+          className="h-full rounded-full bg-blue-700"
           style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
         />
       </div>

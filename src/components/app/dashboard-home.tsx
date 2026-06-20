@@ -109,14 +109,14 @@ export async function DashboardHome({ data, locale, role }: DashboardHomeProps) 
                 </>
               )}
             </Card>
-            <Card className="bg-slate-950 p-5 text-white">
-              <CalendarClock aria-hidden="true" className="size-6 text-cyan-300" />
-              <p className="mt-5 text-sm font-bold text-slate-300">{t("nextMilestone")}</p>
+            <Card className="border-blue-800 bg-gradient-to-br from-blue-700 to-blue-900 p-5 text-white">
+              <CalendarClock aria-hidden="true" className="size-6 text-blue-200" />
+              <p className="mt-5 text-sm font-bold text-blue-100">{t("nextMilestone")}</p>
               <p className="mt-1 text-xl font-black">
                 {metrics.nextTask?.title ?? t("empty.nextTask")}
               </p>
               {metrics.nextTask?.dueDate !== null && metrics.nextTask?.dueDate !== undefined && (
-                <p className="mt-3 inline-flex items-center gap-2 text-sm text-slate-300">
+                <p className="mt-3 inline-flex items-center gap-2 text-sm text-blue-100">
                   <Clock3 aria-hidden="true" className="size-4" />
                   {format.dateTime(new Date(`${metrics.nextTask.dueDate}T00:00:00`), {
                     dateStyle: "medium",

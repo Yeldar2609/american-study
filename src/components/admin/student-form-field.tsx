@@ -16,7 +16,7 @@ export function StudentFormField({ error, label, trailing, ...inputProps }: Stud
         {trailing}
       </span>
       <Input aria-invalid={error !== undefined} id={inputId} {...inputProps} />
-      {error !== undefined && <span className="text-xs font-bold text-rose-600">{error}</span>}
+      {error !== undefined && <span className="text-xs font-bold text-red-600">{error}</span>}
     </label>
   )
 }

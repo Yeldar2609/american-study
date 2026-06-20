@@ -75,7 +75,7 @@ export async function BookingsWorkspace({
       {!calendarConfigured ? (
         <WorkspaceMessage body={t("configurationBody")} title={t("configurationTitle")} />
       ) : role === "parent" ? (
-        <p className="mt-6 rounded-2xl bg-cyan-50 p-4 font-bold text-cyan-900">
+        <p className="mt-6 rounded-2xl bg-blue-50 p-4 font-bold text-blue-800">
           {t("parentReadOnly")}
         </p>
       ) : (

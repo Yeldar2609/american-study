@@ -122,8 +122,8 @@ async function EssayCard({
         {format.dateTime(new Date(essay.updated_at), { dateStyle: "medium" })}
       </p>
       {essay.admin_feedback && (
-        <div className="mt-4 rounded-2xl bg-cyan-50 p-4">
-          <p className="text-xs font-black uppercase tracking-wide text-cyan-800">
+        <div className="mt-4 rounded-2xl bg-blue-50 p-4">
+          <p className="text-xs font-black uppercase tracking-wide text-blue-700">
             {t("feedback")}
           </p>
           <p className="mt-1 leading-6 text-slate-700">{essay.admin_feedback}</p>

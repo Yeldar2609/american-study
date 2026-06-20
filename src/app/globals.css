@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #ffffff;
   --foreground: #0f172a;
-  --primary: #2563eb;
-  --accent: #06b6d4;
-  --warm: #fb7185;
-  --success: #22c55e;
+  /* Modern Civic brand — blue-dominant, red minor */
+  --brand: #1d4ed8; /* royal blue (blue-700) — dominant trust color */
+  --brand-strong: #1e40af; /* blue-800 */
+  --brand-soft: #eff6ff; /* blue-50 — soft fills / focus wash */
+  --danger-text: #dc2626; /* red-600 — AA on white; use for red TEXT + meaningful icons */
+  --danger-fill: #ef4444; /* red-500 — fills / large numerals / notification dot only */
+  --hairline: #e7ecf5;
+  --elevation: 0 4px 14px -8px rgb(15 23 42 / 18%);
 }
 
 * {
@@ -21,9 +25,8 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  background:
-    radial-gradient(circle at 8% 5%, rgb(6 182 212 / 12%), transparent 24rem),
-    radial-gradient(circle at 92% 18%, rgb(251 113 133 / 12%), transparent 22rem), var(--background);
+  /* Modern Civic: flat white (dropped the cyan/rose radial gradients) */
+  background: var(--background);
   color: var(--foreground);
 }
 
@@ -34,12 +37,12 @@ input {
 }
 
 :where(a, button, input):focus-visible {
-  outline: 3px solid rgb(6 182 212 / 75%);
+  outline: 3px solid var(--brand); /* royal blue (was cyan) */
   outline-offset: 3px;
 }
 
 ::selection {
-  background: rgb(37 99 235 / 18%);
+  background: rgb(29 78 216 / 18%); /* royal blue */
 }
 
 @media (prefers-reduced-motion: reduce) {

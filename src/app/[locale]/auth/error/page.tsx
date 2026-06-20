@@ -26,7 +26,7 @@ export default async function AuthErrorPage({ searchParams }: AuthErrorPageProps
   return (
     <main className="grid min-h-screen place-items-center px-4">
       <Card className="w-full max-w-lg p-8 text-center">
-        <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-rose-100 text-rose-700">
+        <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-red-100 text-red-700">
           <AlertCircle aria-hidden="true" className="size-7" />
         </span>
         <h1 className="mt-5 text-3xl font-black text-slate-950">{t("title")}</h1>
