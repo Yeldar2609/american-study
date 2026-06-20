@@ -66,19 +66,35 @@ export async function emailAuthAction(action: AuthAction, locale: string, formDa
       redirect(authErrorPath(locale, "configuration"))
     }
 
-    // app_metadata.role drives the on_auth_user_created trigger, which only
-    // creates the public.users profile when a valid role is present. Without it
-    // the account exists but has no profile, stranding the user at
-    // /setup-required. Self-serve signups default to "student".
+    const language = locale === "ru" ? "ru" : "en"
     const created = await admin.auth.admin.createUser({
       app_metadata: { role: "student" },
       email: credentials.data.email,
       email_confirm: true,
       password: credentials.data.password,
-      user_metadata: { language: locale === "ru" ? "ru" : "en" },
+      user_metadata: { language },
     })
 
-    if (created.error) {
+    if (created.error || created.data.user === null) {
+      redirect(authErrorPath(locale, "signup"))
+    }
+
+    // The on_auth_user_created trigger reads app_metadata.role at INSERT time,
+    // but GoTrue applies admin app_metadata in a follow-up UPDATE, so the
+    // trigger sees no role and skips the profile. Create it explicitly here
+    // (service-role bypasses RLS; upsert is a no-op if the trigger did run).
+    const profile = await admin.from("users").upsert(
+      {
+        email: credentials.data.email,
+        full_name: credentials.data.email.split("@")[0],
+        id: created.data.user.id,
+        language,
+        role: "student",
+      },
+      { onConflict: "id" },
+    )
+
+    if (profile.error) {
       redirect(authErrorPath(locale, "signup"))
     }
   }
