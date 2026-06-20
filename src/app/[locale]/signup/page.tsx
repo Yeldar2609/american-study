@@ -1,10 +1,11 @@
-import { AuthCard } from "@/components/auth/auth-card"
+import { redirect } from "next/navigation"
 
 type SignupPageProps = {
   readonly params: Promise<{ locale: string }>
 }
 
+// Self-serve signup is disabled — accounts are created by the admin only.
 export default async function SignupPage({ params }: SignupPageProps) {
   const { locale } = await params
-  return <AuthCard locale={locale} mode="signup" />
+  redirect(`/${locale}/login`)
 }

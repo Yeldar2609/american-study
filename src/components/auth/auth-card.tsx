@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Link } from "@/i18n/navigation"
 import { emailAuthAction } from "@/lib/auth/actions"
 
-type AuthMode = "login" | "signup" | "reset"
+type AuthMode = "login" | "reset"
 
 type AuthCardProps = {
   readonly locale: string
@@ -41,25 +41,7 @@ export async function AuthCard({ locale, mode, next = "" }: AuthCardProps) {
           </h1>
           <p className="mt-2 text-sm leading-6 text-slate-600">{t(`${mode}.subtitle`)}</p>
 
-          {mode !== "reset" && (
-            <>
-              <div className="mt-6">
-                <Button className="w-full" disabled type="button" variant="outline">
-                  <span aria-hidden="true" className="text-base font-black text-blue-600">
-                    G
-                  </span>
-                  {t("googleDisabled")}
-                </Button>
-              </div>
-              <div className="my-5 flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-slate-400">
-                <span className="h-px flex-1 bg-slate-200" />
-                {t("or")}
-                <span className="h-px flex-1 bg-slate-200" />
-              </div>
-            </>
-          )}
-
-          <form action={action} className={mode === "reset" ? "mt-6 space-y-4" : "space-y-4"}>
+          <form action={action} className="mt-6 space-y-4">
             <input name="next" type="hidden" value={next} />
             <label className="block" htmlFor={`${mode}-email`}>
               <span className="mb-2 block text-sm font-bold text-slate-800">{t("email")}</span>
@@ -91,20 +73,11 @@ export async function AuthCard({ locale, mode, next = "" }: AuthCardProps) {
           </form>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm">
-            {mode === "login" && (
-              <>
-                <Link
-                  className="font-bold text-blue-700 hover:text-blue-800"
-                  href="/forgot-password"
-                >
-                  {t("forgot")}
-                </Link>
-                <Link className="font-bold text-slate-600 hover:text-blue-700" href="/signup">
-                  {t("needAccount")}
-                </Link>
-              </>
-            )}
-            {mode !== "login" && (
+            {mode === "login" ? (
+              <Link className="font-bold text-blue-700 hover:text-blue-800" href="/forgot-password">
+                {t("forgot")}
+              </Link>
+            ) : (
               <Link className="font-bold text-blue-700 hover:text-blue-800" href="/login">
                 {t("haveAccount")}
               </Link>

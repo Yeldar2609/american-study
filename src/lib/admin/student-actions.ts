@@ -69,14 +69,16 @@ export async function createStudentAction(
     user_id: studentUserId,
   }
 
-  const { error: userError } = await supabase
-    .from("users")
-    .update({
+  const { error: userError } = await admin.from("users").upsert(
+    {
       email: value.studentEmail,
       full_name: value.studentFullName,
+      id: studentUserId,
       language: value.studentLanguage,
-    })
-    .eq("id", studentUserId)
+      role: "student",
+    },
+    { onConflict: "id" },
+  )
   const { data: student, error: studentError } =
     userError === null
       ? await supabase.from("students").insert(studentRow).select("id").single()
@@ -118,14 +120,16 @@ export async function createStudentAction(
     }
 
     const parentUserId = parentAuth.user.id
-    const { error: parentUserError } = await supabase
-      .from("users")
-      .update({
+    const { error: parentUserError } = await admin.from("users").upsert(
+      {
         email: value.parentEmail,
         full_name: value.parentFullName,
+        id: parentUserId,
         language: value.parentLanguage,
-      })
-      .eq("id", parentUserId)
+        role: "parent",
+      },
+      { onConflict: "id" },
+    )
     const { error: linkError } =
       parentUserError === null
         ? await supabase

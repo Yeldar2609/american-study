@@ -587,5 +587,39 @@
       "application": "Application",
       "submitted": "Submitted"
     }
+  },
+  "adminAccounts": {
+    "listEyebrow": "All accounts",
+    "listTitle": "Accounts & access",
+    "empty": "No accounts yet.",
+    "you": "You",
+    "lastAdmin": "Last admin",
+    "removeLabel": "Remove account",
+    "loadError": "We could not load accounts. Please try again.",
+    "configuration": "Account management is not configured yet.",
+    "createEyebrow": "Invite",
+    "createTitle": "Create an account",
+    "createHint": "Create a parent or an admin/staff login. Students are created with their full profile in the panel above.",
+    "roleLabel": "Role",
+    "nameLabel": "Full name",
+    "emailLabel": "Email",
+    "passwordLabel": "Temporary password",
+    "languageLabel": "Language",
+    "english": "English",
+    "russian": "Russian",
+    "create": "Create account",
+    "creating": "Creating…",
+    "roles": {
+      "student": "Student",
+      "parent": "Parent",
+      "admin": "Admin"
+    },
+    "messages": {
+      "created": "Account created.",
+      "validation": "Please check the fields and try again.",
+      "duplicate": "That email already has an account.",
+      "configuration": "Account management is not configured.",
+      "unexpected": "Something went wrong. Please try again."
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server"
 import { Suspense } from "react"
+import { AccountManager } from "@/components/admin/account-manager"
 import { AdminAnalytics } from "@/components/admin/analytics/admin-analytics"
 import { AdminAnalyticsLoading } from "@/components/admin/analytics/admin-analytics-loading"
 import { ApplicationsWorkspace } from "@/components/admin/applications-workspace"
@@ -52,8 +53,9 @@ export async function RoleDashboard({
       <main className="min-w-0 flex-1 px-4 py-7 sm:px-7 lg:px-10 lg:py-9">
         <div className="mx-auto max-w-6xl">
           {role === "admin" && activeSection === "people" ? (
-            <section className="mt-8">
+            <section className="mt-8 space-y-6">
               <StudentManager locale={locale} selectedStudentId={selectedStudentId} />
+              <AccountManager locale={locale} />
             </section>
           ) : role === "admin" && activeSection === "applications" ? (
             <ApplicationsWorkspace />

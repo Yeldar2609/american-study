@@ -4,10 +4,9 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 import { safeRedirectPath } from "@/lib/auth/access"
 import { readPublicEnv } from "@/lib/env"
-import { createAdminClient } from "@/lib/supabase/admin"
 import { createClient } from "@/lib/supabase/server"
 
-type AuthAction = "login" | "signup" | "reset"
+type AuthAction = "login" | "reset"
 
 const emailSchema = z.string().trim().email()
 const credentialsSchema = z.object({
@@ -54,49 +53,6 @@ export async function emailAuthAction(action: AuthAction, locale: string, formDa
 
   if (!credentials.success) {
     redirect(authErrorPath(locale, "validation"))
-  }
-
-  if (action === "signup") {
-    // Supabase's built-in mailer is rate-limited and unreliable, so the default
-    // confirm-email signup leaves users stuck unconfirmed. Create the account
-    // pre-confirmed via the service-role admin client, then sign in below.
-    const admin = createAdminClient()
-
-    if (admin === null) {
-      redirect(authErrorPath(locale, "configuration"))
-    }
-
-    const language = locale === "ru" ? "ru" : "en"
-    const created = await admin.auth.admin.createUser({
-      app_metadata: { role: "student" },
-      email: credentials.data.email,
-      email_confirm: true,
-      password: credentials.data.password,
-      user_metadata: { language },
-    })
-
-    if (created.error || created.data.user === null) {
-      redirect(authErrorPath(locale, "signup"))
-    }
-
-    // The on_auth_user_created trigger reads app_metadata.role at INSERT time,
-    // but GoTrue applies admin app_metadata in a follow-up UPDATE, so the
-    // trigger sees no role and skips the profile. Create it explicitly here
-    // (service-role bypasses RLS; upsert is a no-op if the trigger did run).
-    const profile = await admin.from("users").upsert(
-      {
-        email: credentials.data.email,
-        full_name: credentials.data.email.split("@")[0],
-        id: created.data.user.id,
-        language,
-        role: "student",
-      },
-      { onConflict: "id" },
-    )
-
-    if (profile.error) {
-      redirect(authErrorPath(locale, "signup"))
-    }
   }
 
   const result = await supabase.auth.signInWithPassword(credentials.data)
