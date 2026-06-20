@@ -21,3 +21,9 @@ env:
     availability:
       - BUILD
       - RUNTIME
+  # Server-only service-role key (bypasses RLS) — RUNTIME only, never BUILD/client.
+  # Backed by Cloud Secret Manager secret SUPABASE_SERVICE_ROLE_KEY.
+  - variable: SUPABASE_SERVICE_ROLE_KEY
+    secret: SUPABASE_SERVICE_ROLE_KEY
+    availability:
+      - RUNTIME
