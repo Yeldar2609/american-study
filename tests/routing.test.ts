@@ -11,7 +11,8 @@ describe("locale routing", () => {
 
     // Then
     expect(result).toBe("ru")
-    expect(parseLocale("kk")).toBeNull()
+    expect(parseLocale("kk")).toBe("kk")
+    expect(parseLocale("de")).toBeNull()
   })
 
   it("replaces the locale prefix while preserving the route", () => {

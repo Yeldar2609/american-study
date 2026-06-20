@@ -3,18 +3,21 @@
 import { useTranslations } from "next-intl"
 import { useActionState } from "react"
 import { StudentFormField } from "@/components/admin/student-form-field"
+import { CurrentSchoolPicker } from "@/components/current-schools/current-school-picker"
 import { Button } from "@/components/ui/button"
 import { initialAdminStudentActionState } from "@/lib/admin/student-action-state"
 import { createStudentAction } from "@/lib/admin/student-actions"
+import type { CurrentSchoolOption } from "@/lib/current-schools/options"
 
 type CreateStudentFormProps = {
   readonly locale: string
+  readonly currentSchools: readonly CurrentSchoolOption[]
 }
 
 const selectClassName =
   "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-slate-950 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
 
-export function CreateStudentForm({ locale }: CreateStudentFormProps) {
+export function CreateStudentForm({ currentSchools, locale }: CreateStudentFormProps) {
   const t = useTranslations("adminStudents")
   const action = createStudentAction.bind(null, locale)
   const [actionState, formAction, pending] = useActionState(action, initialAdminStudentActionState)
@@ -62,13 +65,6 @@ export function CreateStudentForm({ locale }: CreateStudentFormProps) {
           required
           type="password"
         />
-        <label className="grid gap-2 text-sm font-bold text-slate-700">
-          {t("fields.studentLanguage")}
-          <select className={selectClassName} defaultValue="en" name="studentLanguage">
-            <option value="en">{t("options.english")}</option>
-            <option value="ru">{t("options.russian")}</option>
-          </select>
-        </label>
       </div>
 
       <details className="rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
@@ -99,6 +95,7 @@ export function CreateStudentForm({ locale }: CreateStudentFormProps) {
               <option value="">{t("options.notSet")}</option>
               <option value="en">{t("options.english")}</option>
               <option value="ru">{t("options.russian")}</option>
+              <option value="kk">{t("options.kazakh")}</option>
             </select>
           </label>
         </div>
@@ -112,7 +109,7 @@ export function CreateStudentForm({ locale }: CreateStudentFormProps) {
           <StudentFormField label={t("fields.dob")} name="dob" type="date" />
           <StudentFormField label={t("fields.phone")} name="phone" type="tel" />
           <StudentFormField label={t("fields.address")} name="address" />
-          <StudentFormField label={t("fields.currentSchool")} name="currentSchool" />
+          <CurrentSchoolPicker label={t("fields.currentSchool")} options={currentSchools} />
           <StudentFormField label={t("fields.currentGrade")} name="currentGrade" />
           <StudentFormField label={t("fields.englishLevel")} name="englishLevel" />
           <StudentFormField label={t("fields.parentPhone")} name="parentPhone" type="tel" />

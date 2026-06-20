@@ -27,7 +27,8 @@ describe("parseStudentProfileForm", () => {
     expect(result).toEqual(expect.objectContaining({ kind: "success" }))
     if (result.kind === "success") {
       expect(result.value.interests).toEqual(["Robotics", "Debate"])
-      expect(result.value.studentLanguage).toBe("ru")
+      // Students are English-only: a submitted "ru" is ignored and normalized to "en".
+      expect(result.value.studentLanguage).toBe("en")
       expect(result.value.stage).toBe("list_building")
       expect(result.value.testScores).toEqual({ det: 140, ssat: 88, toefl: 105 })
     }

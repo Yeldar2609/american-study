@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getAdminStudentProfile } from "@/lib/admin/student-profile-query"
 import { listAdminStudents } from "@/lib/admin/student-queries"
+import { getCurrentSchoolOptions } from "@/lib/current-schools/queries"
 
 type StudentManagerProps = {
   readonly locale: string
@@ -16,6 +17,7 @@ type StudentManagerProps = {
 export async function StudentManager({ locale, selectedStudentId }: StudentManagerProps) {
   const t = await getTranslations("adminStudents")
   const result = await listAdminStudents()
+  const currentSchools = await getCurrentSchoolOptions()
   const selected =
     selectedStudentId === undefined ? null : await getAdminStudentProfile(selectedStudentId)
 
@@ -103,13 +105,17 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
           </div>
         </div>
         {selected?.kind === "ready" ? (
-          <StudentProfileEditor locale={locale} profile={selected.profile} />
+          <StudentProfileEditor
+            currentSchools={currentSchools}
+            locale={locale}
+            profile={selected.profile}
+          />
         ) : selected !== null && selected.kind !== "notFound" ? (
           <div className="rounded-2xl bg-red-50 p-4 font-bold text-red-700">
             {t(selected.kind === "configuration" ? "configurationBody" : "loadError")}
           </div>
         ) : (
-          <CreateStudentForm locale={locale} />
+          <CreateStudentForm currentSchools={currentSchools} locale={locale} />
         )}
       </Card>
     </div>

@@ -16,13 +16,17 @@ const optionalScore = (minimum: number, maximum: number) =>
     .refine((value) => value === "" || /^\d+(\.\d+)?$/.test(value), "number")
     .transform((value) => (value === "" ? null : Number(value)))
     .refine((value) => value === null || (value >= minimum && value <= maximum), "range")
+const optionalUuid = z.union([z.literal(""), z.uuid("uuid")]).transform((value) => value || null)
+const independentFlag = z.string().transform((value) => value === "true")
 
 const profileSchema = z.object({
   address: optionalText,
   aidNeedLevel: z.enum(["", "low", "medium", "high"]).transform((value) => value || null),
   currentGrade: optionalText,
   currentSchool: optionalText,
+  currentSchoolId: optionalUuid,
   det: optionalScore(10, 160),
+  isIndependentStudent: independentFlag,
   diagnosticSummary: optionalText,
   dob: optionalText,
   driveFolderUrl: optionalUrl,
@@ -51,7 +55,8 @@ const profileSchema = z.object({
   studentEmail: z.email("email"),
   studentFullName: z.string().trim().min(1, "required").max(200, "tooLong"),
   studentId: z.uuid("uuid"),
-  studentLanguage: z.enum(["en", "ru"]),
+  // Students are English-only (no language switcher). Always normalized to "en".
+  studentLanguage: z.literal("en").default("en"),
   toefl: optionalScore(0, 120),
 })
 
@@ -71,34 +76,39 @@ function formValue(formData: FormData, key: string): string {
 }
 
 export function parseStudentProfileForm(formData: FormData): StudentProfileFormResult {
-  const values = Object.fromEntries(
-    [
-      "address",
-      "aidNeedLevel",
-      "currentGrade",
-      "currentSchool",
-      "det",
-      "diagnosticSummary",
-      "dob",
-      "driveFolderUrl",
-      "englishLevel",
-      "interests",
-      "parentEmail",
-      "parentPhone",
-      "passportIdDriveUrl",
-      "phone",
-      "prefSetting",
-      "prefSize",
-      "prefStateOrRegion",
-      "ssat",
-      "stage",
-      "studentEmail",
-      "studentFullName",
-      "studentId",
-      "studentLanguage",
-      "toefl",
-    ].map((key) => [key, formValue(formData, key)]),
-  )
+  const values = {
+    ...Object.fromEntries(
+      [
+        "address",
+        "aidNeedLevel",
+        "currentGrade",
+        "currentSchool",
+        "currentSchoolId",
+        "det",
+        "diagnosticSummary",
+        "dob",
+        "driveFolderUrl",
+        "englishLevel",
+        "interests",
+        "isIndependentStudent",
+        "parentEmail",
+        "parentPhone",
+        "passportIdDriveUrl",
+        "phone",
+        "prefSetting",
+        "prefSize",
+        "prefStateOrRegion",
+        "ssat",
+        "stage",
+        "studentEmail",
+        "studentFullName",
+        "studentId",
+        "toefl",
+      ].map((key) => [key, formValue(formData, key)]),
+    ),
+    // Students are English-only; ignore any submitted student language.
+    studentLanguage: "en",
+  }
   const parsed = profileSchema.safeParse(values)
   if (!parsed.success) {
     return { fieldErrors: parsed.error.flatten().fieldErrors, kind: "invalid" }
@@ -110,5 +120,8 @@ export function parseStudentProfileForm(formData: FormData): StudentProfileFormR
       (entry): entry is [string, number] => entry[1] !== null,
     ),
   )
-  return { kind: "success", value: { ...profile, testScores } }
+  const currentSchool = profile.isIndependentStudent
+    ? { currentSchool: null, currentSchoolId: null }
+    : { currentSchool: profile.currentSchool, currentSchoolId: profile.currentSchoolId }
+  return { kind: "success", value: { ...profile, ...currentSchool, testScores } }
 }

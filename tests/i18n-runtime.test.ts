@@ -85,8 +85,9 @@ describe("i18n runtime contract", () => {
     expect(findings).toEqual([])
   })
 
-  it("defaults students to English and parents to Russian", () => {
-    expect(createStudentForm).toMatch(/defaultValue="en"\s+name="studentLanguage"/)
+  it("makes students English-only (no switcher) and defaults parents to Russian", () => {
+    // Students are provisioned as English and given no language selector.
+    expect(createStudentForm).not.toContain('name="studentLanguage"')
     expect(createStudentForm).toMatch(/defaultValue="ru"\s+name="parentLanguage"/)
   })
 })

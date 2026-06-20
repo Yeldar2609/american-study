@@ -11,3 +11,4 @@ test-results
 supabase/.temp
 firebase-debug.log
 .gstack/
+.audit-logs/

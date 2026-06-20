@@ -1,0 +1,14 @@
+# Normalize line endings to LF for the whole repo so Biome (which expects LF)
+# lints identically on Windows, macOS, Linux, and in the Firebase build.
+* text=auto eol=lf
+
+# Binary assets must never be normalized.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
