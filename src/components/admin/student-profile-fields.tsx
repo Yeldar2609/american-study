@@ -36,14 +36,6 @@ export function StudentProfileFields({
         name="studentFullName"
         required
       />
-      <StudentFormField
-        defaultValue={profile.email}
-        error={fieldError("studentEmail")}
-        label={t("fields.studentEmail")}
-        name="studentEmail"
-        required
-        type="email"
-      />
       <label className="grid gap-2 text-sm font-bold text-slate-700">
         {t("fields.stage")}
         <select className={selectClassName} defaultValue={profile.stage} name="stage">

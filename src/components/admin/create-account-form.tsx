@@ -40,9 +40,9 @@ export function CreateAccountForm({ locale }: { readonly locale: string }) {
         {t("nameLabel")}
         <Input autoComplete="name" id="account-name" name="fullName" required />
       </label>
-      <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor="account-email">
-        {t("emailLabel")}
-        <Input autoComplete="email" id="account-email" name="email" required type="email" />
+      <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor="account-username">
+        {t("usernameLabel")}
+        <Input autoComplete="username" id="account-username" name="username" required type="text" />
       </label>
       <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor="account-password">
         {t("passwordLabel")}

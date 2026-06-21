@@ -3,7 +3,7 @@ import { parseStudentForm } from "@/lib/admin/student-form"
 
 function validFormData(): FormData {
   const formData = new FormData()
-  formData.set("studentEmail", "student@example.com")
+  formData.set("studentUsername", "student_user")
   formData.set("studentFullName", "Aruzhan Sarsen")
   formData.set("studentLanguage", "en")
   formData.set("studentPassword", "Temporary123!")
@@ -38,10 +38,10 @@ describe("parseStudentForm", () => {
     }
   })
 
-  it("returns field errors when an email or URL is malformed", () => {
+  it("returns field errors when a username or URL is malformed", () => {
     // Given
     const formData = validFormData()
-    formData.set("studentEmail", "not-an-email")
+    formData.set("studentUsername", "bad name!")
     formData.set("driveFolderUrl", "drive/folder")
 
     // When
@@ -52,7 +52,7 @@ describe("parseStudentForm", () => {
       kind: "invalid",
       fieldErrors: expect.objectContaining({
         driveFolderUrl: ["url"],
-        studentEmail: ["email"],
+        studentUsername: ["username"],
       }),
     })
   })

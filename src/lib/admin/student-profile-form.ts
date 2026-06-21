@@ -52,7 +52,6 @@ const profileSchema = z.object({
   prefStateOrRegion: optionalText,
   ssat: optionalScore(0, 2400),
   stage: z.enum(["diagnostic", "trial", "list_building", "finalized", "application", "submitted"]),
-  studentEmail: z.email("email"),
   studentFullName: z.string().trim().min(1, "required").max(200, "tooLong"),
   studentId: z.uuid("uuid"),
   // Students are English-only (no language switcher). Always normalized to "en".
@@ -100,7 +99,6 @@ export function parseStudentProfileForm(formData: FormData): StudentProfileFormR
         "prefStateOrRegion",
         "ssat",
         "stage",
-        "studentEmail",
         "studentFullName",
         "studentId",
         "toefl",

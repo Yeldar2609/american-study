@@ -39,6 +39,7 @@
     "or": "or",
     "email": "Email address",
     "emailPlaceholder": "you@example.com",
+    "username": "Username",
     "password": "Password",
     "forgot": "Forgot password?",
     "needAccount": "Create an account",
@@ -56,7 +57,8 @@
     "reset": {
       "title": "Reset your password",
       "subtitle": "We will send a secure reset link to your email.",
-      "submit": "Send reset link"
+      "submit": "Send reset link",
+      "adminManaged": "Passwords are managed by your administrator. Contact your American Study consultant to reset yours."
     },
     "update": {
       "title": "Choose a new password",
@@ -635,15 +637,18 @@
       "tooLong": "This value is too long.",
       "password": "Use at least 12 characters.",
       "duplicate": "This email is already in use.",
+      "username": "Use 3-64 letters, numbers, dots, dashes, or underscores.",
       "uuid": "Select a valid student record."
     },
     "fields": {
       "studentFullName": "Student full name",
       "studentEmail": "Student email",
+      "studentUsername": "Student username",
       "studentPassword": "Temporary password",
       "studentLanguage": "Student language",
       "parentFullName": "Parent full name",
       "parentEmail": "Parent email",
+      "parentUsername": "Parent username",
       "parentPassword": "Parent temporary password",
       "parentLanguage": "Parent language",
       "dob": "Date of birth",
@@ -714,6 +719,7 @@
     "roleLabel": "Role",
     "nameLabel": "Full name",
     "emailLabel": "Email",
+    "usernameLabel": "Username",
     "passwordLabel": "Temporary password",
     "languageLabel": "Language",
     "english": "English",
@@ -721,6 +727,12 @@
     "kazakh": "Kazakh",
     "create": "Create account",
     "creating": "Creating…",
+    "manage": "Manage account",
+    "changeUsernameLabel": "New username",
+    "changeUsername": "Change username",
+    "newPasswordLabel": "New password",
+    "resetPassword": "Reset password",
+    "saving": "Saving…",
     "roles": {
       "student": "Student",
       "parent": "Parent",
@@ -731,7 +743,9 @@
       "validation": "Please check the fields and try again.",
       "duplicate": "That email already has an account.",
       "configuration": "Account management is not configured.",
-      "unexpected": "Something went wrong. Please try again."
+      "unexpected": "Something went wrong. Please try again.",
+      "passwordReset": "Password updated.",
+      "usernameChanged": "Username updated."
     }
   },
   "adminSettings": {

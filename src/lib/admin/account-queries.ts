@@ -4,10 +4,10 @@ import type { UserRole } from "@/lib/auth/access"
 import { createAdminClient } from "@/lib/supabase/admin"
 
 export type AccountRow = {
-  readonly email: string
   readonly fullName: string
   readonly id: string
   readonly role: UserRole
+  readonly username: string
 }
 
 export type AccountList =
@@ -29,25 +29,25 @@ export async function listAccounts(): Promise<AccountList> {
 
   const { data, error } = await admin
     .from("users")
-    .select("id, email, full_name, role")
+    .select("id, full_name, role, username")
     .order("role")
-    .order("email")
+    .order("username")
 
   if (error !== null || data === null) {
     return { kind: "error" }
   }
 
   const rows = data as ReadonlyArray<{
-    readonly email: string | null
     readonly full_name: string | null
     readonly id: string
     readonly role: UserRole
+    readonly username: string | null
   }>
   const accounts = rows.map((row) => ({
-    email: row.email ?? "",
     fullName: row.full_name ?? "",
     id: row.id,
     role: row.role,
+    username: row.username ?? "",
   }))
 
   return {

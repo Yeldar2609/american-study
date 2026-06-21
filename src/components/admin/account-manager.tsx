@@ -1,5 +1,6 @@
 import { ShieldCheck, Trash2, UserPlus } from "lucide-react"
 import { getTranslations } from "next-intl/server"
+import { AccountManageControls } from "@/components/admin/account-manage-controls"
 import { CreateAccountForm } from "@/components/admin/create-account-form"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -49,39 +50,42 @@ export async function AccountManager({ locale }: { readonly locale: string }) {
               const isLastAdmin = account.role === "admin" && result.adminCount <= 1
               return (
                 <article
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-4"
+                  className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4"
                   key={account.id}
                 >
-                  <div className="min-w-0">
-                    <p className="truncate font-black text-slate-950">
-                      {account.fullName || account.email}
-                    </p>
-                    <p className="mt-0.5 truncate text-sm text-slate-500">{account.email}</p>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate font-black text-slate-950">
+                        {account.fullName || account.username}
+                      </p>
+                      <p className="mt-0.5 truncate text-sm text-slate-500">{account.username}</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Badge
+                        className={roleBadgeClass[account.role] ?? "bg-slate-100 text-slate-700"}
+                      >
+                        {t(`roles.${account.role}`)}
+                      </Badge>
+                      {isSelf || isLastAdmin ? (
+                        <span className="text-xs font-bold text-slate-400">
+                          {isSelf ? t("you") : t("lastAdmin")}
+                        </span>
+                      ) : (
+                        <form action={remove}>
+                          <input name="userId" type="hidden" value={account.id} />
+                          <Button
+                            aria-label={t("removeLabel")}
+                            size="icon"
+                            type="submit"
+                            variant="danger"
+                          >
+                            <Trash2 aria-hidden="true" className="size-5" />
+                          </Button>
+                        </form>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Badge
-                      className={roleBadgeClass[account.role] ?? "bg-slate-100 text-slate-700"}
-                    >
-                      {t(`roles.${account.role}`)}
-                    </Badge>
-                    {isSelf || isLastAdmin ? (
-                      <span className="text-xs font-bold text-slate-400">
-                        {isSelf ? t("you") : t("lastAdmin")}
-                      </span>
-                    ) : (
-                      <form action={remove}>
-                        <input name="userId" type="hidden" value={account.id} />
-                        <Button
-                          aria-label={t("removeLabel")}
-                          size="icon"
-                          type="submit"
-                          variant="danger"
-                        >
-                          <Trash2 aria-hidden="true" className="size-5" />
-                        </Button>
-                      </form>
-                    )}
-                  </div>
+                  <AccountManageControls locale={locale} userId={account.id} />
                 </article>
               )
             })

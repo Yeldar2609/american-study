@@ -3,17 +3,18 @@
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 import type { AccountActionState } from "@/lib/admin/account-action-state"
+import { usernameSchema, usernameToAuthEmail } from "@/lib/auth/identity"
 import { requireRole } from "@/lib/auth/session"
 import { createAdminClient } from "@/lib/supabase/admin"
 
 const createSchema = z.object({
-  email: z.string().trim().email(),
   fullName: z.string().trim().min(1).max(120),
   language: z.enum(["en", "ru", "kk"]),
   password: z.string().min(12).max(128),
   // Students carry a full profile entity and are created via the student form;
   // this quick action handles parent and admin/staff logins only.
   role: z.enum(["parent", "admin"]),
+  username: usernameSchema,
 })
 
 export async function createAccountAction(
@@ -24,11 +25,11 @@ export async function createAccountAction(
   await requireRole(locale, "admin")
 
   const parsed = createSchema.safeParse({
-    email: formData.get("email"),
     fullName: formData.get("fullName"),
     language: formData.get("language"),
     password: formData.get("password"),
     role: formData.get("role"),
+    username: formData.get("username"),
   })
   if (!parsed.success) {
     return { message: "validation", status: "error" }
@@ -40,27 +41,33 @@ export async function createAccountAction(
   }
 
   const value = parsed.data
+  const authEmail = usernameToAuthEmail(value.username)
   const { data: created, error } = await admin.auth.admin.createUser({
     app_metadata: { role: value.role },
-    email: value.email,
+    email: authEmail,
     email_confirm: true,
     password: value.password,
-    user_metadata: { full_name: value.fullName, language: value.language, role: value.role },
+    user_metadata: {
+      full_name: value.fullName,
+      language: value.language,
+      role: value.role,
+      username: value.username,
+    },
   })
   if (error !== null || created.user === null) {
     return { message: "duplicate", status: "error" }
   }
 
-  // The on_auth_user_created trigger races with GoTrue's app_metadata write, so
-  // write the profile explicitly via the service role (which the protect trigger
-  // permits). Roll back the auth user if the profile cannot be written.
+  // The on_auth_user_created trigger races GoTrue's app_metadata write, so write
+  // the profile explicitly via the service role. Roll back on failure.
   const profile = await admin.from("users").upsert(
     {
-      email: value.email,
+      email: authEmail,
       full_name: value.fullName,
       id: created.user.id,
       language: value.language,
       role: value.role,
+      username: value.username,
     },
     { onConflict: "id" },
   )
@@ -71,6 +78,90 @@ export async function createAccountAction(
 
   revalidatePath(`/${locale}/app/admin`)
   return { message: "created", status: "success" }
+}
+
+const resetPasswordSchema = z.object({
+  password: z.string().min(12).max(128),
+  userId: z.string().uuid(),
+})
+
+export async function resetPasswordAction(
+  locale: string,
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState> {
+  await requireRole(locale, "admin")
+
+  const parsed = resetPasswordSchema.safeParse({
+    password: formData.get("password"),
+    userId: formData.get("userId"),
+  })
+  if (!parsed.success) {
+    return { message: "validation", status: "error" }
+  }
+
+  const admin = createAdminClient()
+  if (admin === null) {
+    return { message: "configuration", status: "error" }
+  }
+
+  const { error } = await admin.auth.admin.updateUserById(parsed.data.userId, {
+    password: parsed.data.password,
+  })
+  if (error !== null) {
+    return { message: "unexpected", status: "error" }
+  }
+
+  revalidatePath(`/${locale}/app/admin`)
+  return { message: "passwordReset", status: "success" }
+}
+
+const changeUsernameSchema = z.object({
+  userId: z.string().uuid(),
+  username: usernameSchema,
+})
+
+export async function changeUsernameAction(
+  locale: string,
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState> {
+  await requireRole(locale, "admin")
+
+  const parsed = changeUsernameSchema.safeParse({
+    userId: formData.get("userId"),
+    username: formData.get("username"),
+  })
+  if (!parsed.success) {
+    return { message: "validation", status: "error" }
+  }
+
+  const admin = createAdminClient()
+  if (admin === null) {
+    return { message: "configuration", status: "error" }
+  }
+
+  const authEmail = usernameToAuthEmail(parsed.data.username)
+  // Auth is the source of truth for the login key; update it first so a taken
+  // username fails here before the profile is touched.
+  const authResult = await admin.auth.admin.updateUserById(parsed.data.userId, {
+    email: authEmail,
+    email_confirm: true,
+  })
+  if (authResult.error !== null) {
+    return { message: "duplicate", status: "error" }
+  }
+
+  const profile = await admin
+    .from("users")
+    .update({ email: authEmail, username: parsed.data.username })
+    .eq("id", parsed.data.userId)
+  if (profile.error !== null) {
+    return { message: "duplicate", status: "error" }
+  }
+
+  revalidatePath(`/${locale}/app/admin`)
+  return { message: "usernameChanged", status: "success" }
 }
 
 export async function removeUserAction(locale: string, formData: FormData): Promise<void> {

@@ -18,6 +18,12 @@ const optionalScore = (minimum: number, maximum: number) =>
     .refine((value) => value === null || (value >= minimum && value <= maximum), "range")
 const optionalUuid = z.union([z.literal(""), z.uuid("uuid")]).transform((value) => value || null)
 const independentFlag = z.string().transform((value) => value === "true")
+const formUsername = z
+  .string()
+  .trim()
+  .min(3, "username")
+  .max(64, "username")
+  .regex(/^[A-Za-z0-9._-]+$/, "username")
 
 const studentFormSchema = z
   .object({
@@ -45,11 +51,11 @@ const studentFormSchema = z
       return [...unique.values()]
     }),
     packageState: z.enum(["trial", "paid"]),
-    parentEmail: z.union([z.literal(""), z.email("email")]).transform((value) => value || null),
     parentFullName: optionalText,
     parentLanguage: z.enum(["", "en", "ru", "kk"]).transform((value) => value || null),
     parentPassword: optionalText,
     parentPhone: optionalText,
+    parentUsername: z.union([z.literal(""), formUsername]).transform((value) => value || null),
     passportIdDriveUrl: optionalUrl,
     phone: optionalText,
     prefSetting: z.enum(["", "urban", "suburban", "rural"]).transform((value) => value || null),
@@ -64,7 +70,7 @@ const studentFormSchema = z
       "application",
       "submitted",
     ]),
-    studentEmail: z.email("email"),
+    studentUsername: formUsername,
     studentFullName: z.string().trim().min(1, "required").max(200, "tooLong"),
     // Students are English-only (no language switcher). Always provisioned as "en".
     studentLanguage: z.literal("en").default("en"),
@@ -72,7 +78,7 @@ const studentFormSchema = z
     toefl: optionalScore(0, 120),
   })
   .superRefine((value, context) => {
-    if (value.parentEmail !== null) {
+    if (value.parentUsername !== null) {
       if (value.parentFullName === null) {
         context.addIssue({ code: "custom", message: "required", path: ["parentFullName"] })
       }
@@ -113,11 +119,11 @@ export function parseStudentForm(formData: FormData): StudentFormResult {
     interests: formValue(formData, "interests"),
     isIndependentStudent: formValue(formData, "isIndependentStudent"),
     packageState: formValue(formData, "packageState"),
-    parentEmail: formValue(formData, "parentEmail"),
     parentFullName: formValue(formData, "parentFullName"),
     parentLanguage: formValue(formData, "parentLanguage"),
     parentPassword: formValue(formData, "parentPassword"),
     parentPhone: formValue(formData, "parentPhone"),
+    parentUsername: formValue(formData, "parentUsername"),
     passportIdDriveUrl: formValue(formData, "passportIdDriveUrl"),
     phone: formValue(formData, "phone"),
     prefSetting: formValue(formData, "prefSetting"),
@@ -125,7 +131,7 @@ export function parseStudentForm(formData: FormData): StudentFormResult {
     prefStateOrRegion: formValue(formData, "prefStateOrRegion"),
     ssat: formValue(formData, "ssat"),
     stage: formValue(formData, "stage"),
-    studentEmail: formValue(formData, "studentEmail"),
+    studentUsername: formValue(formData, "studentUsername"),
     studentFullName: formValue(formData, "studentFullName"),
     studentLanguage: "en",
     studentPassword: formValue(formData, "studentPassword"),
