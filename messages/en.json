@@ -140,6 +140,7 @@
     "nav": {
       "home": "Home",
       "roadmap": "Roadmap",
+      "calendar": "Calendar",
       "schools": "Schools",
       "essays": "Essays",
       "bookings": "Bookings",
@@ -184,7 +185,7 @@
     "unstar": "Remove from favorites",
     "studentTitle": "Your school list",
     "studentSubtitle": "Explore schools, save your favorites, and compare your best options.",
-    "packageTrial": "Trial plan",
+    "packageTrial": "Diagnostic plan",
     "packagePaid": "Full access",
     "yes": "Yes",
     "no": "No",
@@ -554,9 +555,9 @@
     "subtitle": "A focused view of access, activation, pipeline movement, deadline risk, and recent student activity.",
     "metrics": {
       "total": "Total students",
-      "trial": "Trial students",
+      "trial": "Diagnostic students",
       "paid": "Paid students",
-      "conversion": "Trial to paid",
+      "conversion": "Diagnostic to paid",
       "activated": "Activated",
       "atRisk": "At risk"
     },
@@ -579,7 +580,7 @@
       "submitted": "Submitted"
     },
     "packages": {
-      "trial": "Trial",
+      "trial": "Diagnostic",
       "paid": "Paid"
     },
     "empty": {
@@ -617,7 +618,7 @@
     "updating": "Saving...",
     "packageLabel": "Current access package",
     "markPaid": "Unlock paid access",
-    "markTrial": "Return to trial access",
+    "markTrial": "Return to diagnostic access",
     "messages": {
       "created": "Student account and family links were created.",
       "updated": "The student profile was updated.",
@@ -685,7 +686,7 @@
       "urban": "Urban",
       "suburban": "Suburban",
       "rural": "Rural",
-      "trial": "Trial",
+      "trial": "Diagnostic",
       "paid": "Paid"
     },
     "picker": {
@@ -764,5 +765,30 @@
       "configuration": "Settings are not configured.",
       "unexpected": "Something went wrong. Please try again."
     }
+  },
+  "calendar": {
+    "eyebrow": "Your schedule",
+    "title": "Task calendar",
+    "body": "Plan your application tasks by date. Add your own, edit, or remove them.",
+    "studentPicker": "Choose a student",
+    "loadError": "We could not load the calendar. Please try again shortly.",
+    "lockedBody": "Upgrade to plan and manage your application tasks on a calendar.",
+    "empty": {
+      "empty": "No student profile is linked to this account yet.",
+      "not_found": "We could not find that student."
+    },
+    "addTask": "Add task",
+    "editTask": "Edit task",
+    "cancel": "Cancel",
+    "save": "Save task",
+    "delete": "Delete task",
+    "taskTitle": "Task title",
+    "taskSection": "Section",
+    "taskDueDate": "Due date",
+    "taskNotes": "Notes",
+    "unscheduled": "No date yet",
+    "noUnscheduled": "Every task has a date.",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month"
   }
 }

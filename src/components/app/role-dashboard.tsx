@@ -10,6 +10,7 @@ import { AppSidebar } from "@/components/app/app-sidebar"
 import { DashboardHome } from "@/components/app/dashboard-home"
 import { WorkspaceEmptyState } from "@/components/app/workspace-empty-state"
 import { BookingsWorkspace } from "@/components/bookings/bookings-workspace"
+import { CalendarWorkspace } from "@/components/calendar/calendar-workspace"
 import { EssaysWorkspace } from "@/components/essays/essays-workspace"
 import { ResourcesWorkspace } from "@/components/resources/resources-workspace"
 import { RoadmapWorkspace } from "@/components/roadmap/roadmap-workspace"
@@ -41,6 +42,7 @@ export async function RoleDashboard({
   const validSections = [
     "home",
     "roadmap",
+    "calendar",
     "schools",
     "essays",
     "bookings",
@@ -84,6 +86,13 @@ export async function RoleDashboard({
             />
           ) : activeSection === "roadmap" ? (
             <RoadmapWorkspace
+              data={data}
+              locale={locale}
+              role={role}
+              selectedStudentId={selectedStudentId}
+            />
+          ) : activeSection === "calendar" ? (
+            <CalendarWorkspace
               data={data}
               locale={locale}
               role={role}

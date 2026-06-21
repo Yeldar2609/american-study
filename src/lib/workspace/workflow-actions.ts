@@ -39,6 +39,52 @@ export async function updateTaskStatusAction(locale: string, formData: FormData)
   }
 }
 
+export async function studentSaveTaskAction(locale: string, formData: FormData): Promise<void> {
+  const authenticated = await requireAuthenticatedUser(locale)
+  const parsed = z
+    .object({
+      description: z.string().max(5000),
+      dueDate: optionalDate,
+      section: z.string().trim().max(120),
+      taskId: optionalUuid,
+      title: z.string().trim().min(1).max(300),
+    })
+    .safeParse(Object.fromEntries(formData))
+  if (authenticated === null || authenticated.role !== "student" || !parsed.success) {
+    return
+  }
+  const supabase = await createClient()
+  if (supabase === null) {
+    return
+  }
+  const { error } = await supabase.rpc("student_save_task", {
+    new_description: parsed.data.description,
+    new_due_date: parsed.data.dueDate,
+    new_section: parsed.data.section,
+    new_title: parsed.data.title,
+    target_task_id: parsed.data.taskId,
+  })
+  if (error === null) {
+    revalidatePath(`/${locale}/app/${authenticated.role}`)
+  }
+}
+
+export async function studentDeleteTaskAction(locale: string, formData: FormData): Promise<void> {
+  const authenticated = await requireAuthenticatedUser(locale)
+  const parsed = uuid.safeParse(formData.get("taskId"))
+  if (authenticated === null || authenticated.role !== "student" || !parsed.success) {
+    return
+  }
+  const supabase = await createClient()
+  if (supabase === null) {
+    return
+  }
+  const { error } = await supabase.rpc("student_delete_task", { target_task_id: parsed.data })
+  if (error === null) {
+    revalidatePath(`/${locale}/app/${authenticated.role}`)
+  }
+}
+
 export async function adminSaveTaskAction(locale: string, formData: FormData): Promise<void> {
   await requireRole(locale, "admin")
   const parsed = z

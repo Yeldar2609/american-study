@@ -71,9 +71,9 @@ describe("admin analytics presentation", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Agency analytics" })).toBeVisible()
     for (const [label, value] of [
       ["Total students", "10"],
-      ["Trial students", "4"],
+      ["Diagnostic students", "4"],
       ["Paid students", "6"],
-      ["Trial to paid", "60%"],
+      ["Diagnostic to paid", "60%"],
       ["Activated", "5"],
       ["At risk", "2"],
     ] as const) {
