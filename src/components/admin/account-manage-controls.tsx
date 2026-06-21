@@ -66,12 +66,11 @@ export function AccountManageControls({
           >
             {t("newPasswordLabel")}
             <Input
-              autoComplete="new-password"
+              autoComplete="off"
               id={`${fieldId}-password`}
-              minLength={12}
               name="password"
               required
-              type="password"
+              type="text"
             />
           </label>
           {resetState.status !== "idle" && (

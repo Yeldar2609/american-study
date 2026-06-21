@@ -1,6 +1,7 @@
 import {
   BookOpen,
   CalendarDays,
+  CalendarRange,
   FileText,
   FolderKanban,
   Home,
@@ -21,6 +22,7 @@ import { logoutAction } from "@/lib/auth/actions"
 const iconByItem = {
   home: Home,
   roadmap: BookOpen,
+  calendar: CalendarRange,
   schools: School,
   essays: FileText,
   applications: FolderKanban,
@@ -44,7 +46,7 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
   const items: readonly NavigationItem[] =
     role === "admin"
       ? ["home", "people", "schools", "applications", "essays", "resources", "settings"]
-      : ["home", "roadmap", "schools", "essays", "bookings", "resources"]
+      : ["home", "roadmap", "calendar", "schools", "essays", "bookings", "resources"]
   const logout = logoutAction.bind(null, locale)
 
   return (

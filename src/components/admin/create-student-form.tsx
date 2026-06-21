@@ -59,10 +59,8 @@ export function CreateStudentForm({ currentSchools, locale }: CreateStudentFormP
         <StudentFormField
           error={fieldError("studentPassword")}
           label={t("fields.studentPassword")}
-          minLength={12}
           name="studentPassword"
           required
-          type="password"
         />
       </div>
 
@@ -84,9 +82,7 @@ export function CreateStudentForm({ currentSchools, locale }: CreateStudentFormP
           <StudentFormField
             error={fieldError("parentPassword")}
             label={t("fields.parentPassword")}
-            minLength={12}
             name="parentPassword"
-            type="password"
           />
           <label className="grid gap-2 text-sm font-bold text-slate-700">
             {t("fields.parentLanguage")}

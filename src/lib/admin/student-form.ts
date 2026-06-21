@@ -74,7 +74,7 @@ const studentFormSchema = z
     studentFullName: z.string().trim().min(1, "required").max(200, "tooLong"),
     // Students are English-only (no language switcher). Always provisioned as "en".
     studentLanguage: z.literal("en").default("en"),
-    studentPassword: z.string().min(12, "password"),
+    studentPassword: z.string().min(1, "required"),
     toefl: optionalScore(0, 120),
   })
   .superRefine((value, context) => {
@@ -85,8 +85,8 @@ const studentFormSchema = z
       if (value.parentLanguage === null) {
         context.addIssue({ code: "custom", message: "required", path: ["parentLanguage"] })
       }
-      if (value.parentPassword === null || value.parentPassword.length < 12) {
-        context.addIssue({ code: "custom", message: "password", path: ["parentPassword"] })
+      if (value.parentPassword === null) {
+        context.addIssue({ code: "custom", message: "required", path: ["parentPassword"] })
       }
     }
   })
