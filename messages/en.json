@@ -169,6 +169,7 @@
     "trialBody": "Explore the schools selected for you and the reasons each one fits.",
     "paidBody": "Search the full database, compare your match scores, and save favorites.",
     "studentPicker": "Choose a student",
+    "recipientLabel": "Building the list for",
     "loadError": "The live school catalog could not be loaded. Please try again shortly.",
     "match": "{percent}% match",
     "why": "Why it fits",
@@ -279,6 +280,7 @@
     },
     "admin": {
       "edit": "Consultant controls",
+      "recipient": "Suggesting to {name}",
       "matched": "Include in matched list",
       "finalSeven": "Include in final seven",
       "override": "Match score override",

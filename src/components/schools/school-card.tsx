@@ -14,6 +14,7 @@ type SchoolCardProps = {
   readonly school: SchoolCatalogItem
   readonly showBreakdown: boolean
   readonly studentId: string
+  readonly studentName: string
   readonly detailHref: string
 }
 
@@ -24,6 +25,7 @@ export async function SchoolCard({
   school,
   showBreakdown,
   studentId,
+  studentName,
 }: SchoolCardProps) {
   const t = await getTranslations("schools")
   const format = await getFormatter()
@@ -151,7 +153,12 @@ export async function SchoolCard({
         </div>
 
         {role === "admin" && (
-          <SchoolAdminControls locale={locale} school={school} studentId={studentId} />
+          <SchoolAdminControls
+            locale={locale}
+            school={school}
+            studentId={studentId}
+            studentName={studentName}
+          />
         )}
       </div>
     </Card>

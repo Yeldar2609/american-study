@@ -6,14 +6,23 @@ type SchoolAdminControlsProps = {
   readonly locale: string
   readonly school: SchoolCatalogItem
   readonly studentId: string
+  readonly studentName: string
 }
 
-export async function SchoolAdminControls({ locale, school, studentId }: SchoolAdminControlsProps) {
+export async function SchoolAdminControls({
+  locale,
+  school,
+  studentId,
+  studentName,
+}: SchoolAdminControlsProps) {
   const t = await getTranslations("schools.admin")
   const action = updateSchoolPickAction.bind(null, locale)
   return (
     <details className="mt-5 rounded-2xl border border-slate-200 p-4">
       <summary className="cursor-pointer font-black text-blue-700">{t("edit")}</summary>
+      <p className="mt-2 text-sm font-bold text-slate-600">
+        {t("recipient", { name: studentName })}
+      </p>
       <form action={action} className="mt-4 grid gap-3">
         <input name="schoolId" type="hidden" value={school.id} />
         <input name="studentId" type="hidden" value={studentId} />

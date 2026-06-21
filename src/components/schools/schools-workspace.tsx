@@ -80,6 +80,7 @@ export async function SchoolsWorkspace({
   }
 
   const items = result.items
+  const recipientName = data.students.find((student) => student.id === access.studentId)?.name ?? ""
   const studentParam = selectedStudentId ? `&student=${selectedStudentId}` : ""
   const sectionBase = `/app/${role}?section=schools${studentParam}`
   const roadmapHref = `/app/${role}?section=roadmap${studentParam}`
@@ -123,6 +124,7 @@ export async function SchoolsWorkspace({
       school={school}
       showBreakdown={unlocked}
       studentId={access.studentId}
+      studentName={recipientName}
     />
   )
 
@@ -145,11 +147,20 @@ export async function SchoolsWorkspace({
             )}
           </p>
         </div>
-        {data.students.length > 1 && (
-          <fieldset className="flex flex-wrap gap-2">
-            <legend className="sr-only">{t("studentPicker")}</legend>
+        {(role === "admin" || data.students.length > 1) && (
+          <fieldset className="flex flex-wrap items-center gap-2">
+            <legend
+              className={
+                role === "admin"
+                  ? "mb-1 w-full text-sm font-extrabold uppercase tracking-wide text-blue-700"
+                  : "sr-only"
+              }
+            >
+              {role === "admin" ? t("recipientLabel") : t("studentPicker")}
+            </legend>
             {data.students.map((student) => (
               <Link
+                aria-current={student.id === access.studentId ? "true" : undefined}
                 className={`rounded-xl px-4 py-2 text-sm font-bold ${
                   student.id === access.studentId
                     ? "bg-blue-600 text-white"
