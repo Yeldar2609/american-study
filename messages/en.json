@@ -143,6 +143,7 @@
       "calendar": "Calendar",
       "schools": "Schools",
       "essays": "Essays",
+      "interview": "Interview",
       "bookings": "Bookings",
       "people": "Students",
       "applications": "Applications",
@@ -613,6 +614,34 @@
     "error": {
       "title": "Analytics are temporarily unavailable",
       "body": "Live agency metrics could not be loaded. Please try again shortly."
+    }
+  },
+  "interview": {
+    "eyebrow": "Interview prep",
+    "title": "Interview practice",
+    "body": "Rehearse common boarding-school interview questions, save your answers, and get consultant feedback.",
+    "studentPicker": "Choose a student",
+    "loadError": "We could not load interview prep. Please try again shortly.",
+    "lockedBody": "Upgrade to plan to practice interview questions with consultant feedback.",
+    "empty": {
+      "empty": "No student profile is linked to this account yet.",
+      "not_found": "We could not find that student."
+    },
+    "tip": "Tip: ",
+    "yourAnswer": "Your answer",
+    "selfRating": "Self rating",
+    "notRated": "Not rated",
+    "statusLabel": "Status",
+    "recordingLink": "Recording link (optional)",
+    "save": "Save answer",
+    "noAnswer": "No answer yet.",
+    "feedback": "Consultant feedback: ",
+    "leaveFeedback": "Leave feedback",
+    "saveFeedback": "Save feedback",
+    "status": {
+      "todo": "To do",
+      "practiced": "Practiced",
+      "reviewed": "Reviewed"
     }
   },
   "adminNotify": {

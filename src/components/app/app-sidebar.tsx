@@ -7,6 +7,7 @@ import {
   Home,
   Library,
   LogOut,
+  Mic,
   School,
   Settings,
   Users,
@@ -25,6 +26,7 @@ const iconByItem = {
   calendar: CalendarRange,
   schools: School,
   essays: FileText,
+  interview: Mic,
   applications: FolderKanban,
   bookings: CalendarDays,
   people: Users,
@@ -45,8 +47,17 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
   const common = await getTranslations("common")
   const items: readonly NavigationItem[] =
     role === "admin"
-      ? ["home", "people", "schools", "applications", "essays", "resources", "settings"]
-      : ["home", "roadmap", "calendar", "schools", "essays", "bookings", "resources"]
+      ? [
+          "home",
+          "people",
+          "schools",
+          "applications",
+          "essays",
+          "interview",
+          "resources",
+          "settings",
+        ]
+      : ["home", "roadmap", "calendar", "schools", "essays", "interview", "bookings", "resources"]
   const logout = logoutAction.bind(null, locale)
 
   return (

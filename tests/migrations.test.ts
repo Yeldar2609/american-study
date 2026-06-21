@@ -47,6 +47,7 @@ const broadcastNotification = readFileSync(
   "supabase/migrations/202606220008_admin_broadcast_notification.sql",
   "utf8",
 )
+const interviewPrep = readFileSync("supabase/migrations/202606220009_interview_prep.sql", "utf8")
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -271,6 +272,24 @@ describe("Supabase migration contract", () => {
     expect(broadcastNotification).toContain(
       "grant execute on function public.admin_broadcast_notification(uuid[], text, text, text)\n  to authenticated",
     )
+  })
+
+  it("surfaces interview prep with guarded read and write RPCs", () => {
+    expect(interviewPrep).toContain("alter table public.interview_practice")
+    expect(interviewPrep).toContain("add column if not exists admin_feedback")
+    expect(interviewPrep).toContain("insert into public.interview_questions")
+    expect(interviewPrep).toContain("on conflict (id) do nothing")
+    expect(interviewPrep).toContain("create or replace function public.get_interview_prep")
+    expect(interviewPrep).toContain(
+      "create or replace function public.student_save_interview_practice",
+    )
+    expect(interviewPrep).toContain(
+      "create or replace function public.admin_set_interview_feedback",
+    )
+    expect(interviewPrep).toContain("not private.is_unlocked(own_student_id)")
+    expect(interviewPrep).toContain("if not private.is_admin()")
+    expect(interviewPrep).toContain("on conflict (student_id, question_id) do update")
+    expect(interviewPrep).toContain("grant execute on function public.get_interview_prep(uuid)")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

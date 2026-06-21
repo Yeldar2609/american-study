@@ -13,6 +13,7 @@ import { WorkspaceEmptyState } from "@/components/app/workspace-empty-state"
 import { BookingsWorkspace } from "@/components/bookings/bookings-workspace"
 import { CalendarWorkspace } from "@/components/calendar/calendar-workspace"
 import { EssaysWorkspace } from "@/components/essays/essays-workspace"
+import { InterviewWorkspace } from "@/components/interview/interview-workspace"
 import { ResourcesWorkspace } from "@/components/resources/resources-workspace"
 import { RoadmapWorkspace } from "@/components/roadmap/roadmap-workspace"
 import { SchoolsWorkspace } from "@/components/schools/schools-workspace"
@@ -46,6 +47,7 @@ export async function RoleDashboard({
     "calendar",
     "schools",
     "essays",
+    "interview",
     "bookings",
     "people",
     "applications",
@@ -110,6 +112,13 @@ export async function RoleDashboard({
             />
           ) : activeSection === "essays" ? (
             <EssaysWorkspace
+              data={data}
+              locale={locale}
+              role={role}
+              selectedStudentId={selectedStudentId}
+            />
+          ) : activeSection === "interview" ? (
+            <InterviewWorkspace
               data={data}
               locale={locale}
               role={role}
