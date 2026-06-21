@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
-import { restoreAuthUser } from "@/lib/admin/auth-compensation"
 import type { AdminStudentActionState } from "@/lib/admin/student-action-state"
 import { parseStudentProfileForm } from "@/lib/admin/student-profile-form"
 import { requireRole } from "@/lib/auth/session"
@@ -42,29 +41,15 @@ export async function updateStudentProfileAction(
   }
   const { data: existingUser, error: userReadError } = await supabase
     .from("users")
-    .select("email,full_name,language")
+    .select("email")
     .eq("id", existingStudent.user_id)
     .maybeSingle()
   if (userReadError !== null || existingUser === null) {
     return { fieldErrors: {}, message: "unexpected", status: "error" }
   }
 
-  const { error: authError } = await admin.auth.admin.updateUserById(existingStudent.user_id, {
-    email: value.studentEmail,
-    email_confirm: true,
-    user_metadata: {
-      full_name: value.studentFullName,
-      language: value.studentLanguage,
-    },
-  })
-  if (authError !== null) {
-    return {
-      fieldErrors: { studentEmail: ["duplicate"] },
-      message: "duplicate",
-      status: "error",
-    }
-  }
-
+  // The login identity (username/synthetic email) is managed from the Accounts
+  // panel; editing a profile never touches it — keep the existing email.
   const { error: profileError } = await supabase.rpc("admin_update_student_profile", {
     profile: {
       address: value.address,
@@ -75,7 +60,7 @@ export async function updateStudentProfileAction(
       diagnostic_summary: value.diagnosticSummary,
       dob: value.dob,
       drive_folder_url: value.driveFolderUrl,
-      email: value.studentEmail,
+      email: existingUser.email,
       english_level: value.englishLevel,
       full_name: value.studentFullName,
       interests: value.interests,
@@ -94,16 +79,7 @@ export async function updateStudentProfileAction(
     target_student_id: value.studentId,
   })
   if (profileError !== null) {
-    const restored = await restoreAuthUser(admin.auth.admin, existingStudent.user_id, {
-      email: existingUser.email,
-      fullName: existingUser.full_name,
-      language: existingUser.language,
-    })
-    return {
-      fieldErrors: {},
-      message: restored ? "unexpected" : "cleanupRequired",
-      status: "error",
-    }
+    return { fieldErrors: {}, message: "unexpected", status: "error" }
   }
 
   revalidatePath(`/${locale}/app/admin`)

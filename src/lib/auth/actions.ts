@@ -3,15 +3,14 @@
 import { redirect } from "next/navigation"
 import { z } from "zod"
 import { safeRedirectPath } from "@/lib/auth/access"
-import { readPublicEnv } from "@/lib/env"
+import { usernameSchema, usernameToAuthEmail } from "@/lib/auth/identity"
 import { createClient } from "@/lib/supabase/server"
 
 type AuthAction = "login" | "reset"
 
-const emailSchema = z.string().trim().email()
 const credentialsSchema = z.object({
-  email: emailSchema,
   password: z.string().min(8).max(128),
+  username: usernameSchema,
 })
 
 function authErrorPath(locale: string, code: string): string {
@@ -29,34 +28,28 @@ async function requireSupabase(locale: string) {
 }
 
 export async function emailAuthAction(action: AuthAction, locale: string, formData: FormData) {
+  // Passwords are managed by an admin now; there is no self-serve email reset.
+  if (action === "reset") {
+    redirect(`/${locale}/login`)
+  }
+
   const next = safeRedirectPath(String(formData.get("next") ?? ""), `/${locale}/app`)
   const supabase = await requireSupabase(locale)
 
-  if (action === "reset") {
-    const email = emailSchema.safeParse(formData.get("email"))
-
-    if (!email.success) {
-      redirect(authErrorPath(locale, "validation"))
-    }
-
-    const env = readPublicEnv()
-    const result = await supabase.auth.resetPasswordForEmail(email.data, {
-      redirectTo: `${env.NEXT_PUBLIC_APP_URL}/${locale}/update-password`,
-    })
-    redirect(result.error ? authErrorPath(locale, "reset") : `/${locale}/login?status=reset-sent`)
-  }
-
   const credentials = credentialsSchema.safeParse({
-    email: formData.get("email"),
     password: formData.get("password"),
+    username: formData.get("username"),
   })
 
   if (!credentials.success) {
     redirect(authErrorPath(locale, "validation"))
   }
 
-  const result = await supabase.auth.signInWithPassword(credentials.data)
-  redirect(result.error ? authErrorPath(locale, action) : next)
+  const result = await supabase.auth.signInWithPassword({
+    email: usernameToAuthEmail(credentials.data.username),
+    password: credentials.data.password,
+  })
+  redirect(result.error ? authErrorPath(locale, "login") : next)
 }
 
 export async function logoutAction(locale: string) {

@@ -50,12 +50,11 @@ export function CreateStudentForm({ currentSchools, locale }: CreateStudentFormP
           required
         />
         <StudentFormField
-          autoComplete="email"
-          error={fieldError("studentEmail")}
-          label={t("fields.studentEmail")}
-          name="studentEmail"
+          autoComplete="username"
+          error={fieldError("studentUsername")}
+          label={t("fields.studentUsername")}
+          name="studentUsername"
           required
-          type="email"
         />
         <StudentFormField
           error={fieldError("studentPassword")}
@@ -77,10 +76,10 @@ export function CreateStudentForm({ currentSchools, locale }: CreateStudentFormP
             name="parentFullName"
           />
           <StudentFormField
-            error={fieldError("parentEmail")}
-            label={t("fields.parentEmail")}
-            name="parentEmail"
-            type="email"
+            autoComplete="username"
+            error={fieldError("parentUsername")}
+            label={t("fields.parentUsername")}
+            name="parentUsername"
           />
           <StudentFormField
             error={fieldError("parentPassword")}

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { deleteAuthUsers } from "@/lib/admin/auth-compensation"
 import type { AdminStudentActionState } from "@/lib/admin/student-action-state"
 import { parseStudentForm } from "@/lib/admin/student-form"
+import { usernameToAuthEmail } from "@/lib/auth/identity"
 import { requireRole } from "@/lib/auth/session"
 import { createAdminClient } from "@/lib/supabase/admin"
 import { createClient } from "@/lib/supabase/server"
@@ -28,18 +29,19 @@ export async function createStudentAction(
   const value = parsed.value
   const { data: studentAuth, error: studentAuthError } = await admin.auth.admin.createUser({
     app_metadata: { role: "student" },
-    email: value.studentEmail,
+    email: usernameToAuthEmail(value.studentUsername),
     email_confirm: true,
     password: value.studentPassword,
     user_metadata: {
       full_name: value.studentFullName,
       language: value.studentLanguage,
       role: "student",
+      username: value.studentUsername,
     },
   })
   if (studentAuthError !== null) {
     return {
-      fieldErrors: { studentEmail: ["duplicate"] },
+      fieldErrors: { studentUsername: ["duplicate"] },
       message: "duplicate",
       status: "error",
     }
@@ -59,7 +61,6 @@ export async function createStudentAction(
     interests: value.interests,
     is_independent_student: value.isIndependentStudent,
     package_state: value.packageState,
-    parent_email: value.parentEmail,
     parent_phone: value.parentPhone,
     passport_id_drive_url: value.passportIdDriveUrl,
     phone: value.phone,
@@ -73,11 +74,12 @@ export async function createStudentAction(
 
   const { error: userError } = await admin.from("users").upsert(
     {
-      email: value.studentEmail,
+      email: usernameToAuthEmail(value.studentUsername),
       full_name: value.studentFullName,
       id: studentUserId,
       language: value.studentLanguage,
       role: "student",
+      username: value.studentUsername,
     },
     { onConflict: "id" },
   )
@@ -96,26 +98,27 @@ export async function createStudentAction(
   }
 
   if (
-    value.parentEmail !== null &&
+    value.parentUsername !== null &&
     value.parentFullName !== null &&
     value.parentLanguage !== null &&
     value.parentPassword !== null
   ) {
     const { data: parentAuth, error: parentAuthError } = await admin.auth.admin.createUser({
       app_metadata: { role: "parent" },
-      email: value.parentEmail,
+      email: usernameToAuthEmail(value.parentUsername),
       email_confirm: true,
       password: value.parentPassword,
       user_metadata: {
         full_name: value.parentFullName,
         language: value.parentLanguage,
         role: "parent",
+        username: value.parentUsername,
       },
     })
     if (parentAuthError !== null) {
       const cleaned = await deleteAuthUsers(admin.auth.admin, [studentUserId])
       return {
-        fieldErrors: { parentEmail: ["duplicate"] },
+        fieldErrors: { parentUsername: ["duplicate"] },
         message: cleaned ? "duplicate" : "cleanupRequired",
         status: "error",
       }
@@ -124,11 +127,12 @@ export async function createStudentAction(
     const parentUserId = parentAuth.user.id
     const { error: parentUserError } = await admin.from("users").upsert(
       {
-        email: value.parentEmail,
+        email: usernameToAuthEmail(value.parentUsername),
         full_name: value.parentFullName,
         id: parentUserId,
         language: value.parentLanguage,
         role: "parent",
+        username: value.parentUsername,
       },
       { onConflict: "id" },
     )

@@ -41,48 +41,47 @@ export async function AuthCard({ locale, mode, next = "" }: AuthCardProps) {
           </h1>
           <p className="mt-2 text-sm leading-6 text-slate-600">{t(`${mode}.subtitle`)}</p>
 
-          <form action={action} className="mt-6 space-y-4">
-            <input name="next" type="hidden" value={next} />
-            <label className="block" htmlFor={`${mode}-email`}>
-              <span className="mb-2 block text-sm font-bold text-slate-800">{t("email")}</span>
-              <Input
-                autoComplete="email"
-                id={`${mode}-email`}
-                name="email"
-                placeholder={t("emailPlaceholder")}
-                required
-                type="email"
-              />
-            </label>
-            {mode !== "reset" && (
-              <label className="block" htmlFor={`${mode}-password`}>
+          {mode === "reset" ? (
+            <div className="mt-6 space-y-6">
+              <p
+                className="rounded-2xl bg-blue-50 p-4 text-sm font-bold text-blue-800"
+                role="status"
+              >
+                {t("reset.adminManaged")}
+              </p>
+              <Link className="text-sm font-bold text-blue-700 hover:text-blue-800" href="/login">
+                {t("haveAccount")}
+              </Link>
+            </div>
+          ) : (
+            <form action={action} className="mt-6 space-y-4">
+              <input name="next" type="hidden" value={next} />
+              <label className="block" htmlFor="login-username">
+                <span className="mb-2 block text-sm font-bold text-slate-800">{t("username")}</span>
+                <Input
+                  autoComplete="username"
+                  id="login-username"
+                  name="username"
+                  required
+                  type="text"
+                />
+              </label>
+              <label className="block" htmlFor="login-password">
                 <span className="mb-2 block text-sm font-bold text-slate-800">{t("password")}</span>
                 <Input
-                  autoComplete={mode === "login" ? "current-password" : "new-password"}
-                  id={`${mode}-password`}
+                  autoComplete="current-password"
+                  id="login-password"
                   minLength={8}
                   name="password"
                   required
                   type="password"
                 />
               </label>
-            )}
-            <Button className="w-full" size="large" type="submit">
-              {t(`${mode}.submit`)}
-            </Button>
-          </form>
-
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm">
-            {mode === "login" ? (
-              <Link className="font-bold text-blue-700 hover:text-blue-800" href="/forgot-password">
-                {t("forgot")}
-              </Link>
-            ) : (
-              <Link className="font-bold text-blue-700 hover:text-blue-800" href="/login">
-                {t("haveAccount")}
-              </Link>
-            )}
-          </div>
+              <Button className="w-full" size="large" type="submit">
+                {t("login.submit")}
+              </Button>
+            </form>
+          )}
         </Card>
       </div>
     </main>
