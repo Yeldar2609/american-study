@@ -22,6 +22,7 @@ type RoleDashboardProps = {
   readonly role: UserRole
   readonly section?: string | undefined
   readonly selectedStudentId?: string | undefined
+  readonly selectedSchoolId?: string | undefined
   readonly schoolFilters?: SchoolCatalogFilters | undefined
 }
 
@@ -30,6 +31,7 @@ export async function RoleDashboard({
   role,
   section = "home",
   selectedStudentId,
+  selectedSchoolId,
   schoolFilters = {},
 }: RoleDashboardProps) {
   const t = await getTranslations("app")
@@ -71,6 +73,7 @@ export async function RoleDashboard({
               filters={schoolFilters}
               locale={locale}
               role={role}
+              selectedSchoolId={selectedSchoolId}
               selectedStudentId={selectedStudentId}
             />
           ) : activeSection === "roadmap" ? (

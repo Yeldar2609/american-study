@@ -6,8 +6,10 @@ import { requireRole } from "@/lib/auth/session"
 type RolePageProps = {
   readonly params: Promise<{ locale: string; role: string }>
   readonly searchParams: Promise<{
+    aid?: string
     body?: string
     q?: string
+    school?: string
     section?: string
     setting?: string
     state?: string
@@ -17,7 +19,7 @@ type RolePageProps = {
 
 export default async function RolePage({ params, searchParams }: RolePageProps) {
   const { locale, role: rawRole } = await params
-  const { body, q, section, setting, state, student } = await searchParams
+  const { aid, body, q, school, section, setting, state, student } = await searchParams
   const role = parseUserRole(rawRole)
 
   if (role === null) {
@@ -29,8 +31,9 @@ export default async function RolePage({ params, searchParams }: RolePageProps) 
     <RoleDashboard
       locale={locale}
       role={role}
-      schoolFilters={{ body, query: q, setting, state }}
+      schoolFilters={{ aid, body, query: q, setting, state }}
       section={section}
+      selectedSchoolId={school}
       selectedStudentId={student}
     />
   )

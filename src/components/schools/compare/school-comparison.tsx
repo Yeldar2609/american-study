@@ -13,7 +13,13 @@ import { getMatchBreakdownAction } from "@/lib/match/match-breakdown-actions"
 
 type BreakdownState = MatchBreakdown | "error" | "loading"
 
-export function SchoolComparison({ studentId }: { readonly studentId: string }) {
+export function SchoolComparison({
+  showBreakdown,
+  studentId,
+}: {
+  readonly showBreakdown: boolean
+  readonly studentId: string
+}) {
   const t = useTranslations("schools")
   const { clear, items, selected } = useCompare()
   const [breakdowns, setBreakdowns] = useState<Record<string, BreakdownState>>({})
@@ -69,7 +75,11 @@ export function SchoolComparison({ studentId }: { readonly studentId: string }) 
         </Card>
       ) : (
         <Card className="mt-3 overflow-x-auto p-0">
-          <ComparisonTable breakdowns={breakdowns} columns={columns} />
+          <ComparisonTable
+            breakdowns={breakdowns}
+            columns={columns}
+            showBreakdown={showBreakdown}
+          />
         </Card>
       )}
     </section>
@@ -79,9 +89,11 @@ export function SchoolComparison({ studentId }: { readonly studentId: string }) 
 function ComparisonTable({
   breakdowns,
   columns,
+  showBreakdown,
 }: {
   readonly breakdowns: Record<string, BreakdownState>
   readonly columns: readonly ComparableSchool[]
+  readonly showBreakdown: boolean
 }) {
   const t = useTranslations("schools")
   const format = useFormatter()
@@ -104,12 +116,24 @@ function ComparisonTable({
     readonly value: (school: ComparableSchool) => string
   }> = [
     {
+      key: "location",
+      label: t("compare.rows.location"),
+      value: (school) =>
+        [school.city, school.state].filter(Boolean).join(", ") || t("notAvailable"),
+    },
+    {
       key: "tuition",
       label: t("compare.rows.tuition"),
       value: (school) =>
         school.tuition === null
           ? t("notAvailable")
           : format.number(school.tuition, { currency: "USD", style: "currency" }),
+    },
+    {
+      key: "enrollment",
+      label: t("compare.rows.enrollment"),
+      value: (school) =>
+        school.enrollment === null ? t("notAvailable") : format.number(school.enrollment),
     },
     {
       key: "aid",
@@ -141,6 +165,21 @@ function ComparisonTable({
       label: t("compare.rows.strengths"),
       value: (school) =>
         school.strengths.length > 0 ? school.strengths.join(", ") : t("notAvailable"),
+    },
+    {
+      key: "status",
+      label: t("compare.rows.status"),
+      value: (school) => t(`admin.statuses.${school.status}`),
+    },
+    {
+      key: "saved",
+      label: t("compare.rows.saved"),
+      value: (school) => (school.starred ? t("yes") : t("no")),
+    },
+    {
+      key: "shortlist",
+      label: t("compare.rows.shortlist"),
+      value: (school) => (school.shortlisted ? t("yes") : t("no")),
     },
   ]
 
@@ -175,18 +214,19 @@ function ComparisonTable({
             </td>
           ))}
         </tr>
-        {MATCH_FACTORS.map((factor) => (
-          <tr key={factor}>
-            <th className={rowHead} scope="row">
-              {t(`breakdown.factors.${factor}`)}
-            </th>
-            {columns.map((school) => (
-              <td className={cell} key={school.id}>
-                {factorScore(school.id, factor)}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {showBreakdown &&
+          MATCH_FACTORS.map((factor) => (
+            <tr key={factor}>
+              <th className={rowHead} scope="row">
+                {t(`breakdown.factors.${factor}`)}
+              </th>
+              {columns.map((school) => (
+                <td className={cell} key={school.id}>
+                  {factorScore(school.id, factor)}
+                </td>
+              ))}
+            </tr>
+          ))}
         {attributeRows.map((row) => (
           <tr key={row.key}>
             <th className={rowHead} scope="row">

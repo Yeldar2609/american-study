@@ -1,9 +1,18 @@
 # Known Limitations
 
-_As of 2026-06-20, branch `fix/schools-timeline-polish-release`._
+_Updated 2026-06-21, branch `fix/student-school-browse-shortlist`._
 
 - **No CSV/PDF export of student data.** Admin can view applications/analytics, but
   there is no download/print export yet. (Chat content must never be exported.)
+- **School detail is a `?school=<id>` panel, not a separate route.** This matches the
+  section-based dashboard navigation; it is intentional, not a gap. See
+  [SCHOOL_PICKING_FIX.md](./SCHOOL_PICKING_FIX.md).
+- **School E2E tests not run here.** Playwright needs browsers + a build; the
+  student browse/save/compare flows are covered by unit tests and manual/runtime
+  smoke. RPC-level gating (trial-save, parent read-only) is enforced in the DB and
+  covered by pgTAP suites that need Docker.
+- **Tuition-range filter not added.** The "All schools" filters cover search, state,
+  setting, student body, and financial aid; a tuition slider is future work.
 - **Audit trail not populated.** `public.activity_log` exists in the schema but no
   code writes to it — admin actions are not yet audited. Recommend wiring an audited
   action helper before relying on it. See [SECURITY_REVIEW.md](./SECURITY_REVIEW.md).

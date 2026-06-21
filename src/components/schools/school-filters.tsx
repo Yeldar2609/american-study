@@ -7,12 +7,13 @@ import type { SchoolCatalogFilters } from "@/lib/workspace/school-catalog"
 type SchoolFiltersProps = {
   readonly filters: SchoolCatalogFilters
   readonly states: readonly string[]
+  readonly studentId?: string | undefined
 }
 
-export async function SchoolFilters({ filters, states }: SchoolFiltersProps) {
+export async function SchoolFilters({ filters, states, studentId }: SchoolFiltersProps) {
   const t = await getTranslations("schools")
   return (
-    <form className="mt-6 grid gap-3 rounded-3xl border border-blue-100 bg-white p-4 shadow-sm md:grid-cols-5">
+    <form className="mt-5 grid gap-3 rounded-3xl border border-blue-100 bg-white p-4 shadow-sm md:grid-cols-6">
       <label className="relative md:col-span-2" htmlFor="school-search">
         <span className="sr-only">{t("filters.search")}</span>
         <Search className="pointer-events-none absolute left-4 top-3.5 size-5 text-slate-400" />
@@ -45,9 +46,14 @@ export async function SchoolFilters({ filters, states }: SchoolFiltersProps) {
           </option>
         ))}
       </SchoolSelect>
+      <SchoolSelect defaultValue={filters.aid} label={t("filters.aid")} name="aid">
+        <option value="yes">{t("filters.aidYes")}</option>
+        <option value="no">{t("filters.aidNo")}</option>
+      </SchoolSelect>
       <input name="section" type="hidden" value="schools" />
+      {studentId !== undefined && <input name="student" type="hidden" value={studentId} />}
       <button
-        className="min-h-11 rounded-xl bg-blue-600 px-5 font-bold text-white md:col-span-5 md:justify-self-start"
+        className="min-h-11 rounded-xl bg-blue-600 px-5 font-bold text-white md:col-span-6 md:justify-self-start"
         type="submit"
       >
         {t("filters.apply")}

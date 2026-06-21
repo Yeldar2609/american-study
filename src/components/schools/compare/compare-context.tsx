@@ -5,12 +5,18 @@ import { canAddToCompare, toggleCompare } from "@/lib/match/compare-selection"
 
 export type ComparableSchool = {
   readonly body: "coed" | "boys" | "girls" | null
+  readonly city: string | null
+  readonly enrollment: number | null
   readonly financialAid: boolean | null
   readonly id: string
   readonly matchPercent: number
   readonly name: string
   readonly saoDeadline: string | null
   readonly setting: "urban" | "suburban" | "rural" | null
+  readonly shortlisted: boolean
+  readonly starred: boolean
+  readonly state: string | null
+  readonly status: "researching" | "applied" | "submitted"
   readonly strengths: readonly string[]
   readonly tuition: number | null
 }
