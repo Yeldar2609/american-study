@@ -143,7 +143,8 @@
       "bookings": "Bookings",
       "people": "Students",
       "applications": "Applications",
-      "resources": "Resources"
+      "resources": "Resources",
+      "settings": "Settings"
     },
     "student": {
       "eyebrow": "Student portal",
@@ -728,6 +729,23 @@
       "validation": "Please check the fields and try again.",
       "duplicate": "That email already has an account.",
       "configuration": "Account management is not configured.",
+      "unexpected": "Something went wrong. Please try again."
+    }
+  },
+  "adminSettings": {
+    "eyebrow": "Workspace",
+    "title": "App settings",
+    "subtitle": "Update settings that change how the portal behaves for everyone.",
+    "configuration": "Settings are not available yet. Connect Supabase to manage them.",
+    "loadError": "We could not load settings. Please try again.",
+    "bookingLinkLabel": "Calendar booking link",
+    "bookingLinkHint": "Students and parents are sent here to schedule sessions. Use the full https link from Google Calendar.",
+    "save": "Save settings",
+    "saving": "Saving…",
+    "messages": {
+      "saved": "Settings saved.",
+      "invalid": "Enter a valid https link.",
+      "configuration": "Settings are not configured.",
       "unexpected": "Something went wrong. Please try again."
     }
   }

@@ -34,6 +34,7 @@ const collaboration = readFileSync(
 )
 const authTriggerFix = readFileSync("supabase/migrations/202606180006_auth_trigger_fix.sql", "utf8")
 const adminAnalytics = readFileSync("supabase/migrations/202606180007_admin_analytics.sql", "utf8")
+const appSettings = readFileSync("supabase/migrations/202606220001_app_settings.sql", "utf8")
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -195,6 +196,22 @@ describe("Supabase migration contract", () => {
     )
     expect(adminAnalytics).toContain(
       "grant execute on function public.get_admin_analytics() to authenticated",
+    )
+  })
+
+  it("stores admin-editable app settings behind a guarded setter", () => {
+    expect(appSettings).toContain("create table public.app_settings")
+    expect(appSettings).toContain("alter table public.app_settings enable row level security")
+    expect(appSettings).toContain("create or replace function public.admin_set_app_setting")
+    expect(appSettings).toContain("security definer")
+    expect(appSettings).toContain("set search_path = ''")
+    expect(appSettings).toContain("if not private.is_admin()")
+    expect(appSettings).toContain("on conflict (key) do update")
+    expect(appSettings).toContain(
+      "revoke execute on function public.admin_set_app_setting(text, text) from public, anon",
+    )
+    expect(appSettings).toContain(
+      "grant execute on function public.admin_set_app_setting(text, text) to authenticated",
     )
   })
 

@@ -27,3 +27,10 @@ env:
     secret: SUPABASE_SERVICE_ROLE_KEY
     availability:
       - RUNTIME
+  # Default calendar booking link. Admins can override it in-app (stored in
+  # public.app_settings); this value is the fallback when no override is set.
+  # Not a secret — it is a public scheduling link users are redirected to.
+  - variable: CALENDAR_BOOKING_LINK
+    value: https://calendar.app.google/dJVzVdoJhdCzXSt17
+    availability:
+      - RUNTIME

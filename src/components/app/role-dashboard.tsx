@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import { AccountManager } from "@/components/admin/account-manager"
 import { AdminAnalytics } from "@/components/admin/analytics/admin-analytics"
 import { AdminAnalyticsLoading } from "@/components/admin/analytics/admin-analytics-loading"
+import { AppSettingsManager } from "@/components/admin/app-settings-manager"
 import { ApplicationsWorkspace } from "@/components/admin/applications-workspace"
 import { StudentManager } from "@/components/admin/student-manager"
 import { AppSidebar } from "@/components/app/app-sidebar"
@@ -15,6 +16,7 @@ import { RoadmapWorkspace } from "@/components/roadmap/roadmap-workspace"
 import { SchoolsWorkspace } from "@/components/schools/schools-workspace"
 import type { UserRole } from "@/lib/auth/access"
 import { getDashboardData } from "@/lib/dashboard/dashboard-data"
+import { resolveCalendarBookingLink } from "@/lib/settings/calendar-link"
 import type { SchoolCatalogFilters } from "@/lib/workspace/school-catalog"
 
 type RoleDashboardProps = {
@@ -45,9 +47,11 @@ export async function RoleDashboard({
     "people",
     "applications",
     "resources",
+    "settings",
   ] as const
   const activeSection = validSections.some((candidate) => candidate === section) ? section : "home"
   const sectionLabel = t(`nav.${activeSection}`)
+  const calendarLink = activeSection === "bookings" ? await resolveCalendarBookingLink() : undefined
 
   return (
     <div className="min-h-screen lg:flex">
@@ -61,6 +65,8 @@ export async function RoleDashboard({
             </section>
           ) : role === "admin" && activeSection === "applications" ? (
             <ApplicationsWorkspace />
+          ) : role === "admin" && activeSection === "settings" ? (
+            <AppSettingsManager locale={locale} />
           ) : role === "admin" && activeSection === "home" ? (
             <Suspense fallback={<AdminAnalyticsLoading />}>
               <AdminAnalytics locale={locale} />
@@ -92,6 +98,7 @@ export async function RoleDashboard({
             />
           ) : activeSection === "bookings" ? (
             <BookingsWorkspace
+              calendarLink={calendarLink}
               data={data}
               locale={locale}
               role={role}

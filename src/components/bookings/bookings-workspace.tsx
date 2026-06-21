@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card"
 import { StudentSwitcher, WorkspaceMessage } from "@/components/workspace/workspace-frame"
 import type { UserRole } from "@/lib/auth/access"
 import type { DashboardDataResult } from "@/lib/dashboard/dashboard-data"
-import { readPrivateEnv } from "@/lib/env"
 import { resolveWorkspaceAccess } from "@/lib/workspace/feature-access"
 import { requestBookingAction } from "@/lib/workspace/workflow-actions"
 import type { Booking } from "@/lib/workspace/workflow-data"
@@ -20,11 +19,13 @@ const bookingTypes = [
 ] as const
 
 export async function BookingsWorkspace({
+  calendarLink,
   data,
   locale,
   role,
   selectedStudentId,
 }: {
+  readonly calendarLink?: string | undefined
   readonly data: DashboardDataResult
   readonly locale: string
   readonly role: UserRole
@@ -52,7 +53,7 @@ export async function BookingsWorkspace({
   if (result.kind !== "ready") {
     return <WorkspaceMessage body={t("loadError")} title={t("title")} />
   }
-  const calendarConfigured = readPrivateEnv().CALENDAR_BOOKING_LINK !== undefined
+  const calendarConfigured = calendarLink !== undefined
 
   return (
     <section className="mt-8">
