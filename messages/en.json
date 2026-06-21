@@ -100,7 +100,6 @@
       "title": "School list",
       "recommended": "Recommended",
       "saved": "Saved",
-      "shortlist": "Shortlist",
       "nextDeadline": "Next deadline: {date}",
       "noDeadline": "No school deadlines yet",
       "review": "Review your schools",
@@ -199,7 +198,6 @@
     "counts": {
       "recommended": "Recommended",
       "saved": "Saved",
-      "shortlist": "Shortlist",
       "final": "Final list"
     },
     "sections": {
@@ -210,9 +208,6 @@
       "saved": "Saved schools",
       "savedBody": "Schools you saved. Tap Save on any school to add it here.",
       "savedEmpty": "Save a school to keep it here for quick access.",
-      "shortlist": "Shortlist",
-      "shortlistBody": "Your strongest options, ready to discuss with your consultant.",
-      "shortlistEmpty": "Add a school to your shortlist when you are seriously considering it.",
       "final": "Final list",
       "finalBody": "The final schools selected with your consultant.",
       "all": "All schools",
@@ -230,8 +225,6 @@
     "actions": {
       "save": "Save",
       "saved": "Saved",
-      "shortlist": "Shortlist",
-      "inShortlist": "In shortlist",
       "viewDetails": "View details",
       "recommended": "Recommended",
       "finalSeven": "Final list"
@@ -337,8 +330,7 @@
         "deadline": "SAO deadline",
         "strengths": "Strengths",
         "status": "Application status",
-        "saved": "Saved",
-        "shortlist": "Shortlisted"
+        "saved": "Saved"
       },
       "aid": {
         "yes": "Offered",

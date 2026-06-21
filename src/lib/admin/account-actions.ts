@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 import type { AccountActionState } from "@/lib/admin/account-action-state"
+import { linkParentToStudent } from "@/lib/admin/parent-link"
 import { usernameSchema, usernameToAuthEmail } from "@/lib/auth/identity"
 import { requireRole } from "@/lib/auth/session"
 import { createAdminClient } from "@/lib/supabase/admin"
@@ -86,12 +87,7 @@ export async function createAccountAction(
   // Link a new parent to the chosen student so they share the same view. Roll
   // back the account if the link cannot be written.
   if (value.role === "parent" && value.studentId !== null) {
-    const link = await admin
-      .from("parents_students")
-      .upsert(
-        { parent_user_id: created.user.id, student_id: value.studentId },
-        { onConflict: "parent_user_id,student_id" },
-      )
+    const link = await linkParentToStudent(admin, created.user.id, value.studentId)
     if (link.error !== null) {
       await admin.auth.admin.deleteUser(created.user.id)
       return { message: "unexpected", status: "error" }

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
+import { linkParentToStudent, unlinkParentFromStudent } from "@/lib/admin/parent-link"
 import { requireRole } from "@/lib/auth/session"
 import { createAdminClient } from "@/lib/supabase/admin"
 
@@ -23,12 +24,7 @@ export async function linkParentAction(locale: string, formData: FormData): Prom
   if (admin === null) {
     return
   }
-  await admin
-    .from("parents_students")
-    .upsert(
-      { parent_user_id: parsed.data.parentUserId, student_id: parsed.data.studentId },
-      { onConflict: "parent_user_id,student_id" },
-    )
+  await linkParentToStudent(admin, parsed.data.parentUserId, parsed.data.studentId)
   revalidatePath(`/${locale}/app/admin`)
 }
 
@@ -45,10 +41,6 @@ export async function unlinkParentAction(locale: string, formData: FormData): Pr
   if (admin === null) {
     return
   }
-  await admin
-    .from("parents_students")
-    .delete()
-    .eq("parent_user_id", parsed.data.parentUserId)
-    .eq("student_id", parsed.data.studentId)
+  await unlinkParentFromStudent(admin, parsed.data.parentUserId, parsed.data.studentId)
   revalidatePath(`/${locale}/app/admin`)
 }

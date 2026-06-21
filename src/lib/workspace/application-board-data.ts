@@ -5,30 +5,22 @@ import { APPLICATION_STAGES, type ApplicationStage } from "@/lib/workspace/appli
 export type { ApplicationStage }
 
 const boardRowSchema = z.object({
-  admin_pick: z.boolean(),
   application_portal_url: z.string().nullable(),
   application_stage: z.enum(APPLICATION_STAGES),
   city: z.string().nullable(),
-  is_final_7: z.boolean(),
   sao_deadline: z.string().nullable(),
   school_id: z.uuid(),
   school_name: z.string(),
-  starred: z.boolean(),
   state: z.string().nullable(),
-  student_shortlisted: z.boolean(),
 })
 
 export type ApplicationBoardItem = {
-  readonly adminPick: boolean
   readonly city: string | null
-  readonly finalSeven: boolean
   readonly portalUrl: string | null
   readonly saoDeadline: string | null
   readonly schoolId: string
   readonly schoolName: string
-  readonly shortlisted: boolean
   readonly stage: ApplicationStage
-  readonly starred: boolean
   readonly state: string | null
 }
 
@@ -53,16 +45,12 @@ export async function getApplicationBoard(
   }
   return {
     items: parsed.data.map((row) => ({
-      adminPick: row.admin_pick,
       city: row.city,
-      finalSeven: row.is_final_7,
       portalUrl: row.application_portal_url,
       saoDeadline: row.sao_deadline,
       schoolId: row.school_id,
       schoolName: row.school_name,
-      shortlisted: row.student_shortlisted,
       stage: row.application_stage,
-      starred: row.starred,
       state: row.state,
     })),
     kind: "ready",

@@ -58,6 +58,10 @@ const catalogMatchPerf = readFileSync(
   "supabase/migrations/202606220013_catalog_match_perf.sql",
   "utf8",
 )
+const consolidateGuards = readFileSync(
+  "supabase/migrations/202606220014_consolidate_access_guards.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -341,6 +345,25 @@ describe("Supabase migration contract", () => {
     )
     expect(catalogMatchPerf).toContain("create or replace function public.get_school_catalog")
     expect(catalogMatchPerf).toContain("order by 22 desc, school.name")
+  })
+
+  it("routes the read RPCs through the shared can_access_student guard", () => {
+    for (const fn of [
+      "public.get_student_school_summary",
+      "public.get_interview_prep",
+      "public.get_application_board",
+      "public.get_school_catalog",
+    ]) {
+      expect(consolidateGuards).toContain(`create or replace function ${fn}`)
+    }
+    expect(consolidateGuards).toContain("if not private.can_access_student(target_student_id) then")
+    // The catalog perf win must survive the guard swap.
+    expect(consolidateGuards).toContain("order by 22 desc, school.name")
+    // These guard a different predicate and must NOT be folded into can_access_student.
+    expect(consolidateGuards).not.toContain("create or replace function public.compute_match")
+    expect(consolidateGuards).not.toContain(
+      "create or replace function public.set_application_stage",
+    )
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

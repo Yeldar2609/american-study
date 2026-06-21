@@ -2,17 +2,15 @@
 
 import { Megaphone } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useActionState, useMemo, useState } from "react"
+import { useActionState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import {
+  type StudentOption,
+  StudentRecipientPicker,
+} from "@/components/workspace/student-recipient-picker"
 import { initialAssignTaskState } from "@/lib/workspace/assign-task-state"
 import { adminBroadcastNotificationAction } from "@/lib/workspace/workflow-actions"
-
-type StudentOption = {
-  readonly id: string
-  readonly name: string
-}
 
 export function AdminNotificationSender({
   locale,
@@ -24,21 +22,6 @@ export function AdminNotificationSender({
   const t = useTranslations("adminNotify")
   const action = adminBroadcastNotificationAction.bind(null, locale)
   const [state, formAction, pending] = useActionState(action, initialAssignTaskState)
-  const [mode, setMode] = useState<"all" | "selected">("all")
-  const [selected, setSelected] = useState<readonly string[]>([])
-  const [query, setQuery] = useState("")
-
-  const filtered = useMemo(() => {
-    const needle = query.trim().toLocaleLowerCase()
-    return needle === ""
-      ? students
-      : students.filter((student) => student.name.toLocaleLowerCase().includes(needle))
-  }, [query, students])
-
-  const toggle = (id: string) =>
-    setSelected((previous) =>
-      previous.includes(id) ? previous.filter((value) => value !== id) : [...previous, id],
-    )
 
   return (
     <Card className="p-6">
@@ -54,66 +37,18 @@ export function AdminNotificationSender({
       <p className="mt-2 text-sm leading-6 text-slate-600">{t("hint")}</p>
 
       <form action={formAction} className="mt-4 grid gap-3">
-        <input name="mode" type="hidden" value={mode} />
-        <input name="studentIds" type="hidden" value={selected.join(",")} />
-
-        <fieldset className="grid gap-2">
-          <legend className="text-sm font-bold text-slate-700">{t("recipients")}</legend>
-          <div className="flex flex-wrap gap-4">
-            <label className="flex items-center gap-2 text-sm font-bold text-slate-700">
-              <input
-                checked={mode === "all"}
-                name="recipientMode"
-                onChange={() => setMode("all")}
-                type="radio"
-              />
-              {t("all", { count: students.length })}
-            </label>
-            <label className="flex items-center gap-2 text-sm font-bold text-slate-700">
-              <input
-                checked={mode === "selected"}
-                name="recipientMode"
-                onChange={() => setMode("selected")}
-                type="radio"
-              />
-              {t("choose")}
-            </label>
-          </div>
-        </fieldset>
-
-        {mode === "selected" && (
-          <div className="grid gap-2">
-            <Input
-              aria-label={t("searchLabel")}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder={t("searchPlaceholder")}
-              type="search"
-              value={query}
-            />
-            <p className="text-xs font-bold text-slate-500">
-              {t("selectedCount", { count: selected.length })}
-            </p>
-            <div className="grid max-h-48 gap-1 overflow-y-auto rounded-xl border border-slate-200 p-2">
-              {filtered.length === 0 ? (
-                <p className="px-1 py-2 text-sm text-slate-500">{t("noStudents")}</p>
-              ) : (
-                filtered.map((student) => (
-                  <label
-                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-bold text-slate-700 hover:bg-blue-50"
-                    key={student.id}
-                  >
-                    <input
-                      checked={selected.includes(student.id)}
-                      onChange={() => toggle(student.id)}
-                      type="checkbox"
-                    />
-                    {student.name}
-                  </label>
-                ))
-              )}
-            </div>
-          </div>
-        )}
+        <StudentRecipientPicker
+          labels={{
+            all: (count) => t("all", { count }),
+            choose: t("choose"),
+            noStudents: t("noStudents"),
+            recipients: t("recipients"),
+            searchLabel: t("searchLabel"),
+            searchPlaceholder: t("searchPlaceholder"),
+            selectedCount: (count) => t("selectedCount", { count }),
+          }}
+          students={students}
+        />
 
         <label className="grid gap-1 text-sm font-bold text-slate-700">
           {t("titleLabel")}

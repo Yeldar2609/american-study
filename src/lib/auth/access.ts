@@ -5,6 +5,46 @@ export type UserRole = (typeof userRoles)[number]
 export const userLanguages = ["en", "ru", "kk"] as const
 export type UserLanguage = (typeof userLanguages)[number]
 
+// Single source of truth for which workspace sections each role may reach, in
+// sidebar order. The sidebar renders directly from this and the dashboard
+// normalizes an incoming ?section against it, so the two can never drift.
+export const ROLE_SECTIONS: Record<UserRole, readonly string[]> = {
+  admin: [
+    "home",
+    "people",
+    "schools",
+    "applications",
+    "essays",
+    "interview",
+    "report",
+    "resources",
+    "settings",
+  ],
+  // Parents see the family's progress, not the school catalog.
+  parent: [
+    "home",
+    "roadmap",
+    "calendar",
+    "applications",
+    "essays",
+    "interview",
+    "bookings",
+    "report",
+    "resources",
+  ],
+  student: [
+    "home",
+    "roadmap",
+    "calendar",
+    "schools",
+    "applications",
+    "essays",
+    "interview",
+    "bookings",
+    "resources",
+  ],
+}
+
 const userProfileSchema = z.object({
   language: z.enum(userLanguages),
   role: z.enum(userRoles),

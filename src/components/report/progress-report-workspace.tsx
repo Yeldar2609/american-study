@@ -5,7 +5,7 @@ import { PrintButton } from "@/components/report/print-button"
 import { Card } from "@/components/ui/card"
 import { StudentSwitcher, WorkspaceMessage } from "@/components/workspace/workspace-frame"
 import type { UserRole } from "@/lib/auth/access"
-import type { DashboardDataResult } from "@/lib/dashboard/dashboard-data"
+import { type DashboardDataResult, isDiagnosticVisible } from "@/lib/dashboard/dashboard-data"
 import { getApplicationBoard } from "@/lib/workspace/application-board-data"
 import { resolveWorkspaceAccess } from "@/lib/workspace/feature-access"
 import { getRoadmapData } from "@/lib/workspace/workflow-queries"
@@ -21,9 +21,11 @@ export async function ProgressReportWorkspace({
   role,
   selectedStudentId,
 }: ProgressReportWorkspaceProps) {
-  const t = await getTranslations("report")
-  const stageT = await getTranslations("applicationBoard")
-  const format = await getFormatter()
+  const [t, stageT, format] = await Promise.all([
+    getTranslations("report"),
+    getTranslations("applicationBoard"),
+    getFormatter(),
+  ])
   if (data.kind !== "ready") {
     return <WorkspaceMessage body={t("loadError")} title={t("title")} />
   }
@@ -42,9 +44,11 @@ export async function ProgressReportWorkspace({
     return <WorkspaceMessage body={t("empty.not_found")} title={t("title")} />
   }
 
-  const roadmap = await getRoadmapData(access.studentId)
+  const [roadmap, board] = await Promise.all([
+    getRoadmapData(access.studentId),
+    getApplicationBoard(access.studentId),
+  ])
   const tasks = roadmap.kind === "ready" ? roadmap.value.tasks : []
-  const board = await getApplicationBoard(access.studentId)
   const applications = board.kind === "ready" ? board.items : []
 
   const progress =
@@ -161,16 +165,14 @@ export async function ProgressReportWorkspace({
           )}
         </section>
 
-        {student.packageState === "trial" &&
-          student.diagnosticSummary !== null &&
-          student.diagnosticSummary.trim() !== "" && (
-            <section className="mt-8">
-              <h3 className="text-lg font-black text-slate-950">{t("diagnosticTitle")}</h3>
-              <p className="mt-2 whitespace-pre-wrap leading-7 text-slate-600">
-                {student.diagnosticSummary}
-              </p>
-            </section>
-          )}
+        {isDiagnosticVisible(student) && (
+          <section className="mt-8">
+            <h3 className="text-lg font-black text-slate-950">{t("diagnosticTitle")}</h3>
+            <p className="mt-2 whitespace-pre-wrap leading-7 text-slate-600">
+              {student.diagnosticSummary}
+            </p>
+          </section>
+        )}
       </Card>
     </section>
   )

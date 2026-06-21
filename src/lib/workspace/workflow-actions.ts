@@ -8,6 +8,41 @@ import { resolveCalendarBookingLink } from "@/lib/settings/calendar-link"
 import { createClient } from "@/lib/supabase/server"
 import type { AssignTaskState } from "@/lib/workspace/assign-task-state"
 
+type SupabaseServerClient = NonNullable<Awaited<ReturnType<typeof createClient>>>
+
+type ResolveStudentIdsResult =
+  | { readonly kind: "ok"; readonly studentIds: string[] }
+  | { readonly kind: "error"; readonly reason: "unexpected" | "none" }
+
+// Shared between the bulk task-assigner and the broadcast sender: "all" expands
+// to every student id, otherwise the comma-separated list is trimmed and kept to
+// valid uuids. An empty result (no students, or none selected) is an error.
+async function resolveTargetStudentIds(
+  supabase: SupabaseServerClient,
+  mode: "all" | "selected",
+  rawStudentIds: string,
+): Promise<ResolveStudentIdsResult> {
+  let studentIds: string[]
+  if (mode === "all") {
+    const { data, error } = await supabase.from("students").select("id")
+    const rows = z.array(z.object({ id: z.uuid() })).safeParse(data)
+    if (error !== null || !rows.success) {
+      return { kind: "error", reason: "unexpected" }
+    }
+    studentIds = rows.data.map((row) => row.id)
+  } else {
+    studentIds = rawStudentIds
+      .split(",")
+      .map((id) => id.trim())
+      .filter((id) => uuid.safeParse(id).success)
+  }
+
+  if (studentIds.length === 0) {
+    return { kind: "error", reason: "none" }
+  }
+  return { kind: "ok", studentIds }
+}
+
 const uuid = z.uuid()
 const optionalUuid = z.preprocess((value) => (value === "" ? null : value), uuid.nullable())
 const optionalDate = z.preprocess((value) => (value === "" ? null : value), z.iso.date().nullable())
@@ -152,24 +187,11 @@ export async function adminAssignTaskAction(
   }
   const value = parsed.data
 
-  let studentIds: string[]
-  if (value.mode === "all") {
-    const { data, error } = await supabase.from("students").select("id")
-    const rows = z.array(z.object({ id: z.uuid() })).safeParse(data)
-    if (error !== null || !rows.success) {
-      return { reason: "unexpected", status: "error" }
-    }
-    studentIds = rows.data.map((row) => row.id)
-  } else {
-    studentIds = value.studentIds
-      .split(",")
-      .map((id) => id.trim())
-      .filter((id) => uuid.safeParse(id).success)
+  const resolved = await resolveTargetStudentIds(supabase, value.mode, value.studentIds)
+  if (resolved.kind === "error") {
+    return { reason: resolved.reason, status: "error" }
   }
-
-  if (studentIds.length === 0) {
-    return { reason: "none", status: "error" }
-  }
+  const studentIds = resolved.studentIds
 
   const { data: createdCount, error } = await supabase.rpc("admin_bulk_create_task", {
     new_description: value.description,
@@ -215,24 +237,11 @@ export async function adminBroadcastNotificationAction(
   }
   const value = parsed.data
 
-  let studentIds: string[]
-  if (value.mode === "all") {
-    const { data, error } = await supabase.from("students").select("id")
-    const rows = z.array(z.object({ id: z.uuid() })).safeParse(data)
-    if (error !== null || !rows.success) {
-      return { reason: "unexpected", status: "error" }
-    }
-    studentIds = rows.data.map((row) => row.id)
-  } else {
-    studentIds = value.studentIds
-      .split(",")
-      .map((id) => id.trim())
-      .filter((id) => uuid.safeParse(id).success)
+  const resolved = await resolveTargetStudentIds(supabase, value.mode, value.studentIds)
+  if (resolved.kind === "error") {
+    return { reason: resolved.reason, status: "error" }
   }
-
-  if (studentIds.length === 0) {
-    return { reason: "none", status: "error" }
-  }
+  const studentIds = resolved.studentIds
 
   const { data: sentCount, error } = await supabase.rpc("admin_broadcast_notification", {
     new_body: value.body,

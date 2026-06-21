@@ -41,7 +41,6 @@ function toComparable(school: SchoolCatalogItem): ComparableSchool {
     name: school.name,
     saoDeadline: school.saoDeadline,
     setting: school.setting,
-    shortlisted: school.shortlisted,
     starred: school.starred,
     state: school.state,
     status: school.status,

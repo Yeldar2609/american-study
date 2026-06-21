@@ -34,7 +34,6 @@ const catalogRowSchema = z.object({
   student_body: z.enum(["coed", "boys", "girls"]).nullable(),
   student_interest_level: z.enum(interestLevels),
   student_note: z.string().nullable(),
-  student_shortlisted: z.boolean(),
   website_url: z.url().nullable(),
 })
 
@@ -61,7 +60,6 @@ export type SchoolCatalogItem = {
   readonly pctInternational: number | null
   readonly setting: "urban" | "suburban" | "rural" | null
   readonly saoDeadline: string | null
-  readonly shortlisted: boolean
   readonly starred: boolean
   readonly state: string | null
   readonly status: "researching" | "applied" | "submitted"
@@ -106,7 +104,6 @@ export function parseSchoolCatalog(value: unknown): readonly SchoolCatalogItem[]
       pctInternational: row.pct_international,
       setting: row.setting,
       saoDeadline: row.sao_deadline,
-      shortlisted: row.student_shortlisted,
       starred: row.starred,
       state: row.state,
       status: row.status,
@@ -145,14 +142,12 @@ const schoolSummarySchema = z.object({
   next_deadline: z.string().nullable(),
   recommended_count: z.coerce.number().int().nonnegative(),
   saved_count: z.coerce.number().int().nonnegative(),
-  shortlist_count: z.coerce.number().int().nonnegative(),
 })
 
 export type StudentSchoolSummary = {
   readonly nextDeadline: string | null
   readonly recommendedCount: number
   readonly savedCount: number
-  readonly shortlistCount: number
 }
 
 // Lightweight counts + next deadline for the dashboard card. Avoids the full
@@ -183,7 +178,6 @@ export async function getStudentSchoolSummary(
       nextDeadline: parsed.data.next_deadline,
       recommendedCount: parsed.data.recommended_count,
       savedCount: parsed.data.saved_count,
-      shortlistCount: parsed.data.shortlist_count,
     },
   }
 }

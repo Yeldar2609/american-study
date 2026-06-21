@@ -19,25 +19,10 @@ import { ProgressReportWorkspace } from "@/components/report/progress-report-wor
 import { ResourcesWorkspace } from "@/components/resources/resources-workspace"
 import { RoadmapWorkspace } from "@/components/roadmap/roadmap-workspace"
 import { SchoolsWorkspace } from "@/components/schools/schools-workspace"
-import type { UserRole } from "@/lib/auth/access"
+import { ROLE_SECTIONS, type UserRole } from "@/lib/auth/access"
 import { getDashboardData } from "@/lib/dashboard/dashboard-data"
 import { resolveCalendarBookingLink } from "@/lib/settings/calendar-link"
 import type { SchoolCatalogFilters } from "@/lib/workspace/school-catalog"
-
-const VALID_SECTIONS = [
-  "home",
-  "roadmap",
-  "calendar",
-  "schools",
-  "essays",
-  "interview",
-  "bookings",
-  "report",
-  "people",
-  "applications",
-  "resources",
-  "settings",
-] as const
 
 type RoleDashboardProps = {
   readonly locale: string
@@ -59,7 +44,9 @@ export function RoleDashboard({
   selectedSchoolId,
   schoolFilters = {},
 }: RoleDashboardProps) {
-  const activeSection = VALID_SECTIONS.some((candidate) => candidate === section) ? section : "home"
+  const activeSection = ROLE_SECTIONS[role].some((candidate) => candidate === section)
+    ? section
+    : "home"
 
   return (
     <div className="min-h-screen lg:flex">
@@ -132,7 +119,7 @@ async function DashboardSections({
   if (activeSection === "home") {
     return <DashboardHome data={data} locale={locale} role={role} />
   }
-  if (activeSection === "schools" && role !== "parent") {
+  if (activeSection === "schools") {
     return (
       <SchoolsWorkspace
         data={data}
@@ -194,7 +181,7 @@ async function DashboardSections({
       />
     )
   }
-  if (activeSection === "report" && role !== "student") {
+  if (activeSection === "report") {
     return <ProgressReportWorkspace data={data} role={role} selectedStudentId={selectedStudentId} />
   }
   if (activeSection === "bookings") {

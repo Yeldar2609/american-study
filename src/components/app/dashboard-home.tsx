@@ -11,6 +11,7 @@ import type { UserRole } from "@/lib/auth/access"
 import {
   type DashboardDataResult,
   type DashboardStudent,
+  isDiagnosticVisible,
   summarizeDashboard,
 } from "@/lib/dashboard/dashboard-data"
 import { getStudentSelf } from "@/lib/workspace/self-profile-data"
@@ -19,17 +20,6 @@ type DashboardHomeProps = {
   readonly data: DashboardDataResult
   readonly locale: string
   readonly role: UserRole
-}
-
-function diagnosticStudents(students: readonly DashboardStudent[]) {
-  // The diagnostic summary belongs to the diagnostic (unpaid) phase only. Once a
-  // student has paid, drop it so neither they nor their parent still see it.
-  return students.filter(
-    (student) =>
-      student.packageState === "trial" &&
-      student.diagnosticSummary !== null &&
-      student.diagnosticSummary.trim().length > 0,
-  )
 }
 
 export async function DashboardHome({ data, locale, role }: DashboardHomeProps) {
@@ -50,7 +40,7 @@ export async function DashboardHome({ data, locale, role }: DashboardHomeProps) 
   }
 
   const metrics = summarizeDashboard(data.students)
-  const diagnostics = diagnosticStudents(data.students)
+  const diagnostics = data.students.filter(isDiagnosticVisible)
   const allStudentFeaturesLocked =
     role !== "admin" && metrics.studentCount > 0 && metrics.unlockedStudentCount === 0
   const self = role === "student" ? await getStudentSelf() : null

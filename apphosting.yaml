@@ -9,7 +9,7 @@ runConfig:
 
 env:
   - variable: NEXT_PUBLIC_APP_URL
-    value: https://american-study--american-study-web-app.europe-west4.hosted.app
+    value: https://american-study-asia--american-study-web-app.asia-southeast1.hosted.app
     availability:
       - BUILD
       - RUNTIME

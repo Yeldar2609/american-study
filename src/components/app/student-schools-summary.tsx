@@ -5,9 +5,9 @@ import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getStudentSchoolSummary } from "@/lib/workspace/school-catalog"
 
-// Schools snapshot for the student dashboard: recommended / saved / shortlisted
-// counts, the next school deadline, and one clear call to action. Uses a
-// counts-only RPC so the home page never pays for full catalog match scoring.
+// Schools snapshot for the student dashboard: recommended / saved counts, the
+// next school deadline, and one clear call to action. Uses a counts-only RPC so
+// the home page never pays for full catalog match scoring.
 export async function StudentSchoolsSummary({
   role,
   studentId,

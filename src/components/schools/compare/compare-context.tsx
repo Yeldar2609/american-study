@@ -13,7 +13,6 @@ export type ComparableSchool = {
   readonly name: string
   readonly saoDeadline: string | null
   readonly setting: "urban" | "suburban" | "rural" | null
-  readonly shortlisted: boolean
   readonly starred: boolean
   readonly state: string | null
   readonly status: "researching" | "applied" | "submitted"

@@ -31,7 +31,6 @@ const fullRow = {
   student_body: "coed",
   student_interest_level: "interested",
   student_note: "Visited in spring",
-  student_shortlisted: true,
   website_url: "https://example.com",
 }
 
@@ -67,7 +66,6 @@ const sparseRow = {
   student_body: null,
   student_interest_level: "exploring",
   student_note: null,
-  student_shortlisted: false,
   website_url: null,
 }
 
@@ -81,7 +79,7 @@ describe("school catalog", () => {
         interestLevel: "interested",
         matchPercent: 91,
         name: "Phillips Academy",
-        shortlisted: true,
+        starred: false,
       }),
     ])
   })
@@ -97,7 +95,6 @@ describe("school catalog", () => {
       notes: null,
       pctBoarding: null,
       pctInternational: null,
-      shortlisted: false,
       tuition: null,
     })
   })

@@ -18,7 +18,7 @@ import { Logo } from "@/components/brand/logo"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
-import type { UserRole } from "@/lib/auth/access"
+import { ROLE_SECTIONS, type UserRole } from "@/lib/auth/access"
 import { logoutAction } from "@/lib/auth/actions"
 
 const iconByItem = {
@@ -47,43 +47,7 @@ type SidebarProps = {
 export async function AppSidebar({ locale, role, activeSection }: SidebarProps) {
   const t = await getTranslations("app")
   const common = await getTranslations("common")
-  const items: readonly NavigationItem[] =
-    role === "admin"
-      ? [
-          "home",
-          "people",
-          "schools",
-          "applications",
-          "essays",
-          "interview",
-          "report",
-          "resources",
-          "settings",
-        ]
-      : role === "parent"
-        ? // Parents see the family's progress, not the school catalog.
-          [
-            "home",
-            "roadmap",
-            "calendar",
-            "applications",
-            "essays",
-            "interview",
-            "bookings",
-            "report",
-            "resources",
-          ]
-        : [
-            "home",
-            "roadmap",
-            "calendar",
-            "schools",
-            "applications",
-            "essays",
-            "interview",
-            "bookings",
-            "resources",
-          ]
+  const items = ROLE_SECTIONS[role] as readonly NavigationItem[]
   const logout = logoutAction.bind(null, locale)
 
   return (

@@ -59,6 +59,17 @@ export type DashboardMetrics = {
   readonly unlockedStudentCount: number
 }
 
+// The diagnostic summary belongs to the diagnostic (unpaid) phase only: it shows
+// while the student is on the trial package and a non-empty summary exists. Once
+// the package is paid it is hidden from the student and their parent.
+export function isDiagnosticVisible(student: DashboardStudent): boolean {
+  return (
+    student.packageState === "trial" &&
+    student.diagnosticSummary !== null &&
+    student.diagnosticSummary.trim() !== ""
+  )
+}
+
 export function summarizeDashboard(students: readonly DashboardStudent[]): DashboardMetrics {
   const totalTasks = students.reduce((total, student) => total + student.totalTasks, 0)
   const completedTasks = students.reduce((total, student) => total + student.completedTasks, 0)
