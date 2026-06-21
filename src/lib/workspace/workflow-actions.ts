@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { z } from "zod"
 import { requireAuthenticatedUser, requireRole } from "@/lib/auth/session"
-import { readPrivateEnv } from "@/lib/env"
+import { resolveCalendarBookingLink } from "@/lib/settings/calendar-link"
 import { createClient } from "@/lib/supabase/server"
 
 const uuid = z.uuid()
@@ -177,13 +177,11 @@ export async function requestBookingAction(locale: string, formData: FormData): 
       ]),
     })
     .safeParse(Object.fromEntries(formData))
-  const calendarLink = readPrivateEnv().CALENDAR_BOOKING_LINK
-  if (
-    authenticated === null ||
-    authenticated.role === "parent" ||
-    !parsed.success ||
-    calendarLink === undefined
-  ) {
+  if (authenticated === null || authenticated.role === "parent" || !parsed.success) {
+    return
+  }
+  const calendarLink = await resolveCalendarBookingLink()
+  if (calendarLink === undefined) {
     return
   }
   const supabase = await createClient()

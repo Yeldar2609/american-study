@@ -7,6 +7,7 @@ import {
   Library,
   LogOut,
   School,
+  Settings,
   Users,
 } from "lucide-react"
 import { getTranslations } from "next-intl/server"
@@ -26,6 +27,7 @@ const iconByItem = {
   bookings: CalendarDays,
   people: Users,
   resources: Library,
+  settings: Settings,
 } as const
 
 type NavigationItem = keyof typeof iconByItem
@@ -41,7 +43,7 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
   const common = await getTranslations("common")
   const items: readonly NavigationItem[] =
     role === "admin"
-      ? ["home", "people", "schools", "applications", "essays", "resources"]
+      ? ["home", "people", "schools", "applications", "essays", "resources", "settings"]
       : ["home", "roadmap", "schools", "essays", "bookings", "resources"]
   const logout = logoutAction.bind(null, locale)
 
