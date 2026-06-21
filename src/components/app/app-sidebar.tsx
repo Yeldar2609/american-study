@@ -48,7 +48,7 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
   const logout = logoutAction.bind(null, locale)
 
   return (
-    <aside className="flex w-full flex-col border-b border-slate-200 bg-white/90 p-4 backdrop-blur lg:min-h-screen lg:w-72 lg:border-b-0 lg:border-r lg:p-6">
+    <aside className="flex w-full flex-col border-b border-t-[3px] border-slate-200 border-t-blue-700 bg-white/90 p-4 backdrop-blur lg:min-h-screen lg:w-72 lg:border-b-0 lg:border-r lg:p-6">
       <div className="flex items-center justify-between gap-3">
         <Logo label={common("brand")} />
         {/* Students are English-only: no language switcher. Parents/admins may switch. */}
