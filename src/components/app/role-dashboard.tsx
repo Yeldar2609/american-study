@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server"
 import { Suspense } from "react"
 import { AccountManager } from "@/components/admin/account-manager"
+import { AdminNotificationSender } from "@/components/admin/admin-notification-sender"
 import { AdminAnalytics } from "@/components/admin/analytics/admin-analytics"
 import { AdminAnalyticsLoading } from "@/components/admin/analytics/admin-analytics-loading"
 import { AppSettingsManager } from "@/components/admin/app-settings-manager"
@@ -64,6 +65,15 @@ export async function RoleDashboard({
             <section className="mt-8 space-y-6">
               <StudentManager locale={locale} selectedStudentId={selectedStudentId} />
               <AccountManager locale={locale} />
+              {data.kind === "ready" && (
+                <AdminNotificationSender
+                  locale={locale}
+                  students={data.students.map((student) => ({
+                    id: student.id,
+                    name: student.name,
+                  }))}
+                />
+              )}
             </section>
           ) : role === "admin" && activeSection === "applications" ? (
             <ApplicationsWorkspace />

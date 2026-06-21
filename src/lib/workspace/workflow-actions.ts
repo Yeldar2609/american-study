@@ -191,6 +191,66 @@ export async function adminAssignTaskAction(
   }
 }
 
+const broadcastSchema = z.object({
+  body: z.string().trim().min(1).max(2000),
+  link: z.string().max(500),
+  mode: z.enum(["all", "selected"]),
+  studentIds: z.string().max(20000),
+  title: z.string().trim().min(1).max(200),
+})
+
+export async function adminBroadcastNotificationAction(
+  locale: string,
+  _previous: AssignTaskState,
+  formData: FormData,
+): Promise<AssignTaskState> {
+  await requireRole(locale, "admin")
+  const parsed = broadcastSchema.safeParse(Object.fromEntries(formData))
+  if (!parsed.success) {
+    return { reason: "validation", status: "error" }
+  }
+  const supabase = await createClient()
+  if (supabase === null) {
+    return { reason: "configuration", status: "error" }
+  }
+  const value = parsed.data
+
+  let studentIds: string[]
+  if (value.mode === "all") {
+    const { data, error } = await supabase.from("students").select("id")
+    const rows = z.array(z.object({ id: z.uuid() })).safeParse(data)
+    if (error !== null || !rows.success) {
+      return { reason: "unexpected", status: "error" }
+    }
+    studentIds = rows.data.map((row) => row.id)
+  } else {
+    studentIds = value.studentIds
+      .split(",")
+      .map((id) => id.trim())
+      .filter((id) => uuid.safeParse(id).success)
+  }
+
+  if (studentIds.length === 0) {
+    return { reason: "none", status: "error" }
+  }
+
+  const { data: sentCount, error } = await supabase.rpc("admin_broadcast_notification", {
+    new_body: value.body,
+    new_link: value.link,
+    new_title: value.title,
+    target_student_ids: studentIds,
+  })
+  if (error !== null) {
+    return { reason: "unexpected", status: "error" }
+  }
+
+  revalidatePath(`/${locale}/app/admin`)
+  return {
+    count: typeof sentCount === "number" ? sentCount : studentIds.length,
+    status: "success",
+  }
+}
+
 export async function adminSaveDocumentAction(locale: string, formData: FormData): Promise<void> {
   await requireRole(locale, "admin")
   const parsed = z

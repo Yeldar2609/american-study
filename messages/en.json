@@ -615,6 +615,30 @@
       "body": "Live agency metrics could not be loaded. Please try again shortly."
     }
   },
+  "adminNotify": {
+    "eyebrow": "Broadcast",
+    "title": "Send a notification",
+    "hint": "Send a custom reminder or announcement to students. It appears in their notifications.",
+    "recipients": "Who receives it",
+    "all": "All students ({count})",
+    "choose": "Choose students",
+    "searchLabel": "Search students",
+    "searchPlaceholder": "Search students by name",
+    "selectedCount": "{count} selected",
+    "noStudents": "No students match your search.",
+    "titleLabel": "Title",
+    "bodyLabel": "Message",
+    "linkLabel": "Link (optional, e.g. /en/app/student?section=calendar)",
+    "send": "Send notification",
+    "sending": "Sending...",
+    "success": "Notification sent to {count} students.",
+    "errors": {
+      "validation": "Add a title and message, then try again.",
+      "none": "Select at least one student first.",
+      "configuration": "The server is missing its Supabase configuration.",
+      "unexpected": "The notification could not be sent. Try again."
+    }
+  },
   "adminStudents": {
     "listEyebrow": "Live student directory",
     "listTitle": "Students and families",

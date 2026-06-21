@@ -43,6 +43,10 @@ const schoolSummary = readFileSync(
   "supabase/migrations/202606220007_student_school_summary.sql",
   "utf8",
 )
+const broadcastNotification = readFileSync(
+  "supabase/migrations/202606220008_admin_broadcast_notification.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -251,6 +255,21 @@ describe("Supabase migration contract", () => {
     )
     expect(schoolSummary).toContain(
       "grant execute on function public.get_student_school_summary(uuid) to authenticated",
+    )
+  })
+
+  it("broadcasts admin notifications to students through a guarded RPC", () => {
+    expect(broadcastNotification).toContain(
+      "create or replace function public.admin_broadcast_notification",
+    )
+    expect(broadcastNotification).toContain("if not private.is_admin()")
+    expect(broadcastNotification).toContain("perform private.notify_user")
+    expect(broadcastNotification).toContain("foreach target_id in array")
+    expect(broadcastNotification).toContain(
+      "revoke execute on function public.admin_broadcast_notification(uuid[], text, text, text)\n  from public, anon",
+    )
+    expect(broadcastNotification).toContain(
+      "grant execute on function public.admin_broadcast_notification(uuid[], text, text, text)\n  to authenticated",
     )
   })
 
