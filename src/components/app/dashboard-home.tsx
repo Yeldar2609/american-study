@@ -3,6 +3,7 @@ import { getFormatter, getTranslations } from "next-intl/server"
 import { NotificationsPanel } from "@/components/app/notifications-panel"
 import { StudentSchoolsSummary } from "@/components/app/student-schools-summary"
 import { LockedCard } from "@/components/locked-card"
+import { SelfProfileForm } from "@/components/onboarding/self-profile-form"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -12,6 +13,7 @@ import {
   type DashboardStudent,
   summarizeDashboard,
 } from "@/lib/dashboard/dashboard-data"
+import { getStudentSelf } from "@/lib/workspace/self-profile-data"
 
 type DashboardHomeProps = {
   readonly data: DashboardDataResult
@@ -51,6 +53,9 @@ export async function DashboardHome({ data, locale, role }: DashboardHomeProps) 
   const diagnostics = diagnosticStudents(data.students)
   const allStudentFeaturesLocked =
     role !== "admin" && metrics.studentCount > 0 && metrics.unlockedStudentCount === 0
+  const self = role === "student" ? await getStudentSelf() : null
+  const onboarding = self?.kind === "ready" && !self.self.onboarded ? self.self : null
+  const editProfile = self?.kind === "ready" && self.self.onboarded ? self.self : null
 
   return (
     <>
@@ -71,6 +76,12 @@ export async function DashboardHome({ data, locale, role }: DashboardHomeProps) 
             : t("status.overdue", { count: metrics.overdueTasks })}
         </Badge>
       </div>
+
+      {onboarding !== null && (
+        <section className="mt-6">
+          <SelfProfileForm locale={locale} mode="onboarding" self={onboarding} />
+        </section>
+      )}
 
       {metrics.studentCount === 0 ? (
         <Card className="mt-8 border-dashed border-blue-200 bg-blue-50/50 p-8 text-center">
@@ -140,6 +151,11 @@ export async function DashboardHome({ data, locale, role }: DashboardHomeProps) 
       )}
       {role === "student" && data.students[0] !== undefined && (
         <StudentSchoolsSummary role={role} studentId={data.students[0].id} />
+      )}
+      {editProfile !== null && (
+        <section className="mt-4">
+          <SelfProfileForm locale={locale} mode="edit" self={editProfile} />
+        </section>
       )}
       <NotificationsPanel locale={locale} />
     </>

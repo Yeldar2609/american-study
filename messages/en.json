@@ -616,6 +616,60 @@
       "body": "Live agency metrics could not be loaded. Please try again shortly."
     }
   },
+  "onboarding": {
+    "eyebrow": "Welcome",
+    "title": "Let's set up your profile, {name}",
+    "intro": "Tell us about your interests, school preferences, and test plans. This shapes your school matches and your roadmap.",
+    "editEyebrow": "Your profile",
+    "editTitle": "Preferences & test prep",
+    "editIntro": "Keep your interests, preferences, and target test scores up to date.",
+    "interests": "Interests (comma separated)",
+    "englishLevel": "English level",
+    "prefState": "Preferred state or region",
+    "prefSetting": "Preferred setting",
+    "prefSize": "Preferred school size",
+    "notSet": "No preference",
+    "setting": { "urban": "Urban", "suburban": "Suburban", "rural": "Rural" },
+    "size": { "small": "Small", "medium": "Medium", "large": "Large" },
+    "testPrep": "Test preparation",
+    "test": { "toefl": "TOEFL", "ssat": "SSAT", "det": "Duolingo (DET)" },
+    "targetScore": "Target score",
+    "testDate": "Test date",
+    "finish": "Save and continue",
+    "save": "Save changes",
+    "saving": "Saving...",
+    "saved": "Saved",
+    "error": "Could not save. Please try again."
+  },
+  "applicationBoard": {
+    "eyebrow": "Applications",
+    "title": "Application tracker",
+    "body": "Track each school you're applying to, from first draft to final decision.",
+    "studentPicker": "Choose a student",
+    "loadError": "We could not load your applications. Please try again shortly.",
+    "lockedBody": "Upgrade to plan to track your applications school by school.",
+    "empty": {
+      "empty": "No student profile is linked to this account yet.",
+      "not_found": "We could not find that student.",
+      "none": "Save schools to your list to start tracking applications."
+    },
+    "emptyTitle": "No schools yet",
+    "deadline": "Deadline: {date}",
+    "noDeadline": "No deadline set",
+    "portal": "Open application portal",
+    "stageLabel": "Stage",
+    "portalLabel": "Application portal URL",
+    "save": "Save",
+    "stages": {
+      "not_started": "Not started",
+      "in_progress": "In progress",
+      "submitted": "Submitted",
+      "interview": "Interview",
+      "accepted": "Accepted",
+      "waitlisted": "Waitlisted",
+      "rejected": "Not admitted"
+    }
+  },
   "interview": {
     "eyebrow": "Interview prep",
     "title": "Interview practice",

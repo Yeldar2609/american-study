@@ -55,7 +55,15 @@ describe("translation catalogs", () => {
   it("uses genuine Russian copy instead of copied English values", () => {
     const english = new Map(leafEntries(readMessages("en")))
     const russian = new Map(leafEntries(readMessages("ru")))
-    const allowedSharedValues = new Set(["common.brand", "auth.emailPlaceholder", "metadata.title"])
+    const allowedSharedValues = new Set([
+      "common.brand",
+      "auth.emailPlaceholder",
+      "metadata.title",
+      // Standardized-test brand names are identical across languages.
+      "onboarding.test.toefl",
+      "onboarding.test.ssat",
+      "onboarding.test.det",
+    ])
     const copiedKeys = [...english.entries()].flatMap(([key, value]) =>
       !allowedSharedValues.has(key) && russian.get(key) === value ? [key] : [],
     )

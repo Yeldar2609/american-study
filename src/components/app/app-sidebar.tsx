@@ -57,7 +57,17 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
           "resources",
           "settings",
         ]
-      : ["home", "roadmap", "calendar", "schools", "essays", "interview", "bookings", "resources"]
+      : [
+          "home",
+          "roadmap",
+          "calendar",
+          "schools",
+          "applications",
+          "essays",
+          "interview",
+          "bookings",
+          "resources",
+        ]
   const logout = logoutAction.bind(null, locale)
 
   return (

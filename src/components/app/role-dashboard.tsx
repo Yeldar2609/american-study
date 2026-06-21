@@ -10,6 +10,7 @@ import { StudentManager } from "@/components/admin/student-manager"
 import { AppSidebar } from "@/components/app/app-sidebar"
 import { DashboardHome } from "@/components/app/dashboard-home"
 import { WorkspaceEmptyState } from "@/components/app/workspace-empty-state"
+import { ApplicationBoardWorkspace } from "@/components/applications/application-board-workspace"
 import { BookingsWorkspace } from "@/components/bookings/bookings-workspace"
 import { CalendarWorkspace } from "@/components/calendar/calendar-workspace"
 import { EssaysWorkspace } from "@/components/essays/essays-workspace"
@@ -119,6 +120,13 @@ export async function RoleDashboard({
             />
           ) : activeSection === "interview" ? (
             <InterviewWorkspace
+              data={data}
+              locale={locale}
+              role={role}
+              selectedStudentId={selectedStudentId}
+            />
+          ) : activeSection === "applications" ? (
+            <ApplicationBoardWorkspace
               data={data}
               locale={locale}
               role={role}

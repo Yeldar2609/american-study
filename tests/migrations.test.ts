@@ -48,6 +48,11 @@ const broadcastNotification = readFileSync(
   "utf8",
 )
 const interviewPrep = readFileSync("supabase/migrations/202606220009_interview_prep.sql", "utf8")
+const selfServe = readFileSync("supabase/migrations/202606220010_student_self_serve.sql", "utf8")
+const applicationPipeline = readFileSync(
+  "supabase/migrations/202606220011_application_pipeline.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -290,6 +295,31 @@ describe("Supabase migration contract", () => {
     expect(interviewPrep).toContain("if not private.is_admin()")
     expect(interviewPrep).toContain("on conflict (student_id, question_id) do update")
     expect(interviewPrep).toContain("grant execute on function public.get_interview_prep(uuid)")
+  })
+
+  it("gives students a narrow self-serve profile surface scoped to their own row", () => {
+    expect(selfServe).toContain("add column if not exists test_targets")
+    expect(selfServe).toContain("add column if not exists onboarded_at")
+    expect(selfServe).toContain("create or replace function public.get_student_self")
+    expect(selfServe).toContain("create or replace function public.student_update_self")
+    expect(selfServe).toContain("create or replace function public.student_complete_onboarding")
+    expect(selfServe).toContain("where s.user_id = (select auth.uid())")
+    // Must not let a student change privileged fields.
+    expect(selfServe).not.toContain("package_state =")
+    expect(selfServe).not.toContain("stage =")
+    expect(selfServe).toContain("grant execute on function public.get_student_self()")
+  })
+
+  it("tracks per-school application stage with admin-or-owner guards", () => {
+    expect(applicationPipeline).toContain("create type public.application_stage as enum")
+    expect(applicationPipeline).toContain("add column if not exists application_stage")
+    expect(applicationPipeline).toContain("create or replace function public.set_application_stage")
+    expect(applicationPipeline).toContain("create or replace function public.get_application_board")
+    expect(applicationPipeline).toContain("private.is_admin()")
+    expect(applicationPipeline).toContain("private.is_unlocked(target_student_id)")
+    expect(applicationPipeline).toContain(
+      "grant execute on function public.get_application_board(uuid) to authenticated",
+    )
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {
