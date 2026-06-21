@@ -1,4 +1,4 @@
-import { Bookmark, GraduationCap, Heart, Lock, Sparkles, Star } from "lucide-react"
+import { Bookmark, GraduationCap, Heart, Sparkles, Star } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import type { ReactNode } from "react"
 import {
@@ -241,24 +241,11 @@ export async function SchoolsWorkspace({
         )}
 
         <SchoolSection body={t("sections.allBody")} title={t("sections.all")}>
-          {unlocked ? (
-            <>
-              <SchoolFilters filters={filters} states={states} studentId={selectedStudentId} />
-              {allFiltered.length === 0 ? (
-                <EmptyTile body={t("empty.filtered")} title={t("empty.title")} />
-              ) : (
-                <SchoolGrid>{allFiltered.map(card)}</SchoolGrid>
-              )}
-            </>
+          <SchoolFilters filters={filters} states={states} studentId={selectedStudentId} />
+          {allFiltered.length === 0 ? (
+            <EmptyTile body={t("empty.filtered")} title={t("empty.title")} />
           ) : (
-            <Card className="mt-4 border-dashed border-blue-200 bg-blue-50/60 p-8 text-center">
-              <Lock aria-hidden="true" className="mx-auto size-8 text-blue-600" />
-              <h3 className="mt-3 text-xl font-black text-slate-950">{t("lockedAll.title")}</h3>
-              <p className="mx-auto mt-2 max-w-md leading-7 text-slate-600">
-                {t("lockedAll.body")}
-              </p>
-              <p className="mt-4 font-black text-blue-700">{t("lockedAll.cta")}</p>
-            </Card>
+            <SchoolGrid>{allFiltered.map(card)}</SchoolGrid>
           )}
         </SchoolSection>
       </CompareProvider>
