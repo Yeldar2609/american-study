@@ -82,7 +82,6 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
             "essays",
             "interview",
             "bookings",
-            "report",
             "resources",
           ]
   const logout = logoutAction.bind(null, locale)

@@ -1,4 +1,4 @@
-import { ArrowRight, Bookmark, CalendarClock, Heart, School, Sparkles } from "lucide-react"
+import { ArrowRight, CalendarClock, Heart, School, Sparkles } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
 import type { ReactNode } from "react"
 import { Card } from "@/components/ui/card"
@@ -22,7 +22,7 @@ export async function StudentSchoolsSummary({
     return null
   }
 
-  const { nextDeadline, recommendedCount, savedCount, shortlistCount } = result.summary
+  const { nextDeadline, recommendedCount, savedCount } = result.summary
 
   return (
     <section className="mt-4">
@@ -40,7 +40,7 @@ export async function StudentSchoolsSummary({
         {recommendedCount === 0 ? (
           <p className="mt-4 leading-7 text-slate-600">{t("waitingBody")}</p>
         ) : (
-          <dl className="mt-5 grid grid-cols-3 gap-3">
+          <dl className="mt-5 grid grid-cols-2 gap-3">
             <SummaryStat
               icon={<Sparkles className="size-4" />}
               label={t("recommended")}
@@ -50,11 +50,6 @@ export async function StudentSchoolsSummary({
               icon={<Heart className="size-4" />}
               label={t("saved")}
               value={savedCount}
-            />
-            <SummaryStat
-              icon={<Bookmark className="size-4" />}
-              label={t("shortlist")}
-              value={shortlistCount}
             />
           </dl>
         )}

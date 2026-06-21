@@ -24,6 +24,21 @@ import { getDashboardData } from "@/lib/dashboard/dashboard-data"
 import { resolveCalendarBookingLink } from "@/lib/settings/calendar-link"
 import type { SchoolCatalogFilters } from "@/lib/workspace/school-catalog"
 
+const VALID_SECTIONS = [
+  "home",
+  "roadmap",
+  "calendar",
+  "schools",
+  "essays",
+  "interview",
+  "bookings",
+  "report",
+  "people",
+  "applications",
+  "resources",
+  "settings",
+] as const
+
 type RoleDashboardProps = {
   readonly locale: string
   readonly role: UserRole
@@ -33,7 +48,10 @@ type RoleDashboardProps = {
   readonly schoolFilters?: SchoolCatalogFilters | undefined
 }
 
-export async function RoleDashboard({
+// The shell (sidebar + chrome) renders immediately from locale/role/section
+// alone; the data-heavy workspace streams in behind a Suspense boundary so the
+// page paints instantly instead of blocking on the slowest query.
+export function RoleDashboard({
   locale,
   role,
   section = "home",
@@ -41,125 +59,178 @@ export async function RoleDashboard({
   selectedSchoolId,
   schoolFilters = {},
 }: RoleDashboardProps) {
-  const t = await getTranslations("app")
-  const data = await getDashboardData()
-  const validSections = [
-    "home",
-    "roadmap",
-    "calendar",
-    "schools",
-    "essays",
-    "interview",
-    "bookings",
-    "report",
-    "people",
-    "applications",
-    "resources",
-    "settings",
-  ] as const
-  const activeSection = validSections.some((candidate) => candidate === section) ? section : "home"
-  const sectionLabel = t(`nav.${activeSection}`)
-  const calendarLink = activeSection === "bookings" ? await resolveCalendarBookingLink() : undefined
+  const activeSection = VALID_SECTIONS.some((candidate) => candidate === section) ? section : "home"
 
   return (
     <div className="min-h-screen lg:flex">
       <AppSidebar activeSection={activeSection} locale={locale} role={role} />
       <main className="min-w-0 flex-1 px-4 py-7 sm:px-7 lg:px-10 lg:py-9">
         <div className="mx-auto max-w-6xl">
-          {role === "admin" && activeSection === "people" ? (
-            <section className="mt-8 space-y-6">
-              <StudentManager locale={locale} selectedStudentId={selectedStudentId} />
-              <AccountManager locale={locale} />
-              {data.kind === "ready" && (
-                <AdminNotificationSender
-                  locale={locale}
-                  students={data.students.map((student) => ({
-                    id: student.id,
-                    name: student.name,
-                  }))}
-                />
-              )}
-            </section>
-          ) : role === "admin" && activeSection === "applications" ? (
-            <ApplicationsWorkspace />
-          ) : role === "admin" && activeSection === "settings" ? (
-            <AppSettingsManager locale={locale} />
-          ) : role === "admin" && activeSection === "home" ? (
-            <Suspense fallback={<AdminAnalyticsLoading />}>
-              <AdminAnalytics locale={locale} />
-            </Suspense>
-          ) : activeSection === "home" ? (
-            <DashboardHome data={data} locale={locale} role={role} />
-          ) : activeSection === "schools" && role !== "parent" ? (
-            <SchoolsWorkspace
-              data={data}
-              filters={schoolFilters}
+          <Suspense fallback={<WorkspaceSkeleton />}>
+            <DashboardSections
+              activeSection={activeSection}
               locale={locale}
               role={role}
+              schoolFilters={schoolFilters}
               selectedSchoolId={selectedSchoolId}
               selectedStudentId={selectedStudentId}
             />
-          ) : activeSection === "roadmap" ? (
-            <RoadmapWorkspace
-              data={data}
-              locale={locale}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : activeSection === "calendar" ? (
-            <CalendarWorkspace
-              data={data}
-              locale={locale}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : activeSection === "essays" ? (
-            <EssaysWorkspace
-              data={data}
-              locale={locale}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : activeSection === "interview" ? (
-            <InterviewWorkspace
-              data={data}
-              locale={locale}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : activeSection === "applications" ? (
-            <ApplicationBoardWorkspace
-              data={data}
-              locale={locale}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : activeSection === "report" ? (
-            <ProgressReportWorkspace
-              data={data}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : activeSection === "bookings" ? (
-            <BookingsWorkspace
-              calendarLink={calendarLink}
-              data={data}
-              locale={locale}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : activeSection === "resources" ? (
-            <ResourcesWorkspace
-              data={data}
-              locale={locale}
-              role={role}
-              selectedStudentId={selectedStudentId}
-            />
-          ) : (
-            <WorkspaceEmptyState data={data} role={role} sectionLabel={sectionLabel} />
-          )}
+          </Suspense>
         </div>
       </main>
+    </div>
+  )
+}
+
+async function DashboardSections({
+  activeSection,
+  locale,
+  role,
+  schoolFilters,
+  selectedSchoolId,
+  selectedStudentId,
+}: {
+  readonly activeSection: string
+  readonly locale: string
+  readonly role: UserRole
+  readonly schoolFilters: SchoolCatalogFilters
+  readonly selectedSchoolId: string | undefined
+  readonly selectedStudentId: string | undefined
+}) {
+  const t = await getTranslations("app")
+  const data = await getDashboardData()
+  const sectionLabel = t(`nav.${activeSection}`)
+  const calendarLink = activeSection === "bookings" ? await resolveCalendarBookingLink() : undefined
+
+  if (role === "admin" && activeSection === "people") {
+    return (
+      <section className="mt-8 space-y-6">
+        <StudentManager locale={locale} selectedStudentId={selectedStudentId} />
+        <AccountManager locale={locale} />
+        {data.kind === "ready" && (
+          <AdminNotificationSender
+            locale={locale}
+            students={data.students.map((student) => ({ id: student.id, name: student.name }))}
+          />
+        )}
+      </section>
+    )
+  }
+  if (role === "admin" && activeSection === "applications") {
+    return <ApplicationsWorkspace />
+  }
+  if (role === "admin" && activeSection === "settings") {
+    return <AppSettingsManager locale={locale} />
+  }
+  if (role === "admin" && activeSection === "home") {
+    return (
+      <Suspense fallback={<AdminAnalyticsLoading />}>
+        <AdminAnalytics locale={locale} />
+      </Suspense>
+    )
+  }
+  if (activeSection === "home") {
+    return <DashboardHome data={data} locale={locale} role={role} />
+  }
+  if (activeSection === "schools" && role !== "parent") {
+    return (
+      <SchoolsWorkspace
+        data={data}
+        filters={schoolFilters}
+        locale={locale}
+        role={role}
+        selectedSchoolId={selectedSchoolId}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  if (activeSection === "roadmap") {
+    return (
+      <RoadmapWorkspace
+        data={data}
+        locale={locale}
+        role={role}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  if (activeSection === "calendar") {
+    return (
+      <CalendarWorkspace
+        data={data}
+        locale={locale}
+        role={role}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  if (activeSection === "essays") {
+    return (
+      <EssaysWorkspace
+        data={data}
+        locale={locale}
+        role={role}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  if (activeSection === "interview") {
+    return (
+      <InterviewWorkspace
+        data={data}
+        locale={locale}
+        role={role}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  if (activeSection === "applications") {
+    return (
+      <ApplicationBoardWorkspace
+        data={data}
+        locale={locale}
+        role={role}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  if (activeSection === "report" && role !== "student") {
+    return <ProgressReportWorkspace data={data} role={role} selectedStudentId={selectedStudentId} />
+  }
+  if (activeSection === "bookings") {
+    return (
+      <BookingsWorkspace
+        calendarLink={calendarLink}
+        data={data}
+        locale={locale}
+        role={role}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  if (activeSection === "resources") {
+    return (
+      <ResourcesWorkspace
+        data={data}
+        locale={locale}
+        role={role}
+        selectedStudentId={selectedStudentId}
+      />
+    )
+  }
+  return <WorkspaceEmptyState data={data} role={role} sectionLabel={sectionLabel} />
+}
+
+function WorkspaceSkeleton() {
+  return (
+    <div aria-hidden="true" className="mt-8 animate-pulse space-y-4">
+      <div className="h-10 w-56 rounded-2xl bg-slate-100" />
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="h-28 rounded-2xl bg-slate-100" />
+        <div className="h-28 rounded-2xl bg-slate-100" />
+        <div className="h-28 rounded-2xl bg-slate-100" />
+      </div>
+      <div className="h-72 rounded-2xl bg-slate-100" />
     </div>
   )
 }

@@ -176,11 +176,6 @@ function ComparisonTable({
       label: t("compare.rows.saved"),
       value: (school) => (school.starred ? t("yes") : t("no")),
     },
-    {
-      key: "shortlist",
-      label: t("compare.rows.shortlist"),
-      value: (school) => (school.shortlisted ? t("yes") : t("no")),
-    },
   ]
 
   const headCell = "border-b border-slate-200 p-3 align-top text-sm font-black text-slate-900"

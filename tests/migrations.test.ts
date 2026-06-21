@@ -53,6 +53,11 @@ const applicationPipeline = readFileSync(
   "supabase/migrations/202606220011_application_pipeline.sql",
   "utf8",
 )
+const saveToFinal = readFileSync("supabase/migrations/202606220012_save_to_final.sql", "utf8")
+const catalogMatchPerf = readFileSync(
+  "supabase/migrations/202606220013_catalog_match_perf.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -320,6 +325,22 @@ describe("Supabase migration contract", () => {
     expect(applicationPipeline).toContain(
       "grant execute on function public.get_application_board(uuid) to authenticated",
     )
+  })
+
+  it("makes saving a school add it to the final list", () => {
+    expect(saveToFinal).toContain("create or replace function public.set_school_star")
+    expect(saveToFinal).toContain("is_final_7")
+    expect(saveToFinal).toContain(
+      "do update set starred = excluded.starred, is_final_7 = excluded.is_final_7",
+    )
+  })
+
+  it("computes the catalog match once per row and marks compute_match parallel-safe", () => {
+    expect(catalogMatchPerf).toContain(
+      "alter function public.compute_match(uuid, uuid) parallel safe",
+    )
+    expect(catalogMatchPerf).toContain("create or replace function public.get_school_catalog")
+    expect(catalogMatchPerf).toContain("order by 22 desc, school.name")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

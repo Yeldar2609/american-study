@@ -1,7 +1,9 @@
 runConfig:
   cpu: 1
   memoryMiB: 512
-  minInstances: 0
+  # Keep one warm instance so the first request of a session does not pay a
+  # cold container + Next.js boot on top of the cross-region DB latency.
+  minInstances: 1
   maxInstances: 10
   concurrency: 80
 

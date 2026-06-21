@@ -1,11 +1,11 @@
-import { ArrowRight, Bookmark, ExternalLink, Heart, MapPin } from "lucide-react"
+import { ArrowRight, ExternalLink, Heart, MapPin } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
 import { CompareToggle } from "@/components/schools/compare/compare-toggle"
 import { MatchBreakdownDisclosure } from "@/components/schools/match-breakdown-disclosure"
 import { SchoolAdminControls } from "@/components/schools/school-admin-controls"
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
-import { setSchoolShortlistAction, setSchoolStarAction } from "@/lib/workspace/school-actions"
+import { setSchoolStarAction } from "@/lib/workspace/school-actions"
 import type { SchoolCatalogItem } from "@/lib/workspace/school-catalog"
 
 type SchoolCardProps = {
@@ -30,7 +30,6 @@ export async function SchoolCard({
   const t = await getTranslations("schools")
   const format = await getFormatter()
   const starAction = setSchoolStarAction.bind(null, locale)
-  const shortlistAction = setSchoolShortlistAction.bind(null, locale)
   const canMutate = role === "student"
 
   return (
@@ -111,24 +110,6 @@ export async function SchoolCard({
               >
                 <Heart className="size-4" fill={school.starred ? "currentColor" : "none"} />
                 {t(school.starred ? "actions.saved" : "actions.save")}
-              </button>
-            </form>
-          )}
-          {canMutate && (
-            <form action={shortlistAction}>
-              <input name="schoolId" type="hidden" value={school.id} />
-              <input name="studentId" type="hidden" value={studentId} />
-              <input name="value" type="hidden" value={String(!school.shortlisted)} />
-              <button
-                className={`inline-flex min-h-11 items-center gap-2 rounded-xl px-4 text-sm font-black ${
-                  school.shortlisted
-                    ? "bg-blue-50 text-blue-700"
-                    : "border border-slate-200 text-slate-700"
-                }`}
-                type="submit"
-              >
-                <Bookmark className="size-4" fill={school.shortlisted ? "currentColor" : "none"} />
-                {t(school.shortlisted ? "actions.inShortlist" : "actions.shortlist")}
               </button>
             </form>
           )}

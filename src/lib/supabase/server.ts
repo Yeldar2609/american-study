@@ -1,8 +1,11 @@
 import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
+import { cache } from "react"
 import { readPublicEnv } from "@/lib/env"
 
-export async function createClient() {
+// One cookie-bound client per request render. Without cache() this was rebuilt
+// (and the cookie store re-read) ~5x per page across the auth/data helpers.
+export const createClient = cache(async () => {
   const env = readPublicEnv()
 
   if (!env.NEXT_PUBLIC_SUPABASE_URL || !env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
@@ -25,4 +28,4 @@ export async function createClient() {
       },
     },
   )
-}
+})

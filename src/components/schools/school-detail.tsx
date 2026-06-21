@@ -1,9 +1,9 @@
-import { ArrowLeft, Bookmark, ExternalLink, Heart, ListChecks } from "lucide-react"
+import { ArrowLeft, ExternalLink, Heart, ListChecks } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
 import { MatchBreakdownDisclosure } from "@/components/schools/match-breakdown-disclosure"
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
-import { setSchoolShortlistAction, setSchoolStarAction } from "@/lib/workspace/school-actions"
+import { setSchoolStarAction } from "@/lib/workspace/school-actions"
 import type { SchoolCatalogItem } from "@/lib/workspace/school-catalog"
 
 type SchoolDetailProps = {
@@ -28,7 +28,6 @@ export async function SchoolDetail({
   const t = await getTranslations("schools")
   const format = await getFormatter()
   const starAction = setSchoolStarAction.bind(null, locale)
-  const shortlistAction = setSchoolShortlistAction.bind(null, locale)
   const canMutate = role === "student"
   const notListed = t("detail.notListed")
 
@@ -168,27 +167,6 @@ export async function SchoolDetail({
                 >
                   <Heart className="size-4" fill={school.starred ? "currentColor" : "none"} />
                   {t(school.starred ? "actions.saved" : "actions.save")}
-                </button>
-              </form>
-            )}
-            {canMutate && (
-              <form action={shortlistAction}>
-                <input name="schoolId" type="hidden" value={school.id} />
-                <input name="studentId" type="hidden" value={studentId} />
-                <input name="value" type="hidden" value={String(!school.shortlisted)} />
-                <button
-                  className={`inline-flex min-h-11 items-center gap-2 rounded-xl px-4 text-sm font-black ${
-                    school.shortlisted
-                      ? "bg-blue-50 text-blue-700"
-                      : "border border-slate-200 text-slate-700"
-                  }`}
-                  type="submit"
-                >
-                  <Bookmark
-                    className="size-4"
-                    fill={school.shortlisted ? "currentColor" : "none"}
-                  />
-                  {t(school.shortlisted ? "actions.inShortlist" : "actions.shortlist")}
                 </button>
               </form>
             )}

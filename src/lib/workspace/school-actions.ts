@@ -54,22 +54,6 @@ export async function setSchoolStarAction(locale: string, formData: FormData): P
   })
 }
 
-export async function setSchoolShortlistAction(locale: string, formData: FormData): Promise<void> {
-  const parsed = flagFormSchema.safeParse({
-    schoolId: formData.get("schoolId"),
-    studentId: formData.get("studentId"),
-    value: formData.get("value"),
-  })
-  if (!parsed.success) {
-    return
-  }
-  await runPickMutation(locale, "set_school_shortlist", {
-    new_shortlisted: parsed.data.value,
-    target_school_id: parsed.data.schoolId,
-    target_student_id: parsed.data.studentId,
-  })
-}
-
 export async function setSchoolInterestAction(locale: string, formData: FormData): Promise<void> {
   const parsed = interestFormSchema.safeParse({
     interest: formData.get("interest"),

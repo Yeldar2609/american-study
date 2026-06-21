@@ -1,4 +1,4 @@
-import { Bookmark, GraduationCap, Heart, Sparkles, Star } from "lucide-react"
+import { GraduationCap, Sparkles, Star } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import type { ReactNode } from "react"
 import {
@@ -106,8 +106,6 @@ export async function SchoolsWorkspace({
   }
 
   const recommended = items.filter((school) => school.adminPick)
-  const saved = items.filter((school) => school.starred)
-  const shortlist = items.filter((school) => school.shortlisted)
   const finalList = items.filter((school) => school.finalSeven)
   const allFiltered = filterSchoolCatalog(items, filters)
   const states = [
@@ -176,21 +174,11 @@ export async function SchoolsWorkspace({
         )}
       </div>
 
-      <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <dl className="mt-6 grid grid-cols-2 gap-3">
         <CountTile
           icon={<Sparkles className="size-5" />}
           label={t("counts.recommended")}
           value={recommended.length}
-        />
-        <CountTile
-          icon={<Heart className="size-5" />}
-          label={t("counts.saved")}
-          value={saved.length}
-        />
-        <CountTile
-          icon={<Bookmark className="size-5" />}
-          label={t("counts.shortlist")}
-          value={shortlist.length}
         />
         <CountTile
           icon={<Star className="size-5" />}
@@ -214,29 +202,13 @@ export async function SchoolsWorkspace({
           )}
         </SchoolSection>
 
-        {(role !== "admin" || saved.length > 0) && (
-          <SchoolSection body={t("sections.savedBody")} title={t("sections.saved")}>
-            {saved.length === 0 ? (
+        {(role !== "admin" || finalList.length > 0) && (
+          <SchoolSection body={t("sections.finalBody")} title={t("sections.final")}>
+            {finalList.length === 0 ? (
               <EmptyTile body={t("sections.savedEmpty")} title={t("sections.noneYet")} />
             ) : (
-              <SchoolGrid>{saved.map(card)}</SchoolGrid>
+              <SchoolGrid>{finalList.map(card)}</SchoolGrid>
             )}
-          </SchoolSection>
-        )}
-
-        {(role !== "admin" || shortlist.length > 0) && (
-          <SchoolSection body={t("sections.shortlistBody")} title={t("sections.shortlist")}>
-            {shortlist.length === 0 ? (
-              <EmptyTile body={t("sections.shortlistEmpty")} title={t("sections.noneYet")} />
-            ) : (
-              <SchoolGrid>{shortlist.map(card)}</SchoolGrid>
-            )}
-          </SchoolSection>
-        )}
-
-        {finalList.length > 0 && (
-          <SchoolSection body={t("sections.finalBody")} title={t("sections.final")}>
-            <SchoolGrid>{finalList.map(card)}</SchoolGrid>
           </SchoolSection>
         )}
 
