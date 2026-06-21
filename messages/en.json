@@ -683,7 +683,6 @@
       "empty": "No student profile is linked to this account yet.",
       "not_found": "We could not find that student."
     },
-    "package": { "trial": "Diagnostic", "paid": "Paid" },
     "metrics": {
       "progress": "Progress",
       "tasksDone": "Tasks done",

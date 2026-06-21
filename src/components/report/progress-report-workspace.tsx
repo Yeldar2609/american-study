@@ -80,15 +80,10 @@ export async function ProgressReportWorkspace({
       </div>
 
       <Card className="mt-6 p-6 sm:p-8">
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 pb-5">
-          <div>
-            <p className="text-sm font-bold text-blue-700">{t("eyebrow")}</p>
-            <h2 className="mt-1 text-2xl font-black text-slate-950">{student.name}</h2>
-            <p className="mt-1 text-sm text-slate-500">{t("generated", { date: generatedAt })}</p>
-          </div>
-          <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-black uppercase tracking-wide text-blue-700">
-            {t(`package.${student.packageState}`)}
-          </span>
+        <div className="border-b border-slate-100 pb-5">
+          <p className="text-sm font-bold text-blue-700">{t("eyebrow")}</p>
+          <h2 className="mt-1 text-2xl font-black text-slate-950">{student.name}</h2>
+          <p className="mt-1 text-sm text-slate-500">{t("generated", { date: generatedAt })}</p>
         </div>
 
         <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">

@@ -60,18 +60,31 @@ export async function AppSidebar({ locale, role, activeSection }: SidebarProps) 
           "resources",
           "settings",
         ]
-      : [
-          "home",
-          "roadmap",
-          "calendar",
-          "schools",
-          "applications",
-          "essays",
-          "interview",
-          "bookings",
-          "report",
-          "resources",
-        ]
+      : role === "parent"
+        ? // Parents see the family's progress, not the school catalog.
+          [
+            "home",
+            "roadmap",
+            "calendar",
+            "applications",
+            "essays",
+            "interview",
+            "bookings",
+            "report",
+            "resources",
+          ]
+        : [
+            "home",
+            "roadmap",
+            "calendar",
+            "schools",
+            "applications",
+            "essays",
+            "interview",
+            "bookings",
+            "report",
+            "resources",
+          ]
   const logout = logoutAction.bind(null, locale)
 
   return (

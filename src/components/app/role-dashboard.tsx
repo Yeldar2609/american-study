@@ -90,7 +90,7 @@ export async function RoleDashboard({
             </Suspense>
           ) : activeSection === "home" ? (
             <DashboardHome data={data} locale={locale} role={role} />
-          ) : activeSection === "schools" ? (
+          ) : activeSection === "schools" && role !== "parent" ? (
             <SchoolsWorkspace
               data={data}
               filters={schoolFilters}
