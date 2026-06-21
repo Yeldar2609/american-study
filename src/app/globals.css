@@ -2,6 +2,7 @@
 
 :root {
   --background: #ffffff;
+  --ground: #fcfcfb; /* warm paper content ground (R2); cards stay --background white */
   --foreground: #0f172a;
   /* Modern Civic brand — blue-dominant, red minor */
   --brand: #1d4ed8; /* royal blue (blue-700) — dominant trust color */
@@ -11,6 +12,13 @@
   --danger-fill: #ef4444; /* red-500 — fills / large numerals / notification dot only */
   --hairline: #e7ecf5;
   --elevation: 0 4px 14px -8px rgb(15 23 42 / 18%);
+  /* Motion (calm institutional) — see DESIGN.md. Named to avoid clobbering Tailwind. */
+  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
 }
 
 * {
@@ -18,15 +26,15 @@
 }
 
 html {
-  background: var(--background);
+  background: var(--ground);
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
-  /* Modern Civic: flat white (dropped the cyan/rose radial gradients) */
-  background: var(--background);
+  /* Modern Civic: warm paper ground (R2); cards/panels stay pure white */
+  background: var(--ground);
   color: var(--foreground);
 }
 

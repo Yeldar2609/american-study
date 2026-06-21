@@ -139,3 +139,9 @@ Available gstack skills: `/office-hours`, `/plan-ceo-review`, `/plan-eng-review`
 `/document-generate`, `/codex`, `/cso`, `/autoplan`, `/plan-devex-review`,
 `/devex-review`, `/careful`, `/freeze`, `/guard`, `/unfreeze`, `/gstack-upgrade`,
 `/learn`.
+
+## Design System
+Always read `DESIGN.md` before making any visual or UI decision. All font choices,
+colors, spacing, type scale, radii, motion, and the EN/RU/KK + accessibility rules are
+defined there. Do not deviate without explicit user approval. In QA mode, flag any code
+that does not match `DESIGN.md`.
