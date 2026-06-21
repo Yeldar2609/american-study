@@ -14,6 +14,12 @@ const createSchema = z.object({
   // Students carry a full profile entity and are created via the student form;
   // this quick action handles parent and admin/staff logins only.
   role: z.enum(["parent", "admin"]),
+  // Optional: when creating a parent, link them to this student so they can see
+  // everything the student sees (the student form already links its own parent).
+  studentId: z
+    .union([z.literal(""), z.string().uuid()])
+    .nullable()
+    .transform((value) => value || null),
   username: usernameSchema,
 })
 
@@ -29,6 +35,7 @@ export async function createAccountAction(
     language: formData.get("language"),
     password: formData.get("password"),
     role: formData.get("role"),
+    studentId: formData.get("studentId"),
     username: formData.get("username"),
   })
   if (!parsed.success) {
@@ -74,6 +81,21 @@ export async function createAccountAction(
   if (profile.error !== null) {
     await admin.auth.admin.deleteUser(created.user.id)
     return { message: "unexpected", status: "error" }
+  }
+
+  // Link a new parent to the chosen student so they share the same view. Roll
+  // back the account if the link cannot be written.
+  if (value.role === "parent" && value.studentId !== null) {
+    const link = await admin
+      .from("parents_students")
+      .upsert(
+        { parent_user_id: created.user.id, student_id: value.studentId },
+        { onConflict: "parent_user_id,student_id" },
+      )
+    if (link.error !== null) {
+      await admin.auth.admin.deleteUser(created.user.id)
+      return { message: "unexpected", status: "error" }
+    }
   }
 
   revalidatePath(`/${locale}/app/admin`)

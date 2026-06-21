@@ -1,10 +1,10 @@
 import { CircleAlert, GraduationCap, Plus, Users } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { CreateStudentForm } from "@/components/admin/create-student-form"
+import { StudentParentLinks } from "@/components/admin/student-parent-links"
 import { StudentProfileEditor } from "@/components/admin/student-profile-editor"
-import { Badge } from "@/components/ui/badge"
+import { StudentSearchList } from "@/components/admin/student-search-list"
 import { Card } from "@/components/ui/card"
-import { Link } from "@/i18n/navigation"
 import { getAdminStudentProfile } from "@/lib/admin/student-profile-query"
 import { listAdminStudents } from "@/lib/admin/student-queries"
 import { getCurrentSchoolOptions } from "@/lib/current-schools/queries"
@@ -55,38 +55,9 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
               <p className="mt-1 max-w-sm text-sm leading-6 text-slate-600">{t("emptyBody")}</p>
             </div>
           )}
-          {result.kind === "ready" &&
-            result.students.map((student) => (
-              <article
-                className="rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/60"
-                key={student.id}
-              >
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-black text-slate-950">{student.fullName}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{student.email}</p>
-                  </div>
-                  <Badge
-                    className={
-                      student.packageState === "paid"
-                        ? "bg-emerald-50 text-emerald-800"
-                        : "bg-blue-50 text-blue-700"
-                    }
-                  >
-                    {t(`options.${student.packageState}`)}
-                  </Badge>
-                </div>
-                <p className="mt-4 text-xs font-extrabold uppercase tracking-[0.14em] text-blue-700">
-                  {t(`stages.${student.stage}`)}
-                </p>
-                <Link
-                  className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-blue-50 px-4 text-sm font-black text-blue-700 transition hover:bg-blue-100"
-                  href={`/app/admin?section=people&student=${student.id}`}
-                >
-                  {t("editProfile")}
-                </Link>
-              </article>
-            ))}
+          {result.kind === "ready" && result.students.length > 0 && (
+            <StudentSearchList students={result.students} />
+          )}
         </div>
       </Card>
 
@@ -105,11 +76,14 @@ export async function StudentManager({ locale, selectedStudentId }: StudentManag
           </div>
         </div>
         {selected?.kind === "ready" ? (
-          <StudentProfileEditor
-            currentSchools={currentSchools}
-            locale={locale}
-            profile={selected.profile}
-          />
+          <div className="grid gap-6">
+            <StudentProfileEditor
+              currentSchools={currentSchools}
+              locale={locale}
+              profile={selected.profile}
+            />
+            <StudentParentLinks locale={locale} studentId={selected.profile.id} />
+          </div>
         ) : selected !== null && selected.kind !== "notFound" ? (
           <div className="rounded-2xl bg-red-50 p-4 font-bold text-red-700">
             {t(selected.kind === "configuration" ? "configurationBody" : "loadError")}

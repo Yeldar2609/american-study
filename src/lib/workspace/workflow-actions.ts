@@ -6,6 +6,7 @@ import { z } from "zod"
 import { requireAuthenticatedUser, requireRole } from "@/lib/auth/session"
 import { resolveCalendarBookingLink } from "@/lib/settings/calendar-link"
 import { createClient } from "@/lib/supabase/server"
+import type { AssignTaskState } from "@/lib/workspace/assign-task-state"
 
 const uuid = z.uuid()
 const optionalUuid = z.preprocess((value) => (value === "" ? null : value), uuid.nullable())
@@ -121,6 +122,72 @@ export async function adminSaveTaskAction(locale: string, formData: FormData): P
   })
   if (error === null) {
     revalidatePath(`/${locale}/app/admin`)
+  }
+}
+
+const assignTaskSchema = z.object({
+  description: z.string().max(5000),
+  driveLink: optionalUrl,
+  dueDate: optionalDate,
+  mode: z.enum(["all", "selected"]),
+  section: z.string().trim().min(1).max(120),
+  studentIds: z.string().max(20000),
+  title: z.string().trim().min(1).max(300),
+  videoId: z.union([z.literal(""), z.string().regex(/^[A-Za-z0-9_-]{11}$/)]),
+})
+
+export async function adminAssignTaskAction(
+  locale: string,
+  _previous: AssignTaskState,
+  formData: FormData,
+): Promise<AssignTaskState> {
+  await requireRole(locale, "admin")
+  const parsed = assignTaskSchema.safeParse(Object.fromEntries(formData))
+  if (!parsed.success) {
+    return { reason: "validation", status: "error" }
+  }
+  const supabase = await createClient()
+  if (supabase === null) {
+    return { reason: "configuration", status: "error" }
+  }
+  const value = parsed.data
+
+  let studentIds: string[]
+  if (value.mode === "all") {
+    const { data, error } = await supabase.from("students").select("id")
+    const rows = z.array(z.object({ id: z.uuid() })).safeParse(data)
+    if (error !== null || !rows.success) {
+      return { reason: "unexpected", status: "error" }
+    }
+    studentIds = rows.data.map((row) => row.id)
+  } else {
+    studentIds = value.studentIds
+      .split(",")
+      .map((id) => id.trim())
+      .filter((id) => uuid.safeParse(id).success)
+  }
+
+  if (studentIds.length === 0) {
+    return { reason: "none", status: "error" }
+  }
+
+  const { data: createdCount, error } = await supabase.rpc("admin_bulk_create_task", {
+    new_description: value.description,
+    new_drive_link: value.driveLink,
+    new_due_date: value.dueDate,
+    new_section: value.section,
+    new_title: value.title,
+    new_video_youtube_id: value.videoId,
+    target_student_ids: studentIds,
+  })
+  if (error !== null) {
+    return { reason: "unexpected", status: "error" }
+  }
+
+  revalidatePath(`/${locale}/app/admin`)
+  return {
+    count: typeof createdCount === "number" ? createdCount : studentIds.length,
+    status: "success",
   }
 }
 

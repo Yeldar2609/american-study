@@ -399,6 +399,25 @@
       "documentType": "Document type",
       "saveTask": "Create task",
       "saveDocument": "Create document request",
+      "assign": {
+        "title": "Assign a task to many students",
+        "recipients": "Who gets this task",
+        "all": "All students ({count})",
+        "choose": "Choose students",
+        "searchLabel": "Search students",
+        "searchPlaceholder": "Search students by name",
+        "selectedCount": "{count} selected",
+        "noStudents": "No students match your search.",
+        "submit": "Assign task",
+        "submitting": "Assigning...",
+        "success": "Task assigned to {count} students.",
+        "errors": {
+          "validation": "Check the task fields and try again.",
+          "none": "Select at least one student first.",
+          "configuration": "The server is missing its Supabase configuration.",
+          "unexpected": "The task could not be assigned. Try again."
+        }
+      },
       "documentTypes": {
         "passport": "Passport",
         "transcript": "Transcript",
@@ -604,6 +623,9 @@
     "editEyebrow": "Selected student",
     "editTitle": "Edit student profile",
     "editProfile": "Edit profile",
+    "searchLabel": "Search students",
+    "searchPlaceholder": "Search students by name, username, or stage",
+    "searchNoResults": "No students match your search.",
     "configurationTitle": "Backend secret required",
     "configurationBody": "Add SUPABASE_SERVICE_ROLE_KEY as a Firebase backend secret to create accounts and update login emails.",
     "loadError": "Student records could not be loaded. Check the database migrations and try again.",
@@ -619,6 +641,14 @@
     "packageLabel": "Current access package",
     "markPaid": "Unlock paid access",
     "markTrial": "Return to diagnostic access",
+    "parents": {
+      "title": "Linked parents",
+      "hint": "Linked parents see everything this student sees.",
+      "none": "No parent is linked to this student yet.",
+      "linkLabel": "Link an existing parent account",
+      "link": "Link parent",
+      "unlink": "Unlink parent"
+    },
     "messages": {
       "created": "Student account and family links were created.",
       "updated": "The student profile was updated.",
@@ -638,7 +668,7 @@
       "tooLong": "This value is too long.",
       "password": "Use at least 12 characters.",
       "duplicate": "This email is already in use.",
-      "username": "Use 3-64 letters, numbers, dots, dashes, or underscores.",
+      "username": "Use 1-64 letters, numbers, dots, dashes, or underscores.",
       "uuid": "Select a valid student record."
     },
     "fields": {
@@ -728,6 +758,8 @@
     "kazakh": "Kazakh",
     "create": "Create account",
     "creating": "Creating…",
+    "linkStudentLabel": "Link to student",
+    "linkStudentNone": "No student (admin/staff)",
     "manage": "Manage account",
     "changeUsernameLabel": "New username",
     "changeUsername": "Change username",
@@ -778,6 +810,7 @@
       "not_found": "We could not find that student."
     },
     "addTask": "Add task",
+    "addOnDate": "Add task on {date}",
     "editTask": "Edit task",
     "cancel": "Cancel",
     "save": "Save task",

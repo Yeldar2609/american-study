@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { removeUserAction } from "@/lib/admin/account-actions"
 import { listAccounts } from "@/lib/admin/account-queries"
+import { listAdminStudents } from "@/lib/admin/student-queries"
 import { createClient } from "@/lib/supabase/server"
 
 const roleBadgeClass: Record<string, string> = {
@@ -18,6 +19,11 @@ const roleBadgeClass: Record<string, string> = {
 export async function AccountManager({ locale }: { readonly locale: string }) {
   const t = await getTranslations("adminAccounts")
   const result = await listAccounts()
+  const studentResult = await listAdminStudents()
+  const students =
+    studentResult.kind === "ready"
+      ? studentResult.students.map((student) => ({ id: student.id, name: student.fullName }))
+      : []
   const supabase = await createClient()
   const currentId =
     supabase === null ? null : ((await supabase.auth.getUser()).data.user?.id ?? null)
@@ -104,7 +110,7 @@ export async function AccountManager({ locale }: { readonly locale: string }) {
           </div>
         </div>
         <p className="mb-4 text-sm leading-6 text-slate-600">{t("createHint")}</p>
-        <CreateAccountForm locale={locale} />
+        <CreateAccountForm locale={locale} students={students} />
       </Card>
     </div>
   )

@@ -35,6 +35,10 @@ const collaboration = readFileSync(
 const authTriggerFix = readFileSync("supabase/migrations/202606180006_auth_trigger_fix.sql", "utf8")
 const adminAnalytics = readFileSync("supabase/migrations/202606180007_admin_analytics.sql", "utf8")
 const appSettings = readFileSync("supabase/migrations/202606220001_app_settings.sql", "utf8")
+const catalogMatchBulk = readFileSync(
+  "supabase/migrations/202606220006_catalog_match_and_bulk_tasks.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -212,6 +216,22 @@ describe("Supabase migration contract", () => {
     )
     expect(appSettings).toContain(
       "grant execute on function public.admin_set_app_setting(text, text) to authenticated",
+    )
+  })
+
+  it("authorizes catalog scoring for the student/parent and adds bulk task assignment", () => {
+    expect(catalogMatchBulk).toContain("create or replace function public.compute_match")
+    expect(catalogMatchBulk).toContain("not private.is_admin()")
+    expect(catalogMatchBulk).toContain("from public.parents_students as link")
+    expect(catalogMatchBulk).toContain("create or replace function public.admin_bulk_create_task")
+    expect(catalogMatchBulk).toContain("if not private.is_admin()")
+    expect(catalogMatchBulk).toContain("foreach target_id in array")
+    expect(catalogMatchBulk).toContain("insert into public.application_tasks")
+    expect(catalogMatchBulk).toContain(
+      "revoke execute on function public.admin_bulk_create_task(uuid[], text, text, text, text, date, text)\n  from public, anon",
+    )
+    expect(catalogMatchBulk).toContain(
+      "grant execute on function public.admin_bulk_create_task(uuid[], text, text, text, text, date, text)\n  to authenticated",
     )
   })
 

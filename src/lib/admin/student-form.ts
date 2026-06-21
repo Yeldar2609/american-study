@@ -21,7 +21,7 @@ const independentFlag = z.string().transform((value) => value === "true")
 const formUsername = z
   .string()
   .trim()
-  .min(3, "username")
+  .min(1, "username")
   .max(64, "username")
   .regex(/^[A-Za-z0-9._-]+$/, "username")
 

@@ -71,7 +71,6 @@ export async function AuthCard({ locale, mode, next = "" }: AuthCardProps) {
                 <Input
                   autoComplete="current-password"
                   id="login-password"
-                  minLength={8}
                   name="password"
                   required
                   type="password"

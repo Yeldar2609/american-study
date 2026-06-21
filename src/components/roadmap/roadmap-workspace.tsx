@@ -1,6 +1,7 @@
 import { CheckCircle2, ExternalLink, FileCheck2 } from "lucide-react"
 import { getFormatter, getLocale, getTranslations } from "next-intl/server"
 import { LockedCard } from "@/components/locked-card"
+import { AdminTaskAssigner } from "@/components/roadmap/admin-task-assigner"
 import { AdminWorkflowForms } from "@/components/roadmap/admin-workflow-forms"
 import { CommentsPanel } from "@/components/roadmap/comments-panel"
 import { TaskCard } from "@/components/roadmap/task-card"
@@ -67,7 +68,15 @@ export async function RoadmapWorkspace({
           students={data.students}
         />
       </div>
-      {role === "admin" && <AdminWorkflowForms locale={locale} studentId={access.studentId} />}
+      {role === "admin" && (
+        <>
+          <AdminWorkflowForms locale={locale} studentId={access.studentId} />
+          <AdminTaskAssigner
+            locale={locale}
+            students={data.students.map((student) => ({ id: student.id, name: student.name }))}
+          />
+        </>
+      )}
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.4fr_0.8fr]">
         <div className="grid content-start gap-4">
           <h2 className="text-2xl font-black text-slate-950">{t("tasks")}</h2>

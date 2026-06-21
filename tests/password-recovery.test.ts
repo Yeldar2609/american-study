@@ -17,7 +17,7 @@ describe("password recovery", () => {
     const client = { auth: { updateUser } }
 
     expect(await updatePassword(client, "secure-passphrase")).toBe("error")
-    expect(await updatePassword(client, "short")).toBe("invalid")
+    expect(await updatePassword(client, "")).toBe("invalid")
     expect(await updatePassword(null, "secure-passphrase")).toBe("configuration")
   })
 })

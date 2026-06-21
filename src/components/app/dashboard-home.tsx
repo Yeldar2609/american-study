@@ -20,8 +20,13 @@ type DashboardHomeProps = {
 }
 
 function diagnosticStudents(students: readonly DashboardStudent[]) {
+  // The diagnostic summary belongs to the diagnostic (unpaid) phase only. Once a
+  // student has paid, drop it so neither they nor their parent still see it.
   return students.filter(
-    (student) => student.diagnosticSummary !== null && student.diagnosticSummary.trim().length > 0,
+    (student) =>
+      student.packageState === "trial" &&
+      student.diagnosticSummary !== null &&
+      student.diagnosticSummary.trim().length > 0,
   )
 }
 
@@ -126,7 +131,7 @@ export async function DashboardHome({ data, locale, role }: DashboardHomeProps) 
               )}
             </Card>
           </section>
-          {role !== "admin" && (
+          {role !== "admin" && diagnostics.length > 0 && (
             <section className="mt-4">
               <DiagnosticCards diagnostics={diagnostics} />
             </section>

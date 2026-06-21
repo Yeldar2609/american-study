@@ -17,7 +17,7 @@ export async function updatePassword(
   client: PasswordClient | null,
   password: string,
 ): Promise<PasswordUpdateResult> {
-  if (password.length < 8) {
+  if (password.length < 1) {
     return "invalid"
   }
 
@@ -49,7 +49,6 @@ export function UpdatePasswordForm() {
         <Input
           autoComplete="new-password"
           id="new-password"
-          minLength={8}
           name="password"
           required
           type="password"

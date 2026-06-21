@@ -9,7 +9,7 @@ import { createClient } from "@/lib/supabase/server"
 type AuthAction = "login" | "reset"
 
 const credentialsSchema = z.object({
-  password: z.string().min(8).max(128),
+  password: z.string().min(1).max(128),
   username: usernameSchema,
 })
 

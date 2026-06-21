@@ -8,7 +8,7 @@ const USERNAME_AUTH_DOMAIN = "users.american-study.internal"
 export const usernameSchema = z
   .string()
   .trim()
-  .min(3)
+  .min(1)
   .max(64)
   .regex(/^[A-Za-z0-9._-]+$/)
 

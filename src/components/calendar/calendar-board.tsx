@@ -36,6 +36,13 @@ export function CalendarBoard({ canEdit, deleteAction, saveAction, tasks }: Cale
   const [year, setYear] = useState(today.getFullYear())
   const [month, setMonth] = useState(today.getMonth())
   const [editing, setEditing] = useState<string | null>(null)
+  // Date pre-seeded into the editor when a calendar day is clicked to add a task.
+  const [newDate, setNewDate] = useState<string | null>(null)
+
+  const openNewTask = (date: string | null) => {
+    setNewDate(date)
+    setEditing("new")
+  }
 
   const byDay = useMemo(() => {
     const map = new Map<string, CalendarTask[]>()
@@ -69,6 +76,7 @@ export function CalendarBoard({ canEdit, deleteAction, saveAction, tasks }: Cale
     setYear(next.getFullYear())
     setMonth(next.getMonth())
     setEditing(null)
+    setNewDate(null)
   }
 
   const editingTask =
@@ -101,7 +109,7 @@ export function CalendarBoard({ canEdit, deleteAction, saveAction, tasks }: Cale
           </Button>
         </div>
         {canEdit && (
-          <Button onClick={() => setEditing("new")} type="button">
+          <Button onClick={() => openNewTask(null)} type="button">
             {t("addTask")}
           </Button>
         )}
@@ -124,15 +132,25 @@ export function CalendarBoard({ canEdit, deleteAction, saveAction, tasks }: Cale
           const dayTasks = byDay.get(key) ?? []
           const isToday =
             day === today.getDate() && month === today.getMonth() && year === today.getFullYear()
+          const dayBadgeClass = `inline-flex size-6 items-center justify-center rounded-full text-xs font-bold ${
+            isToday ? "bg-blue-600 text-white" : "text-slate-500"
+          }`
           return (
             <div className="min-h-24 bg-white p-1.5" key={key}>
-              <span
-                className={`inline-flex size-6 items-center justify-center rounded-full text-xs font-bold ${
-                  isToday ? "bg-blue-600 text-white" : "text-slate-500"
-                }`}
-              >
-                {day}
-              </span>
+              {canEdit ? (
+                <button
+                  aria-label={t("addOnDate", { date: key })}
+                  className={`${dayBadgeClass} transition hover:bg-blue-100 ${
+                    isToday ? "hover:bg-blue-700" : ""
+                  }`}
+                  onClick={() => openNewTask(key)}
+                  type="button"
+                >
+                  {day}
+                </button>
+              ) : (
+                <span className={dayBadgeClass}>{day}</span>
+              )}
               <div className="mt-1 grid gap-1">
                 {dayTasks.map((task) =>
                   canEdit ? (
@@ -161,9 +179,13 @@ export function CalendarBoard({ canEdit, deleteAction, saveAction, tasks }: Cale
 
       {canEdit && editing !== null && (
         <TaskEditor
+          defaultDueDate={newDate ?? undefined}
           deleteAction={deleteAction}
-          key={editing}
-          onCancel={() => setEditing(null)}
+          key={editing === "new" ? `new-${newDate ?? "none"}` : editing}
+          onCancel={() => {
+            setEditing(null)
+            setNewDate(null)
+          }}
           saveAction={saveAction}
           task={editingTask}
         />
@@ -204,11 +226,13 @@ export function CalendarBoard({ canEdit, deleteAction, saveAction, tasks }: Cale
 }
 
 function TaskEditor({
+  defaultDueDate,
   deleteAction,
   onCancel,
   saveAction,
   task,
 }: {
+  readonly defaultDueDate?: string | undefined
   readonly deleteAction: TaskAction
   readonly onCancel: () => void
   readonly saveAction: TaskAction
@@ -242,7 +266,7 @@ function TaskEditor({
         <label className="grid gap-1 text-sm font-bold text-slate-700" htmlFor={`${fieldId}-due`}>
           {t("taskDueDate")}
           <Input
-            defaultValue={task?.dueDate ?? ""}
+            defaultValue={task?.dueDate ?? defaultDueDate ?? ""}
             id={`${fieldId}-due`}
             name="dueDate"
             type="date"
