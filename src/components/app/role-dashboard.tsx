@@ -15,6 +15,7 @@ import { BookingsWorkspace } from "@/components/bookings/bookings-workspace"
 import { CalendarWorkspace } from "@/components/calendar/calendar-workspace"
 import { EssaysWorkspace } from "@/components/essays/essays-workspace"
 import { InterviewWorkspace } from "@/components/interview/interview-workspace"
+import { ProgressReportWorkspace } from "@/components/report/progress-report-workspace"
 import { ResourcesWorkspace } from "@/components/resources/resources-workspace"
 import { RoadmapWorkspace } from "@/components/roadmap/roadmap-workspace"
 import { SchoolsWorkspace } from "@/components/schools/schools-workspace"
@@ -50,6 +51,7 @@ export async function RoleDashboard({
     "essays",
     "interview",
     "bookings",
+    "report",
     "people",
     "applications",
     "resources",
@@ -129,6 +131,12 @@ export async function RoleDashboard({
             <ApplicationBoardWorkspace
               data={data}
               locale={locale}
+              role={role}
+              selectedStudentId={selectedStudentId}
+            />
+          ) : activeSection === "report" ? (
+            <ProgressReportWorkspace
+              data={data}
               role={role}
               selectedStudentId={selectedStudentId}
             />

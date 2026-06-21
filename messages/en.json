@@ -145,6 +145,7 @@
       "essays": "Essays",
       "interview": "Interview",
       "bookings": "Bookings",
+      "report": "Report",
       "people": "Students",
       "applications": "Applications",
       "resources": "Resources",
@@ -669,6 +670,33 @@
       "waitlisted": "Waitlisted",
       "rejected": "Not admitted"
     }
+  },
+  "report": {
+    "eyebrow": "Progress report",
+    "title": "Progress report",
+    "body": "A printable summary of progress, deadlines, and applications. Use Print to save as PDF.",
+    "studentPicker": "Choose a student",
+    "loadError": "We could not load the report. Please try again shortly.",
+    "print": "Print / Save as PDF",
+    "generated": "Generated {date}",
+    "empty": {
+      "empty": "No student profile is linked to this account yet.",
+      "not_found": "We could not find that student."
+    },
+    "package": { "trial": "Diagnostic", "paid": "Paid" },
+    "metrics": {
+      "progress": "Progress",
+      "tasksDone": "Tasks done",
+      "overdue": "Overdue",
+      "nextDeadline": "Next deadline",
+      "noDeadline": "No deadline",
+      "notAvailable": "Not started"
+    },
+    "upcomingTitle": "Upcoming tasks",
+    "noUpcoming": "No upcoming tasks with a due date.",
+    "applicationsTitle": "Applications",
+    "noApplications": "No schools on the list yet.",
+    "diagnosticTitle": "Diagnostic summary"
   },
   "interview": {
     "eyebrow": "Interview prep",
