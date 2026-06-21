@@ -63,23 +63,36 @@ an official Kazakhstan registry. See [DATA_SOURCES.md](./DATA_SOURCES.md).
 ## 2. Target schools (US boarding schools the student applies to)
 
 The application catalog used for matching and the application workflow.
-Existing and unchanged on this branch.
+**Significantly extended 2026-06-21** — see
+[SCHOOL_PICKING_FIX.md](./SCHOOL_PICKING_FIX.md) and
+[STUDENT_SCHOOL_VISIBILITY_AUDIT.md](./STUDENT_SCHOOL_VISIBILITY_AUDIT.md).
 
 **Storage:** `public.schools` (catalog) + `public.student_school_picks`
-(`starred`, `admin_pick`, `is_final_7`, `match_percent`). Reads go through the
-`get_school_catalog` RPC; the `compute_match` engine produces match scores.
+(`starred`, `student_shortlisted`, `student_interest_level`, `student_note`,
+`admin_pick`, `is_final_7`, `match_percent`). Reads go through the
+`get_school_catalog` RPC (now returns the full detail set); `compute_match`
+produces match scores.
 
 ### Access rules (target schools)
 
-| Audience          | What they can do                                                        |
-| ----------------- | ----------------------------------------------------------------------- |
-| Trial student     | See only `admin_pick` schools; **cannot** star.                         |
-| Paid student      | Full catalog; star and compare.                                         |
-| Parent            | Read-only (within the linked student's access).                         |
-| Admin             | Set final-7, override match %, set deadline/status; manage the catalog. |
+| Audience      | What they can do                                                                    |
+| ------------- | ----------------------------------------------------------------------------------- |
+| Trial student | See only `admin_pick` schools; **can save, shortlist, compare** them; full detail.  |
+| Paid student  | Full searchable catalog; save, shortlist, compare (≤3), match breakdown.            |
+| Parent        | Read-only (view detail + compare; no mutations).                                    |
+| Admin         | Set final-7, override match %, deadline/status; see student saved/shortlisted lists. |
 
-Enforced by RLS plus `SECURITY DEFINER` RPCs — the server and database layers
-are kept in sync. See [SECURITY_REVIEW.md](./SECURITY_REVIEW.md).
+The trial save/shortlist boundary is enforced by `private.can_student_save`
+(paid/admin, or own `admin_pick` school) inside the `set_school_*` RPCs. Parents
+are rejected in the RPC. Server + database layers stay in sync. See
+[SECURITY_REVIEW.md](./SECURITY_REVIEW.md).
+
+### Student experience
+
+Sectioned schools page (Recommended / Saved / Shortlist / Final / All), labeled
+card actions (Save, Shortlist, View details, Website), a full `?school=<id>`
+detail view with graceful "Not listed yet" for missing fields, and a dashboard
+schools summary card. Student-facing copy is English only.
 
 ## Related
 

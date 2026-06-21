@@ -1,24 +1,25 @@
-import { ExternalLink, Heart, MapPin } from "lucide-react"
+import { ArrowRight, Bookmark, ExternalLink, Heart, MapPin } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
 import { CompareToggle } from "@/components/schools/compare/compare-toggle"
 import { MatchBreakdownDisclosure } from "@/components/schools/match-breakdown-disclosure"
 import { SchoolAdminControls } from "@/components/schools/school-admin-controls"
 import { Card } from "@/components/ui/card"
-import { setSchoolStarAction } from "@/lib/workspace/school-actions"
+import { Link } from "@/i18n/navigation"
+import { setSchoolShortlistAction, setSchoolStarAction } from "@/lib/workspace/school-actions"
 import type { SchoolCatalogItem } from "@/lib/workspace/school-catalog"
 
 type SchoolCardProps = {
   readonly locale: string
-  readonly readOnly: boolean
   readonly role: "student" | "parent" | "admin"
   readonly school: SchoolCatalogItem
   readonly showBreakdown: boolean
   readonly studentId: string
+  readonly detailHref: string
 }
 
 export async function SchoolCard({
+  detailHref,
   locale,
-  readOnly,
   role,
   school,
   showBreakdown,
@@ -27,6 +28,9 @@ export async function SchoolCard({
   const t = await getTranslations("schools")
   const format = await getFormatter()
   const starAction = setSchoolStarAction.bind(null, locale)
+  const shortlistAction = setSchoolShortlistAction.bind(null, locale)
+  const canMutate = role === "student"
+
   return (
     <Card className="flex h-full flex-col overflow-hidden">
       <div className="bg-blue-700 p-5 text-white">
@@ -34,24 +38,22 @@ export async function SchoolCard({
           <span className="rounded-2xl bg-white/20 px-3 py-2 text-2xl font-black backdrop-blur">
             {t("match", { percent: school.matchPercent })}
           </span>
-          {!readOnly && role === "student" && (
-            <form action={starAction}>
-              <input name="schoolId" type="hidden" value={school.id} />
-              <input name="studentId" type="hidden" value={studentId} />
-              <input name="starred" type="hidden" value={String(!school.starred)} />
-              <button
-                aria-label={t(school.starred ? "unstar" : "star")}
-                className="grid size-11 place-items-center rounded-full bg-white text-red-500 shadow-lg"
-                type="submit"
-              >
-                <Heart className="size-5" fill={school.starred ? "currentColor" : "none"} />
-              </button>
-            </form>
-          )}
+          <div className="flex flex-wrap justify-end gap-2">
+            {school.adminPick && (
+              <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-black">
+                {t("actions.recommended")}
+              </span>
+            )}
+            {school.finalSeven && (
+              <span className="rounded-full bg-amber-300 px-3 py-1 text-xs font-black text-amber-950">
+                {t("actions.finalSeven")}
+              </span>
+            )}
+          </div>
         </div>
-        <h2 className="mt-8 text-2xl font-black">{school.name}</h2>
+        <h2 className="mt-6 text-2xl font-black">{school.name}</h2>
         <p className="mt-2 flex items-center gap-2 text-sm font-bold text-blue-50">
-          <MapPin className="size-4" />
+          <MapPin aria-hidden="true" className="size-4" />
           {[school.city, school.state].filter(Boolean).join(", ") || t("locationUnknown")}
         </p>
       </div>
@@ -72,12 +74,8 @@ export async function SchoolCard({
             <p className="mt-1 text-sm leading-6 text-slate-700">{school.matchReason}</p>
           </div>
         )}
-        {showBreakdown && (
-          <>
-            <MatchBreakdownDisclosure schoolId={school.id} studentId={studentId} />
-            <CompareToggle schoolId={school.id} />
-          </>
-        )}
+        {showBreakdown && <MatchBreakdownDisclosure schoolId={school.id} studentId={studentId} />}
+        <CompareToggle schoolId={school.id} />
         <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
           <div>
             <dt className="font-bold text-slate-500">{t("enrollment")}</dt>
@@ -94,17 +92,64 @@ export async function SchoolCard({
             </dd>
           </div>
         </dl>
-        {school.websiteUrl && (
-          <a
-            className="mt-5 inline-flex min-h-11 items-center gap-2 font-black text-blue-700"
-            href={school.websiteUrl}
-            rel="noreferrer"
-            target="_blank"
+
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          {canMutate && (
+            <form action={starAction}>
+              <input name="schoolId" type="hidden" value={school.id} />
+              <input name="studentId" type="hidden" value={studentId} />
+              <input name="value" type="hidden" value={String(!school.starred)} />
+              <button
+                className={`inline-flex min-h-11 items-center gap-2 rounded-xl px-4 text-sm font-black ${
+                  school.starred
+                    ? "bg-red-50 text-red-600"
+                    : "border border-slate-200 text-slate-700"
+                }`}
+                type="submit"
+              >
+                <Heart className="size-4" fill={school.starred ? "currentColor" : "none"} />
+                {t(school.starred ? "actions.saved" : "actions.save")}
+              </button>
+            </form>
+          )}
+          {canMutate && (
+            <form action={shortlistAction}>
+              <input name="schoolId" type="hidden" value={school.id} />
+              <input name="studentId" type="hidden" value={studentId} />
+              <input name="value" type="hidden" value={String(!school.shortlisted)} />
+              <button
+                className={`inline-flex min-h-11 items-center gap-2 rounded-xl px-4 text-sm font-black ${
+                  school.shortlisted
+                    ? "bg-blue-50 text-blue-700"
+                    : "border border-slate-200 text-slate-700"
+                }`}
+                type="submit"
+              >
+                <Bookmark className="size-4" fill={school.shortlisted ? "currentColor" : "none"} />
+                {t(school.shortlisted ? "actions.inShortlist" : "actions.shortlist")}
+              </button>
+            </form>
+          )}
+          <Link
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-blue-600 px-4 text-sm font-black text-white"
+            href={detailHref}
           >
-            {t("website")}
-            <ExternalLink className="size-4" />
-          </a>
-        )}
+            {t("actions.viewDetails")}
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
+          {school.websiteUrl && (
+            <a
+              className="inline-flex min-h-11 items-center gap-2 px-2 text-sm font-black text-blue-700"
+              href={school.websiteUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {t("website")}
+              <ExternalLink aria-hidden="true" className="size-4" />
+            </a>
+          )}
+        </div>
+
         {role === "admin" && (
           <SchoolAdminControls locale={locale} school={school} studentId={studentId} />
         )}

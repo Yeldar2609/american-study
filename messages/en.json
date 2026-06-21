@@ -93,6 +93,18 @@
     "progress": "Application progress",
     "progressSummary": "{completed} of {total} tasks approved",
     "nextMilestone": "Next milestone",
+    "schoolsCard": {
+      "label": "Your schools",
+      "title": "School list",
+      "recommended": "Recommended",
+      "saved": "Saved",
+      "shortlist": "Shortlist",
+      "nextDeadline": "Next deadline: {date}",
+      "noDeadline": "No school deadlines yet",
+      "review": "Review your schools",
+      "waiting": "Waiting for consultant picks",
+      "waitingBody": "Your school recommendations will appear here after your consultant prepares them."
+    },
     "lockedTitle": "Full application roadmap",
     "lockedDescription": "Unlock guided essays, interview practice, document checklists, and consultant calls in one place.",
     "status": {
@@ -166,11 +178,92 @@
     "website": "Open school website",
     "star": "Add to favorites",
     "unstar": "Remove from favorites",
+    "studentTitle": "Your school list",
+    "studentSubtitle": "Explore schools, save your favorites, and compare your best options.",
+    "packageTrial": "Trial plan",
+    "packagePaid": "Full access",
+    "yes": "Yes",
+    "no": "No",
+    "next": {
+      "trialWaiting": "Your consultant is preparing your school matches.",
+      "trialReview": "Review and save the schools your consultant picked for you.",
+      "paidBrowse": "Browse the full database and build your shortlist."
+    },
+    "counts": {
+      "recommended": "Recommended",
+      "saved": "Saved",
+      "shortlist": "Shortlist",
+      "final": "Final list"
+    },
+    "sections": {
+      "recommended": "Recommended by your consultant",
+      "recommendedBody": "Schools your consultant chose for you, with the reason each one fits.",
+      "recommendedEmptyPaid": "No recommendations yet. Browse the full database below and build your own list.",
+      "noneYet": "Nothing here yet",
+      "saved": "Saved schools",
+      "savedBody": "Schools you saved. Tap Save on any school to add it here.",
+      "savedEmpty": "Save a school to keep it here for quick access.",
+      "shortlist": "Shortlist",
+      "shortlistBody": "Your strongest options, ready to discuss with your consultant.",
+      "shortlistEmpty": "Add a school to your shortlist when you are seriously considering it.",
+      "final": "Final list",
+      "finalBody": "The final schools selected with your consultant.",
+      "all": "All schools",
+      "allBody": "Search and filter every school in the database."
+    },
+    "waiting": {
+      "title": "Waiting for consultant picks",
+      "body": "Your school recommendations will appear here after your consultant prepares them."
+    },
+    "lockedAll": {
+      "title": "The full database unlocks with your full package",
+      "body": "You can view and compare the schools your consultant selected now. The full searchable database opens once your package is activated.",
+      "cta": "Talk to your consultant to unlock the full database."
+    },
+    "actions": {
+      "save": "Save",
+      "saved": "Saved",
+      "shortlist": "Shortlist",
+      "inShortlist": "In shortlist",
+      "viewDetails": "View details",
+      "recommended": "Recommended",
+      "finalSeven": "Final list"
+    },
+    "detail": {
+      "back": "Back to schools",
+      "notListed": "Not listed yet",
+      "countryValue": "United States",
+      "aidYes": "Offered",
+      "aidNo": "Not offered",
+      "openRoadmap": "Open application steps",
+      "nicheProfile": "Open Niche profile",
+      "fields": {
+        "country": "Country",
+        "setting": "Setting",
+        "body": "Student body",
+        "grades": "Grades",
+        "affiliation": "Affiliation",
+        "enrollment": "Enrollment",
+        "boarding": "Boarding students",
+        "international": "International students",
+        "tuition": "Boarding tuition",
+        "aid": "Financial aid",
+        "acceptance": "Acceptance rate",
+        "ssat": "Average SSAT percentile",
+        "niche": "Niche grade",
+        "deadline": "Application deadline",
+        "status": "Application status",
+        "notes": "Notes"
+      }
+    },
     "filters": {
       "search": "Search schools or strengths",
       "state": "All states",
       "setting": "All settings",
       "body": "All student bodies",
+      "aid": "Financial aid",
+      "aidYes": "Offers aid",
+      "aidNo": "No aid",
       "apply": "Apply filters"
     },
     "settings": {
@@ -227,12 +320,17 @@
       "attribute": "Attribute",
       "rows": {
         "match": "Overall match",
+        "location": "Location",
         "tuition": "Boarding tuition",
+        "enrollment": "Enrollment",
         "aid": "Financial aid",
         "setting": "Setting",
         "body": "Student body",
         "deadline": "SAO deadline",
-        "strengths": "Strengths"
+        "strengths": "Strengths",
+        "status": "Application status",
+        "saved": "Saved",
+        "shortlist": "Shortlisted"
       },
       "aid": {
         "yes": "Offered",

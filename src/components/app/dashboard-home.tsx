@@ -1,6 +1,7 @@
 import { CalendarClock, CircleCheck, Clock3, Sparkles } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
 import { NotificationsPanel } from "@/components/app/notifications-panel"
+import { StudentSchoolsSummary } from "@/components/app/student-schools-summary"
 import { LockedCard } from "@/components/locked-card"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
@@ -131,6 +132,9 @@ export async function DashboardHome({ data, locale, role }: DashboardHomeProps) 
             </section>
           )}
         </>
+      )}
+      {role === "student" && data.students[0] !== undefined && (
+        <StudentSchoolsSummary role={role} studentId={data.students[0].id} />
       )}
       <NotificationsPanel locale={locale} />
     </>
