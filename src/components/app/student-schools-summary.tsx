@@ -3,10 +3,11 @@ import { getFormatter, getTranslations } from "next-intl/server"
 import type { ReactNode } from "react"
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
-import { getSchoolCatalog } from "@/lib/workspace/school-catalog"
+import { getStudentSchoolSummary } from "@/lib/workspace/school-catalog"
 
 // Schools snapshot for the student dashboard: recommended / saved / shortlisted
-// counts, the next school deadline, and one clear call to action.
+// counts, the next school deadline, and one clear call to action. Uses a
+// counts-only RPC so the home page never pays for full catalog match scoring.
 export async function StudentSchoolsSummary({
   role,
   studentId,
@@ -16,22 +17,12 @@ export async function StudentSchoolsSummary({
 }) {
   const t = await getTranslations("app.schoolsCard")
   const format = await getFormatter()
-  const result = await getSchoolCatalog(studentId)
+  const result = await getStudentSchoolSummary(studentId)
   if (result.kind !== "ready") {
     return null
   }
 
-  const items = result.items
-  const recommended = items.filter((school) => school.adminPick)
-  const saved = items.filter((school) => school.starred)
-  const shortlist = items.filter((school) => school.shortlisted)
-  const nextDeadline = items
-    .filter(
-      (school) =>
-        school.saoDeadline !== null && (school.adminPick || school.starred || school.shortlisted),
-    )
-    .map((school) => school.saoDeadline as string)
-    .toSorted()[0]
+  const { nextDeadline, recommendedCount, savedCount, shortlistCount } = result.summary
 
   return (
     <section className="mt-4">
@@ -46,31 +37,31 @@ export async function StudentSchoolsSummary({
           </div>
         </div>
 
-        {recommended.length === 0 ? (
+        {recommendedCount === 0 ? (
           <p className="mt-4 leading-7 text-slate-600">{t("waitingBody")}</p>
         ) : (
           <dl className="mt-5 grid grid-cols-3 gap-3">
             <SummaryStat
               icon={<Sparkles className="size-4" />}
               label={t("recommended")}
-              value={recommended.length}
+              value={recommendedCount}
             />
             <SummaryStat
               icon={<Heart className="size-4" />}
               label={t("saved")}
-              value={saved.length}
+              value={savedCount}
             />
             <SummaryStat
               icon={<Bookmark className="size-4" />}
               label={t("shortlist")}
-              value={shortlist.length}
+              value={shortlistCount}
             />
           </dl>
         )}
 
         <p className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-slate-600">
           <CalendarClock aria-hidden="true" className="size-4 text-blue-700" />
-          {nextDeadline === undefined
+          {nextDeadline === null
             ? t("noDeadline")
             : t("nextDeadline", {
                 date: format.dateTime(new Date(`${nextDeadline}T00:00:00`), {
@@ -83,7 +74,7 @@ export async function StudentSchoolsSummary({
           className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-blue-600 px-5 text-sm font-black text-white"
           href={`/app/${role}?section=schools`}
         >
-          {recommended.length === 0 ? t("waiting") : t("review")}
+          {recommendedCount === 0 ? t("waiting") : t("review")}
           <ArrowRight aria-hidden="true" className="size-4" />
         </Link>
       </Card>

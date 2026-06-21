@@ -39,6 +39,10 @@ const catalogMatchBulk = readFileSync(
   "supabase/migrations/202606220006_catalog_match_and_bulk_tasks.sql",
   "utf8",
 )
+const schoolSummary = readFileSync(
+  "supabase/migrations/202606220007_student_school_summary.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -232,6 +236,21 @@ describe("Supabase migration contract", () => {
     )
     expect(catalogMatchBulk).toContain(
       "grant execute on function public.admin_bulk_create_task(uuid[], text, text, text, text, date, text)\n  to authenticated",
+    )
+  })
+
+  it("answers the dashboard schools summary with one guarded aggregate query", () => {
+    expect(schoolSummary).toContain("create or replace function public.get_student_school_summary")
+    expect(schoolSummary).toContain("security definer")
+    expect(schoolSummary).toContain("set search_path = ''")
+    expect(schoolSummary).toContain("from public.parents_students as link")
+    expect(schoolSummary).toContain("count(*) filter (where pick.admin_pick)")
+    expect(schoolSummary).toContain("from public.student_school_picks as pick")
+    expect(schoolSummary).toContain(
+      "revoke execute on function public.get_student_school_summary(uuid) from public, anon",
+    )
+    expect(schoolSummary).toContain(
+      "grant execute on function public.get_student_school_summary(uuid) to authenticated",
     )
   })
 

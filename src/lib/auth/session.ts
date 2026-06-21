@@ -1,5 +1,6 @@
 import type { User } from "@supabase/supabase-js"
 import { redirect } from "next/navigation"
+import { cache } from "react"
 import {
   authenticatedRoleDestination,
   type LegacyTransitionProfile,
@@ -10,6 +11,20 @@ import {
   type UserRole,
 } from "@/lib/auth/access"
 import { createClient } from "@/lib/supabase/server"
+
+// One authenticated-user read per request. getUser() verifies the JWT with the
+// auth server, so without this it ran 2-3x per page (requireUser + dashboard
+// data + role guard). React cache() memoizes it for the render.
+export const getRequestAuth = cache(
+  async (): Promise<{ readonly configured: boolean; readonly user: User | null }> => {
+    const supabase = await createClient()
+    if (supabase === null) {
+      return { configured: false, user: null }
+    }
+    const { data } = await supabase.auth.getUser()
+    return { configured: true, user: data.user }
+  },
+)
 
 export type AuthIdentity = {
   readonly app_metadata: unknown
@@ -63,19 +78,17 @@ export async function resolveUserProfile(
 }
 
 export async function requireUser(locale: string): Promise<User> {
-  const supabase = await createClient()
+  const { configured, user } = await getRequestAuth()
 
-  if (supabase === null) {
+  if (!configured) {
     redirect(`/${locale}/login?error=configuration`)
   }
 
-  const { data } = await supabase.auth.getUser()
-
-  if (data.user === null) {
+  if (user === null) {
     redirect(`/${locale}/login?next=/${locale}/app`)
   }
 
-  return data.user
+  return user
 }
 
 export async function requireAuthenticatedUser(locale: string): Promise<AuthenticatedUser | null> {

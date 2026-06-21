@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { getRequestAuth } from "@/lib/auth/session"
 import { createClient } from "@/lib/supabase/server"
 
 const dashboardStudentSchema = z.object({
@@ -83,18 +84,21 @@ export function summarizeDashboard(students: readonly DashboardStudent[]): Dashb
 }
 
 export async function getDashboardData(): Promise<DashboardDataResult> {
+  const auth = await getRequestAuth()
+  if (!auth.configured) {
+    return { kind: "configuration" }
+  }
+  if (auth.user === null) {
+    return { kind: "error" }
+  }
+
   const supabase = await createClient()
   if (supabase === null) {
     return { kind: "configuration" }
   }
 
-  const { data: user } = await supabase.auth.getUser()
-  if (user.user === null) {
-    return { kind: "error" }
-  }
-
   const [viewerResult, studentResult] = await Promise.all([
-    supabase.from("users").select("full_name").eq("id", user.user.id).maybeSingle(),
+    supabase.from("users").select("full_name").eq("id", auth.user.id).maybeSingle(),
     supabase.rpc("get_dashboard_students"),
   ])
   const viewer = viewerSchema.safeParse(viewerResult.data)

@@ -141,6 +141,53 @@ export function filterSchoolCatalog(
   })
 }
 
+const schoolSummarySchema = z.object({
+  next_deadline: z.string().nullable(),
+  recommended_count: z.coerce.number().int().nonnegative(),
+  saved_count: z.coerce.number().int().nonnegative(),
+  shortlist_count: z.coerce.number().int().nonnegative(),
+})
+
+export type StudentSchoolSummary = {
+  readonly nextDeadline: string | null
+  readonly recommendedCount: number
+  readonly savedCount: number
+  readonly shortlistCount: number
+}
+
+// Lightweight counts + next deadline for the dashboard card. Avoids the full
+// catalog load (which computes a match score for every school) on the home page.
+export async function getStudentSchoolSummary(
+  studentId: string,
+): Promise<{ kind: "ready"; summary: StudentSchoolSummary } | { kind: "configuration" | "error" }> {
+  const supabase = await createClient()
+  if (supabase === null) {
+    return { kind: "configuration" }
+  }
+
+  const { data, error } = await supabase.rpc("get_student_school_summary", {
+    target_student_id: studentId,
+  })
+  if (error !== null) {
+    return { kind: "error" }
+  }
+
+  const row = Array.isArray(data) ? data[0] : data
+  const parsed = schoolSummarySchema.safeParse(row)
+  if (!parsed.success) {
+    return { kind: "error" }
+  }
+  return {
+    kind: "ready",
+    summary: {
+      nextDeadline: parsed.data.next_deadline,
+      recommendedCount: parsed.data.recommended_count,
+      savedCount: parsed.data.saved_count,
+      shortlistCount: parsed.data.shortlist_count,
+    },
+  }
+}
+
 export async function getSchoolCatalog(studentId: string) {
   const supabase = await createClient()
   if (supabase === null) {
