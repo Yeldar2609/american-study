@@ -12,18 +12,25 @@ const adminSchoolRowSchema = z.object({
   admissions_phone: z.string().nullable(),
   affiliation: z.string().nullable(),
   ap_courses: z.array(z.string()).nullable(),
+  application_fee_usd: z.coerce.number().int().nullable(),
+  athletic_conference: z.string().nullable(),
   avg_class_size: z.coerce.number().int().nullable(),
+  avg_sat: z.coerce.number().int().nullable(),
   avg_ssat_pctile: z.coerce.number().nullable(),
   boarding_tuition_usd: z.coerce.number().int().nullable(),
   campus_acres: z.coerce.number().int().nullable(),
   city: z.string().nullable(),
   clubs: z.array(z.string()).nullable(),
   college_matriculation: z.string().nullable(),
+  dorm_count: z.coerce.number().int().nullable(),
+  endowment_usd: z.coerce.number().int().nullable(),
   enrollment: z.coerce.number().int().nullable(),
   extracurriculars: z.array(z.string()).nullable(),
+  faculty_count: z.coerce.number().int().nullable(),
   financial_aid_notes: z.string().nullable(),
   founded_year: z.coerce.number().int().nullable(),
   grades: z.string().nullable(),
+  head_of_school: z.string().nullable(),
   ib_offered: z.boolean().nullable(),
   id: z.uuid(),
   is_partner: z.boolean(),
@@ -36,6 +43,7 @@ const adminSchoolRowSchema = z.object({
   offers_financial_aid: z.boolean().nullable(),
   pct_boarding: z.coerce.number().nullable(),
   pct_international: z.coerce.number().nullable(),
+  percent_students_of_color: z.coerce.number().int().nullable(),
   religious_affiliation: z.string().nullable(),
   setting: z.enum(["urban", "suburban", "rural"]).nullable(),
   sports: z.array(z.string()).nullable(),
@@ -54,18 +62,25 @@ export type AdminSchool = {
   readonly admissionsPhone: string | null
   readonly affiliation: string | null
   readonly apCourses: readonly string[]
+  readonly applicationFeeUsd: number | null
+  readonly athleticConference: string | null
   readonly avgClassSize: number | null
+  readonly avgSat: number | null
   readonly avgSsatPctile: number | null
   readonly boardingTuitionUsd: number | null
   readonly campusAcres: number | null
   readonly city: string | null
   readonly clubs: readonly string[]
   readonly collegeMatriculation: string | null
+  readonly dormCount: number | null
+  readonly endowmentUsd: number | null
   readonly enrollment: number | null
   readonly extracurriculars: readonly string[]
+  readonly facultyCount: number | null
   readonly financialAidNotes: string | null
   readonly foundedYear: number | null
   readonly grades: string | null
+  readonly headOfSchool: string | null
   readonly ibOffered: boolean | null
   readonly id: string
   readonly isPartner: boolean
@@ -78,6 +93,7 @@ export type AdminSchool = {
   readonly offersFinancialAid: boolean | null
   readonly pctBoarding: number | null
   readonly pctInternational: number | null
+  readonly percentStudentsOfColor: number | null
   readonly religiousAffiliation: string | null
   readonly setting: "urban" | "suburban" | "rural" | null
   readonly sports: readonly string[]
@@ -132,18 +148,25 @@ export async function getAdminSchool(schoolId: string): Promise<AdminSchoolResul
       admissionsPhone: row.admissions_phone,
       affiliation: row.affiliation,
       apCourses: row.ap_courses ?? [],
+      applicationFeeUsd: row.application_fee_usd,
+      athleticConference: row.athletic_conference,
       avgClassSize: row.avg_class_size,
+      avgSat: row.avg_sat,
       avgSsatPctile: row.avg_ssat_pctile,
       boardingTuitionUsd: row.boarding_tuition_usd,
       campusAcres: row.campus_acres,
       city: row.city,
       clubs: row.clubs ?? [],
       collegeMatriculation: row.college_matriculation,
+      dormCount: row.dorm_count,
+      endowmentUsd: row.endowment_usd,
       enrollment: row.enrollment,
       extracurriculars: row.extracurriculars ?? [],
+      facultyCount: row.faculty_count,
       financialAidNotes: row.financial_aid_notes,
       foundedYear: row.founded_year,
       grades: row.grades,
+      headOfSchool: row.head_of_school,
       ibOffered: row.ib_offered,
       id: row.id,
       isPartner: row.is_partner,
@@ -156,6 +179,7 @@ export async function getAdminSchool(schoolId: string): Promise<AdminSchoolResul
       offersFinancialAid: row.offers_financial_aid,
       pctBoarding: row.pct_boarding,
       pctInternational: row.pct_international,
+      percentStudentsOfColor: row.percent_students_of_color,
       religiousAffiliation: row.religious_affiliation,
       setting: row.setting,
       sports: row.sports ?? [],

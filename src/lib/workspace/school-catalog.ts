@@ -188,16 +188,24 @@ const schoolExtrasRowSchema = z.object({
   admissions_email: z.string().nullable(),
   admissions_phone: z.string().nullable(),
   ap_courses: z.array(z.string()).nullable(),
+  application_fee_usd: z.coerce.number().int().nullable(),
+  athletic_conference: z.string().nullable(),
   avg_class_size: z.coerce.number().int().nullable(),
+  avg_sat: z.coerce.number().int().nullable(),
   campus_acres: z.coerce.number().int().nullable(),
   clubs: z.array(z.string()).nullable(),
   college_matriculation: z.string().nullable(),
+  dorm_count: z.coerce.number().int().nullable(),
+  endowment_usd: z.coerce.number().int().nullable(),
   extracurriculars: z.array(z.string()).nullable(),
+  faculty_count: z.coerce.number().int().nullable(),
   financial_aid_notes: z.string().nullable(),
   founded_year: z.coerce.number().int().nullable(),
+  head_of_school: z.string().nullable(),
   ib_offered: z.boolean().nullable(),
   languages_offered: z.array(z.string()).nullable(),
   notable_alumni: z.string().nullable(),
+  percent_students_of_color: z.coerce.number().int().nullable(),
   religious_affiliation: z.string().nullable(),
   sports: z.array(z.string()).nullable(),
   student_teacher_ratio: z.string().nullable(),
@@ -209,16 +217,24 @@ export type SchoolExtras = {
   readonly admissionsEmail: string | null
   readonly admissionsPhone: string | null
   readonly apCourses: readonly string[]
+  readonly applicationFeeUsd: number | null
+  readonly athleticConference: string | null
   readonly avgClassSize: number | null
+  readonly avgSat: number | null
   readonly campusAcres: number | null
   readonly clubs: readonly string[]
   readonly collegeMatriculation: string | null
+  readonly dormCount: number | null
+  readonly endowmentUsd: number | null
   readonly extracurriculars: readonly string[]
+  readonly facultyCount: number | null
   readonly financialAidNotes: string | null
   readonly foundedYear: number | null
+  readonly headOfSchool: string | null
   readonly ibOffered: boolean | null
   readonly languagesOffered: readonly string[]
   readonly notableAlumni: string | null
+  readonly percentStudentsOfColor: number | null
   readonly religiousAffiliation: string | null
   readonly sports: readonly string[]
   readonly studentTeacherRatio: string | null
@@ -257,16 +273,24 @@ export async function getSchoolExtras(
     admissionsEmail: parsed.data.admissions_email,
     admissionsPhone: parsed.data.admissions_phone,
     apCourses: parsed.data.ap_courses ?? [],
+    applicationFeeUsd: parsed.data.application_fee_usd,
+    athleticConference: parsed.data.athletic_conference,
     avgClassSize: parsed.data.avg_class_size,
+    avgSat: parsed.data.avg_sat,
     campusAcres: parsed.data.campus_acres,
     clubs: parsed.data.clubs ?? [],
     collegeMatriculation: parsed.data.college_matriculation,
+    dormCount: parsed.data.dorm_count,
+    endowmentUsd: parsed.data.endowment_usd,
     extracurriculars: parsed.data.extracurriculars ?? [],
+    facultyCount: parsed.data.faculty_count,
     financialAidNotes: parsed.data.financial_aid_notes,
     foundedYear: parsed.data.founded_year,
+    headOfSchool: parsed.data.head_of_school,
     ibOffered: parsed.data.ib_offered,
     languagesOffered: parsed.data.languages_offered ?? [],
     notableAlumni: parsed.data.notable_alumni,
+    percentStudentsOfColor: parsed.data.percent_students_of_color,
     religiousAffiliation: parsed.data.religious_affiliation,
     sports: parsed.data.sports ?? [],
     studentTeacherRatio: parsed.data.student_teacher_ratio,

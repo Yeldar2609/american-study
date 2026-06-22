@@ -75,6 +75,11 @@ export function SchoolEditor({ backHref, locale, school }: SchoolEditorProps) {
             name="accreditation"
             value={school.accreditation}
           />
+          <TextField
+            label={t("fields.headOfSchool")}
+            name="headOfSchool"
+            value={school.headOfSchool}
+          />
         </Group>
 
         <Group title={t("groups.size")}>
@@ -110,6 +115,36 @@ export function SchoolEditor({ backHref, locale, school }: SchoolEditorProps) {
             name="avgSsatPctile"
             step="0.01"
             value={school.avgSsatPctile}
+          />
+          <NumberField label={t("fields.avgSat")} name="avgSat" value={school.avgSat} />
+          <NumberField
+            label={t("fields.facultyCount")}
+            min={0}
+            name="facultyCount"
+            value={school.facultyCount}
+          />
+          <NumberField
+            label={t("fields.percentStudentsOfColor")}
+            name="percentStudentsOfColor"
+            value={school.percentStudentsOfColor}
+          />
+          <NumberField
+            label={t("fields.endowmentUsd")}
+            min={0}
+            name="endowmentUsd"
+            value={school.endowmentUsd}
+          />
+          <NumberField
+            label={t("fields.applicationFeeUsd")}
+            min={0}
+            name="applicationFeeUsd"
+            value={school.applicationFeeUsd}
+          />
+          <NumberField
+            label={t("fields.dormCount")}
+            min={0}
+            name="dormCount"
+            value={school.dormCount}
           />
           <NumberField
             label={t("fields.pctBoarding")}
@@ -154,6 +189,11 @@ export function SchoolEditor({ backHref, locale, school }: SchoolEditorProps) {
             label={t("fields.extracurriculars")}
             name="extracurriculars"
             values={school.extracurriculars}
+          />
+          <TextField
+            label={t("fields.athleticConference")}
+            name="athleticConference"
+            value={school.athleticConference}
           />
           <ArrayField label={t("fields.strengths")} name="strengths" values={school.strengths} />
         </Group>

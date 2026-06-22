@@ -87,6 +87,10 @@ const publicCollections = readFileSync(
   "supabase/migrations/202606220021_public_collections.sql",
   "utf8",
 )
+const schoolProfileFieldsExtra = readFileSync(
+  "supabase/migrations/202606220022_school_profile_fields_extra.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -477,6 +481,23 @@ describe("Supabase migration contract", () => {
     expect(publicCollections).toContain("create policy school_collection_members_public_select")
     expect(publicCollections).toContain("for select")
     expect(publicCollections).toContain("using (is_public)")
+  })
+
+  it("adds eight more public school facets to the extras RPC", () => {
+    expect(schoolProfileFieldsExtra).toContain("add column if not exists head_of_school text")
+    expect(schoolProfileFieldsExtra).toContain("add column if not exists endowment_usd bigint")
+    expect(schoolProfileFieldsExtra).toContain("add column if not exists avg_sat integer")
+    expect(schoolProfileFieldsExtra).toContain(
+      "add column if not exists percent_students_of_color integer",
+    )
+    expect(schoolProfileFieldsExtra).toContain("drop function if exists public.get_school_extras")
+    expect(schoolProfileFieldsExtra).toContain("create function public.get_school_extras")
+    expect(schoolProfileFieldsExtra).toContain("private.can_access_student(target_student_id)")
+    expect(schoolProfileFieldsExtra).toContain("s.head_of_school")
+    // Still never exposes the admin-only operational columns.
+    expect(schoolProfileFieldsExtra).not.toContain("s.niche_rank")
+    expect(schoolProfileFieldsExtra).not.toContain("s.is_partner")
+    expect(schoolProfileFieldsExtra).not.toContain("s.last_checked_in")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

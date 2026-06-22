@@ -1,0 +1,2982 @@
+[
+  {
+    "city": "Birmingham",
+    "fieldsFilled": 18,
+    "name": "Alabama School of Fine Arts",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Alabama_School_of_Fine_Arts",
+      "https://www.asfaschool.org/",
+      "https://www.asfaschool.org/apply/boarding"
+    ],
+    "state": "AL"
+  },
+  {
+    "city": "Mobile",
+    "fieldsFilled": 20,
+    "name": "Alabama School of Math and Science",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Alabama_School_of_Mathematics_and_Science",
+      "https://www.asms.net/",
+      "https://encyclopediaofalabama.org/article/alabama-school-of-mathematics-and-science-asms/"
+    ],
+    "state": "AL"
+  },
+  {
+    "city": "Indian Springs Village",
+    "fieldsFilled": 24,
+    "name": "Indian Springs School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Indian_Springs_School",
+      "https://www.indiansprings.org/admission/tuition-and-financial-aid",
+      "https://www.indiansprings.org/admission"
+    ],
+    "state": "AL"
+  },
+  {
+    "city": "Camp Hill",
+    "fieldsFilled": 19,
+    "name": "Southern Preparatory Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Southern_Preparatory_Academy",
+      "https://southernprepacademy.org/admissions/tuition/",
+      "https://southernprepacademy.org/"
+    ],
+    "state": "AL"
+  },
+  {
+    "city": "Cullman",
+    "fieldsFilled": 23,
+    "name": "St. Bernard Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Bernard_Preparatory_School",
+      "https://www.stbernardprep.com/",
+      "https://www.stbernardprep.com/admissions/tuition-financial-aid"
+    ],
+    "state": "AL"
+  },
+  {
+    "city": "Sitka",
+    "fieldsFilled": 18,
+    "name": "Mt. Edgecumbe High School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Mt._Edgecumbe_High_School",
+      "https://www.mehs.us/about_us",
+      "https://education.alaska.gov/compass/ParentPortal/SchoolProfile?SchoolID=980000"
+    ],
+    "state": "AK"
+  },
+  {
+    "city": "Sedona",
+    "fieldsFilled": 22,
+    "name": "Verde Valley School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Verde_Valley_School",
+      "https://www.vvsaz.org/",
+      "https://www.vvsaz.org/admissions/tuition--financial-aid",
+      "https://www.vvsaz.org/explore/contact-us"
+    ],
+    "state": "AZ"
+  },
+  {
+    "city": "Hot Springs",
+    "fieldsFilled": 17,
+    "name": "Arkansas School for Mathematics, Sciences, and the Arts",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Arkansas_School_for_Mathematics,_Sciences,_and_the_Arts",
+      "https://www.asmsa.org/",
+      "https://encyclopediaofarkansas.net/entries/arkansas-school-for-mathematics-sciences-and-the-arts-6024/"
+    ],
+    "state": "AR"
+  },
+  {
+    "city": "Subiaco",
+    "fieldsFilled": 22,
+    "name": "Subiaco Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Subiaco_Academy",
+      "https://academy.subi.org/admissions/tuition-and-financial-aid",
+      "https://www.boardingschoolreview.com/subiaco-academy-profile"
+    ],
+    "state": "AR"
+  },
+  {
+    "city": "Carlsbad",
+    "fieldsFilled": 24,
+    "name": "Army and Navy Academy",
+    "sources": [
+      "https://www.boardingschoolreview.com/army-and-navy-academy-profile",
+      "https://www.armyandnavyacademy.org/boarding-school-tuition/",
+      "https://www.armyandnavyacademy.org/admission-apply-now/"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Danville",
+    "fieldsFilled": 23,
+    "name": "The Athenian School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Athenian_School",
+      "https://www.athenian.org/",
+      "https://www.boardingschoolreview.com/the-athenian-school-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Ojai",
+    "fieldsFilled": 21,
+    "name": "Besant Hill School of Happy Valley",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Besant_Hill_School",
+      "https://www.besanthill.org/about/",
+      "https://www.boardingschoolreview.com/besant-hill-school-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Carson",
+    "fieldsFilled": 15,
+    "name": "California Academy of Mathematics and Science",
+    "sources": [
+      "https://en.wikipedia.org/wiki/California_Academy_of_Mathematics_and_Science",
+      "https://www.cde.ca.gov/schooldirectory/details?cdscode=19647251995539",
+      "https://nces.ed.gov/ccd/schoolsearch/school_detail.asp?Search=1&DistrictID=0622500&ID=062250009901"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Carpinteria",
+    "fieldsFilled": 25,
+    "name": "Cate School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Cate_School",
+      "https://www.boardingschoolreview.com/cate-school-profile",
+      "https://www.findingschool.com/cate-school"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Los Olivos",
+    "fieldsFilled": 27,
+    "name": "Dunn School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Dunn_School,_Los_Olivos",
+      "https://www.dunnschool.org/",
+      "https://www.boardingschoolreview.com/dunn-school-profile",
+      "https://www.findingschool.com/dunn-school"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "La Cañada Flintridge",
+    "fieldsFilled": 24,
+    "name": "Flintridge Sacred Heart Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Flintridge_Sacred_Heart_Academy",
+      "https://www.fsha.org/",
+      "https://www.findingschool.com/flintridge-sacred-heart-academy",
+      "https://www.usnews.com/education/k12/california/flintridge-sacred-heart-academy-305862"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Idyllwild",
+    "fieldsFilled": 19,
+    "name": "Idyllwild Arts Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Idyllwild_Arts_Academy",
+      "https://idyllwildarts.org/academy/tuition-scholarships-financial-aid/",
+      "https://www.boardingschoolreview.com/idyllwild-arts-academy-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Olympic Valley",
+    "fieldsFilled": 18,
+    "name": "Lake Tahoe Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Lake_Tahoe_Preparatory_School",
+      "https://laketahoeprep.org/admissions/tuition",
+      "https://www.findingschool.com/lake-tahoe-preparatory-school",
+      "https://www.boardingschoolreview.com/lake-tahoe-preparatory-school-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Los Olivos",
+    "fieldsFilled": 24,
+    "name": "Midland School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Midland_School,_Los_Olivos,_California",
+      "https://midland-school.org/",
+      "https://www.findingschool.com/midland-school",
+      "https://www.caisca.org/schools/midland-school"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Watsonville",
+    "fieldsFilled": 19,
+    "name": "Monte Vista Christian School",
+    "sources": [
+      "https://www.mvcs.org/academics/high-school",
+      "https://www.mvcs.org/",
+      "https://www.findingschool.com/monte-vista-christian-school",
+      "https://www.usnews.com/education/k12/california/monte-vista-christian-school-306257"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Ojai",
+    "fieldsFilled": 25,
+    "name": "Ojai Valley School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Ojai_Valley_School",
+      "https://www.boardingschoolreview.com/ojai-valley-school-profile",
+      "https://www.ovs.org/"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Anaheim",
+    "fieldsFilled": 17,
+    "name": "St. Catherine's Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Catherine's_Academy",
+      "https://www.stcatherinesacademy.org/",
+      "https://militaryschoolusa.com/california/st-catherines-academy/"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Monterey",
+    "fieldsFilled": 27,
+    "name": "Santa Catalina School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Santa_Catalina_School",
+      "https://www.santacatalina.org/",
+      "https://www.boardingschoolreview.com/santa-catalina-school-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Pebble Beach",
+    "fieldsFilled": 21,
+    "name": "Stevenson School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Stevenson_School",
+      "https://stevensonschool.org/admissions/tuition/",
+      "https://www.boardingschoolreview.com/stevenson-school-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Ojai",
+    "fieldsFilled": 25,
+    "name": "The Thacher School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Thacher_School",
+      "https://www.thacher.org/admission/affording-thacher/tuition--expenses",
+      "https://www.boardingschoolreview.com/the-thacher-school-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Ojai",
+    "fieldsFilled": 21,
+    "name": "Villanova Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Villanova_Preparatory_School",
+      "https://www.villanovaprep.org/",
+      "https://boardingschools.us/california/villanova-preparatory-school/"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Claremont",
+    "fieldsFilled": 22,
+    "name": "The Webb Schools",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Webb_Schools",
+      "https://www.webb.org/admission/tuition-and-financial-aid",
+      "https://www.boardingschoolreview.com/the-webb-schools-profile"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Portola Valley",
+    "fieldsFilled": 20,
+    "name": "Woodside Priory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Woodside_Priory_School",
+      "https://www.prioryca.org/",
+      "https://www.caisca.org/schools/woodside-priory-school"
+    ],
+    "state": "CA"
+  },
+  {
+    "city": "Carbondale",
+    "fieldsFilled": 22,
+    "name": "Colorado Rocky Mountain School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Colorado_Rocky_Mountain_School",
+      "https://www.boardingschoolreview.com/colorado-rocky-mountain-school-profile",
+      "https://boardingschools.us/colorado/rocky-mountain-school/"
+    ],
+    "state": "CO"
+  },
+  {
+    "city": "Colorado Springs",
+    "fieldsFilled": 24,
+    "name": "Fountain Valley School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Fountain_Valley_School_of_Colorado",
+      "https://www.fvs.edu/admission/tuition-aid",
+      "https://www.boardingschoolreview.com/fountain-valley-school-of-colorado-profile"
+    ],
+    "state": "CO"
+  },
+  {
+    "city": "Steamboat Springs",
+    "fieldsFilled": 21,
+    "name": "Lowell Whiteman School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Steamboat_Mountain_School",
+      "https://steamboatmountainschool.org/mission/",
+      "https://www.steamboatpilot.com/news/lowell-whiteman-school-to-become-steamboat-mountain-school/"
+    ],
+    "state": "CO"
+  },
+  {
+    "city": "Sprague",
+    "fieldsFilled": 19,
+    "name": "Academy of the Holy Family",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Academy_of_the_Holy_Family",
+      "https://ahfbaltic.com/about/school-profile/",
+      "https://www.boardingschoolreview.com/academy-of-the-holy-family-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Avon",
+    "fieldsFilled": 25,
+    "name": "Avon Old Farms School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Avon_Old_Farms_School",
+      "https://www.avonoldfarms.com",
+      "https://www.boardingschoolreview.com/avon-old-farms-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Bridgeport",
+    "fieldsFilled": 17,
+    "name": "Bridgeport International Academy",
+    "sources": [
+      "https://www.bridgeportacademy.org/school-profile/",
+      "https://en.wikipedia.org/wiki/Bridgeport_International_Academy",
+      "https://www.privateschoolreview.com/bridgeport-international-academy-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "New Milford",
+    "fieldsFilled": 23,
+    "name": "Canterbury School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Canterbury_School_(Connecticut)",
+      "https://www.cbury.org"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Cheshire",
+    "fieldsFilled": 20,
+    "name": "Cheshire Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Cheshire_Academy",
+      "https://www.boardingschoolreview.com/cheshire-academy-profile",
+      "https://cheshireacademy.org/admission/tuition-financial-aid-scholarship/"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Wallingford",
+    "fieldsFilled": 24,
+    "name": "Choate Rosemary Hall",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Choate_Rosemary_Hall",
+      "https://www.choate.edu/academics/curriculum",
+      "https://www.choate.edu/admission/tuition-and-financial-aid"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Simsbury",
+    "fieldsFilled": 22,
+    "name": "Ethel Walker School",
+    "sources": ["https://en.wikipedia.org/wiki/Ethel_Walker_School", "https://www.ethelwalker.org"],
+    "state": "CT"
+  },
+  {
+    "city": "Litchfield",
+    "fieldsFilled": 23,
+    "name": "Forman School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Forman_School",
+      "https://www.formanschool.org",
+      "https://www.formanschool.org/admissions/affording-forman",
+      "https://www.boardingschoolreview.com/forman-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "East Haddam",
+    "fieldsFilled": 17,
+    "name": "Franklin Academy",
+    "sources": [
+      "https://fa-ct.org/",
+      "https://en.wikipedia.org/wiki/Franklin_Academy_(Connecticut)",
+      "https://www.privateschoolreview.com/franklin-academy-profile/06423"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Washington",
+    "fieldsFilled": 20,
+    "name": "The Gunnery",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Frederick_Gunn_School",
+      "https://www.frederickgunn.org/admissions/affording-fgs",
+      "https://www.boardingschoolreview.com/the-frederick-gunn-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Lakeville",
+    "fieldsFilled": 29,
+    "name": "Hotchkiss School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Hotchkiss_School",
+      "https://www.hotchkiss.org/",
+      "https://www.hotchkiss.org/admission/tuition-financial-aid",
+      "https://www.hotchkiss.org/academics/college-advising/matriculation"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Lakeville",
+    "fieldsFilled": 18,
+    "name": "Indian Mountain School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Indian_Mountain_School",
+      "https://www.indianmountain.org/",
+      "https://www.boardingschoolreview.com/indian-mountain-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Kent",
+    "fieldsFilled": 27,
+    "name": "Kent School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Kent_School",
+      "https://www.kent-school.edu/",
+      "https://www.kent-school.edu/admissions/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/kent-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Windsor",
+    "fieldsFilled": 28,
+    "name": "The Loomis Chaffee School",
+    "sources": [
+      "https://www.loomischaffee.org/about/key-facts",
+      "https://en.wikipedia.org/wiki/Loomis_Chaffee_School",
+      "https://www.boardingschoolreview.com/loomis-chaffee-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Thompson",
+    "fieldsFilled": 25,
+    "name": "Marianapolis Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Marianapolis_Preparatory_School",
+      "https://www.marianapolis.org/about",
+      "https://www.boardingschoolreview.com/marianapolis-preparatory-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Kent",
+    "fieldsFilled": 20,
+    "name": "Marvelwood School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Marvelwood_School",
+      "https://www.marvelwood.org/",
+      "https://www.boardingschoolreview.com/marvelwood-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Farmington",
+    "fieldsFilled": 23,
+    "name": "Miss Porter's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Miss_Porter's_School",
+      "https://www.porters.org/tuition-and-financial-aid/",
+      "https://www.boardingschoolreview.com/miss-porter-s-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Westbrook",
+    "fieldsFilled": 18,
+    "name": "Oxford Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Oxford_Academy_(Connecticut)",
+      "https://oxfordacademy.net/",
+      "https://www.privateschoolreview.com/the-oxford-academy-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Pomfret",
+    "fieldsFilled": 26,
+    "name": "Pomfret School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Pomfret_School",
+      "https://www.pomfret.org/",
+      "https://www.boardingschoolreview.com/pomfret-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Pomfret",
+    "fieldsFilled": 20,
+    "name": "The Rectory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Rectory_School",
+      "https://www.rectoryschool.org/about/at-a-glance",
+      "https://www.boardingschoolreview.com/rectory-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Washington",
+    "fieldsFilled": 19,
+    "name": "Rumsey Hall School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Rumsey_Hall_School",
+      "https://www.rumseyhall.org/who-we-are/history",
+      "https://www.boardingschoolreview.com/rumsey-hall-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Salisbury",
+    "fieldsFilled": 31,
+    "name": "The Salisbury School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Salisbury_School",
+      "https://www.salisburyschool.org/become-a-knight/tuition-fees",
+      "https://www.boardingschoolreview.com/salisbury-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "South Kent",
+    "fieldsFilled": 29,
+    "name": "South Kent School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/South_Kent_School",
+      "https://www.boardingschoolreview.com/south-kent-school-profile",
+      "https://southkentschool.org/"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Suffield",
+    "fieldsFilled": 29,
+    "name": "Suffield Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Suffield_Academy",
+      "https://www.privateschoolreview.com/suffield-academy-profile",
+      "https://www.suffieldacademy.org/"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Watertown",
+    "fieldsFilled": 31,
+    "name": "Taft School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Taft_School",
+      "https://www.boardingschoolreview.com/the-taft-school-profile",
+      "https://www.taftschool.org/admission/affording-taft/tuition-and-fees"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Simsbury",
+    "fieldsFilled": 31,
+    "name": "Westminster School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Westminster_School_(Connecticut)",
+      "https://www.boardingschoolreview.com/westminster-school-profile",
+      "https://www.westminster-school.org/admissions/affording-westminster"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Middlebury",
+    "fieldsFilled": 28,
+    "name": "Westover School",
+    "sources": [
+      "https://www.westoverschool.org/",
+      "https://www.westoverschool.org/admission/tuition-and-financial-aid",
+      "https://en.wikipedia.org/wiki/Westover_School",
+      "https://www.boardingschoolreview.com/westover-school-profile"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Bethlehem",
+    "fieldsFilled": 23,
+    "name": "The Woodhall School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Woodhall_School",
+      "https://woodhallschool.org/",
+      "https://boardingschools.us/connecticut/the-woodhall-school/"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Woodstock",
+    "fieldsFilled": 27,
+    "name": "Woodstock Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Woodstock_Academy",
+      "https://www.woodstockacademy.org/",
+      "https://www.findingschool.com/the-woodstock-academy"
+    ],
+    "state": "CT"
+  },
+  {
+    "city": "Middletown",
+    "fieldsFilled": 32,
+    "name": "St. Andrew's School (DE)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Andrew's_School_(Delaware)",
+      "https://www.standrews-de.org/admission/tuition-financialaid",
+      "https://www.boardingschoolreview.com/st-andrew-s-school-de-profile"
+    ],
+    "state": "DE"
+  },
+  {
+    "city": "Washington",
+    "fieldsFilled": 30,
+    "name": "St. Albans School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Albans_School_(Washington,_D.C.)",
+      "https://www.stalbansschool.org/",
+      "https://www.findingschool.com/st-albans-school"
+    ],
+    "state": "DC"
+  },
+  {
+    "city": "Washington",
+    "fieldsFilled": 18,
+    "name": "The SEED School",
+    "sources": [
+      "https://www.seedschooldc.org/about-us",
+      "https://en.wikipedia.org/wiki/SEED_Foundation",
+      "https://dcpcsb.org/seed-pcs-washington-dc-high-school"
+    ],
+    "state": "DC"
+  },
+  {
+    "city": "St. Petersburg",
+    "fieldsFilled": 24,
+    "name": "Admiral Farragut Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Admiral_Farragut_Academy",
+      "https://farragut.org/admissions/boarding/",
+      "https://www.boardingschoolreview.com/admiral-farragut-academy-profile"
+    ],
+    "state": "FL"
+  },
+  {
+    "city": "Jacksonville",
+    "fieldsFilled": 25,
+    "name": "The Bolles School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Bolles_School",
+      "https://www.bolles.org/about-us",
+      "https://www.privateschoolreview.com/the-bolles-school-profile"
+    ],
+    "state": "FL"
+  },
+  {
+    "city": "Bradenton",
+    "fieldsFilled": 22,
+    "name": "IMG Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/IMG_Academy",
+      "https://www.imgacademy.com/boarding-school/admissions-tuition",
+      "https://www.boardingschoolreview.com/img-academy-profile"
+    ],
+    "state": "FL"
+  },
+  {
+    "city": "Boca Raton",
+    "fieldsFilled": 24,
+    "name": "Saint Andrew's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Saint_Andrew's_School_(Florida)",
+      "https://www.saintandrews.net/",
+      "https://www.boardingschoolreview.com/saint-andrew-s-school-profile"
+    ],
+    "state": "FL"
+  },
+  {
+    "city": "Windermere",
+    "fieldsFilled": 25,
+    "name": "Windermere Preparatory School",
+    "sources": [
+      "https://www.boardingschoolreview.com/windermere-preparatory-school-profile",
+      "https://world-schools.com/schools/windermere-preparatory-school/",
+      "https://www.ibo.org/en/school/004007"
+    ],
+    "state": "FL"
+  },
+  {
+    "city": "Rome",
+    "fieldsFilled": 30,
+    "name": "Darlington School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Darlington_School",
+      "https://www.boardingschoolreview.com/darlington-school-profile",
+      "https://www.privateschoolreview.com/darlington-school-profile"
+    ],
+    "state": "GA"
+  },
+  {
+    "city": "Gainesville",
+    "fieldsFilled": 22,
+    "name": "Riverside Military Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Riverside_Military_Academy",
+      "https://www.riversideprep.org/",
+      "https://www.boardingschoolreview.com/riverside-preparatory-academy-profile"
+    ],
+    "state": "GA"
+  },
+  {
+    "city": "Hauʻula",
+    "fieldsFilled": 21,
+    "name": "Asia Pacific International School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Asia_Pacific_International_School",
+      "https://www.apishawaii.org/",
+      "https://www.boardingschoolreview.com/asia-pacific-international-school-hawaii-profile"
+    ],
+    "state": "HI"
+  },
+  {
+    "city": "Kamuela",
+    "fieldsFilled": 30,
+    "name": "Hawaii Preparatory Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Hawai%CA%BBi_Preparatory_Academy",
+      "https://www.boardingschoolreview.com/hawai-i-preparatory-academy-profile",
+      "https://www.privateschoolreview.com/hawaii-preparatory-academy-profile"
+    ],
+    "state": "HI"
+  },
+  {
+    "city": "Honolulu",
+    "fieldsFilled": 26,
+    "name": "ʻIolani School",
+    "sources": [
+      "https://www.iolani.org/",
+      "https://en.wikipedia.org/wiki/%CA%BBIolani_School",
+      "https://www.boardingschoolreview.com/iolani-school-profile"
+    ],
+    "state": "HI"
+  },
+  {
+    "city": "Honolulu",
+    "fieldsFilled": 20,
+    "name": "Kamehameha Schools",
+    "sources": [
+      "https://www.ksbe.edu/",
+      "https://en.wikipedia.org/wiki/Kamehameha_Schools",
+      "https://www.staradvertiser.com/2025/12/31/hawaii-news/kamehameha-schools-to-eliminate-tuition-for-all-students-in-2026-27/"
+    ],
+    "state": "HI"
+  },
+  {
+    "city": "Aurora",
+    "fieldsFilled": 22,
+    "name": "Illinois Mathematics and Science Academy",
+    "sources": [
+      "https://www.imsa.edu/",
+      "https://www.imsa.edu/admissions/college-matriculation/",
+      "https://en.wikipedia.org/wiki/Illinois_Mathematics_and_Science_Academy"
+    ],
+    "state": "IL"
+  },
+  {
+    "city": "Lake Forest",
+    "fieldsFilled": 29,
+    "name": "Lake Forest Academy",
+    "sources": [
+      "https://www.lfanet.org/admissions/tuition-and-aid",
+      "https://en.wikipedia.org/wiki/Lake_Forest_Academy",
+      "https://www.boardingschoolreview.com/lake-forest-academy-profile"
+    ],
+    "state": "IL"
+  },
+  {
+    "city": "Peru",
+    "fieldsFilled": 21,
+    "name": "St. Bede Academy",
+    "sources": [
+      "https://www.st-bede.com/",
+      "https://en.wikipedia.org/wiki/St._Bede_Academy",
+      "https://www.boardingschoolreview.com/saint-bede-academy-profile"
+    ],
+    "state": "IL"
+  },
+  {
+    "city": "Lake Forest",
+    "fieldsFilled": 30,
+    "name": "Woodlands Academy of the Sacred Heart",
+    "sources": [
+      "https://www.woodlandsacademy.org/",
+      "https://en.wikipedia.org/wiki/Woodlands_Academy_of_the_Sacred_Heart",
+      "https://www.boardingschoolreview.com/woodlands-academy-of-the-sacred-heart-profile",
+      "https://www.findingschool.com/woodlands-academy-of-the-sacred-heart"
+    ],
+    "state": "IL"
+  },
+  {
+    "city": "Culver",
+    "fieldsFilled": 35,
+    "name": "Culver Academies",
+    "sources": [
+      "https://www.culver.org/about/at-a-glance",
+      "https://www.culver.org/admissions/tuition-financial-aid",
+      "https://en.wikipedia.org/wiki/Culver_Academies",
+      "https://www.boardingschoolreview.com/culver-academies-profile"
+    ],
+    "state": "IN"
+  },
+  {
+    "city": "Muncie",
+    "fieldsFilled": 21,
+    "name": "Indiana Academy for Science, Mathematics, and Humanities",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Indiana_Academy_for_Science,_Mathematics,_and_Humanities",
+      "https://academy.bsu.edu/",
+      "https://academy.bsu.edu/admissions/"
+    ],
+    "state": "IN"
+  },
+  {
+    "city": "La Porte",
+    "fieldsFilled": 20,
+    "name": "La Lumiere School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/La_Lumiere_School",
+      "https://www.lalumiere.org/",
+      "https://www.boardingschoolreview.com/la-lumiere-school-profile"
+    ],
+    "state": "IN"
+  },
+  {
+    "city": "Fairfield",
+    "fieldsFilled": 23,
+    "name": "Maharishi School of the Age of Enlightenment",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Maharishi_School_(US)",
+      "https://maharishischool.org/",
+      "https://maharishischool.org/boarding/"
+    ],
+    "state": "IA"
+  },
+  {
+    "city": "West Branch",
+    "fieldsFilled": 21,
+    "name": "Scattergood Friends School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Scattergood_Friends_School",
+      "https://www.scattergood.org/",
+      "https://www.findingschool.com/scattergood-friends-school"
+    ],
+    "state": "IA"
+  },
+  {
+    "city": "Atchison",
+    "fieldsFilled": 21,
+    "name": "Maur Hill Mount Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Maur_Hill%E2%80%93Mount_Academy",
+      "https://www.mh-ma.com/",
+      "https://www.boardingschoolreview.com/maur-hill-mount-academy-mh-ma-profile"
+    ],
+    "state": "KS"
+  },
+  {
+    "city": "Salina",
+    "fieldsFilled": 16,
+    "name": "St. John's Military School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._John's_Military_School",
+      "https://militaryacademies.org/kansas/st-johns-military-school/"
+    ],
+    "state": "KS"
+  },
+  {
+    "city": "Hays",
+    "fieldsFilled": 18,
+    "name": "Thomas More Prep-Marian",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Thomas_More_Prep-Marian",
+      "https://www.tmp-m.org/",
+      "https://www.privateschoolreview.com/thomas-more-prep-marian-high-profile"
+    ],
+    "state": "KS"
+  },
+  {
+    "city": "Clay County",
+    "fieldsFilled": 17,
+    "name": "Oneida Baptist Institute",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Oneida_Baptist_Institute",
+      "https://www.oneidaschool.org/",
+      "https://www.oneidaschool.org/admissions/room-board-fees.cfm"
+    ],
+    "state": "KY"
+  },
+  {
+    "city": "Grand Coteau",
+    "fieldsFilled": 17,
+    "name": "Academy of the Sacred Heart",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Schools_of_the_Sacred_Heart_(Louisiana)",
+      "https://www.ash1821.org/",
+      "https://www.findingschool.com/academy-of-the-sacred-heart"
+    ],
+    "state": "LA"
+  },
+  {
+    "city": "Natchitoches",
+    "fieldsFilled": 25,
+    "name": "Louisiana School for Math, Science, and the Arts",
+    "sources": [
+      "https://www.lsmsa.edu/",
+      "https://en.wikipedia.org/wiki/Louisiana_School_for_Math,_Science,_and_the_Arts",
+      "https://nces.ed.gov/ccd/schoolsearch/school_detail.asp?Search=1&Miles=10&Zip=71414&ID=220001701975",
+      "https://www.usnews.com/education/best-high-schools/louisiana/districts/louisiana-school-for-math-science--the-arts/louisiana-school-for-math-science-and-the-arts-8443"
+    ],
+    "state": "LA"
+  },
+  {
+    "city": "Fryeburg",
+    "fieldsFilled": 30,
+    "name": "Fryeburg Academy",
+    "sources": [
+      "https://www.fryeburgacademy.org/",
+      "https://www.fryeburgacademy.org/admissions/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/fryeburg-academy-profile",
+      "https://www.findingschool.com/fryeburg-academy"
+    ],
+    "state": "ME"
+  },
+  {
+    "city": "Bethel",
+    "fieldsFilled": 30,
+    "name": "Gould Academy",
+    "sources": [
+      "https://www.gouldacademy.org/",
+      "https://www.gouldacademy.org/admissions/affording-gould",
+      "https://en.wikipedia.org/wiki/Gould_Academy",
+      "https://www.boardingschoolreview.com/gould-academy-profile"
+    ],
+    "state": "ME"
+  },
+  {
+    "city": "Kents Hill",
+    "fieldsFilled": 31,
+    "name": "Kents Hill School",
+    "sources": [
+      "https://www.kentshill.org/",
+      "https://www.kentshill.org/admissions/your-kents-hill-investment",
+      "https://www.boardingschoolreview.com/kents-hill-school-profile",
+      "https://www.findingschool.com/kents-hill-school"
+    ],
+    "state": "ME"
+  },
+  {
+    "city": "Limestone",
+    "fieldsFilled": 19,
+    "name": "Maine School of Science and Mathematics",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Maine_School_of_Science_and_Mathematics",
+      "https://www.mssm.org/",
+      "https://www.mssm.org/admission"
+    ],
+    "state": "ME"
+  },
+  {
+    "city": "Owings Mills",
+    "fieldsFilled": 29,
+    "name": "Garrison Forest School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Garrison_Forest_School",
+      "https://www.gfs.org/admission/admission-overview",
+      "https://www.boardingschoolreview.com/garrison-forest-school-profile"
+    ],
+    "state": "MD"
+  },
+  {
+    "city": "North Bethesda",
+    "fieldsFilled": 30,
+    "name": "Georgetown Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Georgetown_Preparatory_School",
+      "https://www.gprep.org/admissions/tuition-and-financial-aid",
+      "https://www.boardingschoolreview.com/georgetown-preparatory-school-profile"
+    ],
+    "state": "MD"
+  },
+  {
+    "city": "Owings Mills",
+    "fieldsFilled": 22,
+    "name": "McDonogh School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/McDonogh_School",
+      "https://www.mcdonogh.org/about",
+      "https://www.mcdonogh.org/academics/beyondap"
+    ],
+    "state": "MD"
+  },
+  {
+    "city": "Glencoe",
+    "fieldsFilled": 25,
+    "name": "Oldfields School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Oldfields_School",
+      "https://www.boardingschoolreview.com/oldfields-school-profile",
+      "https://www.oldfieldsschool.org/"
+    ],
+    "state": "MD"
+  },
+  {
+    "city": "St. James",
+    "fieldsFilled": 21,
+    "name": "St. James School",
+    "sources": [
+      "https://www.stjames.edu/",
+      "https://www.stjames.edu/admission/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/saint-james-school-profile"
+    ],
+    "state": "MD"
+  },
+  {
+    "city": "Stevenson",
+    "fieldsFilled": 26,
+    "name": "St. Timothy's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Timothy's_School",
+      "https://www.boardingschoolreview.com/st-timothy-s-school-profile",
+      "https://www.stt.org/"
+    ],
+    "state": "MD"
+  },
+  {
+    "city": "Colora",
+    "fieldsFilled": 27,
+    "name": "West Nottingham Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/West_Nottingham_Academy",
+      "https://www.boardingschoolreview.com/west-nottingham-academy-profile",
+      "https://wna.org/"
+    ],
+    "state": "MD"
+  },
+  {
+    "city": "Sheffield",
+    "fieldsFilled": 28,
+    "name": "Berkshire School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Berkshire_School",
+      "https://www.boardingschoolreview.com/berkshire-school-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "North Andover",
+    "fieldsFilled": 28,
+    "name": "Brooks School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Brooks_School",
+      "https://www.boardingschoolreview.com/brooks-school-profile",
+      "https://www.brooksschool.org/"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Williamstown",
+    "fieldsFilled": 19,
+    "name": "Buxton School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Buxton_School_(Massachusetts)",
+      "https://www.boardingschoolreview.com/buxton-school-profile",
+      "https://buxtonschool.org/"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Weston",
+    "fieldsFilled": 26,
+    "name": "Cambridge School of Weston",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Cambridge_School_of_Weston",
+      "https://www.boardingschoolreview.com/the-cambridge-school-of-weston-profile",
+      "https://www.csw.org/"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Waltham",
+    "fieldsFilled": 28,
+    "name": "Chapel Hill - Chauncy Hall School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Chapel_Hill_%E2%80%93_Chauncy_Hall_School",
+      "https://www.chch.org/admissions/affording/tuition",
+      "https://www.chch.org/admissions/affording/need-based-financial-aid"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Concord",
+    "fieldsFilled": 28,
+    "name": "Concord Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Concord_Academy",
+      "https://concordacademy.org/",
+      "https://concordacademy.org/admissions/apply/"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Ashburnham",
+    "fieldsFilled": 27,
+    "name": "Cushing Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Cushing_Academy",
+      "https://www.cushing.org/admissions/tuition",
+      "https://www.boardingschoolreview.com/cushing-academy-profile",
+      "https://www.cushing.org/about-us/fast-facts"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Wellesley",
+    "fieldsFilled": 27,
+    "name": "Dana Hall School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Dana_Hall_School",
+      "https://www.boardingschoolreview.com/dana-hall-school-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Deerfield",
+    "fieldsFilled": 30,
+    "name": "Deerfield Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Deerfield_Academy",
+      "https://www.boardingschoolreview.com/deerfield-academy-profile",
+      "https://en.wikipedia.org/wiki/List_of_Deerfield_Academy_alumni"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Hardwick",
+    "fieldsFilled": 25,
+    "name": "Eagle Hill School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Eagle_Hill_School",
+      "https://www.boardingschoolreview.com/eagle-hill-school-profile",
+      "https://www.eaglehill.school/"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Deerfield",
+    "fieldsFilled": 23,
+    "name": "Eaglebrook School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Eaglebrook_School",
+      "https://www.eaglebrook.org/about-us/at-a-glance",
+      "https://www.eaglebrook.org/academics/secondary-school-advising"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Southborough",
+    "fieldsFilled": 23,
+    "name": "Fay School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Fay_School",
+      "https://www.fayschool.org/about/about-fay-school",
+      "https://www.boardingschoolreview.com/fay-school-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "West Newton",
+    "fieldsFilled": 23,
+    "name": "Fessenden School",
+    "sources": [
+      "https://www.fessenden.org/",
+      "https://en.wikipedia.org/wiki/Fessenden_School",
+      "https://www.boardingschoolreview.com/the-fessenden-school-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Byfield",
+    "fieldsFilled": 25,
+    "name": "The Governor's Academy",
+    "sources": [
+      "https://www.thegovernorsacademy.org/",
+      "https://en.wikipedia.org/wiki/The_Governor's_Academy",
+      "https://www.boardingschoolreview.com/the-governor-s-academy-formerly-governor-dummer-academy-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Groton",
+    "fieldsFilled": 32,
+    "name": "Groton School",
+    "sources": [
+      "https://www.groton.org/about/fast-facts",
+      "https://en.wikipedia.org/wiki/Groton_School",
+      "https://www.groton.org/admission/tuition-affordability"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Groton",
+    "fieldsFilled": 28,
+    "name": "Lawrence Academy at Groton",
+    "sources": [
+      "https://www.lacademy.edu/",
+      "https://en.wikipedia.org/wiki/Lawrence_Academy_(Groton,_Massachusetts)",
+      "https://www.boardingschoolreview.com/lawrence-academy-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Granby",
+    "fieldsFilled": 23,
+    "name": "MacDuffie School",
+    "sources": [
+      "https://macduffie.org/tuition-and-fees",
+      "https://en.wikipedia.org/wiki/MacDuffie_School",
+      "https://www.boardingschoolreview.com/the-macduffie-school-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Concord",
+    "fieldsFilled": 30,
+    "name": "Middlesex School",
+    "sources": [
+      "https://www.mxschool.edu/about/facts-and-figures",
+      "https://en.wikipedia.org/wiki/Middlesex_School",
+      "https://www.boardingschoolreview.com/middlesex-school-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Milton",
+    "fieldsFilled": 29,
+    "name": "Milton Academy",
+    "sources": [
+      "https://www.milton.edu/about/quick-facts/",
+      "https://en.wikipedia.org/wiki/Milton_Academy",
+      "https://www.milton.edu/academics/academic-departments/modern-languages/",
+      "https://www.milton.edu/admission/college-matriculations/"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Pittsfield",
+    "fieldsFilled": 29,
+    "name": "Miss Hall's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Miss_Hall's_School",
+      "https://www.boardingschoolreview.com/miss-hall-s-school-profile",
+      "https://www.berkshireeagle.com/news/central_berkshires/all-girls-miss-halls-school-in-pittsfield-raises-76-million/article_225315e6-db09-11ee-81cf-536c4cf8acb5.html"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Northfield",
+    "fieldsFilled": 24,
+    "name": "Northfield Mount Hermon School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Northfield_Mount_Hermon_School",
+      "https://www.nmhschool.org"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Andover",
+    "fieldsFilled": 26,
+    "name": "Phillips Academy",
+    "sources": ["https://en.wikipedia.org/wiki/Phillips_Academy", "https://www.andover.edu"],
+    "state": "MA"
+  },
+  {
+    "city": "Southborough",
+    "fieldsFilled": 20,
+    "name": "St. Mark's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Mark%27s_School_(Massachusetts)",
+      "https://www.stmarksschool.org"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Greenfield",
+    "fieldsFilled": 19,
+    "name": "Stoneleigh-Burnham School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Stoneleigh-Burnham_School",
+      "https://sbschool.org/admissions/affording-sbs-tuition-and-tuition-assistance"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Marion",
+    "fieldsFilled": 20,
+    "name": "Tabor Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Tabor_Academy_(Massachusetts)",
+      "https://www.taboracademy.org/admissions/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/tabor-academy-profile"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Natick",
+    "fieldsFilled": 18,
+    "name": "Walnut Hill School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Walnut_Hill_School_for_the_Arts",
+      "https://walnuthillarts.org"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Wilbraham",
+    "fieldsFilled": 21,
+    "name": "Wilbraham and Monson Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Wilbraham_%26_Monson_Academy",
+      "https://www.wma.us/admission/tuition-financial-aid",
+      "https://www.wma.us/student-life/international-student-office"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Easthampton",
+    "fieldsFilled": 24,
+    "name": "Williston Northampton School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Williston_Northampton_School",
+      "https://www.williston.com/admission/tuition-and-financial-aid/",
+      "https://www.williston.com/wp-content/uploads/2024/10/WNS-School-Profile-2024-2025.pdf"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Winchendon",
+    "fieldsFilled": 30,
+    "name": "The Winchendon School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Winchendon_School",
+      "https://www.boardingschoolreview.com/the-winchendon-school-profile",
+      "https://winchendon.org/admissions/tuition-and-fees/"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Worcester",
+    "fieldsFilled": 28,
+    "name": "Worcester Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Worcester_Academy",
+      "https://www.boardingschoolreview.com/worcester-academy-profile",
+      "https://www.worcesteracademy.org/about/head-of-school"
+    ],
+    "state": "MA"
+  },
+  {
+    "city": "Bloomfield Hills",
+    "fieldsFilled": 29,
+    "name": "Cranbrook Kingswood School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Cranbrook_Schools",
+      "https://www.boardingschoolreview.com/cranbrook-schools-profile",
+      "https://schools.cranbrook.edu/",
+      "https://en.wikipedia.org/wiki/List_of_Cranbrook_Kingswood_School_alumni"
+    ],
+    "state": "MI"
+  },
+  {
+    "city": "Cedar Lake",
+    "fieldsFilled": 21,
+    "name": "Great Lakes Adventist Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Great_Lakes_Adventist_Academy",
+      "https://glaa.net/about-us/",
+      "https://glaa.net/contact/",
+      "https://glaa.net/financial-information/"
+    ],
+    "state": "MI"
+  },
+  {
+    "city": "Interlochen",
+    "fieldsFilled": 23,
+    "name": "Interlochen Arts Academy",
+    "sources": [
+      "https://www.interlochen.org/arts-boarding-school/tuition-and-financial-aid",
+      "https://en.wikipedia.org/wiki/Interlochen_Center_for_the_Arts",
+      "https://www.interlochen.org/academy-students-and-families/student-support/college-matriculation",
+      "https://www.boardingschoolreview.com/interlochen-arts-academy-profile"
+    ],
+    "state": "MI"
+  },
+  {
+    "city": "Glen Arbor",
+    "fieldsFilled": 18,
+    "name": "The Leelanau School",
+    "sources": [
+      "https://leelanau.org/tuition/",
+      "https://en.wikipedia.org/wiki/The_Leelanau_School",
+      "https://leelanau.org/",
+      "https://www.privateschoolreview.com/the-leelanau-school-profile"
+    ],
+    "state": "MI"
+  },
+  {
+    "city": "Winona",
+    "fieldsFilled": 18,
+    "name": "Cotter High School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Cotter_High_School_(Winona,_Minnesota)",
+      "https://www.cotterschools.org/admissions",
+      "https://www.boardingschoolreview.com/cotter-schools-profile"
+    ],
+    "state": "MN"
+  },
+  {
+    "city": "West St. Paul",
+    "fieldsFilled": 17,
+    "name": "St. Croix Lutheran High School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Croix_Lutheran_Academy",
+      "https://www.stcroixusa.org/admissions/tuition-and-affordability",
+      "https://www.stcroixlutheran.org/admissions/american-admissions/faq"
+    ],
+    "state": "MN"
+  },
+  {
+    "city": "Collegeville",
+    "fieldsFilled": 25,
+    "name": "Saint John's Prep",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Saint_John's_Preparatory_School_(Minnesota)",
+      "https://sjprep.net/",
+      "https://sjprep.net/academics/international-baccalaureate-programme/",
+      "https://www.boardingschoolreview.com/saint-john-s-preparatory-school-profile"
+    ],
+    "state": "MN"
+  },
+  {
+    "city": "Faribault",
+    "fieldsFilled": 22,
+    "name": "Shattuck-Saint Mary's",
+    "sources": [
+      "https://www.s-sm.org/",
+      "https://en.wikipedia.org/wiki/Shattuck-Saint_Mary's",
+      "https://www.findingschool.com/shattuck-st-marys-school",
+      "https://studyminnesota.us/schools/shattuck-st-marys/"
+    ],
+    "state": "MN"
+  },
+  {
+    "city": "French Camp",
+    "fieldsFilled": 17,
+    "name": "French Camp Academy",
+    "sources": [
+      "https://www.frenchcamp.org/",
+      "https://en.wikipedia.org/wiki/French_Camp_Academy",
+      "https://www.privateschoolreview.com/french-camp-academy-profile"
+    ],
+    "state": "MS"
+  },
+  {
+    "city": "Columbus",
+    "fieldsFilled": 16,
+    "name": "Mississippi School for Mathematics and Science",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Mississippi_School_for_Mathematics_and_Science",
+      "https://themsms.org/about/",
+      "https://themsms.org/admissions/"
+    ],
+    "state": "MS"
+  },
+  {
+    "city": "Brookhaven",
+    "fieldsFilled": 15,
+    "name": "Mississippi School of the Arts",
+    "sources": [
+      "https://msabrookhaven.org/",
+      "https://en.wikipedia.org/wiki/Mississippi_School_of_the_Arts",
+      "https://msabrookhaven.org/programs"
+    ],
+    "state": "MS"
+  },
+  {
+    "city": "Piney Woods",
+    "fieldsFilled": 18,
+    "name": "Piney Woods Country Life School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Piney_Woods_Country_Life_School",
+      "https://www.pineywoods.org/",
+      "https://www.privateschoolreview.com/the-piney-woods-school-profile"
+    ],
+    "state": "MS"
+  },
+  {
+    "city": "Bay St. Louis",
+    "fieldsFilled": 16,
+    "name": "Saint Stanislaus College",
+    "sources": [
+      "https://ststan.com/",
+      "https://www.boardingschoolreview.com/saint-stanislaus-high-school-profile",
+      "https://www.findingschool.com/saint-stanislaus-high-school"
+    ],
+    "state": "MS"
+  },
+  {
+    "city": "St. Louis",
+    "fieldsFilled": 20,
+    "name": "Chaminade College Preparatory School",
+    "sources": [
+      "https://www.chaminade-stl.org/",
+      "https://en.wikipedia.org/wiki/Chaminade_College_Preparatory_School_(Missouri)",
+      "https://www.boardingschoolreview.com/chaminade-college-preparatory-school-profile"
+    ],
+    "state": "MO"
+  },
+  {
+    "city": "Mexico",
+    "fieldsFilled": 24,
+    "name": "Missouri Military Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Missouri_Military_Academy",
+      "https://www.missourimilitaryacademy.org/about/about-mma/quick-facts",
+      "https://www.boardingschoolreview.com/missouri-military-academy-profile"
+    ],
+    "state": "MO"
+  },
+  {
+    "city": "Sunset Hills",
+    "fieldsFilled": 20,
+    "name": "Thomas Jefferson School",
+    "sources": [
+      "https://www.tjs.org/",
+      "https://en.wikipedia.org/wiki/Thomas_Jefferson_School_(St._Louis,_Missouri)",
+      "https://www.tjs.org/admissions/tuition-and-financial-aid",
+      "https://www.boardingschoolreview.com/thomas-jefferson-school-profile"
+    ],
+    "state": "MO"
+  },
+  {
+    "city": "Omaha",
+    "fieldsFilled": 27,
+    "name": "Mt. Michael Benedictine",
+    "sources": [
+      "https://mountmichael.com/",
+      "https://mountmichael.com/tuition-financial-aid/",
+      "https://en.wikipedia.org/wiki/Mount_Michael_Benedictine_School",
+      "https://www.privateschoolreview.com/mount-michael-benedictine-high-school-profile"
+    ],
+    "state": "NE"
+  },
+  {
+    "city": "Wolfeboro",
+    "fieldsFilled": 28,
+    "name": "Brewster Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Brewster_Academy",
+      "https://www.brewsteracademy.org/admissions/tuition-and-financial-aid",
+      "https://www.boardingschoolreview.com/brewster-academy-profile"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Canaan",
+    "fieldsFilled": 26,
+    "name": "Cardigan Mountain School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Cardigan_Mountain_School",
+      "https://www.cardigan.org/",
+      "https://www.boardingschoolreview.com/cardigan-mountain-school-profile"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Dublin",
+    "fieldsFilled": 18,
+    "name": "Dublin Christian Academy",
+    "sources": [
+      "https://dublinchristian.org",
+      "https://www.privateschoolreview.com/dublin-christian-academy-profile"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Dublin",
+    "fieldsFilled": 26,
+    "name": "Dublin School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Dublin_School",
+      "https://www.dublinschool.org/admissions/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/dublin-school-profile"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Wilton",
+    "fieldsFilled": 22,
+    "name": "High Mowing School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/High_Mowing_School",
+      "https://www.highmowing.org/admissions/tuition-and-financial-support",
+      "https://www.boardingschools.us/new-hampshire/high-mowing-school/"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Holderness",
+    "fieldsFilled": 28,
+    "name": "Holderness School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Holderness_School",
+      "https://www.holderness.org/",
+      "https://www.boardingschoolreview.com/holderness-school-profile"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Meriden",
+    "fieldsFilled": 29,
+    "name": "Kimball Union Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Kimball_Union_Academy",
+      "https://www.kua.org/",
+      "https://www.boardingschoolreview.com/kimball-union-academy-profile"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "New Hampton",
+    "fieldsFilled": 27,
+    "name": "New Hampton School",
+    "sources": [
+      "https://www.boardingschoolreview.com/new-hampton-school-profile",
+      "https://www.newhampton.org/",
+      "https://www.newhampton.org/about/facts-in-brief"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Exeter",
+    "fieldsFilled": 32,
+    "name": "Phillips Exeter Academy",
+    "sources": [
+      "https://www.exeter.edu/",
+      "https://en.wikipedia.org/wiki/Phillips_Exeter_Academy",
+      "https://www.boardingschoolreview.com/phillips-exeter-academy-profile",
+      "https://exeter.edu/admissions/financial-aid/tuition-costs/",
+      "https://exeter.edu/academics/departments/modern-languages/"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Andover",
+    "fieldsFilled": 32,
+    "name": "Proctor Academy",
+    "sources": [
+      "https://www.proctoracademy.org/",
+      "https://en.wikipedia.org/wiki/Proctor_Academy",
+      "https://www.boardingschoolreview.com/proctor-academy-profile",
+      "https://www.proctoracademy.org/admissions/tuition-and-financial-aid"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Concord",
+    "fieldsFilled": 34,
+    "name": "St. Paul's School",
+    "sources": [
+      "https://www.sps.edu/",
+      "https://en.wikipedia.org/wiki/St._Paul%27s_School_(New_Hampshire)",
+      "https://www.boardingschoolreview.com/st-paul-s-school-profile",
+      "https://www.findingschool.com/st-pauls-school"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Tilton",
+    "fieldsFilled": 31,
+    "name": "Tilton School",
+    "sources": [
+      "https://tiltonschool.org/",
+      "https://en.wikipedia.org/wiki/Tilton_School",
+      "https://www.boardingschoolreview.com/tilton-school-profile",
+      "https://tiltonschool.org/admissions/tuition/"
+    ],
+    "state": "NH"
+  },
+  {
+    "city": "Blairstown",
+    "fieldsFilled": 32,
+    "name": "Blair Academy",
+    "sources": [
+      "https://www.blair.edu/",
+      "https://en.wikipedia.org/wiki/Blair_Academy",
+      "https://www.boardingschoolreview.com/blair-academy-profile",
+      "https://www.blair.edu/admission/tuition-financial-aid"
+    ],
+    "state": "NJ"
+  },
+  {
+    "city": "Princeton",
+    "fieldsFilled": 28,
+    "name": "The Hun School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Hun_School_of_Princeton",
+      "https://www.hunschool.org/",
+      "https://www.boardingschoolreview.com/the-hun-school-of-princeton-profile"
+    ],
+    "state": "NJ"
+  },
+  {
+    "city": "Lawrenceville",
+    "fieldsFilled": 30,
+    "name": "The Lawrenceville School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Lawrenceville_School",
+      "https://www.lawrenceville.org/admission/tuition-aid",
+      "https://www.boardingschoolreview.com/lawrenceville-school-profile"
+    ],
+    "state": "NJ"
+  },
+  {
+    "city": "Hightstown",
+    "fieldsFilled": 31,
+    "name": "The Peddie School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Peddie_School",
+      "https://peddie.org/admission/tuition-affordability/",
+      "https://www.boardingschoolreview.com/peddie-school-profile"
+    ],
+    "state": "NJ"
+  },
+  {
+    "city": "Pennington",
+    "fieldsFilled": 29,
+    "name": "The Pennington School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Pennington_School",
+      "https://www.pennington.org/admission/tuition-and-financial-aid",
+      "https://www.pennington.org/about-us"
+    ],
+    "state": "NJ"
+  },
+  {
+    "city": "Newark",
+    "fieldsFilled": 26,
+    "name": "St. Benedict's Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Benedict%27s_Preparatory_School",
+      "https://www.sbp.org/",
+      "https://www.privateschoolreview.com/st-benedict-s-preparatory-school-profile"
+    ],
+    "state": "NJ"
+  },
+  {
+    "city": "Montezuma",
+    "fieldsFilled": 26,
+    "name": "Armand Hammer United World College of the American West",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Armand_Hammer_United_World_College_of_the_American_West",
+      "https://www.uwc-usa.org/",
+      "https://www.findingschool.com/the-armand-hammer-united-world-college"
+    ],
+    "state": "NM"
+  },
+  {
+    "city": "Albuquerque",
+    "fieldsFilled": 26,
+    "name": "Menaul School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Menaul_School",
+      "https://www.menaulschool.org/about/",
+      "https://www.privateschoolreview.com/menaul-school-profile"
+    ],
+    "state": "NM"
+  },
+  {
+    "city": "Roswell",
+    "fieldsFilled": 27,
+    "name": "New Mexico Military Institute",
+    "sources": [
+      "https://en.wikipedia.org/wiki/New_Mexico_Military_Institute",
+      "https://www.nmmi.edu/about-nmmi/",
+      "https://www.boardingschoolreview.com/new-mexico-military-institute-profile"
+    ],
+    "state": "NM"
+  },
+  {
+    "city": "Barrytown",
+    "fieldsFilled": 13,
+    "name": "Bard Academy",
+    "sources": [
+      "https://bardacademy.simons-rock.edu/",
+      "https://en.wikipedia.org/wiki/Bard_Academy",
+      "https://simons-rock.edu/academy/apply-to-bard-academy/tuition-and-fees.php"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "New Lebanon",
+    "fieldsFilled": 23,
+    "name": "Darrow School",
+    "sources": [
+      "https://www.darrowschool.org/",
+      "https://en.wikipedia.org/wiki/Darrow_School",
+      "https://www.darrowschool.org/admissions/tuition-aid",
+      "https://www.privateschoolreview.com/darrow-school-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Thornwood",
+    "fieldsFilled": 18,
+    "name": "Education First EF Academy",
+    "sources": [
+      "https://www.efacademy.org/en-us/new-york/",
+      "https://www.boardingschoolreview.com/ef-academy-new-york-profile",
+      "https://www.findingschool.com/ef-academy-new-york"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Troy",
+    "fieldsFilled": 27,
+    "name": "Emma Willard School",
+    "sources": [
+      "https://www.emmawillard.org/",
+      "https://en.wikipedia.org/wiki/Emma_Willard_School",
+      "https://www.emmawillard.org/about/school-profile",
+      "https://www.boardingschoolreview.com/emma-willard-school-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Cornwall-on-Hudson",
+    "fieldsFilled": 19,
+    "name": "Storm King School",
+    "sources": [
+      "https://sks.org/admissions/tuition-and-fees/",
+      "https://en.wikipedia.org/wiki/Storm_King_School",
+      "https://www.collegetransitions.com/blog/boarding-schools/the-storm-king-school/"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "South Wales",
+    "fieldsFilled": 19,
+    "name": "Gow School",
+    "sources": [
+      "https://www.gow.org/",
+      "https://en.wikipedia.org/wiki/Gow_School",
+      "https://www.boardingschoolreview.com/the-gow-school-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Tarrytown",
+    "fieldsFilled": 20,
+    "name": "Hackley School",
+    "sources": [
+      "https://www.hackleyschool.org/",
+      "https://en.wikipedia.org/wiki/Hackley_School",
+      "https://www.hackleyschool.org/admissions/affording-hackley",
+      "https://www.privateschoolreview.com/hackley-school-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Harrison",
+    "fieldsFilled": 23,
+    "name": "Keio Academy of New York",
+    "sources": [
+      "https://www.keio.edu/",
+      "https://en.wikipedia.org/wiki/Keio_Academy_of_New_York",
+      "https://www.keio.edu/campus-life/sports-clubs",
+      "https://www.privateschoolreview.com/keio-academy-of-new-york-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "New York City",
+    "fieldsFilled": 20,
+    "name": "Léman Manhattan Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/L%C3%A9man_Manhattan_Preparatory_School",
+      "https://www.lemanmanhattan.org/about",
+      "https://www.boardingschoolreview.com/l-man-manhattan-preparatory-school-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Dobbs Ferry",
+    "fieldsFilled": 28,
+    "name": "The Masters School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Masters_School",
+      "https://www.mastersny.org/",
+      "https://www.boardingschoolreview.com/the-masters-school-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Millbrook",
+    "fieldsFilled": 27,
+    "name": "Millbrook School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Millbrook_School",
+      "https://www.millbrook.org/",
+      "https://www.millbrook.org/school-life/academics/college-counseling/college-matriculation",
+      "https://www.findingschool.com/millbrook-school"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Lake Placid",
+    "fieldsFilled": 22,
+    "name": "North Country School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/North_Country_School",
+      "https://northcountryschool.org/",
+      "https://northcountryschool.org/admissions/tuition-financial-aid/"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Lake Placid",
+    "fieldsFilled": 23,
+    "name": "Northwood School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Northwood_School_(Lake_Placid,_New_York)",
+      "https://northwoodschool.org/",
+      "https://www.boardingschoolreview.com/northwood-school-profile"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "East Hampton",
+    "fieldsFilled": 21,
+    "name": "Ross School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Ross_School_(East_Hampton,_New_York)",
+      "https://www.ross.org/",
+      "https://www.ross.org/admissions/tuition-and-financial-aid"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "New York City",
+    "fieldsFilled": 19,
+    "name": "Saint Thomas Choir School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Saint_Thomas_Choir_School",
+      "https://www.choirschool.org/",
+      "https://www.saintthomaschurch.org/choir-school/choir-school-overview/"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Stony Brook",
+    "fieldsFilled": 27,
+    "name": "The Stony Brook School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Stony_Brook_School",
+      "https://www.sbs.org/",
+      "https://www.sbs.org/tuition-and-financial-aid"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Pawling",
+    "fieldsFilled": 27,
+    "name": "Trinity-Pawling School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Trinity-Pawling_School",
+      "https://www.boardingschoolreview.com/trinity-pawling-school-profile",
+      "https://www.trinitypawling.org"
+    ],
+    "state": "NY"
+  },
+  {
+    "city": "Greensboro",
+    "fieldsFilled": 15,
+    "name": "American Hebrew Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/American_Hebrew_Academy",
+      "https://religionnews.com/2019/06/13/closing-of-american-hebrew-academy-marks-end-of-jewish-boarding-school-experiment/",
+      "https://www.timesofisrael.com/landmark-us-jewish-boarding-high-school-closes-abruptly/"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Asheville",
+    "fieldsFilled": 29,
+    "name": "Asheville School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Asheville_School",
+      "https://www.boardingschoolreview.com/asheville-school-profile",
+      "https://www.ashevilleschool.org/about/"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Arden",
+    "fieldsFilled": 20,
+    "name": "Christ School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Christ_School_(North_Carolina)",
+      "https://www.christschool.org/admissions/tuition-and-financial-aid",
+      "https://www.christschool.org/about-us/who-we-are"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Winston-Salem",
+    "fieldsFilled": 17,
+    "name": "North Carolina School of the Arts",
+    "sources": [
+      "https://en.wikipedia.org/wiki/University_of_North_Carolina_School_of_the_Arts",
+      "https://www.uncsa.edu/high-school/",
+      "https://www.uncsa.edu/news/news-media-resources/facts.aspx"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Durham",
+    "fieldsFilled": 18,
+    "name": "North Carolina School of Science and Mathematics",
+    "sources": [
+      "https://en.wikipedia.org/wiki/North_Carolina_School_of_Science_and_Mathematics",
+      "https://www.ncssm.edu/about",
+      "https://www.ncssm.edu/admissions"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Oak Ridge",
+    "fieldsFilled": 17,
+    "name": "Oak Ridge Military Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Oak_Ridge_Military_Academy",
+      "https://www.boardingschoolreview.com/oak-ridge-military-academy-profile",
+      "https://www.oakridgemilitary.com/"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Raleigh",
+    "fieldsFilled": 29,
+    "name": "Saint Mary's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Saint_Mary's_School_(Raleigh,_North_Carolina)",
+      "https://www.boardingschoolreview.com/saint-mary-s-school-profile",
+      "https://www.sms.edu/about"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Winston-Salem",
+    "fieldsFilled": 21,
+    "name": "Salem Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Salem_Academy",
+      "https://salemacademy.com/admission/tuition-payment/",
+      "https://salemacademy.com/"
+    ],
+    "state": "NC"
+  },
+  {
+    "city": "Willoughby",
+    "fieldsFilled": 25,
+    "name": "Andrews Osborne Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Andrews_Osborne_Academy",
+      "https://www.andrewsosborne.org/admissions/tuition-and-scholarships",
+      "https://www.andrewsosborne.org/"
+    ],
+    "state": "OH"
+  },
+  {
+    "city": "Gates Mills",
+    "fieldsFilled": 23,
+    "name": "Gilmour Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Gilmour_Academy",
+      "https://www.gilmour.org/admission/tuition--tuition-assistance/tuition-and-fees",
+      "https://www.gilmour.org/"
+    ],
+    "state": "OH"
+  },
+  {
+    "city": "Austinburg",
+    "fieldsFilled": 19,
+    "name": "Grand River Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Grand_River_Academy",
+      "https://www.grandriver.org/admissions/affording-gra",
+      "https://grandriver.org/"
+    ],
+    "state": "OH"
+  },
+  {
+    "city": "Toledo",
+    "fieldsFilled": 21,
+    "name": "Maumee Valley Country Day School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Maumee_Valley_Country_Day_School",
+      "https://www.mvcds.org/",
+      "https://www.mvcds.org/admissions/tuition/tuition-and-fees/"
+    ],
+    "state": "OH"
+  },
+  {
+    "city": "Barnesville",
+    "fieldsFilled": 23,
+    "name": "Olney Friends School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Olney_Friends_School",
+      "https://www.olneyfriends.org/admissions/tuition-and-financial-aid/",
+      "https://www.olneyfriends.org/"
+    ],
+    "state": "OH"
+  },
+  {
+    "city": "Hudson",
+    "fieldsFilled": 29,
+    "name": "Western Reserve Academy",
+    "sources": [
+      "https://www.wra.net/",
+      "https://en.wikipedia.org/wiki/Western_Reserve_Academy",
+      "https://www.boardingschoolreview.com/western-reserve-academy-profile"
+    ],
+    "state": "OH"
+  },
+  {
+    "city": "Oklahoma City",
+    "fieldsFilled": 27,
+    "name": "Oklahoma School of Science and Mathematics",
+    "sources": [
+      "https://www.ossm.edu/",
+      "https://en.wikipedia.org/wiki/Oklahoma_School_of_Science_and_Mathematics",
+      "https://www.ossm.edu/admissions-2/",
+      "https://www.ossm.edu/contact-us-2/"
+    ],
+    "state": "OK"
+  },
+  {
+    "city": "Sheridan",
+    "fieldsFilled": 20,
+    "name": "The Delphian School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Delphian_School",
+      "https://www.delphian.org/admissions/tuition-fees",
+      "https://www.boardingschoolreview.com/delphian-school-profile"
+    ],
+    "state": "OR"
+  },
+  {
+    "city": "Raleigh Hills",
+    "fieldsFilled": 20,
+    "name": "Oregon Episcopal School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Oregon_Episcopal_School",
+      "https://www.oes.edu/admissions/affording-oes/tuition",
+      "https://www.oes.edu/boarding",
+      "https://www.boardingschoolreview.com/oregon-episcopal-school-profile"
+    ],
+    "state": "OR"
+  },
+  {
+    "city": "Medford",
+    "fieldsFilled": 17,
+    "name": "St. Mary's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Mary's_School_(Medford,_Oregon)",
+      "https://www.smschool.us/",
+      "https://www.boardingschoolreview.com/st-mary-s-school-profile"
+    ],
+    "state": "OR"
+  },
+  {
+    "city": "Exton",
+    "fieldsFilled": 14,
+    "name": "Church Farm School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Church_Farm_School",
+      "https://www.gocfs.net/admission/tuition-and-financial-aid",
+      "https://www.gocfs.net/about/history-of-church-farm-school"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Newtown",
+    "fieldsFilled": 23,
+    "name": "George School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/George_School",
+      "https://www.georgeschool.org/",
+      "https://www.boardingschoolreview.com/george-school-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Philadelphia",
+    "fieldsFilled": 17,
+    "name": "Girard College",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Girard_College",
+      "https://www.girardcollege.edu/",
+      "https://www.girardcollege.edu/admissions/faqs/"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Tyrone",
+    "fieldsFilled": 19,
+    "name": "The Grier School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Grier_School",
+      "https://www.grier.org/",
+      "https://www.grier.org/about/director--staff",
+      "https://www.boardingschoolreview.com/grier-school-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Pottstown",
+    "fieldsFilled": 24,
+    "name": "The Hill School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Hill_School",
+      "https://www.thehill.org/admission/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/the-hill-school-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Saltsburg",
+    "fieldsFilled": 30,
+    "name": "The Kiski School",
+    "sources": [
+      "https://kiski.org/",
+      "https://en.wikipedia.org/wiki/The_Kiski_School",
+      "https://www.boardingschoolreview.com/the-kiski-school-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Lititz",
+    "fieldsFilled": 27,
+    "name": "Linden Hall",
+    "sources": [
+      "https://www.lindenhall.org/",
+      "https://en.wikipedia.org/wiki/Linden_Hall_(school)",
+      "https://www.boardingschoolreview.com/linden-hall-school-for-girls-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Mercersburg",
+    "fieldsFilled": 30,
+    "name": "Mercersburg Academy",
+    "sources": [
+      "https://www.mercersburg.edu/",
+      "https://en.wikipedia.org/wiki/Mercersburg_Academy",
+      "https://www.mercersburg.edu/admission/how-to-apply",
+      "https://www.boardingschoolreview.com/mercersburg-academy-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Hershey",
+    "fieldsFilled": 23,
+    "name": "Milton Hershey School",
+    "sources": [
+      "https://www.mhskids.org/",
+      "https://en.wikipedia.org/wiki/Milton_Hershey_School",
+      "https://www.mhskids.org/about/mhs-fast-facts/"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Pennsburg",
+    "fieldsFilled": 28,
+    "name": "Perkiomen School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Perkiomen_School",
+      "https://www.perkiomen.org/admissions/tuition-fees",
+      "https://www.boardingschoolreview.com/perkiomen-school-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Malvern",
+    "fieldsFilled": 28,
+    "name": "The Phelps School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Phelps_School",
+      "https://www.boardingschoolreview.com/the-phelps-school-profile",
+      "https://www.thephelpsschool.org/contact-us"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Pine Forge",
+    "fieldsFilled": 17,
+    "name": "Pine Forge Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Pine_Forge_Academy",
+      "https://www.pineforgeacademy.org/about-us/"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "New Hope",
+    "fieldsFilled": 30,
+    "name": "Solebury School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Solebury_School",
+      "https://www.boardingschoolreview.com/solebury-school-profile",
+      "https://www.solebury.org/admission/how-to-apply"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Westtown",
+    "fieldsFilled": 26,
+    "name": "Westtown School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Westtown_School",
+      "https://www.westtown.edu/about/fast-facts/",
+      "https://www.boardingschoolreview.com/westtown-school-profile"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "Kingston",
+    "fieldsFilled": 30,
+    "name": "Wyoming Seminary",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Wyoming_Seminary",
+      "https://www.privateschoolreview.com/wyoming-seminary-upper-school-profile",
+      "https://www.wyomingseminary.org/admissions/application-process/international"
+    ],
+    "state": "PA"
+  },
+  {
+    "city": "San Juan",
+    "fieldsFilled": 21,
+    "name": "Robinson School",
+    "sources": [
+      "https://www.robinsonschool.org/",
+      "https://msa-cess.org/robinson-school-early-childhood-education/",
+      "https://www.ibo.org/en/school/050047"
+    ],
+    "state": "PR"
+  },
+  {
+    "city": "Portsmouth",
+    "fieldsFilled": 28,
+    "name": "Portsmouth Abbey School",
+    "sources": [
+      "https://www.portsmouthabbey.org/",
+      "https://en.wikipedia.org/wiki/Portsmouth_Abbey_School",
+      "https://www.portsmouthabbey.org/tuition-and-financial-aid"
+    ],
+    "state": "RI"
+  },
+  {
+    "city": "Barrington",
+    "fieldsFilled": 27,
+    "name": "St. Andrew's School",
+    "sources": [
+      "https://www.standrews-ri.org/about-us/school-profile",
+      "https://en.wikipedia.org/wiki/St._Andrew's_School_(Rhode_Island)",
+      "https://www.standrews-ri.org/admission/tuition-and-financial-aid"
+    ],
+    "state": "RI"
+  },
+  {
+    "city": "Middletown",
+    "fieldsFilled": 33,
+    "name": "St. George's School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._George's_School_(Rhode_Island)",
+      "https://www.boardingschoolreview.com/st-george-s-school-profile",
+      "https://www.findingschool.com/st-georges-school"
+    ],
+    "state": "RI"
+  },
+  {
+    "city": "Camden",
+    "fieldsFilled": 27,
+    "name": "Camden Military Academy",
+    "sources": [
+      "https://camdenmilitary.com/admissions/domestic-tuition/",
+      "https://en.wikipedia.org/wiki/Camden_Military_Academy",
+      "https://www.boardingschoolreview.com/camden-military-academy-profile"
+    ],
+    "state": "SC"
+  },
+  {
+    "city": "Greenville",
+    "fieldsFilled": 19,
+    "name": "South Carolina Governor's School for the Arts and Humanities",
+    "sources": [
+      "https://www.scgsah.org/",
+      "https://en.wikipedia.org/wiki/South_Carolina_Governor's_School_for_the_Arts_%26_Humanities",
+      "https://www.scgsah.org/admissions/fees-payments"
+    ],
+    "state": "SC"
+  },
+  {
+    "city": "Hartsville",
+    "fieldsFilled": 23,
+    "name": "South Carolina Governor's School for Science and Mathematics",
+    "sources": [
+      "https://en.wikipedia.org/wiki/South_Carolina_Governor's_School_for_Science_and_Mathematics",
+      "https://www.scgssm.org/",
+      "https://www.scgssm.org/admissions",
+      "https://www.scgssm.org/admissions/fees-financial-aid"
+    ],
+    "state": "SC"
+  },
+  {
+    "city": "Chattanooga",
+    "fieldsFilled": 34,
+    "name": "Baylor School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Baylor_School",
+      "https://www.baylorschool.org/about-baylor",
+      "https://www.baylorschool.org/admission/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/baylor-school-profile"
+    ],
+    "state": "TN"
+  },
+  {
+    "city": "Chattanooga",
+    "fieldsFilled": 31,
+    "name": "McCallie School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_McCallie_School",
+      "https://www.mccallie.org/about",
+      "https://www.mccallie.org/about/fast-facts"
+    ],
+    "state": "TN"
+  },
+  {
+    "city": "Sewanee",
+    "fieldsFilled": 32,
+    "name": "St. Andrew's-Sewanee School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Andrew's-Sewanee_School",
+      "https://www.sasweb.org/",
+      "https://www.sasweb.org/admission/affording-sas",
+      "https://www.boardingschoolreview.com/st-andrew-s-sewanee-school-profile"
+    ],
+    "state": "TN"
+  },
+  {
+    "city": "Bell Buckle",
+    "fieldsFilled": 32,
+    "name": "The Webb School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/The_Webb_School_(Bell_Buckle,_Tennessee)",
+      "https://www.thewebbschool.com/admissions/tuition-financial-aid",
+      "https://www.boardingschoolreview.com/the-webb-school-profile"
+    ],
+    "state": "TN"
+  },
+  {
+    "city": "Bullard",
+    "fieldsFilled": 28,
+    "name": "Brook Hill School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Brook_Hill_School",
+      "https://www.brookhill.org/",
+      "https://www.brookhill.org/admissions/tuition-aid/",
+      "https://www.boardingschoolreview.com/the-brook-hill-school-profile"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "Houston",
+    "fieldsFilled": 20,
+    "name": "The Chinquapin School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Chinquapin_Preparatory_School",
+      "https://chinquapin.org/",
+      "https://chinquapin.org/admissions/"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "Dallas",
+    "fieldsFilled": 25,
+    "name": "Hockaday School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Hockaday_School",
+      "https://www.hockaday.org/admission/tuition-and-fees",
+      "https://www.hockaday.org/academics/school-profile"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "Harlingen",
+    "fieldsFilled": 29,
+    "name": "Marine Military Academy",
+    "sources": [
+      "https://www.mma-tx.org/about-us/",
+      "https://www.boardingschoolreview.com/marine-military-academy-profile",
+      "https://en.wikipedia.org/wiki/Marine_Military_Academy"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "Austin",
+    "fieldsFilled": 31,
+    "name": "St. Stephen's Episcopal School",
+    "sources": [
+      "https://www.sstx.org/",
+      "https://en.wikipedia.org/wiki/St._Stephen's_Episcopal_School_(Austin,_Texas)",
+      "https://www.boardingschoolreview.com/st-stephen-s-episcopal-school-profile"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "San Marcos",
+    "fieldsFilled": 30,
+    "name": "San Marcos Baptist Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/San_Marcos_Baptist_Academy",
+      "https://www.boardingschoolreview.com/san-marcos-academy-profile",
+      "https://www.smabears.org/admissions/tuition-and-financial-aid"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "Denton",
+    "fieldsFilled": 21,
+    "name": "Texas Academy of Mathematics and Science",
+    "sources": [
+      "https://tams.unt.edu/",
+      "https://en.wikipedia.org/wiki/Texas_Academy_of_Mathematics_and_Science"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "San Antonio",
+    "fieldsFilled": 29,
+    "name": "TMI — The Episcopal School of Texas",
+    "sources": [
+      "https://www.tmi-sa.org/about-tmi/tmi-at-a-glance",
+      "https://en.wikipedia.org/wiki/TMI_Episcopal",
+      "https://www.tmi-sa.org/admission/tuition"
+    ],
+    "state": "TX"
+  },
+  {
+    "city": "Mt. Pleasant",
+    "fieldsFilled": 28,
+    "name": "Wasatch Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Wasatch_Academy",
+      "https://www.boardingschoolreview.com/wasatch-academy-profile",
+      "https://www.wasatchacademy.org/tuition-financial-aid"
+    ],
+    "state": "UT"
+  },
+  {
+    "city": "Waitsfield",
+    "fieldsFilled": 22,
+    "name": "Green Mountain Valley School",
+    "sources": [
+      "https://gmvs.org/",
+      "https://en.wikipedia.org/wiki/Green_Mountain_Valley_School",
+      "https://gmvs.org/admissions/tuition-and-financial-aid/",
+      "https://cis.neasc.org/institution/green-mountain-valley-school"
+    ],
+    "state": "VT"
+  },
+  {
+    "city": "Putney",
+    "fieldsFilled": 30,
+    "name": "The Putney School",
+    "sources": [
+      "https://www.putneyschool.org/",
+      "https://en.wikipedia.org/wiki/The_Putney_School",
+      "https://www.boardingschoolreview.com/the-putney-school-profile",
+      "https://www.putneyschool.org/tuition-and-financial-aid/"
+    ],
+    "state": "VT"
+  },
+  {
+    "city": "St. Johnsbury",
+    "fieldsFilled": 27,
+    "name": "St. Johnsbury Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Johnsbury_Academy",
+      "https://stjacademy.org",
+      "https://www.boardingschoolreview.com/st-johnsbury-academy-profile"
+    ],
+    "state": "VT"
+  },
+  {
+    "city": "Stratton",
+    "fieldsFilled": 18,
+    "name": "Stratton Mountain School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Stratton_Mountain_School",
+      "https://www.gosms.org",
+      "https://boardingschools.us/vermont/stratton-mountain-school/"
+    ],
+    "state": "VT"
+  },
+  {
+    "city": "Saxtons River",
+    "fieldsFilled": 25,
+    "name": "Vermont Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Vermont_Academy",
+      "https://www.vermontacademy.org",
+      "https://www.findingschool.com/vermont-academy"
+    ],
+    "state": "VT"
+  },
+  {
+    "city": "St. George",
+    "fieldsFilled": 23,
+    "name": "Blue Ridge School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Blue_Ridge_School",
+      "https://www.blueridgeschool.com",
+      "https://www.boardingschoolreview.com/blue-ridge-school-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Chatham",
+    "fieldsFilled": 27,
+    "name": "Chatham Hall",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Chatham_Hall",
+      "https://www.chathamhall.org/about-us/fast-facts",
+      "https://www.boardingschoolreview.com/chatham-hall-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Christchurch",
+    "fieldsFilled": 23,
+    "name": "Christchurch School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Christchurch_School",
+      "https://www.christchurchschool.org/at-a-glance/quick-facts",
+      "https://www.findingschool.com/christchurch-school"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Alexandria",
+    "fieldsFilled": 26,
+    "name": "Episcopal High School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Episcopal_High_School_(Alexandria,_Virginia)",
+      "https://www.episcopalhighschool.org",
+      "https://www.boardingschoolreview.com/episcopal-high-school-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Waynesboro",
+    "fieldsFilled": 24,
+    "name": "Fishburne Military School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Fishburne_Military_School",
+      "https://www.fishburne.org",
+      "https://www.boardingschoolreview.com/fishburne-military-school-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Fork Union",
+    "fieldsFilled": 22,
+    "name": "Fork Union Military Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Fork_Union_Military_Academy",
+      "https://www.forkunion.com/admissions/tuition-and-fees"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Middleburg",
+    "fieldsFilled": 26,
+    "name": "Foxcroft School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Foxcroft_School",
+      "https://www.boardingschoolreview.com/foxcroft-school-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Chatham",
+    "fieldsFilled": 29,
+    "name": "Hargrave Military Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Hargrave_Military_Academy",
+      "https://www.boardingschoolreview.com/hargrave-military-academy-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "McLean",
+    "fieldsFilled": 20,
+    "name": "Madeira School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Madeira_School",
+      "https://www.boardingschoolreview.com/the-madeira-school-profile",
+      "https://www.findingschool.com/the-madeira-school"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Woodstock",
+    "fieldsFilled": 20,
+    "name": "Massanutten Military Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Massanutten_Military_Academy",
+      "https://www.militaryschool.com/admissions/tuition-and-assistance",
+      "https://www.findingschool.com/massanutten-military-academy"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Charlottesville",
+    "fieldsFilled": 28,
+    "name": "The Miller School of Albemarle",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Miller_School_of_Albemarle",
+      "https://www.boardingschoolreview.com/miller-school-of-albemarle-profile",
+      "https://millerschoolofalbemarle.org/tuition"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Front Royal",
+    "fieldsFilled": 23,
+    "name": "Randolph-Macon Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Randolph-Macon_Academy",
+      "https://rma.edu/admissions/tuition-financial-aid/",
+      "https://www.boardingschoolreview.com/randolph-macon-academy-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Charlottesville",
+    "fieldsFilled": 27,
+    "name": "St. Anne's-Belfield School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Anne%27s-Belfield_School",
+      "https://www.boardingschoolreview.com/st-anne-s-belfield-school-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "New Market",
+    "fieldsFilled": 19,
+    "name": "Shenandoah Valley Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Shenandoah_Valley_Academy",
+      "https://www.shenandoahvalleyacademy.org/",
+      "https://www.shenandoahvalleyacademy.org/admissions/tuition-financial-aid.cfm",
+      "https://www.privateschoolreview.com/shenandoah-valley-academy-profile"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Lynchburg",
+    "fieldsFilled": 21,
+    "name": "Virginia Episcopal School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Virginia_Episcopal_School",
+      "https://www.ves.org/",
+      "https://www.ves.org/admission/tuition-financial-aid",
+      "https://www.findingschool.com/virginia-episcopal-school"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Madison County",
+    "fieldsFilled": 29,
+    "name": "Woodberry Forest School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Woodberry_Forest_School",
+      "https://www.boardingschoolreview.com/woodberry-forest-school-profile",
+      "https://www.woodberry.org/admission/tuition-and-tuition-assistance",
+      "https://www.woodberry.org/support/endowed-giving"
+    ],
+    "state": "VA"
+  },
+  {
+    "city": "Tacoma",
+    "fieldsFilled": 28,
+    "name": "Annie Wright School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Annie_Wright_Schools",
+      "https://www.aw.org/",
+      "https://www.boardingschoolreview.com/annie-wright-schools-profile",
+      "https://ibo.org/programmes/find-an-ib-school/ibna/a/annie-wright-schools/"
+    ],
+    "state": "WA"
+  },
+  {
+    "city": "Auburn",
+    "fieldsFilled": 14,
+    "name": "Auburn Adventist Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Auburn_Adventist_Academy",
+      "https://www.auburn.org/",
+      "https://www.auburn.org/boarding-school",
+      "https://www.findingschool.com/auburn-adventist-academy"
+    ],
+    "state": "WA"
+  },
+  {
+    "city": "Seattle",
+    "fieldsFilled": 18,
+    "name": "Northwest School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Northwest_School,_Seattle",
+      "https://www.northwestschool.org/",
+      "https://www.northwestschool.org/student-experience/boarding",
+      "https://www.findingschool.com/the-northwest-school"
+    ],
+    "state": "WA"
+  },
+  {
+    "city": "Spangle",
+    "fieldsFilled": 14,
+    "name": "Upper Columbia Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Upper_Columbia_Academy",
+      "https://www.ucaa.org/",
+      "https://www.ucaa.org/about-us/",
+      "https://www.findingschool.com/upper-columbia-academy"
+    ],
+    "state": "WA"
+  },
+  {
+    "city": "Wheeling",
+    "fieldsFilled": 26,
+    "name": "Linsly School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Linsly_School",
+      "https://www.linsly.org/",
+      "https://www.boardingschoolreview.com/the-linsly-school-profile",
+      "https://www.findingschool.com/the-linsly-school"
+    ],
+    "state": "WV"
+  },
+  {
+    "city": "Watertown",
+    "fieldsFilled": 20,
+    "name": "Luther Preparatory School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Luther_Preparatory_School",
+      "https://www.lps.wels.net/apps/pages/index.jsp?uREC_ID=1703118&type=d&pREC_ID=1867685",
+      "https://www.lps.wels.net/apps/pages/index.jsp?uREC_ID=1705330&type=d&pREC_ID=1868106"
+    ],
+    "state": "WI"
+  },
+  {
+    "city": "Delafield",
+    "fieldsFilled": 22,
+    "name": "St. John's Northwestern Military Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._John's_Northwestern_Military_Academy",
+      "https://stjohnsnorthwestern.org/",
+      "https://www.boardingschoolreview.com/st-john-s-northwestern-academy-profile"
+    ],
+    "state": "WI"
+  },
+  {
+    "city": "Mt. Calvary",
+    "fieldsFilled": 22,
+    "name": "St. Lawrence Seminary High School",
+    "sources": [
+      "https://en.wikipedia.org/wiki/St._Lawrence_Seminary_High_School",
+      "https://www.stlawrence.edu/admissions/faqs",
+      "https://www.boardingschoolreview.com/st-lawrence-seminary-high-school-profile"
+    ],
+    "state": "WI"
+  },
+  {
+    "city": "Beaver Dam",
+    "fieldsFilled": 24,
+    "name": "Wayland Academy",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Wayland_Academy_(Wisconsin)",
+      "https://www.wayland.org/",
+      "https://www.wayland.org/admission/affording-wayland"
+    ],
+    "state": "WI"
+  }
+]

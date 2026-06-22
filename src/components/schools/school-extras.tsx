@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server"
+import { getFormatter, getTranslations } from "next-intl/server"
 import type { ReactNode } from "react"
 import { getSchoolExtras, type SchoolExtras } from "@/lib/workspace/school-catalog"
 
@@ -17,11 +17,13 @@ export async function SchoolExtrasSection({ schoolId, studentId }: SchoolExtrasS
   }
 
   const t = await getTranslations("schools")
+  const format = await getFormatter()
 
   const facts: ReadonlyArray<{ readonly key: string; readonly value: string }> = [
     ...(extras.foundedYear !== null
       ? [{ key: "foundedYear", value: String(extras.foundedYear) }]
       : []),
+    ...(extras.headOfSchool ? [{ key: "headOfSchool", value: extras.headOfSchool }] : []),
     ...(extras.religiousAffiliation
       ? [{ key: "religious", value: extras.religiousAffiliation }]
       : []),
@@ -29,11 +31,47 @@ export async function SchoolExtrasSection({ schoolId, studentId }: SchoolExtrasS
     ...(extras.avgClassSize !== null
       ? [{ key: "classSize", value: String(extras.avgClassSize) }]
       : []),
+    ...(extras.facultyCount !== null
+      ? [{ key: "faculty", value: String(extras.facultyCount) }]
+      : []),
+    ...(extras.avgSat !== null ? [{ key: "avgSat", value: String(extras.avgSat) }] : []),
+    ...(extras.percentStudentsOfColor !== null
+      ? [{ key: "studentsOfColor", value: `${extras.percentStudentsOfColor}%` }]
+      : []),
     ...(extras.ibOffered !== null
       ? [{ key: "ib", value: extras.ibOffered ? t("detail.yes") : t("detail.no") }]
       : []),
     ...(extras.accreditation ? [{ key: "accreditation", value: extras.accreditation }] : []),
+    ...(extras.athleticConference
+      ? [{ key: "athleticConference", value: extras.athleticConference }]
+      : []),
     ...(extras.campusAcres !== null ? [{ key: "campus", value: String(extras.campusAcres) }] : []),
+    ...(extras.dormCount !== null ? [{ key: "dorms", value: String(extras.dormCount) }] : []),
+    ...(extras.endowmentUsd !== null
+      ? [
+          {
+            key: "endowment",
+            value: format.number(extras.endowmentUsd, {
+              currency: "USD",
+              maximumFractionDigits: 1,
+              notation: "compact",
+              style: "currency",
+            }),
+          },
+        ]
+      : []),
+    ...(extras.applicationFeeUsd !== null
+      ? [
+          {
+            key: "applicationFee",
+            value: format.number(extras.applicationFeeUsd, {
+              currency: "USD",
+              maximumFractionDigits: 0,
+              style: "currency",
+            }),
+          },
+        ]
+      : []),
   ]
 
   const chipLists: ReadonlyArray<{ readonly items: readonly string[]; readonly key: string }> = [
@@ -175,16 +213,24 @@ function hasContent(extras: SchoolExtras): boolean {
     extras.admissionsEmail !== null ||
     extras.admissionsPhone !== null ||
     extras.apCourses.length > 0 ||
+    extras.applicationFeeUsd !== null ||
+    extras.athleticConference !== null ||
     extras.avgClassSize !== null ||
+    extras.avgSat !== null ||
     extras.campusAcres !== null ||
     extras.clubs.length > 0 ||
     extras.collegeMatriculation !== null ||
+    extras.dormCount !== null ||
+    extras.endowmentUsd !== null ||
     extras.extracurriculars.length > 0 ||
+    extras.facultyCount !== null ||
     extras.financialAidNotes !== null ||
     extras.foundedYear !== null ||
+    extras.headOfSchool !== null ||
     extras.ibOffered !== null ||
     extras.languagesOffered.length > 0 ||
     extras.notableAlumni !== null ||
+    extras.percentStudentsOfColor !== null ||
     extras.religiousAffiliation !== null ||
     extras.sports.length > 0 ||
     extras.studentTeacherRatio !== null

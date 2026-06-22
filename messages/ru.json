@@ -180,6 +180,14 @@
       "nicheProfileUrl": "Ссылка на профиль Niche",
       "admissionsEmail": "Эл. почта приёмной комиссии",
       "admissionsPhone": "Телефон приёмной комиссии",
+      "headOfSchool": "Директор школы",
+      "endowmentUsd": "Целевой фонд (USD)",
+      "applicationFeeUsd": "Вступительный взнос (USD)",
+      "avgSat": "Средний балл SAT",
+      "percentStudentsOfColor": "Учащиеся из меньшинств (%)",
+      "facultyCount": "Число преподавателей",
+      "athleticConference": "Спортивная лига",
+      "dormCount": "Общежития",
       "nicheRank": "Рейтинг Niche (только для администратора)",
       "isPartner": "Школа-партнёр",
       "lastCheckedIn": "Последняя сверка"
@@ -445,7 +453,15 @@
         "classSize": "Средний размер класса",
         "ib": "Программа IB",
         "accreditation": "Аккредитация",
-        "campus": "Кампус (акры)"
+        "campus": "Кампус (акры)",
+        "headOfSchool": "Директор школы",
+        "endowment": "Целевой фонд",
+        "applicationFee": "Вступительный взнос",
+        "avgSat": "Средний балл SAT",
+        "studentsOfColor": "Учащиеся из меньшинств",
+        "faculty": "Преподаватели",
+        "athleticConference": "Спортивная лига",
+        "dorms": "Общежития"
       }
     },
     "filters": {

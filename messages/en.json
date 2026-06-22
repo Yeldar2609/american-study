@@ -180,6 +180,14 @@
       "nicheProfileUrl": "Niche profile URL",
       "admissionsEmail": "Admissions email",
       "admissionsPhone": "Admissions phone",
+      "headOfSchool": "Head of school",
+      "endowmentUsd": "Endowment (USD)",
+      "applicationFeeUsd": "Application fee (USD)",
+      "avgSat": "Average SAT",
+      "percentStudentsOfColor": "Students of color (%)",
+      "facultyCount": "Faculty count",
+      "athleticConference": "Athletic conference",
+      "dormCount": "Dormitories",
       "nicheRank": "Niche rank (admin only)",
       "isPartner": "Partner school",
       "lastCheckedIn": "Last checked in"
@@ -445,7 +453,15 @@
         "classSize": "Average class size",
         "ib": "IB offered",
         "accreditation": "Accreditation",
-        "campus": "Campus (acres)"
+        "campus": "Campus (acres)",
+        "headOfSchool": "Head of school",
+        "endowment": "Endowment",
+        "applicationFee": "Application fee",
+        "avgSat": "Average SAT",
+        "studentsOfColor": "Students of color",
+        "faculty": "Faculty",
+        "athleticConference": "Athletic conference",
+        "dorms": "Dormitories"
       }
     },
     "filters": {

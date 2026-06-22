@@ -180,6 +180,14 @@
       "nicheProfileUrl": "Niche профилінің сілтемесі",
       "admissionsEmail": "Қабылдау комиссиясының эл. поштасы",
       "admissionsPhone": "Қабылдау комиссиясының телефоны",
+      "headOfSchool": "Мектеп директоры",
+      "endowmentUsd": "Эндаумент қоры (USD)",
+      "applicationFeeUsd": "Өтінім жарнасы (USD)",
+      "avgSat": "Орташа SAT баллы",
+      "percentStudentsOfColor": "Аз ұлт өкілдері (%)",
+      "facultyCount": "Оқытушылар саны",
+      "athleticConference": "Спорттық лига",
+      "dormCount": "Жатақханалар",
       "nicheRank": "Niche рейтингі (тек әкімшіге)",
       "isPartner": "Серіктес мектеп",
       "lastCheckedIn": "Соңғы тексеру"
@@ -445,7 +453,15 @@
         "classSize": "Сыныптың орташа көлемі",
         "ib": "IB бағдарламасы",
         "accreditation": "Аккредитация",
-        "campus": "Кампус (акр)"
+        "campus": "Кампус (акр)",
+        "headOfSchool": "Мектеп директоры",
+        "endowment": "Эндаумент қоры",
+        "applicationFee": "Өтінім жарнасы",
+        "avgSat": "Орташа SAT баллы",
+        "studentsOfColor": "Аз ұлт өкілдері",
+        "faculty": "Оқытушылар",
+        "athleticConference": "Спорттық лига",
+        "dorms": "Жатақханалар"
       }
     },
     "filters": {
