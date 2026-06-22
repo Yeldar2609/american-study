@@ -27,7 +27,6 @@
     "db:stop": "supabase stop"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "latest",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "class-variance-authority": "latest",

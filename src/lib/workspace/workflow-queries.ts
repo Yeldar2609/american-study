@@ -8,10 +8,6 @@ import {
   parseVideos,
 } from "@/lib/workspace/workflow-data"
 
-export type QueryResult<T> =
-  | { readonly kind: "ready"; readonly value: T }
-  | { readonly kind: "configuration" | "error" }
-
 export async function getRoadmapData(studentId: string) {
   const supabase = await createClient()
   if (supabase === null) {
