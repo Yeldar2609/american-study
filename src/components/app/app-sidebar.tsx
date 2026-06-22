@@ -8,6 +8,7 @@ import {
   Home,
   Inbox,
   Library,
+  ListOrdered,
   LogOut,
   Mic,
   School,
@@ -34,6 +35,7 @@ const iconByItem = {
   report: ClipboardList,
   people: Users,
   leads: Inbox,
+  rankings: ListOrdered,
   resources: Library,
   settings: Settings,
 } as const

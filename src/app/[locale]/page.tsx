@@ -16,7 +16,7 @@ export default function LandingPage() {
       <ConsultationForm />
       <Testimonials />
       <Cases />
-      <ConsultationForm />
+      <ConsultationForm id="consultation-footer" />
     </>
   )
 }

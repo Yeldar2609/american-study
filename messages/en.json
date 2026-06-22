@@ -40,11 +40,7 @@
     "value3Title": "Admission guarantee",
     "value3Body": "We guarantee admission. If your child is not admitted this year, we guide them again next year free of charge.",
     "value4Title": "100% admission rate",
-    "value4Body": "Our team delivers a 100% admission record through professionalism, experience, and attention to detail at every step.",
-    "ctaTitle": "Book your free consultation",
-    "ctaBody": "We'll assess your chances and give you a clear, step-by-step plan for admission to a top US school.",
-    "ctaButton": "Book a free consultation",
-    "ctaSignIn": "Already have an account? Sign in"
+    "value4Body": "Our team delivers a 100% admission record through professionalism, experience, and attention to detail at every step."
   },
   "form": {
     "title": "Book a consultation",
@@ -88,6 +84,20 @@
     "colDate": "Date",
     "colStatus": "Status",
     "notSet": "Not provided"
+  },
+  "rankings": {
+    "title": "School rankings",
+    "intro": "Niche ranks are visible only here. Set or update a school's rank — students never see it.",
+    "unranked": "Unranked",
+    "rank": "Rank",
+    "school": "School",
+    "location": "Location",
+    "grade": "Niche grade",
+    "save": "Save",
+    "searchPlaceholder": "Search schools…",
+    "count": "{count} schools",
+    "noResults": "No schools match your search.",
+    "loadError": "School rankings could not be loaded. Check the database migrations and try again."
   },
   "auth": {
     "google": "Continue with Google",
@@ -203,6 +213,7 @@
       "report": "Report",
       "people": "Students",
       "leads": "Leads",
+      "rankings": "School rankings",
       "applications": "Applications",
       "resources": "Resources",
       "settings": "Settings"

@@ -66,6 +66,14 @@ const consultationLeads = readFileSync(
   "supabase/migrations/202606220015_consultation_leads.sql",
   "utf8",
 )
+const schoolRankFacets = readFileSync(
+  "supabase/migrations/202606220016_school_rank_and_facets.sql",
+  "utf8",
+)
+const boardingSeed = readFileSync(
+  "supabase/migrations/202606220017_seed_boarding_schools.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -388,6 +396,30 @@ describe("Supabase migration contract", () => {
     expect(consultationLeads).toContain("create policy consultation_leads_admin_select")
     expect(consultationLeads).toContain("private.is_admin()")
     expect(consultationLeads).toContain("admin_set_lead_handled")
+  })
+
+  it("keeps the Niche rank admin-only and out of the student catalog", () => {
+    expect(schoolRankFacets).toContain("add column if not exists niche_rank integer")
+    // The migration must NOT recreate the catalog RPC (that would risk leaking
+    // the rank to students); only the admin RPCs may surface niche_rank.
+    expect(schoolRankFacets).not.toContain("create or replace function public.get_school_catalog")
+    // Rank is read/written only through admin-gated RPCs.
+    expect(schoolRankFacets).toContain("create or replace function public.admin_list_schools")
+    expect(schoolRankFacets).toContain("create or replace function public.admin_set_school_rank")
+    expect(schoolRankFacets).toContain("if not private.is_admin()")
+    // Importer carries the new facets.
+    expect(schoolRankFacets).toContain("create or replace function public.admin_import_schools")
+    expect(schoolRankFacets).toContain("niche_rank = coalesce(excluded.niche_rank")
+  })
+
+  it("seeds boarding schools by name/state/city only, never overwriting existing rows", () => {
+    expect(boardingSeed).toContain("insert into public.schools (name, state, city)")
+    expect(boardingSeed).toContain("on conflict (natural_key) do nothing")
+    // Names-only seed: it must not write fabricated stats/rank.
+    expect(boardingSeed).not.toContain("niche_rank")
+    expect(boardingSeed).not.toContain("boarding_tuition_usd")
+    // A couple of real, verifiable rows from the public Wikipedia list.
+    expect(boardingSeed).toContain("Wayland Academy")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

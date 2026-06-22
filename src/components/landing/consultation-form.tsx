@@ -10,7 +10,7 @@ import { initialLeadFormState } from "@/lib/landing/lead-state"
 const selectClassName =
   "min-h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-base text-slate-950 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-200"
 
-export function ConsultationForm() {
+export function ConsultationForm({ id = "consultation" }: { readonly id?: string }) {
   const t = useTranslations("form")
   const locale = useLocale()
   const [state, formAction, pending] = useActionState(
@@ -19,10 +19,7 @@ export function ConsultationForm() {
   )
 
   return (
-    <section
-      className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20"
-      id="consultation"
-    >
+    <section className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20" id={id}>
       <div className="mx-auto max-w-2xl rounded-3xl border border-slate-200 bg-white p-8 shadow-[var(--elevation)] sm:p-10">
         <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
           {t("title")}
@@ -46,28 +43,28 @@ export function ConsultationForm() {
               </div>
             )}
             <input name="locale" type="hidden" value={locale} />
-            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor="lead-name">
+            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor={`${id}-name`}>
               {t("name")}
-              <Input autoComplete="name" id="lead-name" name="name" required type="text" />
+              <Input autoComplete="name" id={`${id}-name`} name="name" required type="text" />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor="lead-phone">
+            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor={`${id}-phone`}>
               {t("phone")}
               <Input
                 autoComplete="tel"
                 defaultValue="+7"
-                id="lead-phone"
+                id={`${id}-phone`}
                 name="phone"
                 required
                 type="tel"
               />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor="lead-email">
+            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor={`${id}-email`}>
               {t("email")}
-              <Input autoComplete="email" id="lead-email" name="email" type="email" />
+              <Input autoComplete="email" id={`${id}-email`} name="email" type="email" />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor="lead-grade">
+            <label className="grid gap-2 text-sm font-bold text-slate-700" htmlFor={`${id}-grade`}>
               {t("grade")}
-              <select className={selectClassName} defaultValue="" id="lead-grade" name="grade">
+              <select className={selectClassName} defaultValue="" id={`${id}-grade`} name="grade">
                 <option disabled value="">
                   {t("gradePlaceholder")}
                 </option>

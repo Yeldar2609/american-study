@@ -13,6 +13,7 @@ export const ROLE_SECTIONS: Record<UserRole, readonly string[]> = {
     "home",
     "people",
     "leads",
+    "rankings",
     "schools",
     "applications",
     "essays",
