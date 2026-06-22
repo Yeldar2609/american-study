@@ -273,6 +273,82 @@ export async function getSchoolExtras(
   }
 }
 
+const publicCollectionRowSchema = z.object({
+  description: z.string().nullable(),
+  id: z.string(),
+  name: z.string(),
+})
+
+const publicMemberRowSchema = z.object({
+  collection_id: z.string(),
+  school_id: z.string(),
+})
+
+export type PublicCollection = {
+  readonly description: string | null
+  readonly id: string
+  readonly name: string
+  readonly schoolIds: readonly string[]
+}
+
+// Public collections any authenticated user can browse. RLS (migration 021)
+// restricts both selects to is_public collections and their members, so this
+// returns only the lists an admin has chosen to publish. Null-safe: an empty
+// array on any misconfiguration or error, never throws.
+export async function getPublicCollections(): Promise<readonly PublicCollection[]> {
+  const supabase = await createClient()
+  if (supabase === null) {
+    return []
+  }
+
+  const { data: collectionData, error: collectionError } = await supabase
+    .from("school_collections")
+    .select("id,name,description")
+    .eq("is_public", true)
+    .order("sort_order", { ascending: true })
+    .order("name", { ascending: true })
+  if (collectionError !== null) {
+    return []
+  }
+
+  const parsedCollections = z.array(publicCollectionRowSchema).safeParse(collectionData)
+  if (!parsedCollections.success) {
+    return []
+  }
+  if (parsedCollections.data.length === 0) {
+    return []
+  }
+
+  const { data: memberData, error: memberError } = await supabase
+    .from("school_collection_members")
+    .select("collection_id,school_id")
+  if (memberError !== null) {
+    return []
+  }
+
+  const parsedMembers = z.array(publicMemberRowSchema).safeParse(memberData)
+  if (!parsedMembers.success) {
+    return []
+  }
+
+  const schoolIdsByCollection = new Map<string, string[]>()
+  for (const member of parsedMembers.data) {
+    const existing = schoolIdsByCollection.get(member.collection_id)
+    if (existing === undefined) {
+      schoolIdsByCollection.set(member.collection_id, [member.school_id])
+    } else {
+      existing.push(member.school_id)
+    }
+  }
+
+  return parsedCollections.data.map((collection) => ({
+    description: collection.description,
+    id: collection.id,
+    name: collection.name,
+    schoolIds: schoolIdsByCollection.get(collection.id) ?? [],
+  }))
+}
+
 export async function getSchoolCatalog(studentId: string) {
   const supabase = await createClient()
   if (supabase === null) {

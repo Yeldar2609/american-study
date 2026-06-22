@@ -11,6 +11,10 @@
     "titleTemplate": "%s | American Study",
     "description": "A clear path from Kazakhstan to a US boarding school."
   },
+  "meta": {
+    "landingTitle": "American Study — admission to US private schools",
+    "landingDescription": "We help students from Kazakhstan win scholarships and admission to top American boarding schools. Start with a free consultation."
+  },
   "common": {
     "brand": "American Study",
     "signIn": "Sign in",
@@ -119,7 +123,11 @@
     "delete": "Delete collection",
     "deleteConfirm": "Delete this collection? Its schools stay in the catalog; only the grouping is removed.",
     "noMembers": "No schools in this collection yet. Add some below.",
+    "publicOff": "Private",
+    "publicOn": "Public",
+    "publish": "Publish to students",
     "schoolPickerEmpty": "No schools match your search.",
+    "unpublish": "Make private",
     "loadError": "Collections could not be loaded. Check the database migrations and try again."
   },
   "schoolEdit": {
@@ -325,6 +333,8 @@
   },
   "schools": {
     "title": "School matches",
+    "allSchools": "All schools",
+    "collectionsLabel": "Lists",
     "searchPlaceholder": "Search schools by name…",
     "searchLabel": "Search schools",
     "searchEmpty": "No schools match your search.",

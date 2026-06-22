@@ -17,6 +17,7 @@ import type { DashboardDataResult } from "@/lib/dashboard/dashboard-data"
 import { resolveWorkspaceAccess } from "@/lib/workspace/feature-access"
 import {
   filterSchoolCatalog,
+  getPublicCollections,
   getSchoolCatalog,
   type SchoolCatalogFilters,
   type SchoolCatalogItem,
@@ -74,7 +75,10 @@ export async function SchoolsWorkspace({
       break
   }
 
-  const result = await getSchoolCatalog(access.studentId)
+  const [result, publicCollections] = await Promise.all([
+    getSchoolCatalog(access.studentId),
+    getPublicCollections(),
+  ])
   if (result.kind !== "ready") {
     return <WorkspaceMessage body={t("loadError")} title={t("title")} />
   }
@@ -108,6 +112,17 @@ export async function SchoolsWorkspace({
   const recommended = items.filter((school) => school.adminPick)
   const finalList = items.filter((school) => school.finalSeven)
   const allFiltered = filterSchoolCatalog(items, filters)
+
+  // Only surface collections that actually contain schools present in this
+  // student's catalog, so the chip row never offers an empty filter.
+  const catalogIds = new Set(items.map((school) => school.id))
+  const searchCollections = publicCollections
+    .map((collection) => ({
+      id: collection.id,
+      name: collection.name,
+      schoolIds: collection.schoolIds.filter((schoolId) => catalogIds.has(schoolId)),
+    }))
+    .filter((collection) => collection.schoolIds.length > 0)
   const states = [
     ...new Set(items.flatMap((school) => (school.state ? [school.state] : []))),
   ].toSorted()
@@ -218,6 +233,7 @@ export async function SchoolsWorkspace({
             <EmptyTile body={t("empty.filtered")} title={t("empty.title")} />
           ) : (
             <SchoolSearch
+              collections={searchCollections}
               schools={allFiltered.map((school) => ({
                 card: card(school),
                 city: school.city,

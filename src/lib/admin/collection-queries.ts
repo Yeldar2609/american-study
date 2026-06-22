@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server"
 const collectionRowSchema = z.object({
   description: z.string().nullable(),
   id: z.string(),
+  is_public: z.boolean(),
   name: z.string(),
   sort_order: z.number().int(),
 })
@@ -22,6 +23,7 @@ const memberSchoolSchema = z.object({
 export type Collection = {
   readonly description: string | null
   readonly id: string
+  readonly isPublic: boolean
   readonly memberCount: number
   readonly name: string
 }
@@ -36,6 +38,7 @@ export type CollectionMember = {
 export type CollectionDetail = {
   readonly description: string | null
   readonly id: string
+  readonly isPublic: boolean
   readonly members: readonly CollectionMember[]
   readonly name: string
 }
@@ -61,7 +64,7 @@ export async function listCollections(): Promise<CollectionsResult> {
 
   const { data: collectionData, error: collectionError } = await supabase
     .from("school_collections")
-    .select("id,name,description,sort_order")
+    .select("id,name,description,is_public,sort_order")
     .order("sort_order", { ascending: true })
     .order("name", { ascending: true })
   if (collectionError !== null) {
@@ -97,6 +100,7 @@ export async function listCollections(): Promise<CollectionsResult> {
     collections: parsedCollections.data.map((collection) => ({
       description: collection.description,
       id: collection.id,
+      isPublic: collection.is_public,
       memberCount: countByCollection.get(collection.id) ?? 0,
       name: collection.name,
     })),
@@ -116,7 +120,7 @@ export async function getCollectionDetail(collectionId: string): Promise<Collect
 
   const { data: collectionData, error: collectionError } = await supabase
     .from("school_collections")
-    .select("id,name,description,sort_order")
+    .select("id,name,description,is_public,sort_order")
     .eq("id", collectionId)
     .maybeSingle()
   if (collectionError !== null) {
@@ -171,6 +175,7 @@ export async function getCollectionDetail(collectionId: string): Promise<Collect
     collection: {
       description: parsedCollection.data.description,
       id: parsedCollection.data.id,
+      isPublic: parsedCollection.data.is_public,
       members,
       name: parsedCollection.data.name,
     },

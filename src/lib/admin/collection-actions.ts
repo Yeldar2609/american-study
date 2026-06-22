@@ -27,6 +27,12 @@ const memberSchema = z.object({
   schoolId: z.string().uuid(),
 })
 
+const publicSchema = z.object({
+  collectionId: z.string().uuid(),
+  isPublic: z.enum(["true", "false"]).transform((value) => value === "true"),
+  locale: localeSchema,
+})
+
 export async function createCollectionAction(formData: FormData): Promise<void> {
   const parsed = createSchema.safeParse({
     description: formData.get("description") ?? "",
@@ -68,6 +74,31 @@ export async function deleteCollectionAction(formData: FormData): Promise<void> 
   }
 
   await supabase.from("school_collections").delete().eq("id", parsed.data.collectionId)
+
+  revalidatePath(`/${parsed.data.locale}/app/admin`)
+}
+
+export async function setCollectionPublicAction(formData: FormData): Promise<void> {
+  const parsed = publicSchema.safeParse({
+    collectionId: formData.get("collectionId"),
+    isPublic: formData.get("isPublic"),
+    locale: formData.get("locale"),
+  })
+  if (!parsed.success) {
+    return
+  }
+
+  await requireRole(parsed.data.locale, "admin")
+
+  const supabase = await createClient()
+  if (supabase === null) {
+    return
+  }
+
+  await supabase
+    .from("school_collections")
+    .update({ is_public: parsed.data.isPublic })
+    .eq("id", parsed.data.collectionId)
 
   revalidatePath(`/${parsed.data.locale}/app/admin`)
 }

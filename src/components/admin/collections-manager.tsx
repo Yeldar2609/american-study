@@ -1,6 +1,7 @@
-import { ArrowLeft, Layers } from "lucide-react"
+import { ArrowLeft, Globe, Layers } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { CollectionDeleteButton } from "@/components/admin/collection-delete-button"
+import { CollectionPublishToggle } from "@/components/admin/collection-publish-toggle"
 import { CollectionSchoolPicker } from "@/components/admin/collection-school-picker"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -92,6 +93,12 @@ export async function CollectionsManager({
                   <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-blue-700">
                     {t("memberCount", { count: collection.memberCount })}
                   </p>
+                  {collection.isPublic && (
+                    <span className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 px-3 py-1 text-xs font-black text-blue-700">
+                      <Globe aria-hidden="true" className="size-3.5" />
+                      {t("publicOn")}
+                    </span>
+                  )}
                   <span className="inline-flex min-h-9 items-center rounded-xl bg-blue-50 px-4 text-sm font-black text-blue-700">
                     {t("manage")}
                   </span>
@@ -163,7 +170,14 @@ async function CollectionDetailView({
             <p className="max-w-2xl leading-7 text-slate-600">{collection.description}</p>
           )}
         </div>
-        <CollectionDeleteButton collectionId={collection.id} locale={locale} />
+        <div className="flex flex-wrap items-center gap-3">
+          <CollectionPublishToggle
+            collectionId={collection.id}
+            isPublic={collection.isPublic}
+            locale={locale}
+          />
+          <CollectionDeleteButton collectionId={collection.id} locale={locale} />
+        </div>
       </div>
 
       <Card className="rounded-3xl p-6">

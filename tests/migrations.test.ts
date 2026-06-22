@@ -83,6 +83,10 @@ const schoolCollections = readFileSync(
   "supabase/migrations/202606220020_school_collections.sql",
   "utf8",
 )
+const publicCollections = readFileSync(
+  "supabase/migrations/202606220021_public_collections.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -466,6 +470,13 @@ describe("Supabase migration contract", () => {
     )
     expect(schoolCollections).toContain("create policy school_collections_admin_all")
     expect(schoolCollections).toContain("private.is_admin()")
+  })
+
+  it("exposes only is_public collections to students via read-only RLS", () => {
+    expect(publicCollections).toContain("create policy school_collections_public_select")
+    expect(publicCollections).toContain("create policy school_collection_members_public_select")
+    expect(publicCollections).toContain("for select")
+    expect(publicCollections).toContain("using (is_public)")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {
