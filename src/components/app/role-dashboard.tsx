@@ -6,7 +6,9 @@ import { AdminAnalytics } from "@/components/admin/analytics/admin-analytics"
 import { AdminAnalyticsLoading } from "@/components/admin/analytics/admin-analytics-loading"
 import { AppSettingsManager } from "@/components/admin/app-settings-manager"
 import { ApplicationsWorkspace } from "@/components/admin/applications-workspace"
+import { CollectionsManager } from "@/components/admin/collections-manager"
 import { LeadsManager } from "@/components/admin/leads-manager"
+import { SchoolEditorWorkspace } from "@/components/admin/school-editor-workspace"
 import { SchoolRankings } from "@/components/admin/school-rankings"
 import { StudentManager } from "@/components/admin/student-manager"
 import { AppSidebar } from "@/components/app/app-sidebar"
@@ -32,6 +34,7 @@ type RoleDashboardProps = {
   readonly section?: string | undefined
   readonly selectedStudentId?: string | undefined
   readonly selectedSchoolId?: string | undefined
+  readonly selectedCollectionId?: string | undefined
   readonly schoolFilters?: SchoolCatalogFilters | undefined
 }
 
@@ -44,6 +47,7 @@ export function RoleDashboard({
   section = "home",
   selectedStudentId,
   selectedSchoolId,
+  selectedCollectionId,
   schoolFilters = {},
 }: RoleDashboardProps) {
   const activeSection = ROLE_SECTIONS[role].some((candidate) => candidate === section)
@@ -61,6 +65,7 @@ export function RoleDashboard({
               locale={locale}
               role={role}
               schoolFilters={schoolFilters}
+              selectedCollectionId={selectedCollectionId}
               selectedSchoolId={selectedSchoolId}
               selectedStudentId={selectedStudentId}
             />
@@ -76,6 +81,7 @@ async function DashboardSections({
   locale,
   role,
   schoolFilters,
+  selectedCollectionId,
   selectedSchoolId,
   selectedStudentId,
 }: {
@@ -83,6 +89,7 @@ async function DashboardSections({
   readonly locale: string
   readonly role: UserRole
   readonly schoolFilters: SchoolCatalogFilters
+  readonly selectedCollectionId: string | undefined
   readonly selectedSchoolId: string | undefined
   readonly selectedStudentId: string | undefined
 }) {
@@ -109,7 +116,14 @@ async function DashboardSections({
     return <LeadsManager locale={locale} />
   }
   if (role === "admin" && activeSection === "rankings") {
-    return <SchoolRankings locale={locale} />
+    return selectedSchoolId !== undefined ? (
+      <SchoolEditorWorkspace locale={locale} schoolId={selectedSchoolId} />
+    ) : (
+      <SchoolRankings locale={locale} />
+    )
+  }
+  if (role === "admin" && activeSection === "collections") {
+    return <CollectionsManager locale={locale} selectedCollectionId={selectedCollectionId} />
   }
   if (role === "admin" && activeSection === "applications") {
     return <ApplicationsWorkspace />

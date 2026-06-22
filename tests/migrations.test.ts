@@ -75,6 +75,14 @@ const boardingSeed = readFileSync(
   "utf8",
 )
 const nicheLinks = readFileSync("supabase/migrations/202606220018_school_niche_links.sql", "utf8")
+const schoolProfileFields = readFileSync(
+  "supabase/migrations/202606220019_school_profile_fields.sql",
+  "utf8",
+)
+const schoolCollections = readFileSync(
+  "supabase/migrations/202606220020_school_collections.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -430,6 +438,34 @@ describe("Supabase migration contract", () => {
     expect(nicheLinks).toContain("where niche_profile_url is null")
     // Needs a city for a valid Niche slug.
     expect(nicheLinks).toContain("coalesce(btrim(city), '') <> ''")
+  })
+
+  it("adds richer school profile facets + partner check-in fields", () => {
+    expect(schoolProfileFields).toContain("add column if not exists founded_year integer")
+    expect(schoolProfileFields).toContain("add column if not exists ap_courses text[]")
+    expect(schoolProfileFields).toContain("add column if not exists college_matriculation text")
+    expect(schoolProfileFields).toContain("add column if not exists is_partner boolean not null")
+    expect(schoolProfileFields).toContain("add column if not exists last_checked_in date")
+    expect(schoolProfileFields).toContain("schools_partner_checkin_idx")
+    // Public extras RPC exists and is guarded, but never SELECTs an admin-only field.
+    expect(schoolProfileFields).toContain("create or replace function public.get_school_extras")
+    expect(schoolProfileFields).toContain("private.can_access_student(target_student_id)")
+    expect(schoolProfileFields).not.toContain("s.niche_rank")
+    expect(schoolProfileFields).not.toContain("s.is_partner")
+    expect(schoolProfileFields).not.toContain("s.last_checked_in")
+  })
+
+  it("adds admin-managed school collections with RLS", () => {
+    expect(schoolCollections).toContain("create table public.school_collections")
+    expect(schoolCollections).toContain("create table public.school_collection_members")
+    expect(schoolCollections).toContain(
+      "alter table public.school_collections enable row level security",
+    )
+    expect(schoolCollections).toContain(
+      "alter table public.school_collection_members enable row level security",
+    )
+    expect(schoolCollections).toContain("create policy school_collections_admin_all")
+    expect(schoolCollections).toContain("private.is_admin()")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server"
+import { SchoolCheckinsDue } from "@/components/admin/school-checkins-due"
 import { SchoolRankingsList } from "@/components/admin/school-rankings-list"
 import { Card } from "@/components/ui/card"
 import { getAdminSchools } from "@/lib/admin/school-rank-queries"
@@ -13,6 +14,7 @@ export async function SchoolRankings({ locale }: { readonly locale: string }) {
         <h1 className="text-3xl font-black text-slate-950">{t("title")}</h1>
         <p className="max-w-2xl leading-7 text-slate-600">{t("intro")}</p>
       </div>
+      <SchoolCheckinsDue editBase="/app/admin?section=rankings" locale={locale} />
       {result.kind === "ready" ? (
         <SchoolRankingsList locale={locale} schools={result.schools} />
       ) : (

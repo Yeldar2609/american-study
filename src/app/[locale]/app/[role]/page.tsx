@@ -8,6 +8,7 @@ type RolePageProps = {
   readonly searchParams: Promise<{
     aid?: string
     body?: string
+    collection?: string
     q?: string
     school?: string
     section?: string
@@ -19,7 +20,7 @@ type RolePageProps = {
 
 export default async function RolePage({ params, searchParams }: RolePageProps) {
   const { locale, role: rawRole } = await params
-  const { aid, body, q, school, section, setting, state, student } = await searchParams
+  const { aid, body, collection, q, school, section, setting, state, student } = await searchParams
   const role = parseUserRole(rawRole)
 
   if (role === null) {
@@ -33,6 +34,7 @@ export default async function RolePage({ params, searchParams }: RolePageProps) 
       role={role}
       schoolFilters={{ aid, body, query: q, setting, state }}
       section={section}
+      selectedCollectionId={collection}
       selectedSchoolId={school}
       selectedStudentId={student}
     />

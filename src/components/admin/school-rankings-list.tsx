@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import { useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Link } from "@/i18n/navigation"
 import { setSchoolRankAction } from "@/lib/admin/school-rank-actions"
 import type { AdminSchoolRow } from "@/lib/admin/school-rank-queries"
 
@@ -68,23 +69,31 @@ export function SchoolRankingsList({
                   {`${t("grade")}: ${school.nicheGrade ?? "—"}`}
                 </p>
               </div>
-              <form action={setSchoolRankAction} className="flex shrink-0 items-center gap-2">
-                <input name="locale" type="hidden" value={locale} />
-                <input name="schoolId" type="hidden" value={school.schoolId} />
-                <Input
-                  aria-label={t("rank")}
-                  className="min-h-11 w-24"
-                  defaultValue={school.nicheRank === null ? "" : String(school.nicheRank)}
-                  inputMode="numeric"
-                  min={1}
-                  name="rank"
-                  placeholder={t("rank")}
-                  type="number"
-                />
-                <Button size="default" type="submit" variant="secondary">
-                  {t("save")}
-                </Button>
-              </form>
+              <div className="flex shrink-0 flex-wrap items-center gap-2">
+                <form action={setSchoolRankAction} className="flex items-center gap-2">
+                  <input name="locale" type="hidden" value={locale} />
+                  <input name="schoolId" type="hidden" value={school.schoolId} />
+                  <Input
+                    aria-label={t("rank")}
+                    className="min-h-11 w-24"
+                    defaultValue={school.nicheRank === null ? "" : String(school.nicheRank)}
+                    inputMode="numeric"
+                    min={1}
+                    name="rank"
+                    placeholder={t("rank")}
+                    type="number"
+                  />
+                  <Button size="default" type="submit" variant="secondary">
+                    {t("save")}
+                  </Button>
+                </form>
+                <Link
+                  className="inline-flex min-h-11 items-center rounded-xl bg-blue-50 px-4 text-sm font-black text-blue-700 transition hover:bg-blue-100"
+                  href={`/app/admin?section=rankings&school=${school.schoolId}`}
+                >
+                  {t("edit")}
+                </Link>
+              </div>
             </div>
           </article>
         ))

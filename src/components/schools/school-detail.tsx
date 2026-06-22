@@ -1,6 +1,7 @@
 import { ArrowLeft, ExternalLink, Heart, ListChecks } from "lucide-react"
 import { getFormatter, getTranslations } from "next-intl/server"
 import { MatchBreakdownDisclosure } from "@/components/schools/match-breakdown-disclosure"
+import { SchoolExtrasSection } from "@/components/schools/school-extras"
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { setSchoolStarAction } from "@/lib/workspace/school-actions"
@@ -150,6 +151,8 @@ export async function SchoolDetail({
               <p className="mt-1 whitespace-pre-wrap leading-7 text-slate-700">{school.notes}</p>
             </div>
           )}
+
+          <SchoolExtrasSection schoolId={school.id} studentId={studentId} />
 
           <div className="mt-6 flex flex-wrap items-center gap-2">
             {canMutate && (

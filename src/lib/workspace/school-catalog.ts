@@ -182,6 +182,97 @@ export async function getStudentSchoolSummary(
   }
 }
 
+const schoolExtrasRowSchema = z.object({
+  about: z.string().nullable(),
+  accreditation: z.string().nullable(),
+  admissions_email: z.string().nullable(),
+  admissions_phone: z.string().nullable(),
+  ap_courses: z.array(z.string()).nullable(),
+  avg_class_size: z.coerce.number().int().nullable(),
+  campus_acres: z.coerce.number().int().nullable(),
+  clubs: z.array(z.string()).nullable(),
+  college_matriculation: z.string().nullable(),
+  extracurriculars: z.array(z.string()).nullable(),
+  financial_aid_notes: z.string().nullable(),
+  founded_year: z.coerce.number().int().nullable(),
+  ib_offered: z.boolean().nullable(),
+  languages_offered: z.array(z.string()).nullable(),
+  notable_alumni: z.string().nullable(),
+  religious_affiliation: z.string().nullable(),
+  sports: z.array(z.string()).nullable(),
+  student_teacher_ratio: z.string().nullable(),
+})
+
+export type SchoolExtras = {
+  readonly about: string | null
+  readonly accreditation: string | null
+  readonly admissionsEmail: string | null
+  readonly admissionsPhone: string | null
+  readonly apCourses: readonly string[]
+  readonly avgClassSize: number | null
+  readonly campusAcres: number | null
+  readonly clubs: readonly string[]
+  readonly collegeMatriculation: string | null
+  readonly extracurriculars: readonly string[]
+  readonly financialAidNotes: string | null
+  readonly foundedYear: number | null
+  readonly ibOffered: boolean | null
+  readonly languagesOffered: readonly string[]
+  readonly notableAlumni: string | null
+  readonly religiousAffiliation: string | null
+  readonly sports: readonly string[]
+  readonly studentTeacherRatio: string | null
+}
+
+// On-demand public profile facts for the school detail page. Returns null when
+// the RPC is unavailable or the school has no extras row — callers render
+// nothing in that case. Admin-only fields (niche_rank/is_partner/
+// last_checked_in) are never part of this RPC's contract.
+export async function getSchoolExtras(
+  studentId: string,
+  schoolId: string,
+): Promise<SchoolExtras | null> {
+  const supabase = await createClient()
+  if (supabase === null) {
+    return null
+  }
+
+  const { data, error } = await supabase.rpc("get_school_extras", {
+    target_school_id: schoolId,
+    target_student_id: studentId,
+  })
+  if (error !== null) {
+    return null
+  }
+
+  const row = Array.isArray(data) ? data[0] : data
+  const parsed = schoolExtrasRowSchema.safeParse(row)
+  if (!parsed.success) {
+    return null
+  }
+
+  return {
+    about: parsed.data.about,
+    accreditation: parsed.data.accreditation,
+    admissionsEmail: parsed.data.admissions_email,
+    admissionsPhone: parsed.data.admissions_phone,
+    apCourses: parsed.data.ap_courses ?? [],
+    avgClassSize: parsed.data.avg_class_size,
+    campusAcres: parsed.data.campus_acres,
+    clubs: parsed.data.clubs ?? [],
+    collegeMatriculation: parsed.data.college_matriculation,
+    extracurriculars: parsed.data.extracurriculars ?? [],
+    financialAidNotes: parsed.data.financial_aid_notes,
+    foundedYear: parsed.data.founded_year,
+    ibOffered: parsed.data.ib_offered,
+    languagesOffered: parsed.data.languages_offered ?? [],
+    notableAlumni: parsed.data.notable_alumni,
+    religiousAffiliation: parsed.data.religious_affiliation,
+    sports: parsed.data.sports ?? [],
+    studentTeacherRatio: parsed.data.student_teacher_ratio,
+  }
+}
+
 export async function getSchoolCatalog(studentId: string) {
   const supabase = await createClient()
   if (supabase === null) {

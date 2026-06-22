@@ -15,6 +15,7 @@ export const ROLE_SECTIONS: Record<UserRole, readonly string[]> = {
     "leads",
     "rankings",
     "schools",
+    "collections",
     "applications",
     "essays",
     "interview",
