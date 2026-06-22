@@ -74,6 +74,7 @@ const boardingSeed = readFileSync(
   "supabase/migrations/202606220017_seed_boarding_schools.sql",
   "utf8",
 )
+const nicheLinks = readFileSync("supabase/migrations/202606220018_school_niche_links.sql", "utf8")
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -420,6 +421,15 @@ describe("Supabase migration contract", () => {
     expect(boardingSeed).not.toContain("boarding_tuition_usd")
     // A couple of real, verifiable rows from the public Wikipedia list.
     expect(boardingSeed).toContain("Wayland Academy")
+  })
+
+  it("links each school to its Niche profile without overwriting curated URLs", () => {
+    expect(nicheLinks).toContain("update public.schools")
+    expect(nicheLinks).toContain("https://www.niche.com/k12/")
+    // Only fills missing links; never clobbers an existing one.
+    expect(nicheLinks).toContain("where niche_profile_url is null")
+    // Needs a city for a valid Niche slug.
+    expect(nicheLinks).toContain("coalesce(btrim(city), '') <> ''")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

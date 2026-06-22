@@ -131,6 +131,17 @@ export async function SchoolCard({
               <ExternalLink aria-hidden="true" className="size-4" />
             </a>
           )}
+          {school.nicheProfileUrl && (
+            <a
+              className="inline-flex min-h-11 items-center gap-2 px-2 text-sm font-black text-blue-700"
+              href={school.nicheProfileUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {t("detail.nicheProfile")}
+              <ExternalLink aria-hidden="true" className="size-4" />
+            </a>
+          )}
         </div>
 
         {role === "admin" && (
