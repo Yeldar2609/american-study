@@ -46,6 +46,49 @@
     "ctaButton": "Book a free consultation",
     "ctaSignIn": "Already have an account? Sign in"
   },
+  "form": {
+    "title": "Book a consultation",
+    "subtitle": "We'll assess your chances and give you a step-by-step admissions plan.",
+    "name": "Your name",
+    "phone": "Phone",
+    "email": "Email (optional)",
+    "grade": "Applicant's current grade",
+    "grade8": "Grade 8",
+    "grade9": "Grade 9",
+    "grade10": "Grade 10",
+    "grade11": "Grade 11",
+    "grade12": "Grade 12",
+    "gradeOther": "Other",
+    "gradePlaceholder": "Select grade",
+    "submit": "Request a consultation",
+    "consent": "By submitting, you agree to the processing of your personal data.",
+    "success": "Thank you! Our manager will contact you shortly.",
+    "error": "Something went wrong. Please try again."
+  },
+  "testimonials": {
+    "title": "Reviews",
+    "alt": "Parent review about American Study"
+  },
+  "cases": {
+    "title": "Our cases",
+    "lead": "Real families, real acceptances to top US boarding schools.",
+    "alt": "American Study client"
+  },
+  "leads": {
+    "title": "Consultation leads",
+    "empty": "No leads yet.",
+    "new": "New",
+    "handled": "Handled",
+    "markHandled": "Mark handled",
+    "markUnhandled": "Mark as new",
+    "colName": "Name",
+    "colPhone": "Phone",
+    "colEmail": "Email",
+    "colGrade": "Grade",
+    "colDate": "Date",
+    "colStatus": "Status",
+    "notSet": "Not provided"
+  },
   "auth": {
     "google": "Continue with Google",
     "googleDisabled": "Google sign-in is temporarily unavailable",
@@ -159,6 +202,7 @@
       "bookings": "Bookings",
       "report": "Report",
       "people": "Students",
+      "leads": "Leads",
       "applications": "Applications",
       "resources": "Resources",
       "settings": "Settings"
@@ -181,6 +225,9 @@
   },
   "schools": {
     "title": "School matches",
+    "searchPlaceholder": "Search schools by name…",
+    "searchLabel": "Search schools",
+    "searchEmpty": "No schools match your search.",
     "trialEyebrow": "Your consultant's matches",
     "paidEyebrow": "Full school database",
     "trialBody": "Explore the schools selected for you and the reasons each one fits.",

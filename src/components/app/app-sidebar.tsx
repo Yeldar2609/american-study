@@ -6,6 +6,7 @@ import {
   FileText,
   FolderKanban,
   Home,
+  Inbox,
   Library,
   LogOut,
   Mic,
@@ -32,6 +33,7 @@ const iconByItem = {
   bookings: CalendarDays,
   report: ClipboardList,
   people: Users,
+  leads: Inbox,
   resources: Library,
   settings: Settings,
 } as const

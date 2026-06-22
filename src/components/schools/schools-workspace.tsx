@@ -9,6 +9,7 @@ import { SchoolComparison } from "@/components/schools/compare/school-comparison
 import { SchoolCard } from "@/components/schools/school-card"
 import { SchoolDetail } from "@/components/schools/school-detail"
 import { SchoolFilters } from "@/components/schools/school-filters"
+import { SchoolSearch } from "@/components/schools/school-search"
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import type { UserRole } from "@/lib/auth/access"
@@ -216,7 +217,15 @@ export async function SchoolsWorkspace({
           {allFiltered.length === 0 ? (
             <EmptyTile body={t("empty.filtered")} title={t("empty.title")} />
           ) : (
-            <SchoolGrid>{allFiltered.map(card)}</SchoolGrid>
+            <SchoolSearch
+              schools={allFiltered.map((school) => ({
+                card: card(school),
+                city: school.city,
+                id: school.id,
+                name: school.name,
+                state: school.state,
+              }))}
+            />
           )}
         </SchoolSection>
       </CompareProvider>

@@ -12,6 +12,7 @@ export const ROLE_SECTIONS: Record<UserRole, readonly string[]> = {
   admin: [
     "home",
     "people",
+    "leads",
     "schools",
     "applications",
     "essays",

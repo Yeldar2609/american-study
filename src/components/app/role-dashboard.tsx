@@ -6,6 +6,7 @@ import { AdminAnalytics } from "@/components/admin/analytics/admin-analytics"
 import { AdminAnalyticsLoading } from "@/components/admin/analytics/admin-analytics-loading"
 import { AppSettingsManager } from "@/components/admin/app-settings-manager"
 import { ApplicationsWorkspace } from "@/components/admin/applications-workspace"
+import { LeadsManager } from "@/components/admin/leads-manager"
 import { StudentManager } from "@/components/admin/student-manager"
 import { AppSidebar } from "@/components/app/app-sidebar"
 import { DashboardHome } from "@/components/app/dashboard-home"
@@ -102,6 +103,9 @@ async function DashboardSections({
         )}
       </section>
     )
+  }
+  if (role === "admin" && activeSection === "leads") {
+    return <LeadsManager locale={locale} />
   }
   if (role === "admin" && activeSection === "applications") {
     return <ApplicationsWorkspace />

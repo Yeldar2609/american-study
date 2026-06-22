@@ -1,20 +1,22 @@
-import { ConsultationCta } from "@/components/landing/consultation-cta"
+import { Cases } from "@/components/landing/cases"
+import { ConsultationForm } from "@/components/landing/consultation-form"
 import { ConsultationTopics } from "@/components/landing/consultation-topics"
 import { Hero } from "@/components/landing/hero"
+import { Testimonials } from "@/components/landing/testimonials"
 import { ValueProps } from "@/components/landing/value-props"
 import { SiteHeader } from "@/components/site-header"
-import { resolveCalendarBookingLink } from "@/lib/settings/calendar-link"
 
-export default async function LandingPage() {
-  const bookingLink = await resolveCalendarBookingLink()
-
+export default function LandingPage() {
   return (
     <>
       <SiteHeader />
-      <Hero bookingLink={bookingLink} />
+      <Hero />
       <ConsultationTopics />
       <ValueProps />
-      <ConsultationCta bookingLink={bookingLink} />
+      <ConsultationForm />
+      <Testimonials />
+      <Cases />
+      <ConsultationForm />
     </>
   )
 }

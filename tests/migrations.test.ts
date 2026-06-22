@@ -62,6 +62,10 @@ const consolidateGuards = readFileSync(
   "supabase/migrations/202606220014_consolidate_access_guards.sql",
   "utf8",
 )
+const consultationLeads = readFileSync(
+  "supabase/migrations/202606220015_consultation_leads.sql",
+  "utf8",
+)
 const functionGrants = readFileSync("supabase/migrations/202606130007_function_grants.sql", "utf8")
 const seed = readFileSync("supabase/seed.sql", "utf8")
 
@@ -364,6 +368,26 @@ describe("Supabase migration contract", () => {
     expect(consolidateGuards).not.toContain(
       "create or replace function public.set_application_stage",
     )
+  })
+
+  it("captures public consultation leads through a guarded anon RPC, admin-read only", () => {
+    expect(consultationLeads).toContain("create table public.consultation_leads")
+    expect(consultationLeads).toContain(
+      "alter table public.consultation_leads enable row level security",
+    )
+    expect(consultationLeads).toContain(
+      "create or replace function public.submit_consultation_lead",
+    )
+    expect(consultationLeads).toContain("security definer")
+    expect(consultationLeads).toContain("set search_path = ''")
+    // Public form: the intake RPC is the ONLY anon-callable write.
+    expect(consultationLeads).toContain(
+      "grant execute on function public.submit_consultation_lead(text, text, text, text, text) to anon, authenticated",
+    )
+    // Reading leads is admin-only.
+    expect(consultationLeads).toContain("create policy consultation_leads_admin_select")
+    expect(consultationLeads).toContain("private.is_admin()")
+    expect(consultationLeads).toContain("admin_set_lead_handled")
   })
 
   it("seeds exactly four role accounts without inventing school records", () => {

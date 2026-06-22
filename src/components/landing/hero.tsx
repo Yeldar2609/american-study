@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 
-export async function Hero({ bookingLink }: { readonly bookingLink?: string | undefined }) {
+export async function Hero() {
   const t = await getTranslations("landing")
 
   return (
@@ -17,22 +17,10 @@ export async function Hero({ bookingLink }: { readonly bookingLink?: string | un
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">{t("subtitle")}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          {bookingLink ? (
-            <a
-              className={buttonVariants({ size: "large" })}
-              href={bookingLink}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {t("primaryCta")}
-              <ArrowRight aria-hidden="true" className="size-5" />
-            </a>
-          ) : (
-            <Link className={buttonVariants({ size: "large" })} href="/login">
-              {t("primaryCta")}
-              <ArrowRight aria-hidden="true" className="size-5" />
-            </Link>
-          )}
+          <a className={buttonVariants({ size: "large" })} href="#consultation">
+            {t("primaryCta")}
+            <ArrowRight aria-hidden="true" className="size-5" />
+          </a>
           <Link className={buttonVariants({ size: "large", variant: "outline" })} href="/login">
             {t("signInCta")}
           </Link>
